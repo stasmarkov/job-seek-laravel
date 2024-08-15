@@ -16,8 +16,8 @@ class JobController extends Controller {
    * Display a listing of the resource.
    */
   public function index() {
-    $jobs_featured = Job::latest()->with(['employer', 'tags'])->get()->where('featured', TRUE);
-    $jobs = Job::latest()->with(['employer', 'tags'])->where('featured', FALSE)->limit(3)->get();
+    $jobs_featured = Job::latest()->with(['employer', 'tags'])->where('featured', TRUE)->limit(6)->get();
+    $jobs = Job::latest()->with(['employer', 'tags'])->where('featured', FALSE)->limit(9)->get();
 
     return view('jobs.index', [
       'featuredJobs' => $jobs_featured,
