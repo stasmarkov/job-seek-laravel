@@ -2,14 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\BlogPost;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Comment>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Profile>
  */
-class CommentFactory extends Factory {
+class ProfileFactory extends Factory {
 
   /**
    * Define the model's default state.
@@ -18,8 +17,9 @@ class CommentFactory extends Factory {
    */
   public function definition(): array {
     return [
-      'body' => $this->faker->paragraph(),
-      'blog_post_id' => BlogPost::factory(),
+      'first_name' => $this->faker->firstName(),
+      'last_name' => $this->faker->lastName(),
+      'phone_number' => $this->faker->phoneNumber(),
       'user_id' => User::factory(),
     ];
   }

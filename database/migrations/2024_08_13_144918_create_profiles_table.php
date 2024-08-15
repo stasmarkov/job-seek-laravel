@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\BlogPost;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -12,11 +11,12 @@ return new class extends Migration {
    * Run the migrations.
    */
   public function up(): void {
-    Schema::create('comments', function(Blueprint $table) {
+    Schema::create('profiles', function (Blueprint $table) {
       $table->id();
-      $table->foreignIdFor(BlogPost::class)->constrained()->cascadeOnDelete();
       $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-      $table->text('body');
+      $table->string('first_name');
+      $table->string('last_name');
+      $table->string('phone_number')->nullable();
       $table->timestamps();
     });
   }
@@ -25,7 +25,7 @@ return new class extends Migration {
    * Reverse the migrations.
    */
   public function down(): void {
-    Schema::dropIfExists('comments');
+    Schema::dropIfExists('profiles');
   }
 
 };

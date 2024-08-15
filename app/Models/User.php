@@ -65,4 +65,14 @@ class User extends Authenticatable {
     return $this->hasMany(BlogPost::class);
   }
 
+  /**
+   * Get the Profile Model.
+   *
+   * @return \Illuminate\Database\Eloquent\Relations\HasOne
+   *   Returns the Profile Model.
+   */
+  public function profile() {
+    return $this->hasOne(Profile::class);
+  }
+
 }

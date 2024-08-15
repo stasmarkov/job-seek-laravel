@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\LikableModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,7 +14,7 @@ use Illuminate\Notifications\Notifiable;
  */
 class Job extends Model {
 
-  use HasFactory, Notifiable;
+  use HasFactory, Notifiable, LikableModel;
 
   protected $fillable = [
     'title',

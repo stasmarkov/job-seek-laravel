@@ -12,9 +12,12 @@ class JobSeeder extends Seeder {
   /**
    * Run the database seeds.
    */
-  public function run(): void {
-    $tags = Tag::factory(3)->create();
-    Job::factory(20)->hasAttached($tags)->create(new Sequence([
+  public function run($users): void {
+    $tags = Tag::factory(5)->create();
+    Job::factory(50)
+      ->recycle($users)
+      ->recycle($tags)
+      ->hasAttached($tags)->create(new Sequence([
       'featured' => FALSE,
     ], [
       'featured' => TRUE,

@@ -8,8 +8,8 @@
         {{ $blog_post->title . ' ' . $blog_post->id }}
       </a> </h2>
   </div>
-  <div class="mt-auto flex justify-between">
-    <p class="text-sm">{{ __('Author: ') }} <span class="text-blue-500">{{ $blog_post->user->name }}</span></p>
-    <p class="text-sm">{{ __('Likes: ') }} <span class="text-blue-500">{{ count($blog_post->likes) }}</span>  </p>
+  <div class="mt-auto flex justify-between font-light">
+    <p class="text-sm text-gray-400">{{ __('Author: ') }} <span class="text-blue-500">{{ $blog_post->user->name }}</span></p>
+    <p class="text-sm text-gray-400">{{ __('Likes: ') }} <span class="text-blue-500">{{ count($blog_post->likes) }}</span>  </p>
   </div>
 </article>

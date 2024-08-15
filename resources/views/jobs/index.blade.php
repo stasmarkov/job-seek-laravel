@@ -32,6 +32,9 @@
       @foreach($jobs as $job)
         <x-job.card-wide :$job />
       @endforeach
+      <div class="mt-2">
+        <a href="{{ route('search', ['q' => '_all']) }}">{{ __('View more') }}</a>
+      </div>
     </section>
   </div>
 </x-layout>
