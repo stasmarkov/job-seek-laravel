@@ -5,4 +5,8 @@
       <x-blog_post.index :$blog_post />
     @endforeach
   </div>
+
+  <div class="pager mt-4">
+    {{ $blog_posts->links() }}
+  </div>
 </x-layout>

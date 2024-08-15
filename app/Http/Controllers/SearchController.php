@@ -18,13 +18,13 @@ class SearchController extends Controller {
       $results = Job::with([
         'employer',
         'tags',
-      ])->get();
+      ])->paginate(10);
     }
     else {
       $results = Job::with([
         'employer',
         'tags',
-      ])->where('title', 'LIKE', '%' . $request->get('q') . '%')->get();
+      ])->where('title', 'LIKE', '%' . $request->get('q') . '%')->paginate(10);
     }
 
     return view('search.job_results', [

@@ -6,6 +6,10 @@
       @foreach($results as $result)
         <x-job.card-wide :job="$result"/>
       @endforeach
+
+      <div class="pager mt-4">
+        {{ $results->links() }}
+      </div>
     @else
       <div class="text-xl text-center">
         {{ __('Oops! No results found :\'(') }}

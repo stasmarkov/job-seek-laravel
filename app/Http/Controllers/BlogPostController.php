@@ -12,7 +12,7 @@ class BlogPostController extends Controller {
    */
   public function index() {
     return view('blog_post.index', [
-      'blog_posts' => BlogPost::all(),
+      'blog_posts' => BlogPost::orderBy('created_at', 'DESC')->paginate(10),
     ]);
   }
 
