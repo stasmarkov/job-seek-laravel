@@ -19,9 +19,6 @@
     <div class="space-x-6 font-bold">
       <a href="{{ route('search', ['q' => '_all']) }}">Jobs</a>
       <a href="{{ route('blog_post.index') }}">Blog</a>
-      <a href="#">Careers</a>
-      <a href="#">Salaries</a>
-      <a href="#">Companies</a>
     </div>
     <div class="space-x-6 font-bold flex">
       @auth
