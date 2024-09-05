@@ -28,7 +28,7 @@ class SearchJobsController extends Controller {
 
     $this->applyFilters($request, $query);
 
-    $response = Inertia::render('Search/SearchJobs', [
+    return Inertia::render('Search/SearchJobs', [
       'filters' => [
         'search' => $request->get('search'),
         'order' => $request->get('order'),
@@ -40,8 +40,6 @@ class SearchJobsController extends Controller {
         // Important to pre-save the query in pager links.
         ->withQueryString(),
     ]);
-
-    return $response;
   }
 
   /**

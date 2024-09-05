@@ -4,7 +4,7 @@ import Footer from "@/Components/Footer.vue";
 </script>
 
 <template>
-  <Head title="Admin Area" />
+  <Head title="Admin Page" />
 
   <div class="pt-16 bg-white text-gray-900 flex flex-col h-min-screen justify-between">
     <slot name="header">

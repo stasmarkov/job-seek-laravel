@@ -24,7 +24,7 @@ defineProps({
 });
 
 function redirectOnSearchPage(value) {
-  Inertia.get(route('search.jobs'), {'search': value});
+  Inertia.get(route('search.jobs', {'search': value}));
 }
 
 </script>
@@ -35,7 +35,7 @@ function redirectOnSearchPage(value) {
     <div class="space-y-4">
       <section>
         <section class="text-center pt-6">
-          <SearchJobForm @searchFormSubmitEvent="redirectOnSearchPage"/>
+          <SearchJobForm type="submit" @searchFormSubmitEvent="redirectOnSearchPage"/>
         </section>
 
         <Heading>Featured Jobs</Heading>
@@ -48,7 +48,7 @@ function redirectOnSearchPage(value) {
       <section>
         <Heading>Tags</Heading>
         <div class="mt-6 gap-2 flex flex-wrap">
-          <Tag v-for="tag in tags.data" :tag :size="base" />
+          <Tag v-for="tag in tags.data" :tag size="base" />
         </div>
       </section>
 

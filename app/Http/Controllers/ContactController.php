@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
-use App\Jobs\ContactUsJob;
+use App\Jobs\SendContactUsMailJob;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -34,7 +34,9 @@ class ContactController extends Controller {
    */
   public function store(Request $request) {
     $message = $request->get('contact_message');
-    ContactUsJob::dispatch($message);
+    // Add the name to the queue and run it with prior.
+    // php artisan queue:Work --queue=mail,default.
+    SendContactUsMailJob::dispatch($message)->onQueue('mail');
     return back();
   }
 

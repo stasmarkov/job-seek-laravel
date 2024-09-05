@@ -37,7 +37,7 @@ watch([order, searchString, tags], throttle(function ([orderValue, searchValue, 
   router.get(route('search.jobs'), {order: orderValue, search: searchValue, tags: tagsValue}, {
     preserveState: true,
     preserveScroll: true,
-    replace: true
+    replace: true,
   })
 }, 500))
 
@@ -48,7 +48,7 @@ watch([order, searchString, tags], throttle(function ([orderValue, searchValue, 
 
   <Layout>
     <section class="text-center pt-6">
-      <SearchJobForm :searchString @searchFormSubmitEvent="searchFormSubmit"/>
+      <SearchJobForm type="keyup" :searchString @searchFormSubmitEvent="searchFormSubmit"/>
     </section>
 
     <heading>{{ ('Search results') }}</heading>

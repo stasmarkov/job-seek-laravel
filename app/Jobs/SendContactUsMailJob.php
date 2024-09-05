@@ -6,7 +6,9 @@ namespace App\Jobs;
 
 use App\Mail\ContactUsNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -14,9 +16,9 @@ use Illuminate\Support\Facades\Mail;
 /**
  * The contact us job.
  */
-class ContactUsJob implements ShouldQueue {
+class SendContactUsMailJob implements ShouldQueue {
 
-  use Queueable;
+  use Queueable, InteractsWithQueue, Dispatchable;
 
   /**
    * Create a new job instance.

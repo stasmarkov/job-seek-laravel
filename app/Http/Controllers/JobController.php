@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Events\JobPostedEvent;
+use App\Events\JobViewedEvent;
 use App\Http\Resources\JobResource;
 use App\Http\Resources\TagResource;
 use App\Models\Job;
@@ -44,6 +46,9 @@ class JobController extends Controller implements HasMiddleware {
    */
   public function index(Job $job) {
     $user = Auth::user();
+
+    broadcast(new JobViewedEvent($job))->toOthers();
+
     return Inertia::render('Model/Job/View', [
       'job' => JobResource::make($job),
       'can' => [
@@ -90,13 +95,14 @@ class JobController extends Controller implements HasMiddleware {
       }
 
       foreach ($attributes['tags'] as $tag) {
-        $b=0;
         if ($loaded_tag = Tag::find($tag)) {
           $job->tag($loaded_tag->name);
         }
       }
     }
 
+    // @todo Add if posted/draft functionality, but for testing it's ok.
+    broadcast(new JobPostedEvent($job))->toOthers();
     return redirect(route('job.index', ['job' => $job->id]));
   }
 

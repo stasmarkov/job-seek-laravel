@@ -1,6 +1,7 @@
 <script setup>
 import Footer from "@/Components/Footer.vue";
 import Header from "@/Components/Header.vue";
+import Notification from "@/Components/Notification.vue";
 </script>
 
 <template>
@@ -30,5 +31,7 @@ import Header from "@/Components/Header.vue";
         <Footer />
       </slot>
     </div>
+
+    <Notification />
   </div>
 </template>
