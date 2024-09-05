@@ -21,17 +21,17 @@ const props = defineProps({
 let enablePreview = ref(false);
 
 const form = useForm({
-  title: props.job.title,
-  salary: props.job.salary,
-  location: props.job.location,
-  schedule: props.job.schedule,
-  url: props.job.url,
-  tags: props.job.tags.map(tag => {
+  title: props.job.data.title,
+  salary: props.job.data.salary,
+  location: props.job.data.location,
+  schedule: props.job.data.schedule,
+  url: props.job.data.url,
+  tags: props.job.data.tags.map(tag => {
     return tag.name
   }).toString(),
-  description: props.job.description,
-  short_description: props.job.short_description,
-  featured: props.job.featured
+  description: props.job.data.description,
+  short_description: props.job.data.short_description,
+  featured: props.job.data.featured
 });
 
 const user = usePage().props.auth.user;
@@ -64,7 +64,7 @@ let limitChars = computed(function() {
 
 // The form submission.
 const submit = () => {
-  form.patch(route('job.update', { job: props.job.id }));
+  form.patch(route('job.update', { job: props.job.data.id }));
 };
 </script>
 
@@ -72,7 +72,7 @@ const submit = () => {
   <AdminAreaTwoColumnsLayout>
     <Head title="Edit job"/>
 
-    <template #heading>Edit job: {{ props.job.title }}</template>
+    <template #heading>Edit job: {{ props.job.data.title }}</template>
 
     <template #left_column :class="{
       'sm:grid-cols-1': !enablePreview

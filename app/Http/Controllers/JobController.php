@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\JobResource;
 use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -40,11 +41,8 @@ class JobController extends Controller implements HasMiddleware {
    */
   public function index(Job $job) {
     $user = Auth::user();
-    $job->employer;
-    $job->tags;
-
     return Inertia::render('Model/Job/View', [
-      'job' => $job,
+      'job' => JobResource::make($job),
       'can' => [
         'can_edit' => $user ? $user->can('update', $job) : FALSE,
       ],
@@ -100,11 +98,9 @@ class JobController extends Controller implements HasMiddleware {
    *   The page.
    */
   public function edit(Job $job) {
-    $job->tags;
-    $job->employer;
     return Inertia::render('Model/Job/EditForm', [
       'employer' => Auth::user()->employer,
-      'job' => $job,
+      'job' => JobResource::make($job),
     ]);
   }
 

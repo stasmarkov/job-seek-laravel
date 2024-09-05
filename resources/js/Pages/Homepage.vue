@@ -13,13 +13,13 @@ import { Inertia } from "@inertiajs/inertia";
 // Properties given by the route should be defined using defineProps.
 defineProps({
   featuredJobs: {
-    type: Array
+    type: Object
   },
   jobs: {
-    type: Array
+    type: Object
   },
   tags: {
-    type: Array,
+    type: Object,
   }
 });
 
@@ -42,20 +42,20 @@ function redirectOnSearchPage(value) {
         <Heading>Featured Jobs</Heading>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
-          <JobCard v-for="job in featuredJobs" :job />
+          <JobCard v-for="job in featuredJobs.data" :job />
         </div>
       </section>
 
       <section>
         <Heading>Tags</Heading>
         <div class="mt-6 gap-2 flex flex-wrap">
-          <Tag v-for="tag in tags" :tag :size="base" />
+          <Tag v-for="tag in tags.data" :tag :size="base" />
         </div>
       </section>
 
       <section class="mt-6 space-y-6">
         <Heading>Recent Jobs</Heading>
-        <JobCardWide v-for="job in jobs" :job />
+        <JobCardWide v-for="job in jobs.data" :job />
 
         <div class="flex justify-center mt-2">
           <LinkButton :href="route('search.jobs')">{{ ('View more') }}</LinkButton>

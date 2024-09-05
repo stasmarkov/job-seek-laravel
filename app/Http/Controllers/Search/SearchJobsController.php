@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Search;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TagResource;
 use App\Models\Job;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Builder;
@@ -29,7 +30,7 @@ class SearchJobsController extends Controller {
 
     return Inertia::render('Search/SearchJobs', [
       'filters' => $request->only(['search', 'order', 'tags']),
-      'tags' => Tag::all(),
+      'tags' => TagResource::collection(Tag::all()),
       'results' => $query
         ->paginate(6)
         // Important to pre-save the query in pager links.

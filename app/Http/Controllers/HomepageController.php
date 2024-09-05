@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\JobResource;
+use App\Http\Resources\TagResource;
 use App\Models\Job;
 use App\Models\Tag;
 use Inertia\Inertia;
@@ -39,44 +41,9 @@ class HomepageController extends Controller {
       'canRegister' => Route::has('register'),
       'laravelVersion' => Application::VERSION,
       'phpVersion' => PHP_VERSION,
-      'featuredJobs' => $jobs_featured->map(fn($job) => [
-        'id' => $job->id,
-        'title' => $job->title,
-        'description' => $job->description,
-        'short_description' => $job->short_description,
-        'url' => $job->url,
-        'schedule' => $job->schedule,
-        'salary' => $job->salary,
-        'tags' => $job->tags->map(fn($tag) => [
-          'id' => $tag->id,
-          'name' => $tag->name,
-        ]),
-        'employer' => [
-          'name' => $job->employer->name,
-          'logo' => $job->employer->logo,
-        ],
-      ]),
-      'jobs' => $jobs->map(fn($job) => [
-        'id' => $job->id,
-        'title' => $job->title,
-        'description' => $job->description,
-        'short_description' => $job->short_description,
-        'url' => $job->url,
-        'schedule' => $job->schedule,
-        'salary' => $job->salary,
-        'tags' => $job->tags->map(fn($tag) => [
-          'id' => $tag->id,
-          'name' => $tag->name,
-        ]),
-        'employer' => [
-          'name' => $job->employer->name,
-          'logo' => $job->employer->logo,
-        ],
-      ]),
-      'tags' => Tag::all()->map(fn($tag) => [
-        'id' => $tag->id,
-        'name' => $tag->name,
-      ]),
+      'featuredJobs' => JobResource::collection($jobs_featured),
+      'jobs' => JobResource::collection($jobs),
+      'tags' => TagResource::collection(Tag::all()),
     ]);
   }
 

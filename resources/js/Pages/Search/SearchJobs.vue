@@ -12,13 +12,13 @@ import { throttle, debounce } from "lodash";
 const props = defineProps({
   results: Object,
   filters: Object,
-  tags: Array,
+  tags: Object,
 });
 
 // The search string.
 let searchString = ref(props.filters.search ?? '');
 let order = ref(props.filters.order ?? 'DESC');
-let tags = ref(props.filters.tags ?? []);
+let tags = ref(props.filters.tags?.data ?? []);
 
 // The callback on search.
 function searchFormSubmit(searchSubmitValue) {
@@ -59,7 +59,7 @@ watch([order, searchString, tags], throttle(function ([orderValue, searchValue, 
       <div class="flex items-center gap-2">
         <span>Tags:</span>
         <div class="flex flex-wrap gap-2">
-           <span v-for="tag in props.tags">
+           <span v-for="tag in props.tags.data">
           <input type="checkbox" :id="tag.id" :value="tag.id" v-model="tags" class="hidden"/>
           <label
             :for="tag.id"
