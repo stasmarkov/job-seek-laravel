@@ -18,7 +18,7 @@ defineEmits(['searchFormSubmitEvent']);
 </script>
 
 <template>
-  <form @submit.prevent="$emit('searchFormSubmitEvent', form.query)" class="mt-6 space-y-6 max-w-96 mx-auto text-gray-900">
+  <form class="mt-6 space-y-6 max-w-96 mx-auto text-gray-900">
     <div>
       <TextInput
         type="search"
@@ -26,6 +26,7 @@ defineEmits(['searchFormSubmitEvent']);
         placeholder="Web Developer..."
         v-model="form.query"
         class="mt-1 block w-full"
+        @keyup="$emit('searchFormSubmitEvent', form.query)"
       />
     </div>
   </form>

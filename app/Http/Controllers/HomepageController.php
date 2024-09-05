@@ -48,6 +48,7 @@ class HomepageController extends Controller {
         'schedule' => $job->schedule,
         'salary' => $job->salary,
         'tags' => $job->tags->map(fn($tag) => [
+          'id' => $tag->id,
           'name' => $tag->name,
         ]),
         'employer' => [
@@ -64,6 +65,7 @@ class HomepageController extends Controller {
         'schedule' => $job->schedule,
         'salary' => $job->salary,
         'tags' => $job->tags->map(fn($tag) => [
+          'id' => $tag->id,
           'name' => $tag->name,
         ]),
         'employer' => [
@@ -72,6 +74,7 @@ class HomepageController extends Controller {
         ],
       ]),
       'tags' => Tag::all()->map(fn($tag) => [
+        'id' => $tag->id,
         'name' => $tag->name,
       ]),
     ]);

@@ -14,10 +14,12 @@ class JobSeeder extends Seeder {
    */
   public function run($users): void {
     $tags = Tag::factory(15)->create();
+
     Job::factory(50)
       ->recycle($users)
-      ->recycle($tags)
-      ->hasAttached($tags)->create(new Sequence([
+//      ->recycle($tags)
+//      ->hasAttached($tags)
+      ->create(new Sequence([
       'featured' => FALSE,
     ], [
       'featured' => TRUE,

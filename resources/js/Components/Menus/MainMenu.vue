@@ -7,8 +7,8 @@ import NavLink from "@/Components/NavLink.vue";
 <template>
   <nav>
     <NavLink
-      :href="route('search')"
-      :active="route().current('search')"
+      :href="route('search.jobs')"
+      :active="route().current('search.jobs')"
       class="hover:text-white/70"
     >Jobs</NavLink>
 

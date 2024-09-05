@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Employer;
+use App\Models\Job;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -43,6 +45,15 @@ class JobFactory extends Factory {
       'description' => fake()->realText(2500),
       'short_description' => fake()->realText(250),
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function configure() {
+    return $this->afterCreating(function (Job $job) {
+      $job->tags()->attach(Tag::all()->random(random_int(4, 10)));
+    });
   }
 
 }

@@ -58,7 +58,7 @@ function redirectOnSearchPage(value) {
         <JobCardWide v-for="job in jobs" :job />
 
         <div class="flex justify-center mt-2">
-          <LinkButton :href="route('search')">{{ ('View more') }}</LinkButton>
+          <LinkButton :href="route('search.jobs')">{{ ('View more') }}</LinkButton>
         </div>
       </section>
     </div>

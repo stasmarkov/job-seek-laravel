@@ -10,16 +10,17 @@ declare(strict_types=1);
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Search\SearchJobsController;
+use App\Models\Job;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 
-Route::get('/dashboard', static function () {
+Route::get('/dashboard', static function() {
   return Inertia::render('Admin/Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function() {
   Route::get('/profile', [ProfileController::class, 'edit'])
     ->name('profile.edit');
   Route::patch('/profile', [ProfileController::class, 'update'])
@@ -28,7 +29,7 @@ Route::middleware('auth')->group(function () {
     ->name('profile.destroy');
 });
 
-Route::get('/search', [SearchJobsController::class, 'index'])->name('search');
+Route::get('/search', [SearchJobsController::class, 'index'])->name('search.jobs');
 
 require __DIR__ . '/job.php';
 require __DIR__ . '/employer.php';
