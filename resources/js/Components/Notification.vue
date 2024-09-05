@@ -4,10 +4,10 @@ import {ref} from "vue";
 
 let job = ref(null);
 
-window.Echo.channel('job')
-  .listen('JobViewedEvent', (e) => {
-    job.value = e.job;
-  });
+// window.Echo.channel('job')
+//   .listen('JobViewedEvent', (e) => {
+//     job.value = e.job;
+//   });
 
 </script>
 
