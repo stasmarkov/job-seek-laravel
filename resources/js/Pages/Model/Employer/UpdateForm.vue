@@ -1,12 +1,13 @@
 <script setup>
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
+import InputError from '@/Components/FormElements/InputError.vue';
+import InputLabel from '@/Components/FormElements/InputLabel.vue';
 import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import TextInput from '@/Components/FormElements/TextInput.vue';
 import {Link, useForm, usePage} from '@inertiajs/vue3';
 import AdminAreaLayout from "@/Layouts/AdminAreaLayout.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
 import EmployerLogo from "@/Components/Employers/EmployerLogo.vue";
+import {useCurrentUser} from "@/Composables/useCurrentUser.js";
 
 const props = defineProps({
   employer: {
@@ -14,7 +15,7 @@ const props = defineProps({
   },
 });
 
-const user = usePage().props.auth.user;
+const user = useCurrentUser();
 
 const form = useForm({
   name: props.employer.name,

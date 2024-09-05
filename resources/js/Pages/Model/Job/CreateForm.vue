@@ -1,17 +1,20 @@
 <script setup>
 
 import {useForm, usePage} from "@inertiajs/vue3";
-import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
+import InputLabel from "@/Components/FormElements/InputLabel.vue";
+import TextInput from "@/Components/FormElements/TextInput.vue";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 import Checkbox from "@/Components/Checkbox.vue";
-import InputError from "@/Components/InputError.vue";
+import InputError from "@/Components/FormElements/InputError.vue";
 import JobCardWide from "@/Components/Jobs/JobCardWide.vue";
 import JobCard from "@/Components/Jobs/JobCard.vue";
 import {computed, ref} from "vue";
 import AdminAreaTwoColumnsLayout from "@/Layouts/AdminAreaTwoColumnsLayout.vue";
 import HtmlTextarea from "@/Components/FormElements/HtmlTextarea.vue";
-import CheckboxButtons from "@/Components/Forms/CheckboxButtons.vue";
+import CheckboxButtons from "@/Components/FormElements/CheckboxButtons.vue";
+import {useCurrentUser} from "@/Composables/useCurrentUser.js";
+import FormGroup from "@/Components/FormElements/FormGroup.vue";
+import TextareaInput from "@/Components/FormElements/TextareaInput.vue";
 
 const props = defineProps({
   employer: Object,
@@ -31,13 +34,15 @@ const form = useForm({
   featured: false
 });
 
+
 // Get current user.
-const user = usePage().props.auth.user;
+const user = useCurrentUser();
 
 // Enable/disable preview.
 let enablePreview = ref(false);
 
-// The Job object for the preview.
+// Job passed to the preview.
+// @todo Find better way to extract tags.
 const job = computed(() => {
   return {
     title: form.title,
@@ -45,12 +50,19 @@ const job = computed(() => {
     location: form.location,
     schedule: form.schedule,
     url: form.url,
-    tags: form.tags.split(',').map(item => {
-      return {'name': item}
+    tags: form.tags.map(item => {
+      if (item instanceof Object) {
+        return item;
+      }
+      let tag = props.tags.data.find(el => el.id === item);
+      return {
+        'id': tag.id,
+        'name': tag.name,
+      }
     }),
     description: form.description,
     short_description: form.short_description,
-    employer: user.employer
+    employer: user.employer,
   };
 });
 
@@ -78,12 +90,12 @@ const submit = () => {
   <AdminAreaTwoColumnsLayout>
     <Head title="Post a new job"/>
 
-    <template #heading>Add new job</template>
+    <template #heading><h1 class="text-xl font-bold">Add new job</h1></template>
 
     <template #left_column :class="{
       'sm:grid-cols-1': !enablePreview
     }">
-      <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+      <FormGroup>
         <div class="flex gap-2 items-center">
           <Checkbox :checked="enablePreview" id="preview" name="preview" @input="enablePreview = ! enablePreview"/>
           <InputLabel for="preview" value="Enable preview"/>
@@ -94,7 +106,8 @@ const submit = () => {
             <InputError :message="form.errors.title" class="mt-2"/>
 
             <InputLabel value="Short description" for="short_description" />
-            <textarea name="short_description" v-model="form.short_description"/>
+            <TextareaInput name="short_description" v-model="form.short_description"/>
+
             <span class="flex w-full justify-end" :class="{
               'text-red-500': charsLeft <= 0,
             }">{{ charsLeft }} / 250</span>
@@ -158,7 +171,7 @@ const submit = () => {
             </Transition>
           </div>
         </form>
-      </div>
+      </FormGroup>
     </template>
 
     <template #right_column v-if="enablePreview">

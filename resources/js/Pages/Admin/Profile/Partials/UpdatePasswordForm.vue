@@ -1,8 +1,8 @@
 <script setup>
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
+import InputError from '@/Components/FormElements/InputError.vue';
+import InputLabel from '@/Components/FormElements/InputLabel.vue';
 import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import TextInput from '@/Components/FormElements/TextInput.vue';
 import {useForm} from '@inertiajs/vue3';
 import {ref} from 'vue';
 

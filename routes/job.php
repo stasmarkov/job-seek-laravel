@@ -8,10 +8,11 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\JobController;
+use App\Http\Middleware\AddContext;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(JobController::class)->group(function () {
-  Route::middleware('auth')->group(function () {
+  Route::middleware(['auth', AddContext::class])->group(function () {
     Route::get('/job/add', 'create')
       ->name('job.create');
 

@@ -26,7 +26,8 @@ const model = defineModel({
 </template>
 
 <style scoped>
-  .textarea--html {
+  .tox.tox-tinymce {
     border-radius: 0;
+    border-width: 1px;
   }
 </style>

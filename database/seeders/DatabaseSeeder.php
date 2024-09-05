@@ -19,7 +19,14 @@ class DatabaseSeeder extends Seeder {
       'email' => 'admin@example.com',
       'password' => '123123123',
     ]);
+
+    $second_admin = User::factory()->create([
+      'name' => 'admin-2',
+      'email' => 'admin-2@example.com',
+      'password' => '123123123',
+    ]);
     Employer::factory(1)->recycle($admin)->create();
+    Employer::factory(1)->recycle($second_admin)->create();
 
     $users = User::factory(10)->create();
     $this->call(JobSeeder::class, FALSE, [

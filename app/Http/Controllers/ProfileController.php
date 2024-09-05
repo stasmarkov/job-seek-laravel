@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -25,7 +26,8 @@ class ProfileController extends Controller {
     return Inertia::render('Admin/Profile/Edit', [
       'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
       'status' => session('status'),
-      'employer' => Auth::user()?->employer,
+      // @todo Retrieve from the context.
+      'employer' => Context::get('current_user_employer'),
     ]);
   }
 

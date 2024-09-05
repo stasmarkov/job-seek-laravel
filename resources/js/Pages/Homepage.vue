@@ -35,7 +35,6 @@ function redirectOnSearchPage(value) {
     <div class="space-y-4">
       <section>
         <section class="text-center pt-6">
-          <h1 class="font-bold text-4xl">Let's Find Your NExt Job</h1>
           <SearchJobForm @searchFormSubmitEvent="redirectOnSearchPage"/>
         </section>
 

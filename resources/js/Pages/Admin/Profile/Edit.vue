@@ -5,6 +5,7 @@ import UpdateProfileInformationForm from './Partials/UpdateProfileInformationFor
 import {Head, usePage} from '@inertiajs/vue3';
 import AdminAreaLayout from "@/Layouts/AdminAreaLayout.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
+import FormGroup from "@/Components/FormElements/FormGroup.vue";
 
 defineProps({
   mustVerifyEmail: {
@@ -29,21 +30,21 @@ defineProps({
         <LinkButton :href="route('employer.edit', {'employer': $page.props.employer.id })">Edit Employer information</LinkButton>
       </div>
 
-      <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+      <FormGroup>
         <UpdateProfileInformationForm
           :must-verify-email="mustVerifyEmail"
           :status="status"
           class="max-w-xl"
         />
-      </div>
+      </FormGroup>
 
-      <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+      <FormGroup>
         <UpdatePasswordForm class="max-w-xl"/>
-      </div>
+      </FormGroup>
 
-      <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+      <FormGroup>
         <DeleteUserForm class="max-w-xl"/>
-      </div>
+      </FormGroup>
     </template>
   </AdminAreaLayout>
 </template>

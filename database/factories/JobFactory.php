@@ -44,6 +44,7 @@ class JobFactory extends Factory {
       'featured' => FALSE,
       'description' => fake()->realText(2500),
       'short_description' => fake()->realText(250),
+      'created_at' => fake()->time,
     ];
   }
 

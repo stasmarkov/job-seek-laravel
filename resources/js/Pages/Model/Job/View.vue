@@ -4,6 +4,7 @@
   import LinkButton from "@/Components/Buttons/LinkButton.vue";
   import EmployerLogo from "@/Components/Employers/EmployerLogo.vue";
   import Tag from "@/Components/Tags/Tag.vue";
+  import AnchorButton from "@/Components/Buttons/AnchorButton.vue";
 
   defineProps({
     job: Object,
@@ -17,8 +18,8 @@
   </Head>
 
   <Layout>
-    <div v-if="can.can_edit" class="flex gap-2 mb-2">
-      <LinkButton class="bg-green-600" :href="route('job.edit', { job: job.data.id })">Edit</LinkButton>
+    <div v-if="can.edit" class="flex gap-2 mb-2">
+      <LinkButton  class="bg-green-600" :href="route('job.edit', { job: job.data.id })">Edit</LinkButton>
     </div>
 
     <Panel>
@@ -46,7 +47,7 @@
         </div>
       </div>
       <div class="mt-4 flex justify-end">
-        <a :href="job.data.url" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-700 border border-transparent rounded-md font-semibold text-sm text-white tracking-widest hover:bg-blue-500 focus:bg-gray-700 active:bg-gray-900 transition ease-in-out duration-150">View more</a>
+        <AnchorButton :href="job.data.url" target="_blank">View more</AnchorButton>
       </div>
     </Panel>
   </Layout>

@@ -7,7 +7,7 @@ import Pager from "@/Components/Pager.vue";
 import {ref, watch} from "vue";
 import {router} from "@inertiajs/vue3";
 import {throttle, debounce} from "lodash";
-import CheckboxButtons from "@/Components/Forms/CheckboxButtons.vue";
+import CheckboxButtons from "@/Components/FormElements/CheckboxButtons.vue";
 
 // Properties given from controller and parent components.
 const props = defineProps({
@@ -48,7 +48,6 @@ watch([order, searchString, tags], throttle(function ([orderValue, searchValue, 
 
   <Layout>
     <section class="text-center pt-6">
-      <h1 class="font-bold text-4xl">Let's Find Your Next Job</h1>
       <SearchJobForm :searchString @searchFormSubmitEvent="searchFormSubmit"/>
     </section>
 

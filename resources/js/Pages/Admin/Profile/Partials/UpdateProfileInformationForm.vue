@@ -1,9 +1,10 @@
 <script setup>
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
+import InputError from '@/Components/FormElements/InputError.vue';
+import InputLabel from '@/Components/FormElements/InputLabel.vue';
 import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import TextInput from '@/Components/FormElements/TextInput.vue';
 import {Link, useForm, usePage} from '@inertiajs/vue3';
+import {useCurrentUser} from "@/Composables/useCurrentUser.js";
 
 defineProps({
   mustVerifyEmail: {
@@ -14,7 +15,7 @@ defineProps({
   },
 });
 
-const user = usePage().props.auth.user;
+const user = useCurrentUser();
 
 const form = useForm({
   name: user.name,

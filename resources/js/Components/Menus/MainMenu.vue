@@ -11,11 +11,10 @@ import NavLink from "@/Components/NavLink.vue";
       :active="route().current('search.jobs')"
       class="hover:text-white/70"
     >Jobs</NavLink>
-
-<!--    <NavLink-->
-<!--      :href="route('homepage')"-->
-<!--      :active="route().current('homepage')"-->
-<!--      class="hover:text-white/70"-->
-<!--    >Blog</NavLink>-->
+    <NavLink
+      :href="route('contact.index')"
+      :active="route().current('contact.index')"
+      class="hover:text-white/70"
+    >Contact Us</NavLink>
   </nav>
 </template>

@@ -1,18 +1,20 @@
 <script setup>
 
 import {useForm, usePage} from "@inertiajs/vue3";
-import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
+import InputLabel from "@/Components/FormElements/InputLabel.vue";
+import TextInput from "@/Components/FormElements/TextInput.vue";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 import Checkbox from "@/Components/Checkbox.vue";
-import InputError from "@/Components/InputError.vue";
+import InputError from "@/Components/FormElements/InputError.vue";
 import JobCardWide from "@/Components/Jobs/JobCardWide.vue";
 import JobCard from "@/Components/Jobs/JobCard.vue";
 import {computed, ref} from "vue";
 import AdminAreaTwoColumnsLayout from "@/Layouts/AdminAreaTwoColumnsLayout.vue";
 import HtmlTextarea from "@/Components/FormElements/HtmlTextarea.vue";
 import useCharsCounter from "@/stores/charsCounter.js";
-import CheckboxButtons from "@/Components/Forms/CheckboxButtons.vue";
+import CheckboxButtons from "@/Components/FormElements/CheckboxButtons.vue";
+import {useCurrentUser} from "@/Composables/useCurrentUser.js";
+import TextareaInput from "@/Components/FormElements/TextareaInput.vue";
 
 const props = defineProps({
   job: Object,
@@ -34,9 +36,10 @@ const form = useForm({
   featured: props.job.data.featured
 });
 
-const user = usePage().props.auth.user;
+const user = useCurrentUser();
 
 // Job passed to the preview.
+// @todo Find better way to extract tags.
 const job = computed(() => {
   return {
     title: form.title,
@@ -44,8 +47,15 @@ const job = computed(() => {
     location: form.location,
     schedule: form.schedule,
     url: form.url,
-    tags: form.tags.split(',').map(item => {
-      return {'name': item}
+    tags: form.tags.map(item => {
+      if (item instanceof Object) {
+        return item;
+      }
+      let tag = props.tags.data.find(el => el.id === item);
+      return {
+        'id': tag.id,
+        'name': tag.name,
+      }
     }),
     description: form.description,
     short_description: form.short_description,
@@ -89,7 +99,7 @@ const submit = () => {
             <InputError :message="form.errors.title" class="mt-2"/>
 
             <InputLabel value="Short description" for="short_description" />
-            <textarea name="short_description" v-model="form.short_description"/>
+            <TextareaInput name="short_description" v-model="form.short_description"/>
             <span class="flex w-full justify-end" :class="{
               'text-red-500': limitChars <= 0,
             }">{{ limitChars }} / 250</span>

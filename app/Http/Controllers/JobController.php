@@ -13,6 +13,7 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Context;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
@@ -46,7 +47,7 @@ class JobController extends Controller implements HasMiddleware {
     return Inertia::render('Model/Job/View', [
       'job' => JobResource::make($job),
       'can' => [
-        'can_edit' => $user ? $user->can('update', $job) : FALSE,
+        'edit' => $user ? $user->can('update', $job) : FALSE,
       ],
     ]);
   }
@@ -56,7 +57,7 @@ class JobController extends Controller implements HasMiddleware {
    */
   public function create(Request $request) {
     return Inertia::render('Model/Job/CreateForm', [
-      'employer' => Auth::user()->employer,
+      'employer' => Context::get('current_user_employer'),
       'tags' => TagResource::collection(Tag::all()),
     ]);
   }
@@ -89,6 +90,7 @@ class JobController extends Controller implements HasMiddleware {
       }
 
       foreach ($attributes['tags'] as $tag) {
+        $b=0;
         if ($loaded_tag = Tag::find($tag)) {
           $job->tag($loaded_tag->name);
         }
@@ -109,7 +111,8 @@ class JobController extends Controller implements HasMiddleware {
    */
   public function edit(Job $job) {
     return Inertia::render('Model/Job/EditForm', [
-      'employer' => Auth::user()->employer,
+      // @todo Retrieve from the context.
+      'employer' => Context::get('current_user_employer'),
       'job' => JobResource::make($job),
       'tags' => TagResource::collection(Tag::all()),
     ]);
@@ -141,7 +144,7 @@ class JobController extends Controller implements HasMiddleware {
 
       foreach ($attributes['tags'] as $tag) {
         if ($loaded_tag = Tag::find($tag)) {
-          $job->tag($loaded_tag->name);
+          $job->tags()->attach($loaded_tag);
         }
       }
     }
