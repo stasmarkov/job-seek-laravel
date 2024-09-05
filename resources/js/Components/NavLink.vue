@@ -1,5 +1,4 @@
 <script setup>
-import {computed} from 'vue';
 import {Link} from '@inertiajs/vue3';
 
 const props = defineProps({
@@ -12,19 +11,14 @@ const props = defineProps({
   },
 });
 
-const classes = computed(() =>
-  props.active
-    ? 'inline-flex items-center px-2 pt-1 border-b-2 border-indigo-400 text-md font-medium leading-5 text-white focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out'
-    : 'inline-flex items-center px-2 pt-1 border-b-2 border-transparent text-md font-medium leading-5 text-white hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out'
-);
 </script>
 
 <template>
   <Link :href="href"
-        class="inline-flex items-center px-4 py-2 border-b-2 text-md font-medium leading-5 text-white focus:outline-none focus:border-indigo-500 transition duration-150 ease-in-out"
-        :class="{
-          'border-blue-700 focus:outline-none focus:border-blue-700' : props.active,
-          'border-transparent hover:text-gray-700 hover:border-blue-500 focus:outline-none focus:text-gray-700 focus:border-gray-300': !props.active
+    class="inline-flex items-center px-4 py-2 border-b-2 text-md font-medium leading-5 text-white focus:outline-none focus:border-indigo-500 transition duration-150 ease-in-out"
+    :class="{
+      'border-blue-700 focus:outline-none focus:border-blue-700' : props.active,
+      'border-transparent hover:text-gray-700 hover:border-blue-500 focus:outline-none focus:text-gray-700 focus:border-gray-300': !props.active
   }">
     <slot/>
   </Link>

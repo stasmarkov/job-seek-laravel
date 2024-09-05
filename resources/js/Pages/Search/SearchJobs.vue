@@ -7,6 +7,7 @@ import useSearchJobResults from "@/stores/searchJobResults.js";
 import SearchJobForm from "@/Components/Forms/SearchJobForm.vue";
 
 let {results, getResults} = useSearchJobResults();
+getResults();
 
 </script>
 
@@ -20,11 +21,13 @@ let {results, getResults} = useSearchJobResults();
     <heading>{{ ('Search results') }}</heading>
 
 
-    <div class="space-y-3">
+    <div class="space-y-10">
 <!--      <div v-if="results.data && results.data.length > 0">-->
+      <div>
         <JobCardWide v-for="job in results.data" :job :key="job.id"/>
+      </div>
 
-        <div class="pager mt-6 flex justify-center">
+        <div class="flex justify-center px-2">
           <TailwindPagination
             :data="results"
             @pagination-change-page="getResults"

@@ -12,7 +12,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
       <div class="flex justify-between items-center py-4  w-full max-w-7xl mx-auto">
         <div>
           <Link :href="route('homepage')">
-            <ApplicationLogo/>
+            <ApplicationLogo />
           </Link>
         </div>
         <div class="space-x-6 font-bold">

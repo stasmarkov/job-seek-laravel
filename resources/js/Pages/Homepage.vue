@@ -6,6 +6,7 @@ import JobCard from "@/Components/Jobs/JobCard.vue";
 import Tag from "@/Components/Tags/Tag.vue";
 import JobCardWide from "@/Components/Jobs/JobCardWide.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
+import SearchJobForm from "@/Components/Forms/SearchJobForm.vue";
 
 // Properties given by the route should be defined using defineProps.
 defineProps({
@@ -28,7 +29,7 @@ defineProps({
       <section class="pt-10">
         <section class="text-center pt-6">
           <h1 class="font-bold text-4xl">Let's Find Your NExt Job</h1>
-          form goes here
+          <SearchJobForm />
         </section>
 
         <Heading>Featured Jobs</Heading>

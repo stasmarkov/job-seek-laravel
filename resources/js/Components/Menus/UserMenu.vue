@@ -7,14 +7,19 @@ import DropdownLink from "@/Components/DropdownLink.vue";
 
 <template>
   <nav>
-    <Dropdown align="right" width="48" v-if="$page.props.auth.user">
+    <Dropdown align="right" width="48">
       <template #trigger>
       <span class="inline-flex rounded-md">
         <button
           type="button"
           class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
         >
-          {{ $page.props.auth.user.name }}
+          <span v-if="$page.props.auth.user">
+            {{ $page.props.auth.user.name }}
+          </span>
+          <span v-else>
+            My Account
+          </span>
 
           <svg
             class="ms-2 -me-0.5 h-4 w-4"
@@ -33,30 +38,20 @@ import DropdownLink from "@/Components/DropdownLink.vue";
       </template>
 
       <template #content>
-        <DropdownLink :href="route('profile.edit')"> Profile</DropdownLink>
-        <DropdownLink :href="route('homepage')">Post a job</DropdownLink>
-        <DropdownLink :href="route('logout')" method="post" as="button">
+        <DropdownLink :href="route('profile.edit')" v-if="$page.props.auth.user"> Profile</DropdownLink>
+        <DropdownLink :href="route('homepage')" v-if="$page.props.auth.user">Post a job</DropdownLink>
+        <DropdownLink :href="route('logout')" method="post" as="button" v-if="$page.props.auth.user">
           Log Out
         </DropdownLink>
+
+        <DropdownLink :href="route('login')" v-if="!$page.props.auth.user">Log In</DropdownLink>
+        <DropdownLink :href="route('register')" v-show="!$page.props.auth.user">Sign Up</DropdownLink>
       </template>
     </Dropdown>
-
-    <Link
-      :href="route('login')"
-      class="hover:text-white/70"
-      v-if="!$page.props.auth.user"
-    >
-      Log In
-    </Link>
-    <Link
-      :href="route('register')"
-      v-if="!$page.props.auth.user"
-      class="hover:text-white/70"
-    >Sign Up
-    </Link>
   </nav>
 </template>
 
 <style scoped>
+
 
 </style>
