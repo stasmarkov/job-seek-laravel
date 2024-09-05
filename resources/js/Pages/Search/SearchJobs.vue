@@ -15,6 +15,7 @@ const props = defineProps({
 
 // The search string.
 let searchString = ref(props.filters.search ?? '');
+let order = ref(props.filters.order ?? 'DESC');
 
 // The callback on search.
 function searchFormSubmit(searchSubmitValue) {
@@ -22,8 +23,8 @@ function searchFormSubmit(searchSubmitValue) {
 }
 
 // Watch changes and perform request.
-watch(searchString, value => {
-  Inertia.get('/search', { search: value }, {
+watch([order, searchString], ([orderValue, searchValue]) => {
+  Inertia.get('/search', { search: searchValue, order: orderValue }, {
     preserveState: true,
     preserveScroll: true,
   });
@@ -41,6 +42,15 @@ watch(searchString, value => {
     </section>
 
     <heading>{{ ('Search results') }}</heading>
+
+    <div class="border-t border-b py-4 mt-4">
+      <div class="flex items-center gap-2">
+        <span>Sort by:</span>
+        <select name="" id="" v-model="order" class="text-black border-0">
+          <option value="DESC">Newest</option>
+          <option value="ASC">Oldest</option>
+        </select></div>
+    </div>
 
     <div class="mt-4">
       <div v-if="props.results.data.length > 0">

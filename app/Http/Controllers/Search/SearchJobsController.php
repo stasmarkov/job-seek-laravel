@@ -19,7 +19,7 @@ class SearchJobsController extends Controller {
    */
   public function index(Request $request) {
     return Inertia::render('Search/SearchJobs', [
-      'filters' => $request->only(['search']),
+      'filters' => $request->only(['search', 'order']),
       'results' => Job::query()
         ->with([
           'employer',
