@@ -7,11 +7,18 @@
 
   defineProps({
     job: Object,
+    can: Object,
   })
 </script>
 
 <template>
+  <Head :title="job.title" />
+
   <Layout>
+    <div v-if="true" class="flex gap-2 mb-2">
+      <LinkButton class="bg-green-600" :v-if="can.can_edit" :href="route('job.edit', { job: job.id })">Edit</LinkButton>
+    </div>
+
     <Panel>
       <div class="border-b pb-4 flex justify-between items-center gap-2">
         <h1 class="text-3xl font-bold">{{ job.title }}</h1>

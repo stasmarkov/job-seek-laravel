@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ use Inertia\Inertia;
 /**
  * The job controller.
  */
-class JobController extends Controller {
+class JobController extends Controller implements HasMiddleware {
 
   /**
    * {@inheritdoc}
@@ -42,6 +43,9 @@ class JobController extends Controller {
     $job->tags;
     return Inertia::render('Model/Job/View', [
       'job' => $job,
+      'can' => [
+        'can_edit' => Auth::user()?->can('edit', [Auth::user(), $job]),
+      ],
     ]);
   }
 
@@ -80,6 +84,55 @@ class JobController extends Controller {
     }
 
     return back();
+  }
+
+  /**
+   * The edit Job Model page.
+   *
+   * @param \App\Models\Job $job
+   *   The Job model.
+   *
+   * @return \Inertia\Response
+   *   The page.
+   */
+  public function edit(Job $job) {
+    $job->tags;
+    $job->employer;
+    return Inertia::render('Model/Job/EditForm', [
+      'employer' => Auth::user()->employer,
+      'job' => $job,
+    ]);
+  }
+
+  /**
+   * Store a newly created resource in storage.
+   */
+  public function update(Request $request, Job $job) {
+    $attributes = $request->validate([
+      'title' => ['required'],
+      'description' => ['required'],
+      'salary' => ['required'],
+      'location' => ['required'],
+      'schedule' => ['required', Rule::in(['Part-Time', 'Full-Time', 'Contract'])],
+      'url' => ['required', 'active_url'],
+      'tags' => ['nullable'],
+    ]);
+
+    $attributes['featured'] = $request->has('featured');
+
+    if ($attributes['tags'] ?? FALSE) {
+      $job->tags()->detach();
+      foreach (explode(',', $attributes['tags']) as $tag) {
+        $job->tag($tag);
+      }
+    }
+
+    unset($attributes['tags']);
+    $job->update($attributes);
+
+    return redirect(route('job.index', [
+      'job' => $job,
+    ]));
   }
 
 }

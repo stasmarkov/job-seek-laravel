@@ -6,17 +6,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Employer;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Inertia\Inertia;
 
 /**
  * The job controller.
  */
-class EmployerController extends Controller {
+class EmployerController extends Controller implements HasMiddleware {
 
-  public function __construct(Request $request) {
-    $this->request = $request;
-  }
+  /**
+   * Constructs EmployerController class.
+   *
+   * @param \Illuminate\Http\Request $request
+   *   The request.
+   */
+  public function __construct(
+    protected Request $request
+  ) {}
 
   /**
    * {@inheritdoc}
@@ -24,8 +31,8 @@ class EmployerController extends Controller {
   public static function middleware() {
     return [
       new Middleware('can:create,\App\Model\Employer', only: ['create', 'store']),
-      new Middleware('can:update,job', only: ['edit', 'update']),
-      new Middleware('can:delete,job', only: ['destroy']),
+      new Middleware('can:update,employer', only: ['edit', 'update']),
+      new Middleware('can:delete,employer', only: ['destroy']),
     ];
   }
 

@@ -77,6 +77,12 @@ Route::middleware('auth')->group(function () {
 
   Route::get('/job/{job}', [JobController::class, 'index'])
     ->name('job.index');
+
+  Route::get('/job/{job}/edit', [JobController::class, 'edit'])
+    ->name('job.edit');
+
+  Route::patch('/job/{job}/edit', [JobController::class, 'update'])
+    ->name('job.update');
 });
 
 Route::middleware('auth')->group(function () {
