@@ -6,6 +6,7 @@ import {createInertiaApp} from '@inertiajs/vue3';
 import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
 import {ZiggyVue} from '../../vendor/tightenco/ziggy';
 import {createPinia} from "pinia";
+import { InertiaProgress } from "@inertiajs/progress";
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -20,6 +21,10 @@ createInertiaApp({
       .mount(el);
   },
   progress: {
-    color: '#4B5563',
-  },
+    delay: 250,
+    color: '#1d4ed8',
+    showSpinner: false,
+  }
 });
+
+InertiaProgress.init();
