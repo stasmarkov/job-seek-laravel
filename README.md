@@ -10,6 +10,7 @@ The working demo might be found here: https://job-seeker.markovrecords.com/
 - [Laravel 11](https://laravel.com/docs/11.x) as a core of the website;
 - [Vue.js3](https://vuejs.org/) as a frontend;
 - [Inertia](https://inertiajs.com/) as a bridge between backend and frontend technologies;
+- [TailwindCSS](https://tailwindcss.com/docs) as a CSS framework;
 - [Redis](https://redis.io/) as a cache and queue provider;
 - [Reverb](https://reverb.laravel.com/) as a socket functionality provider;
 - [Forge](https://forge.laravel.com/) as deployment tool;
