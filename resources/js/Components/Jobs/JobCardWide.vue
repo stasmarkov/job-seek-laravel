@@ -11,18 +11,22 @@ defineProps({
 </script>
 
 <template>
-  <Panel class="flex gap-x-6 flex-wrap">
-    <div>
+  <Panel class="flex gap-x-6 flex-wrap bg-black text-white">
+    <div v-if="job.employer">
       <EmployerLogo :employer="job.employer"/>
     </div>
 
-    <div class="flex-1 flex flex-col md:flex-1">
-      <a href="#" class="self-start text-sm text-gray-400 ">{{ job.employer.name }}</a>
-      <h3 class="font-bold text-xl mt-2 group-hover:text-blue-600 transition-colors duration-300">
-        <a :href="job.url" target="_blank">
+    <div class="flex-1 flex flex-col md:flex-1 gap-0.5">
+      <a href="#" class="self-start text-sm text-gray-400" v-if="job.employer">{{ job.employer.name }}</a>
+      <h3 class="text-white font-bold text-xl mt-2 group-hover:text-blue-600 transition-colors duration-300">
+        <a :href="route('job.index', { job: job.id })" v-if="job.id">
           {{ job.title }}
         </a>
+        <span v-else>
+          {{ job.title }}
+        </span>
       </h3>
+      <p class="text-md font-light">{{ job.description.substring(0, 50) + '...' }}</p>
       <p class="text-sm text-gray-500 mt-auto">{{ job.schedule }} - {{ job.salary }}</p>
     </div>
 

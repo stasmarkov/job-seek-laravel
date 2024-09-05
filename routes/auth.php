@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function() {
@@ -63,4 +64,15 @@ Route::middleware('auth')->group(function() {
 
   Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
+});
+
+Route::middleware('auth')->group(function () {
+  Route::get('/job/create', [JobController::class, 'create'])
+    ->name('job.create');
+
+  Route::post('/job/create', [JobController::class, 'store'])
+    ->name('job.store');
+
+  Route::get('/job/{job}', [JobController::class, 'index'])
+    ->name('job.index');
 });

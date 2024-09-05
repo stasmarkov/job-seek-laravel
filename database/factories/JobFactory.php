@@ -36,6 +36,7 @@ class JobFactory extends Factory {
       'schedule' => fake()->randomElement([
         'Part-Time',
         'Full-Time',
+        'Contract',
       ]),
       'url' => fake()->url(),
       'featured' => FALSE,

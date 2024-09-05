@@ -40,7 +40,9 @@ class HomepageController extends Controller {
       'laravelVersion' => Application::VERSION,
       'phpVersion' => PHP_VERSION,
       'featuredJobs' => $jobs_featured->map(fn($job) => [
+        'id' => $job->id,
         'title' => $job->title,
+        'description' => $job->description,
         'url' => $job->url,
         'schedule' => $job->schedule,
         'salary' => $job->salary,
@@ -53,7 +55,9 @@ class HomepageController extends Controller {
         ],
       ]),
       'jobs' => $jobs->map(fn($job) => [
+        'id' => $job->id,
         'title' => $job->title,
+        'description' => $job->description,
         'url' => $job->url,
         'schedule' => $job->schedule,
         'salary' => $job->salary,

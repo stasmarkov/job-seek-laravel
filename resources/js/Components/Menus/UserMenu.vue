@@ -39,7 +39,7 @@ import DropdownLink from "@/Components/DropdownLink.vue";
 
       <template #content>
         <DropdownLink :href="route('profile.edit')" v-if="$page.props.auth.user"> Profile</DropdownLink>
-        <DropdownLink :href="route('homepage')" v-if="$page.props.auth.user">Post a job</DropdownLink>
+        <DropdownLink :href="route('job.create')" v-if="$page.props.auth.user">Post a job</DropdownLink>
         <DropdownLink :href="route('logout')" method="post" as="button" v-if="$page.props.auth.user">
           Log Out
         </DropdownLink>

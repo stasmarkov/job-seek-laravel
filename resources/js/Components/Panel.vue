@@ -3,7 +3,7 @@
 
 <template>
   <div
-    class="p-4 bg-white/5 rounded-xl border border-transparent hover:border-blue-600 group transition-colors duration-300">
+    class="p-4 rounded-xl border border-transparent hover:border-blue-600 group transition-colors duration-300 bg-black">
     <slot/>
   </div>
 </template>

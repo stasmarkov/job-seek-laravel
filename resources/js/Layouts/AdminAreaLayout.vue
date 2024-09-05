@@ -6,7 +6,7 @@ import Footer from "@/Components/Footer.vue";
 <template>
   <Head title="Admin Area" />
 
-  <div class="pt-16 bg-white text-gray-900">
+  <div class="pt-16 bg-white text-gray-900 flex flex-col h-min-screen justify-between">
     <slot name="header">
       <Header />
     </slot>
@@ -24,7 +24,7 @@ import Footer from "@/Components/Footer.vue";
     </main>
 
     <slot name="footer">
-      <Footer />
+      <Footer class="text-white bg-black"/>
     </slot>
   </div>
 </template>

@@ -1,5 +1,6 @@
 <script setup>
 import {onMounted, ref} from 'vue';
+import InputError from "@/Components/InputError.vue";
 
 const model = defineModel({
   type: String,
@@ -23,4 +24,5 @@ defineExpose({focus: () => input.value.focus()});
     v-model="model"
     ref="input"
   />
+
 </template>

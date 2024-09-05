@@ -11,23 +11,27 @@ defineProps({
 </script>
 
 <template>
-  <Panel class="flex flex-col text-center">
-    <div class="self-start text-sm">{{ job.employer.name }}</div>
+  <Panel class="flex flex-col text-center bg-black">
+    <div v-if="job.employer" class="self-start text-sm">{{ job.employer.name }}</div>
 
-    <div class="py-8">
-      <h3 class="group-hover:text-blue-600 text-xl text-bold transition-colors duration-300">
-        <a :href="job.url" target="_blank">
+    <div class="py-8 space-y-3">
+      <h3 class="text-white group-hover:text-blue-600 text-xl text-bold transition-colors duration-300 ">
+        <a :href="route('job.index', { job: job.id })" v-if="job.id">
           {{ job.title }}
         </a>
+        <span v-else>
+          {{ job.title }}
+        </span>
       </h3>
-      <p class="text-sm mt-4">{{ job.schedule }} - {{ job.salary }}</p>
+      <p class="text-sm font-light">{{ job.description.substring(0, 150) + '...' }}</p>
+      <p class="text-xs mt-4 text-gray-300">{{ job.schedule }} - {{ job.salary }}</p>
     </div>
 
     <div class="flex justify-between items-baseline mt-auto gap-2">
       <div class="flex flex-wrap mt-auto gap-2">
         <Tag v-for="tag in job.tags" size="small" :tag/>
       </div>
-      <EmployerLogo :employer="job.employer" width="42"/>
+      <EmployerLogo v-if="job.employer"  :employer="job.employer" width="42"/>
     </div>
   </Panel>
 </template>
