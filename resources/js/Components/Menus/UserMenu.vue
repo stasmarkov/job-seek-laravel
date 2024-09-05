@@ -6,8 +6,9 @@ import DropdownLink from "@/Components/DropdownLink.vue";
 </script>
 
 <template>
-  <Dropdown align="right" width="48" v-if="$page.props.auth.user">
-    <template #trigger>
+  <nav>
+    <Dropdown align="right" width="48" v-if="$page.props.auth.user">
+      <template #trigger>
       <span class="inline-flex rounded-md">
         <button
           type="button"
@@ -29,30 +30,31 @@ import DropdownLink from "@/Components/DropdownLink.vue";
           </svg>
         </button>
       </span>
-    </template>
+      </template>
 
-    <template #content>
-      <DropdownLink :href="route('profile.edit')"> Profile</DropdownLink>
-      <DropdownLink :href="route('homepage')">Post a job</DropdownLink>
-      <DropdownLink :href="route('logout')" method="post" as="button">
-        Log Out
-      </DropdownLink>
-    </template>
-  </Dropdown>
+      <template #content>
+        <DropdownLink :href="route('profile.edit')"> Profile</DropdownLink>
+        <DropdownLink :href="route('homepage')">Post a job</DropdownLink>
+        <DropdownLink :href="route('logout')" method="post" as="button">
+          Log Out
+        </DropdownLink>
+      </template>
+    </Dropdown>
 
-  <Link
-    :href="route('login')"
-    class="hover:text-white/70"
-    v-if="!$page.props.auth.user"
-  >
-    Log In
-  </Link>
-  <Link
-    :href="route('register')"
-    v-if="!$page.props.auth.user"
-    class="hover:text-white/70"
-  >Sign Up
-  </Link>
+    <Link
+      :href="route('login')"
+      class="hover:text-white/70"
+      v-if="!$page.props.auth.user"
+    >
+      Log In
+    </Link>
+    <Link
+      :href="route('register')"
+      v-if="!$page.props.auth.user"
+      class="hover:text-white/70"
+    >Sign Up
+    </Link>
+  </nav>
 </template>
 
 <style scoped>

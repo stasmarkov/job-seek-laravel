@@ -5,6 +5,7 @@ import Heading from "@/Components/Heading.vue";
 import JobCard from "@/Components/Jobs/JobCard.vue";
 import Tag from "@/Components/Tags/Tag.vue";
 import JobCardWide from "@/Components/Jobs/JobCardWide.vue";
+import LinkButton from "@/Components/Buttons/LinkButton.vue";
 
 // Properties given by the route should be defined using defineProps.
 defineProps({
@@ -49,7 +50,7 @@ defineProps({
         <JobCardWide v-for="job in jobs" :job />
 
         <div class="flex justify-center mt-2">
-          <a :href="route('search', {q: '_all'})">{{ ('View more') }}</a>
+          <LinkButton :href="route('search', {q: '_all'})">{{ ('View more') }}</LinkButton>
         </div>
       </section>
     </div>

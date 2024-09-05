@@ -6,6 +6,7 @@ namespace App\Traits;
 
 use App\Models\User;
 use Illuminate\Database\UniqueConstraintViolationException;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Provides Model trait for likable Models.
@@ -16,7 +17,7 @@ trait LikableModel {
    * {@inheritdoc}
    */
   public function like(?User $user = NULL) {
-    $user = $user ?: \Auth::user();
+    $user = $user ?: Auth::user();
     try {
       $this->likes()->attach($user);
     }
