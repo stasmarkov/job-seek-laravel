@@ -63,9 +63,10 @@ watch([order, searchString, tags], throttle(function ([orderValue, searchValue, 
           <input type="checkbox" :id="tag.id" :value="tag.id" v-model="tags" class="hidden"/>
           <label
             :for="tag.id"
-            class="hover:cursor-pointer bg-white/10 rounded-2xl font-bold hover:bg-white/25 transition-colors duration-300 text-white px-5 py-1 text-sm"
+            class="hover:cursor-pointer rounded-2xl font-bold transition-colors duration-300 text-white px-5 py-1 text-sm"
             :class="{
               'bg-blue-500 hover:bg-blue-400' : tags.find(el => Number(el) === Number(tag.id)),
+              'bg-white/10 hover:bg-white/25' : !tags.find(el => Number(el) === Number(tag.id)),
             }"
           >{{ tag.name }}</label>
         </span>
