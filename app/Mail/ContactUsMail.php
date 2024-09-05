@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Context;
 /**
  * The contact us mail.
  */
-class ContactUsNotification extends Mailable {
+class ContactUsMail extends Mailable {
 
   use Queueable, SerializesModels;
 

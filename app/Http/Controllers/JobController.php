@@ -15,6 +15,7 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Context;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
@@ -47,7 +48,7 @@ class JobController extends Controller implements HasMiddleware {
   public function index(Job $job) {
     $user = Auth::user();
 
-    broadcast(new JobViewedEvent($job))->toOthers();
+    JobViewedEvent::dispatch($job);
 
     return Inertia::render('Model/Job/View', [
       'job' => JobResource::make($job),
@@ -102,7 +103,7 @@ class JobController extends Controller implements HasMiddleware {
     }
 
     // @todo Add if posted/draft functionality, but for testing it's ok.
-    broadcast(new JobPostedEvent($job))->toOthers();
+    JobPostedEvent::dispatch($job);
     return redirect(route('job.index', ['job' => $job->id]));
   }
 

@@ -14,9 +14,7 @@ const form = useForm({
 // The form submission.
 const submit = () => {
   form.post(route('contact.store'), {
-    onFinish: () => {
-      form.reset();
-    }
+    onSuccess: () => form.reset(),
   });
 };
 </script>

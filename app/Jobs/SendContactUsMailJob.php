@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Jobs;
 
-use App\Mail\ContactUsNotification;
+use App\Mail\ContactUsMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
@@ -31,7 +31,7 @@ class SendContactUsMailJob implements ShouldQueue {
   public function handle(): void {
     try {
       Context::push('queued_jobs', json_encode($this, JSON_THROW_ON_ERROR));
-      Mail::send(new ContactUsNotification($this->contactMessage));
+      Mail::send(new ContactUsMail($this->contactMessage));
     }
     catch (\JsonException $e) {
       Log::error($e);
