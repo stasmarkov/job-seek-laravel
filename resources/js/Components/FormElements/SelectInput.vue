@@ -8,6 +8,10 @@ const model = defineModel({
 
 const props = defineProps({
   options: [],
+  emptyValue: {
+    type: String,
+    default: '--- Select ---',
+  },
 });
 
 const input = ref(null);
@@ -23,6 +27,7 @@ defineExpose({ focus: () => input.value.focus() });
 
 <template>
   <select v-model="model" ref="input">
+    <option selected disabled value>{{ props.emptyValue }}</option>
     <option v-for="(value, key) in options" :value="key">{{ value }}</option>
   </select>
 

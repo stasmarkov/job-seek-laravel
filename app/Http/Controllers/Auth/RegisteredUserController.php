@@ -27,7 +27,12 @@ class RegisteredUserController extends Controller {
     $roles = Role::whereIn('name', [
       UserRolesEnum::EMPLOYER->value,
       UserRolesEnum::EMPLOYEE->value,
-    ])->get()->pluck('name', 'id');
+    ])
+      ->get()
+      ->pluck('name', 'id')
+      ->map(function ($role) {
+        return UserRolesEnum::from($role)->label();
+      });
 
     return Inertia::render('Auth/Register', [
       'roles' => $roles,
