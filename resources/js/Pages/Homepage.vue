@@ -7,6 +7,8 @@ import Tag from "@/Components/Tags/Tag.vue";
 import JobCardWide from "@/Components/Jobs/JobCardWide.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
 import SearchJobForm from "@/Components/Forms/SearchJobForm.vue";
+import {Head, useForm} from '@inertiajs/vue3';
+import { Inertia } from "@inertiajs/inertia";
 
 // Properties given by the route should be defined using defineProps.
 defineProps({
@@ -21,15 +23,20 @@ defineProps({
   }
 });
 
+function redirectOnSearchPage(value) {
+  Inertia.get(route('search'), {'search': value});
+}
+
 </script>
 
 <template>
+  <Head title="Homepage" />
   <Layout>
-    <div class="space-y-10">
-      <section class="pt-10">
+    <div class="space-y-4">
+      <section>
         <section class="text-center pt-6">
           <h1 class="font-bold text-4xl">Let's Find Your NExt Job</h1>
-          <SearchJobForm />
+          <SearchJobForm @searchFormSubmitEvent="redirectOnSearchPage"/>
         </section>
 
         <Heading>Featured Jobs</Heading>
@@ -51,7 +58,7 @@ defineProps({
         <JobCardWide v-for="job in jobs" :job />
 
         <div class="flex justify-center mt-2">
-          <LinkButton :href="route('search', {q: '_all'})">{{ ('View more') }}</LinkButton>
+          <LinkButton :href="route('search')">{{ ('View more') }}</LinkButton>
         </div>
       </section>
     </div>

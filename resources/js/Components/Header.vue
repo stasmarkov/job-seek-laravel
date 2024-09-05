@@ -16,11 +16,11 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
           </Link>
         </div>
         <div class="space-x-6 font-bold">
-          <MainMenu/>
+          <MainMenu />
         </div>
 
         <div class="space-x-6 font-bold flex">
-          <UserMenu/>
+          <UserMenu />
         </div>
       </div>
     </div>

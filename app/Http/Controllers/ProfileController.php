@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
@@ -11,13 +13,16 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
+/**
+ * The profile controller.
+ */
 class ProfileController extends Controller {
 
   /**
    * Display the user's profile form.
    */
   public function edit(Request $request): Response {
-    return Inertia::render('Profile/Edit', [
+    return Inertia::render('Admin/Profile/Edit', [
       'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
       'status' => session('status'),
     ]);
@@ -30,7 +35,7 @@ class ProfileController extends Controller {
     $request->user()->fill($request->validated());
 
     $request->validate([
-      'name' => ['min:3']
+      'name' => ['min:3'],
     ]);
 
     if ($request->user()->isDirty('email')) {

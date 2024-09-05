@@ -11,14 +11,12 @@ defineProps({
 </script>
 
 <template>
-
-
   <Panel class="flex flex-col text-center">
     <div class="self-start text-sm">{{ job.employer.name }}</div>
 
     <div class="py-8">
       <h3 class="group-hover:text-blue-600 text-xl text-bold transition-colors duration-300">
-        <a href="{{ job.url }}" target="_blank">
+        <a :href="job.url" target="_blank">
           {{ job.title }}
         </a>
       </h3>

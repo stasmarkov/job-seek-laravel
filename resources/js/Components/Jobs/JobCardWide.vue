@@ -19,7 +19,7 @@ defineProps({
     <div class="flex-1 flex flex-col md:flex-1">
       <a href="#" class="self-start text-sm text-gray-400 ">{{ job.employer.name }}</a>
       <h3 class="font-bold text-xl mt-2 group-hover:text-blue-600 transition-colors duration-300">
-        <a href="{{ job.url }}" target="_blank">
+        <a :href="job.url" target="_blank">
           {{ job.title }}
         </a>
       </h3>

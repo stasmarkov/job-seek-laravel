@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Search;
 
@@ -9,42 +9,29 @@ use App\Models\Job;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-
 /**
  * The search controller.
  */
 class SearchJobsController extends Controller {
 
   /**
-   * Handle the incoming request.
+   * Handle the incoming request [GET].
    */
-  public function index() {
-    return Inertia::render('Search/SearchJobs');
-  }
-
-  /**
-   * Handle the incoming request.
-   */
-  public function doSearch() {
-    return Inertia::render('Search/SearchJobs');
-  }
-
-  /**
-   * Handle the results incoming request.
-   */
-  public function results(Request $request) {
-    $b=0;
-
-    $results = Job::with([
-      'employer',
-      'tags',
+  public function index(Request $request) {
+    return Inertia::render('Search/SearchJobs', [
+      'filters' => $request->only(['search']),
+      'results' => Job::query()
+        ->with([
+          'employer',
+          'tags',
+        ])
+        ->when($request->input('search'), function ($query, $search) {
+          $query->where('title', 'LIKE', '%' . $search . '%');
+        })
+        ->paginate(6)
+        // Important to pre-save the query in pager links.
+        ->withQueryString(),
     ]);
-
-    if ($request->exists('q') && $request->get('q') !== '_all') {
-      $results->where('title', 'LIKE', '%' . $request->get('q') . '%');
-    }
-
-    return $results->paginate(6);
   }
 
 }
