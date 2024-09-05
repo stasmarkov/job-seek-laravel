@@ -1,20 +1,32 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Enums;
 
 /**
  * Provides different type of users.
  */
-enum UserType: string {
+enum UserRole: string {
 
-  case ANON = 'anonymous';
-  case AUTH = 'authenticated';
+  /**
+   * The administrator role.
+   */
   case ADMIN = 'administrator';
 
+  /**
+   * The employer role.
+   */
   case EMPLOYER = 'employer';
 
-  case EMPLOYEE = 'employy';
+  /**
+   * The employee role.
+   */
+  case EMPLOYEE = 'employee';
+
+  /**
+   * The content admin role.
+   */
+  case CONTENT_ADMIN = 'content_admin';
 
 }
