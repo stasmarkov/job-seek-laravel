@@ -15,7 +15,7 @@ The working demo might be found here: https://job-seeker.markovrecords.com/
 - [Reverb](https://reverb.laravel.com/) as a socket functionality provider;
 - [Forge](https://forge.laravel.com/) as deployment tool;
 - [TinyMCE](https://www.tiny.cloud/) for WYSIWYG fields;
-- [DDev](https://ddev.com/)
+- [DDev](https://ddev.com/) as a local docker environment; 
 
 ### Local deployment
 1. `git clone git@github.com:stasmarkov/job-seeker-laravel.git`
