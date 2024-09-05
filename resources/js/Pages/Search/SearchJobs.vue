@@ -6,7 +6,8 @@ import SearchJobForm from "@/Components/Forms/SearchJobForm.vue";
 import Pager from "@/Components/Pager.vue";
 import {ref, watch} from "vue";
 import {router} from "@inertiajs/vue3";
-import { throttle, debounce } from "lodash";
+import {throttle, debounce} from "lodash";
+import CheckboxButtons from "@/Components/Forms/CheckboxButtons.vue";
 
 // Properties given from controller and parent components.
 const props = defineProps({
@@ -18,17 +19,22 @@ const props = defineProps({
 // The search string.
 let searchString = ref(props.filters.search ?? '');
 let order = ref(props.filters.order ?? 'DESC');
-let tags = ref(props.filters.tags?.data ?? []);
+let tags = ref(props.filters.tags ?? []);
 
-// The callback on search.
+// The callback on tags checkboxes.
 function searchFormSubmit(searchSubmitValue) {
   searchString.value = searchSubmitValue;
+}
+
+// The callback on search.
+function checkboxFormSubmit(value) {
+  tags.value = value;
 }
 
 // throttle - Makes request with some period.
 // debounce - Makes request after some period.
 watch([order, searchString, tags], throttle(function ([orderValue, searchValue, tagsValue]) {
-  router.get('/search', { order: orderValue, search: searchValue, tags: tagsValue }, {
+  router.get(route('search.jobs'), {order: orderValue, search: searchValue, tags: tagsValue}, {
     preserveState: true,
     preserveScroll: true,
     replace: true
@@ -58,19 +64,7 @@ watch([order, searchString, tags], throttle(function ([orderValue, searchValue, 
       </div>
       <div class="flex items-center gap-2">
         <span>Tags:</span>
-        <div class="flex flex-wrap gap-2">
-           <span v-for="tag in props.tags.data">
-          <input type="checkbox" :id="tag.id" :value="tag.id" v-model="tags" class="hidden"/>
-          <label
-            :for="tag.id"
-            class="hover:cursor-pointer rounded-2xl font-bold transition-colors duration-300 text-white px-5 py-1 text-sm"
-            :class="{
-              'bg-blue-500 hover:bg-blue-400' : tags.find(el => Number(el) === Number(tag.id)),
-              'bg-white/10 hover:bg-white/25' : !tags.find(el => Number(el) === Number(tag.id)),
-            }"
-          >{{ tag.name }}</label>
-        </span>
-        </div>
+        <CheckboxButtons :items="props.tags.data" :selectedItems="tags" @checkboxCheckedEvent="checkboxFormSubmit" />
       </div>
     </div>
 

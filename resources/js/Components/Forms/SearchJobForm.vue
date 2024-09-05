@@ -10,7 +10,7 @@ const props = defineProps({
 
 // The form values.
 const form = useForm({
-  query: props.searchString
+  search: props.searchString
 });
 
 // List of events.
@@ -22,11 +22,11 @@ defineEmits(['searchFormSubmitEvent']);
     <div>
       <TextInput
         type="search"
-        name="query"
+        name="search"
         placeholder="Web Developer..."
-        v-model="form.query"
+        v-model="form.search"
         class="mt-1 block w-full"
-        @keyup="$emit('searchFormSubmitEvent', form.query)"
+        @keyup="$emit('searchFormSubmitEvent', form.search)"
       />
     </div>
   </form>

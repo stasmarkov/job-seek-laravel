@@ -11,9 +11,11 @@ import JobCard from "@/Components/Jobs/JobCard.vue";
 import {computed, ref} from "vue";
 import AdminAreaTwoColumnsLayout from "@/Layouts/AdminAreaTwoColumnsLayout.vue";
 import HtmlTextarea from "@/Components/FormElements/HtmlTextarea.vue";
+import CheckboxButtons from "@/Components/Forms/CheckboxButtons.vue";
 
 const props = defineProps({
   employer: Object,
+  tags: Object,
 });
 
 // The form object.
@@ -23,7 +25,7 @@ const form = useForm({
   location: '',
   schedule: 'Part-Time',
   url: '',
-  tags: '',
+  tags: [],
   description: '',
   short_description: '',
   featured: false
@@ -56,6 +58,11 @@ const job = computed(() => {
 const charsLeft = computed(() => {
   return 250 - form.short_description.length
 });
+
+// The callback on search.
+function checkboxFormSubmit(value) {
+  form.tags = value;
+}
 
 // The form submission.
 const submit = () => {
@@ -118,7 +125,7 @@ const submit = () => {
           <InputError :message="form.errors.schedule" class="mt-2"/>
 
 
-          <div class="flex align-middle gap-2">
+          <div class="flex items-center align-middle gap-2">
             <Checkbox label="Featured (Costs Extra)" id="featured" name="featured" v-model:checked="form.featured"/>
             <InputLabel for="featured">Is this job should be featured?</InputLabel>
             <InputError :message="form.errors.featured" class="mt-2"/>
@@ -133,8 +140,8 @@ const submit = () => {
                        placeholder="https://acme.com/jobs.ceo-wanted"/>
             <InputError :message="form.errors.url" class="mt-2"/>
 
-            <TextInput label="Tags (Comma separated)" name="tags" v-model="form.tags"
-                       placeholder="laravel, symfony, education"/>
+            <CheckboxButtons :items="props.tags.data" :selectedItems="form.tags" type="admin" @checkboxCheckedEvent="checkboxFormSubmit" />
+
             <InputError :message="form.errors.tags" class="mt-2"/>
           </div>
 

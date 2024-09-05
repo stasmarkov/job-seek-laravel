@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Resources\JobResource;
+use App\Http\Resources\TagResource;
 use App\Models\Job;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -55,6 +57,7 @@ class JobController extends Controller implements HasMiddleware {
   public function create(Request $request) {
     return Inertia::render('Model/Job/CreateForm', [
       'employer' => Auth::user()->employer,
+      'tags' => TagResource::collection(Tag::all()),
     ]);
   }
 
@@ -80,8 +83,15 @@ class JobController extends Controller implements HasMiddleware {
       ->create(Arr::except($attributes, 'tags'));
 
     if ($attributes['tags'] ?? FALSE) {
-      foreach (explode(',', $attributes['tags']) as $tag) {
-        $job->tag($tag);
+      $job->tags()->detach();
+      if (\is_string($attributes['tags'])) {
+        $attributes['tags'] = explode(',', $attributes['tags']);
+      }
+
+      foreach ($attributes['tags'] as $tag) {
+        if ($loaded_tag = Tag::find($tag)) {
+          $job->tag($loaded_tag->name);
+        }
       }
     }
 
@@ -101,6 +111,7 @@ class JobController extends Controller implements HasMiddleware {
     return Inertia::render('Model/Job/EditForm', [
       'employer' => Auth::user()->employer,
       'job' => JobResource::make($job),
+      'tags' => TagResource::collection(Tag::all()),
     ]);
   }
 
@@ -124,8 +135,14 @@ class JobController extends Controller implements HasMiddleware {
 
     if ($attributes['tags'] ?? FALSE) {
       $job->tags()->detach();
-      foreach (explode(',', $attributes['tags']) as $tag) {
-        $job->tag($tag);
+      if (\is_string($attributes['tags'])) {
+        $attributes['tags'] = explode(',', $attributes['tags']);
+      }
+
+      foreach ($attributes['tags'] as $tag) {
+        if ($loaded_tag = Tag::find($tag)) {
+          $job->tag($loaded_tag->name);
+        }
       }
     }
 

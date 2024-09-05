@@ -24,7 +24,7 @@ defineProps({
 });
 
 function redirectOnSearchPage(value) {
-  Inertia.get(route('search'), {'search': value});
+  Inertia.get(route('search.jobs'), {'search': value});
 }
 
 </script>

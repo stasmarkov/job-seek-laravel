@@ -28,14 +28,20 @@ class SearchJobsController extends Controller {
 
     $this->applyFilters($request, $query);
 
-    return Inertia::render('Search/SearchJobs', [
-      'filters' => $request->only(['search', 'order', 'tags']),
+    $response = Inertia::render('Search/SearchJobs', [
+      'filters' => [
+        'search' => $request->get('search'),
+        'order' => $request->get('order'),
+        'tags' => $request->get('tags'),
+      ],
       'tags' => TagResource::collection(Tag::all()),
       'results' => $query
         ->paginate(6)
         // Important to pre-save the query in pager links.
         ->withQueryString(),
     ]);
+
+    return $response;
   }
 
   /**

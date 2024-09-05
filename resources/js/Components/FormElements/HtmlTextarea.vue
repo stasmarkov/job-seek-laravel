@@ -14,6 +14,7 @@ const model = defineModel({
   <Editor
     :api-key="tineMceKey"
     v-model="model"
+    class="textarea--html"
     :init="{
         toolbar_mode: 'sliding',
         plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
@@ -25,5 +26,7 @@ const model = defineModel({
 </template>
 
 <style scoped>
-
+  .textarea--html {
+    border-radius: 0;
+  }
 </style>

@@ -12,10 +12,12 @@ import {computed, ref} from "vue";
 import AdminAreaTwoColumnsLayout from "@/Layouts/AdminAreaTwoColumnsLayout.vue";
 import HtmlTextarea from "@/Components/FormElements/HtmlTextarea.vue";
 import useCharsCounter from "@/stores/charsCounter.js";
+import CheckboxButtons from "@/Components/Forms/CheckboxButtons.vue";
 
 const props = defineProps({
   job: Object,
   employer: Object,
+  tags: Array,
 });
 
 let enablePreview = ref(false);
@@ -26,9 +28,7 @@ const form = useForm({
   location: props.job.data.location,
   schedule: props.job.data.schedule,
   url: props.job.data.url,
-  tags: props.job.data.tags.map(tag => {
-    return tag.name
-  }).toString(),
+  tags: props.job.data.tags,
   description: props.job.data.description,
   short_description: props.job.data.short_description,
   featured: props.job.data.featured
@@ -36,6 +36,7 @@ const form = useForm({
 
 const user = usePage().props.auth.user;
 
+// Job passed to the preview.
 const job = computed(() => {
   return {
     title: form.title,
@@ -52,15 +53,15 @@ const job = computed(() => {
   };
 });
 
-// // The chars counter functionality.
-// const charsLeft = computed(() => {
-//   return 250 - form.short_description.length
-// });
-
 let { getCharsLeft } = useCharsCounter();
 let limitChars = computed(function() {
   return getCharsLeft(250, form.short_description);
 });
+
+// The callback on search.
+function checkboxFormSubmit(value) {
+  form.tags = value;
+}
 
 // The form submission.
 const submit = () => {
@@ -119,7 +120,7 @@ const submit = () => {
           <InputError :message="form.errors.schedule" class="mt-2"/>
 
 
-          <div class="flex align-middle gap-2">
+          <div class="flex items-center align-middle gap-2">
             <Checkbox label="Featured (Costs Extra)" id="featured" name="featured" v-model:checked="form.featured"/>
             <InputLabel for="featured">Is this job should be featured?</InputLabel>
             <InputError :message="form.errors.featured" class="mt-2"/>
@@ -134,8 +135,7 @@ const submit = () => {
                        placeholder="https://acme.com/jobs.ceo-wanted"/>
             <InputError :message="form.errors.url" class="mt-2"/>
 
-            <TextInput label="Tags (Comma separated)" name="tags" v-model="form.tags"
-                       placeholder="laravel, symfony, education"/>
+            <CheckboxButtons :items="props.tags.data" :selectedItems="form.tags.map(el => el.id)" type="admin" @checkboxCheckedEvent="checkboxFormSubmit" />
             <InputError :message="form.errors.tags" class="mt-2"/>
           </div>
 
