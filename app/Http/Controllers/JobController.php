@@ -46,7 +46,7 @@ class JobController extends Controller implements HasMiddleware {
    * @return \Inertia\Response
    *   The page.
    */
-  public function show(Job $job) {
+  public function show(Request $request, Job $job) {
     $user = Auth::user();
 
     JobViewedEvent::dispatch($job);
@@ -54,7 +54,8 @@ class JobController extends Controller implements HasMiddleware {
     return Inertia::render('Model/Job/View', [
       'job' => JobResource::make($job),
       'can' => [
-        'edit' => $user ? $user->can('update', $job) : FALSE,
+        'edit_job' => $user ? $user->can('update', $job) : FALSE,
+        'create_job' => Auth::user()?->can('create', Job::class),
       ],
     ]);
   }

@@ -18,7 +18,7 @@
   </Head>
 
   <Layout>
-    <div v-if="can.edit" class="flex gap-2 mb-2">
+    <div v-if="can.edit_job" class="flex gap-2 mb-2">
       <LinkButton  class="bg-green-600" :href="route('job.edit', { job: job.data.id })">Edit</LinkButton>
     </div>
 
