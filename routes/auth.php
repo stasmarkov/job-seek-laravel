@@ -9,10 +9,11 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->group(function() {
+Route::middleware('guest')->group(function () {
   Route::get('register', [RegisteredUserController::class, 'create'])
     ->name('register');
 
@@ -36,7 +37,7 @@ Route::middleware('guest')->group(function() {
     ->name('password.store');
 });
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
   Route::get('verify-email', EmailVerificationPromptController::class)
     ->name('verification.notice');
 
@@ -71,8 +72,21 @@ Route::middleware('auth')->group(function () {
     ->name('job.create');
 
   Route::post('/job/create', [JobController::class, 'store'])
-    ->name('job.store');
+    ->name('job.store')
+    ->middleware('can:create,job');
 
   Route::get('/job/{job}', [JobController::class, 'index'])
     ->name('job.index');
+});
+
+Route::middleware('auth')->group(function () {
+  Route::get('/employer/{employer}/edit', [
+    EmployerController::class,
+    'edit',
+  ])->name('employer.edit');
+
+  Route::patch('/employer/{employer}/edit', [
+    EmployerController::class,
+    'update',
+  ])->name('employer.update');
 });

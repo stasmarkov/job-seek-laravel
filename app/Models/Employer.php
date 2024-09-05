@@ -17,6 +17,11 @@ class Employer extends Model {
 
   use HasFactory;
 
+  public function newInstance($attributes = [], $exists = FALSE) {
+    $instance = parent::newInstance($attributes, $exists);
+    return $instance;
+  }
+
   /**
    * Get the User data model.
    *

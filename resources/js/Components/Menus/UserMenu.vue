@@ -1,8 +1,12 @@
 <script setup>
 
-import {Link} from "@inertiajs/vue3";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
+
+defineProps({
+  can: Object,
+})
+
 </script>
 
 <template>
@@ -39,7 +43,7 @@ import DropdownLink from "@/Components/DropdownLink.vue";
 
       <template #content>
         <DropdownLink :href="route('profile.edit')" v-if="$page.props.auth.user"> Profile</DropdownLink>
-        <DropdownLink :href="route('job.create')" v-if="$page.props.auth.user">Post a job</DropdownLink>
+        <DropdownLink :href="route('job.create')" v-if="$page.props.auth.user && $page.props.can.create_job">Post a job</DropdownLink>
         <DropdownLink :href="route('logout')" method="post" as="button" v-if="$page.props.auth.user">
           Log Out
         </DropdownLink>

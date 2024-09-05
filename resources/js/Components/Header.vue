@@ -8,8 +8,8 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 <template>
   <header>
-    <div class="fixed left-0 top-0 z-10 bg-black border-b border-white/10 w-full px-10">
-      <div class="flex justify-between items-center py-4  w-full max-w-7xl mx-auto">
+    <div class="fixed left-0 top-0 z-10 bg-black border-b border-white/10 w-full px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4  w-full max-w-5xl mx-auto">
         <div>
           <Link :href="route('homepage')">
             <ApplicationLogo />

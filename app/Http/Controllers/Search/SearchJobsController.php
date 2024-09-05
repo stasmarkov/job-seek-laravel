@@ -25,6 +25,14 @@ class SearchJobsController extends Controller {
           'employer',
           'tags',
         ])
+        // Sort by created_at date.
+        ->when($request->input('order'), function ($query, $order) {
+          if (\in_array(strtoupper($order), ['ASC', 'DESC'])) {
+            $query->orderBy('created_at', $order);
+          }
+        })
+        ->orderBy('created_at', 'DESC')
+        // Search by title.
         ->when($request->input('search'), function ($query, $search) {
           $query->where('title', 'LIKE', '%' . $search . '%');
         })

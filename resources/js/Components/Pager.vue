@@ -6,7 +6,7 @@
 </script>
 
 <template>
-  <div class="space-x-2">
+  <div class="gap-2 flex flex-wrap justify-center">
     <Component
       :is="link.url && !link.active ? 'Link' : 'span'"
       v-for="link in props.links"

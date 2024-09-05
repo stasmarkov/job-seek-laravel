@@ -41,14 +41,14 @@ function redirectOnSearchPage(value) {
 
         <Heading>Featured Jobs</Heading>
 
-        <div class="grid lg:grid-cols-3 gap-8 mt-6">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
           <JobCard v-for="job in featuredJobs" :job />
         </div>
       </section>
 
       <section>
         <Heading>Tags</Heading>
-        <div class="mt-6 space-x-3 flex">
+        <div class="mt-6 gap-2 flex flex-wrap">
           <Tag v-for="tag in tags" :tag :size="base" />
         </div>
       </section>

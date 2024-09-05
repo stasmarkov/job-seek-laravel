@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -17,7 +18,17 @@ use Inertia\Inertia;
 class JobController extends Controller {
 
   /**
-   *
+   * {@inheritdoc}
+   */
+  public static function middleware() {
+    return [
+      new Middleware('can:create,\App\Model\Job', only: ['create', 'store']),
+      new Middleware('can:update,job', only: ['edit', 'update']),
+      new Middleware('can:delete,job', only: ['destroy']),
+    ];
+  }
+
+  /**
    * The job view page.
    *
    * @param \App\Models\Job $job
@@ -27,6 +38,8 @@ class JobController extends Controller {
    *   The page.
    */
   public function index(Job $job) {
+    $job->employer;
+    $job->tags;
     return Inertia::render('Model/Job/View', [
       'job' => $job,
     ]);
@@ -36,7 +49,9 @@ class JobController extends Controller {
    * Show the form for creating a new resource.
    */
   public function create(Request $request) {
-    return Inertia::render('Model/Job/CreateForm');
+    return Inertia::render('Model/Job/CreateForm', [
+      'employer' => Auth::user()->employer,
+    ]);
   }
 
   /**

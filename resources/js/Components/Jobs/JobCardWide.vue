@@ -11,7 +11,7 @@ defineProps({
 </script>
 
 <template>
-  <Panel class="flex gap-x-6 flex-wrap bg-black text-white">
+  <Panel class="flex gap-x-6 flex-wrap bg-black text-white max-w-5xl mx-auto">
     <div v-if="job.employer">
       <EmployerLogo :employer="job.employer"/>
     </div>

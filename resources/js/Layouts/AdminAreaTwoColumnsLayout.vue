@@ -19,9 +19,18 @@ import Footer from "@/Components/Footer.vue";
     </header>
 
     <!-- Page Content -->
-    <main class="pt-12 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-      <slot name="default" />
+    <main class="pt-12 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 grid gap-6" :class="{
+      'sm:grid-cols-2' : $slots.left_column && $slots.right_column,
+    }">
+      <section v-if="$slots.left_column">
+        <slot name="left_column" />
+      </section>
+      <section v-if="$slots.right_column">
+        <slot name="right_column" />
+      </section>
     </main>
+
+    <slot />
 
     <slot name="footer">
       <Footer class="text-white bg-black"/>

@@ -25,6 +25,7 @@ class ProfileController extends Controller {
     return Inertia::render('Admin/Profile/Edit', [
       'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
       'status' => session('status'),
+      'employer' => Auth::user()?->employer,
     ]);
   }
 

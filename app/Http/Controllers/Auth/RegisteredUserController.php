@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rules\File;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -38,6 +39,17 @@ class RegisteredUserController extends Controller {
       'name' => $request->name,
       'email' => $request->email,
       'password' => Hash::make($request->password),
+    ]);
+
+    $employer_attributes = $request->validate([
+      'employer' => ['required', 'unique:employers,name'],
+      'logo' => ['required', File::types(['png', 'webp', 'jpg'])],
+    ]);
+    // Store logos.
+    $logo_path = $request->logo->store('logos');
+    $user->employer()->create([
+      'name' => $employer_attributes['employer'],
+      'logo' => $logo_path,
     ]);
 
     event(new Registered($user));

@@ -4,7 +4,7 @@ import Header from "@/Components/Header.vue";
 </script>
 
 <template>
-  <div class="px-10 pt-16 flex flex-col h-screen justify-between">
+  <div class="pt-16 flex flex-col h-screen justify-between">
     <!-- Page Header -->
     <div>
       <slot name="header">
@@ -14,13 +14,13 @@ import Header from "@/Components/Header.vue";
 
     <!-- Page Heading -->
     <header class="shadow" v-if="$slots.heading">
-      <div class="text-white max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+      <div class="text-white w-full max-w-5xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <slot name="heading"/>
       </div>
     </header>
 
     <!-- Page Content -->
-    <main class="mt-12 max-w-7xl mx-auto flex-1">
+    <main class="mt-12  w-full max-w-5xl mx-auto flex-1 px-4 sm:px-6 lg:px-8">
       <slot name="default" />
     </main>
 
