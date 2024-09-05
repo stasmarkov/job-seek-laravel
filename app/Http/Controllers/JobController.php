@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Events\JobPostedEvent;
+use App\Events\JobCreatedEvent;
 use App\Events\JobViewedEvent;
+use App\Http\Requests\JobCreateRequest;
+use App\Http\Requests\JobUpdateRequest;
 use App\Http\Resources\JobResource;
 use App\Http\Resources\TagResource;
 use App\Models\Job;
@@ -17,7 +19,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Context;
-use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 /**
@@ -45,7 +46,7 @@ class JobController extends Controller implements HasMiddleware {
    * @return \Inertia\Response
    *   The page.
    */
-  public function index(Job $job) {
+  public function show(Job $job) {
     $user = Auth::user();
 
     JobViewedEvent::dispatch($job);
@@ -71,19 +72,9 @@ class JobController extends Controller implements HasMiddleware {
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request) {
+  public function store(JobCreateRequest $request) {
     // @todo Move to the separate shared storage.
-    $attributes = $request->validate([
-      'title' => ['required'],
-      'short_description' => ['max:250', 'required'],
-      'description' => ['required'],
-      'salary' => ['required'],
-      'location' => ['required'],
-      'schedule' => ['required', Rule::in(['Part-Time', 'Full-Time', 'Contract'])],
-      'url' => ['required', 'active_url'],
-      'tags' => ['nullable'],
-    ]);
-
+    $attributes = $request->validated();
     $attributes['featured'] = $request->has('featured');
 
     $job = Auth::user()->employer->jobs()
@@ -103,8 +94,7 @@ class JobController extends Controller implements HasMiddleware {
     }
 
     // @todo Add if posted/draft functionality, but for testing it's ok.
-    JobPostedEvent::dispatch($job);
-    return redirect(route('job.index', ['job' => $job->id]));
+    return redirect(route('job.show', ['job' => $job->id]));
   }
 
   /**
@@ -128,18 +118,9 @@ class JobController extends Controller implements HasMiddleware {
   /**
    * Store a newly created resource in storage.
    */
-  public function update(Request $request, Job $job) {
+  public function update(JobUpdateRequest $request, Job $job) {
     // @todo Move to the separate shared storage.
-    $attributes = $request->validate([
-      'title' => ['required'],
-      'short_description' => ['max:250', 'required'],
-      'description' => ['required'],
-      'salary' => ['required'],
-      'location' => ['required'],
-      'schedule' => ['required', Rule::in(['Part-Time', 'Full-Time', 'Contract'])],
-      'url' => ['required', 'active_url'],
-      'tags' => ['nullable'],
-    ]);
+    $attributes = $request->validated();
 
     $attributes['featured'] = $request->has('featured');
 
@@ -159,7 +140,7 @@ class JobController extends Controller implements HasMiddleware {
     unset($attributes['tags']);
     $job->update($attributes);
 
-    return redirect(route('job.index', [
+    return redirect(route('job.show', [
       'job' => $job,
     ]));
   }

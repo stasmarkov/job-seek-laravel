@@ -39,7 +39,7 @@ class JobPostedNotification extends Notification {
       ->greeting('Hello!')
       ->line('The new job has been posted.')
       ->line($this->job->title)
-      ->action('View job', url(route('job.index', ['job' => $this->job])))
+      ->action('View job', url(route('job.show', ['job' => $this->job])))
       ->line('Thank you for using our application!');
   }
 

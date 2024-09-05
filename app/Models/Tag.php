@@ -11,6 +11,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Tag extends Model {
 
+  /**
+   * The list of guarded fields.
+   *
+   * @var string[]
+   */
+  protected $guarded = [
+    'id',
+  ];
+
   use HasFactory;
 
   /**

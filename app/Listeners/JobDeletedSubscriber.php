@@ -4,25 +4,27 @@ declare(strict_types = 1);
 
 namespace App\Listeners;
 
-use App\Events\JobPostedEvent;
+use App\Events\JobCreatedEvent;
+use App\Events\JobDeletedEvent;
 use App\Events\JobViewedEvent;
 use App\Models\User;
 use App\Notifications\JobPostedNotification;
 use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
 use Illuminate\Events\Dispatcher;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Notification;
 
 /**
- * The send Job Model viewed notification.
+ * The Job Deleted event subscriber.
  */
-class JobPostedSubscriber implements ShouldQueueAfterCommit {
+class JobDeletedSubscriber implements ShouldQueueAfterCommit {
 
   /**
-   * Handle the event.
+   * Delete caches.
    */
-  public function handle(JobViewedEvent $event): void {
-    // Send a notification to the all users for now.
-    Notification::send(User::all(), new JobPostedNotification($event->job));
+  public function handleCaches(JobDeletedEvent $event): void {
+    Cache::delete('views:jobs:homepage:featured');
+    Cache::delete('views:jobs:homepage:non-featured');
   }
 
   /**
@@ -33,8 +35,8 @@ class JobPostedSubscriber implements ShouldQueueAfterCommit {
    */
   public function subscribe(Dispatcher $events): void {
     $events->listen(
-      JobPostedEvent::class,
-      [__CLASS__, 'handle']
+      JobDeletedEvent::class,
+      [__CLASS__, 'handleCaches']
     );
   }
 

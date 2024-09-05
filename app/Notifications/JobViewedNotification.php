@@ -35,7 +35,7 @@ class JobViewedNotification extends Notification implements ShouldQueue {
    * Get the broadcastable representation of the notification.
    */
   public function toBroadcast(object $notifiable): BroadcastMessage {
-    $link = route('job.index', ['job' => $this->job->id]);
+    $link = route('job.show', ['job' => $this->job->id]);
 
     return new BroadcastMessage([
       'message' => "The job has been posted: <a class='text-gray-200 hover:text-blue-400' href='{$link}'>{$this->job->title}</a>",

@@ -10,9 +10,9 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * The Job Model entity created event.
+ * The Job Model entity deleted event.
  */
-class JobPostedEvent {
+class JobDeletedEvent {
 
   use Dispatchable, InteractsWithSockets, SerializesModels;
 

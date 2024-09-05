@@ -19,7 +19,7 @@ defineProps({
     <div class="flex-1 flex flex-col md:flex-1 gap-0.5">
       <a href="#" class="self-start text-sm text-gray-400" v-if="job.employer">{{ job.employer.name }}</a>
       <h3 class="text-white font-bold text-xl mt-2 group-hover:text-blue-600 transition-colors duration-300">
-        <Link :href="route('job.index', { job: job.id })" v-if="job.id">
+        <Link :href="route('job.show', { job: job.id })" v-if="job.id">
           {{ job.title }}
         </Link>
         <span v-else>

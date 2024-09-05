@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -8,6 +8,7 @@ use App\Http\Resources\JobResource;
 use App\Http\Resources\TagResource;
 use App\Models\Job;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -24,17 +25,21 @@ class HomepageController extends Controller {
    *   The Inertia render page.
    */
   public function index() {
-    $jobs_featured = Job::latest()
-      ->with(['employer', 'tags'])
-      ->where('featured', TRUE)
-      ->limit(6)
-      ->get();
+    $jobs_featured = Cache::remember('views:jobs:homepage:featured', 3600, static function () {
+      return Job::latest()
+        ->with(['employer', 'tags'])
+        ->where('featured', TRUE)
+        ->limit(6)
+        ->get();
+    });
 
-    $jobs = Job::latest()
-      ->with(['employer', 'tags'])
-      ->where('featured', FALSE)
-      ->limit(9)
-      ->get();
+    $jobs = Cache::remember('views:jobs:homepage:non-featured', 3600, static function () {
+      return Job::latest()
+        ->with(['employer', 'tags'])
+        ->where('featured', FALSE)
+        ->limit(9)
+        ->get();
+    });
 
     return Inertia::render('Homepage', [
       'canLogin' => Route::has('login'),

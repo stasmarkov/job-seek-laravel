@@ -9,10 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Employer extends Model {
 
-  protected $fillable = [
+  protected $guarded = [
     'user_id',
-    'name',
-    'logo',
   ];
 
   use HasFactory;

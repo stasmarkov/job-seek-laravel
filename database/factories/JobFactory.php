@@ -20,8 +20,8 @@ class JobFactory extends Factory {
   public function definition(): array {
     return [
       'employer_id' => Employer::factory(),
-      'title' => fake()->jobTitle(),
-      'salary' => fake()->randomElement([
+      'title' => $this->faker->jobTitle(),
+      'salary' => $this->faker->randomElement([
         '$50,000 USD',
         '$40,000 USD',
         '$75,000 USD',
@@ -30,21 +30,21 @@ class JobFactory extends Factory {
         '$115,000 USD',
         '$35,000 USD',
       ]),
-      'location' => fake()->randomElement([
+      'location' => $this->faker->randomElement([
         'Remote',
         'Office',
         'Hybrid',
       ]),
-      'schedule' => fake()->randomElement([
+      'schedule' => $this->faker->randomElement([
         'Part-Time',
         'Full-Time',
         'Contract',
       ]),
-      'url' => fake()->url(),
+      'url' => $this->faker->url(),
       'featured' => FALSE,
-      'description' => fake()->realText(2500),
-      'short_description' => fake()->realText(250),
-      'created_at' => fake()->time,
+      'description' => $this->faker->realText(2500),
+      'short_description' => $this->faker->realText(250),
+      'created_at' => $this->faker->time,
     ];
   }
 

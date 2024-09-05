@@ -1,8 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Models;
 
+use App\Events\JobCreatedEvent;
+use App\Events\JobDeletedEvent;
 use App\Traits\LikableModel;
+use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,16 +21,23 @@ class Job extends Model {
 
   use HasFactory, Notifiable, LikableModel;
 
-  protected $fillable = [
-    'title',
-    'salary',
-    'location',
-    'schedule',
-    'url',
-    'tags',
-    'featured',
-    'description',
-    'short_description',
+  /**
+   * The list of guarded fields.
+   *
+   * @var string[]
+   */
+  protected $guarded = [
+    'id',
+  ];
+
+  /**
+   * The list of dispatched events.
+   *
+   * @var string[]
+   */
+  protected $dispatchesEvents = [
+    'saved' => JobCreatedEvent::class,
+    'deleted' => JobDeletedEvent::class,
   ];
 
   /**
@@ -55,6 +67,19 @@ class Job extends Model {
    */
   public function tags(): BelongsToMany {
     return $this->belongsToMany(Tag::class)->withTimestamps();
+  }
+
+  /**
+   * Example of using the scope.
+   *
+   * @param $query
+   *   The query.
+   *
+   * @return mixed
+   *   The query.
+   */
+  public function scopePopular($query) {
+    return $query;
   }
 
 }

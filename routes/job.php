@@ -26,6 +26,6 @@ Route::controller(JobController::class)->group(function () {
       ->name('job.update');
   });
 
-  Route::get('/job/{job}', 'index')
-    ->name('job.index');
+  Route::get('/job/{job}', 'show')
+    ->name('job.show');
 });
