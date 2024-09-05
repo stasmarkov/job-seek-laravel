@@ -26,6 +26,5 @@ Route::controller(JobController::class)->group(function () {
   });
 
   Route::get('/job/{job}', 'index')
-    ->name('job.index')
-    ->can('view', 'job');
+    ->name('job.index');
 });
