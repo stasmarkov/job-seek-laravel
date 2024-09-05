@@ -10,6 +10,8 @@ import JobCardWide from "@/Components/Jobs/JobCardWide.vue";
 import JobCard from "@/Components/Jobs/JobCard.vue";
 import {computed, ref} from "vue";
 import AdminAreaTwoColumnsLayout from "@/Layouts/AdminAreaTwoColumnsLayout.vue";
+import HtmlTextarea from "@/Components/FormElements/HtmlTextarea.vue";
+import useCharsCounter from "@/stores/charsCounter.js";
 
 const props = defineProps({
   job: Object,
@@ -28,6 +30,7 @@ const form = useForm({
     return tag.name
   }).toString(),
   description: props.job.description,
+  short_description: props.job.short_description,
   featured: props.job.featured
 });
 
@@ -44,10 +47,22 @@ const job = computed(() => {
       return {'name': item}
     }),
     description: form.description,
-    employer: user.employer
+    short_description: form.short_description,
+    employer: user.employer,
   };
 });
 
+// // The chars counter functionality.
+// const charsLeft = computed(() => {
+//   return 250 - form.short_description.length
+// });
+
+let { getCharsLeft } = useCharsCounter();
+let limitChars = computed(function() {
+  return getCharsLeft(250, form.short_description);
+});
+
+// The form submission.
 const submit = () => {
   form.patch(route('job.update', { job: props.job.id }));
 };
@@ -72,7 +87,17 @@ const submit = () => {
             <TextInput label="Title" name="title" v-model="form.title" placeholder="Laravel Developer"/>
             <InputError :message="form.errors.title" class="mt-2"/>
 
-            <textarea name="description" v-model="form.description"/>
+            <InputLabel value="Short description" for="short_description" />
+            <textarea name="short_description" v-model="form.short_description"/>
+            <span class="flex w-full justify-end" :class="{
+              'text-red-500': limitChars <= 0,
+            }">{{ limitChars }} / 250</span>
+
+            <InputLabel value="Full description" for="description" />
+            <HtmlTextarea
+              name="description"
+              v-model="form.description"
+            />
             <InputError :message="form.errors.description" class="mt-2"/>
           </div>
           <div>

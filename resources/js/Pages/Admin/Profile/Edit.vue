@@ -15,8 +15,6 @@ defineProps({
   },
 });
 
-const user = usePage().props.auth.user;
-
 </script>
 
 <template>
@@ -27,8 +25,8 @@ const user = usePage().props.auth.user;
     </template>
 
     <template #default>
-      <div v-if="user.employer?.id" class="flex gap-2">
-        <LinkButton :href="route('employer.edit', {'employer': user.employer.id })">Edit Employer information</LinkButton>
+      <div v-if="$page.props.employer.id" class="flex gap-2">
+        <LinkButton :href="route('employer.edit', {'employer': $page.props.employer.id })">Edit Employer information</LinkButton>
       </div>
 
       <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">

@@ -39,12 +39,14 @@ class JobController extends Controller implements HasMiddleware {
    *   The page.
    */
   public function index(Job $job) {
+    $user = Auth::user();
     $job->employer;
     $job->tags;
+
     return Inertia::render('Model/Job/View', [
       'job' => $job,
       'can' => [
-        'can_edit' => Auth::user()?->can('edit', [Auth::user(), $job]),
+        'can_edit' => $user ? $user->can('update', $job) : FALSE,
       ],
     ]);
   }
@@ -62,8 +64,10 @@ class JobController extends Controller implements HasMiddleware {
    * Store a newly created resource in storage.
    */
   public function store(Request $request) {
+    // @todo Move to the separate shared storage.
     $attributes = $request->validate([
       'title' => ['required'],
+      'short_description' => ['max:250', 'required'],
       'description' => ['required'],
       'salary' => ['required'],
       'location' => ['required'],
@@ -83,7 +87,7 @@ class JobController extends Controller implements HasMiddleware {
       }
     }
 
-    return back();
+    return redirect(route('job.index', ['job' => $job->id]));
   }
 
   /**
@@ -108,8 +112,10 @@ class JobController extends Controller implements HasMiddleware {
    * Store a newly created resource in storage.
    */
   public function update(Request $request, Job $job) {
+    // @todo Move to the separate shared storage.
     $attributes = $request->validate([
       'title' => ['required'],
+      'short_description' => ['max:250', 'required'],
       'description' => ['required'],
       'salary' => ['required'],
       'location' => ['required'],

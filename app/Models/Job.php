@@ -25,6 +25,7 @@ class Job extends Model {
     'tags',
     'featured',
     'description',
+    'short_description',
   ];
 
   /**

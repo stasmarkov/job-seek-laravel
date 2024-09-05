@@ -23,7 +23,7 @@ defineProps({
           {{ job.title }}
         </span>
       </h3>
-      <p class="text-sm font-light text-white">{{ job.description.substring(0, 150) + '...' }}</p>
+      <p class="text-sm font-light text-white">{{ job.short_description?.substring(0, 250) + '...' }}</p>
       <p class="text-xs mt-4 text-gray-300">{{ job.schedule }} - {{ job.salary }}</p>
     </div>
 

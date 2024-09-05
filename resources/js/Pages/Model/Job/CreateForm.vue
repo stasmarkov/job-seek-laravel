@@ -10,13 +10,13 @@ import JobCardWide from "@/Components/Jobs/JobCardWide.vue";
 import JobCard from "@/Components/Jobs/JobCard.vue";
 import {computed, ref} from "vue";
 import AdminAreaTwoColumnsLayout from "@/Layouts/AdminAreaTwoColumnsLayout.vue";
+import HtmlTextarea from "@/Components/FormElements/HtmlTextarea.vue";
 
 const props = defineProps({
   employer: Object,
 });
 
-let enablePreview = ref(false);
-
+// The form object.
 const form = useForm({
   title: '',
   salary: '',
@@ -25,11 +25,17 @@ const form = useForm({
   url: '',
   tags: '',
   description: '',
+  short_description: '',
   featured: false
 });
 
+// Get current user.
 const user = usePage().props.auth.user;
 
+// Enable/disable preview.
+let enablePreview = ref(false);
+
+// The Job object for the preview.
 const job = computed(() => {
   return {
     title: form.title,
@@ -41,15 +47,19 @@ const job = computed(() => {
       return {'name': item}
     }),
     description: form.description,
+    short_description: form.short_description,
     employer: user.employer
   };
 });
 
+// The chars counter functionality.
+const charsLeft = computed(() => {
+  return 250 - form.short_description.length
+});
+
+// The form submission.
 const submit = () => {
   form.post(route('job.store'), {
-
-    onFinish: () => {
-    },
     onSuccess: () => {
       form.reset()
     }
@@ -68,15 +78,25 @@ const submit = () => {
     }">
       <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
         <div class="flex gap-2 items-center">
-          <Checkbox :checked="enablePreview" id="preview" name="preview" @input="enablePreview = ! enablePreview" />
-          <InputLabel for="preview" value="Enable preview" />
+          <Checkbox :checked="enablePreview" id="preview" name="preview" @input="enablePreview = ! enablePreview"/>
+          <InputLabel for="preview" value="Enable preview"/>
         </div>
         <form @submit.prevent="submit" class="space-y-6 mt-4">
           <div class="flex flex-wrap flex-col gap-4">
             <TextInput label="Title" name="title" v-model="form.title" placeholder="Laravel Developer"/>
             <InputError :message="form.errors.title" class="mt-2"/>
 
-            <textarea name="description" v-model="form.description"/>
+            <InputLabel value="Short description" for="short_description" />
+            <textarea name="short_description" v-model="form.short_description"/>
+            <span class="flex w-full justify-end" :class="{
+              'text-red-500': charsLeft <= 0,
+            }">{{ charsLeft }} / 250</span>
+
+            <InputLabel value="Full description" for="description" />
+            <HtmlTextarea
+              name="description"
+              v-model="form.description"
+            />
             <InputError :message="form.errors.description" class="mt-2"/>
           </div>
           <div>

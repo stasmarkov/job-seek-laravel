@@ -33,14 +33,14 @@ class JobPolicy {
    * Determine whether the user can update the model.
    */
   public function update(User $user, Job $job): bool {
-    return $user->id === $job->employer->user_id || (int) $user->id === 1;
+    return $user->id === $job?->employer?->user_id || (int) $user->id === 1;
   }
 
   /**
    * Determine whether the user can delete the model.
    */
   public function delete(User $user, Job $job): bool {
-    return $user->id === $job->employer->user_id || (int) $user->id === 1;
+    return $user->id === $job?->employer?->user_id || (int) $user->id === 1;
   }
 
   /**

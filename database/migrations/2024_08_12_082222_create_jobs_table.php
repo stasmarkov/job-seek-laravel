@@ -22,6 +22,7 @@ return new class extends Migration {
       $table->string('url');
       $table->boolean('featured')->default(FALSE);
       $table->longText('description');
+      $table->longText('short_description');
       $table->timestamps();
     });
   }

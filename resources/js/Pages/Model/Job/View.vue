@@ -13,10 +13,9 @@
 
 <template>
   <Head :title="job.title" />
-
   <Layout>
-    <div v-if="true" class="flex gap-2 mb-2">
-      <LinkButton class="bg-green-600" :v-if="can.can_edit" :href="route('job.edit', { job: job.id })">Edit</LinkButton>
+    <div v-if="can.can_edit" class="flex gap-2 mb-2">
+      <LinkButton class="bg-green-600" :href="route('job.edit', { job: job.id })">Edit</LinkButton>
     </div>
 
     <Panel>
@@ -26,7 +25,7 @@
       </div>
       <div class="info mt-4 border-b pb-4 text-gray-100 font-light">
         <h2 class="text-xl font-medium">General information:</h2>
-        <p class="mt-2">{{ job.description }}</p>
+        <div class="mt-2" v-html="job.description"></div>
         <div class="mt-4 space-y-2">
           <p><strong>Salary:</strong> <i>{{ job.salary }}</i></p>
           <p><strong>Schedule:</strong> <i>{{ job.schedule }}</i></p>

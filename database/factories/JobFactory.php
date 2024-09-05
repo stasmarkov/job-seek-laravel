@@ -40,7 +40,8 @@ class JobFactory extends Factory {
       ]),
       'url' => fake()->url(),
       'featured' => FALSE,
-      'description' => fake()->realText(1000),
+      'description' => fake()->realText(2500),
+      'short_description' => fake()->realText(250),
     ];
   }
 

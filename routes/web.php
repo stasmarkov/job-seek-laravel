@@ -1,6 +1,11 @@
 <?php
 
-declare(strict_types = 1);
+/**
+ * @file
+ * Contains routes.
+ */
+
+declare(strict_types=1);
 
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProfileController;
@@ -25,4 +30,6 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/search', [SearchJobsController::class, 'index'])->name('search');
 
+require __DIR__ . '/job.php';
+require __DIR__ . '/employer.php';
 require __DIR__ . '/auth.php';
