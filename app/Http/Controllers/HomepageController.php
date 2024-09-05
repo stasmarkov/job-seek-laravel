@@ -41,6 +41,10 @@ class HomepageController extends Controller {
         ->get();
     });
 
+    $tags = Cache::remember('tags:all', 3600, static function () {
+      return Tag::all();
+    });
+
     return Inertia::render('Homepage', [
       'canLogin' => Route::has('login'),
       'canRegister' => Route::has('register'),
@@ -48,7 +52,7 @@ class HomepageController extends Controller {
       'phpVersion' => PHP_VERSION,
       'featuredJobs' => JobResource::collection($jobs_featured),
       'jobs' => JobResource::collection($jobs),
-      'tags' => TagResource::collection(Tag::all()),
+      'tags' => TagResource::collection($tags),
     ]);
   }
 
