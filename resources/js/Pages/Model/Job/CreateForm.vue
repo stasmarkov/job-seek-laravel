@@ -49,10 +49,8 @@ const submit = () => {
   form.post(route('job.store'), {
 
     onFinish: () => {
-      console.log(form);
     },
     onSuccess: () => {
-      console.log(form);
       form.reset()
     }
   });

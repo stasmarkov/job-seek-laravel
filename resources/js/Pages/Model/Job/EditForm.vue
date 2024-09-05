@@ -49,11 +49,7 @@ const job = computed(() => {
 });
 
 const submit = () => {
-  form.patch(route('job.update', { job: props.job.id }), {
-    onSuccess: () => {
-      form.reset()
-    }
-  });
+  form.patch(route('job.update', { job: props.job.id }));
 };
 </script>
 

@@ -6,6 +6,7 @@ import TextInput from '@/Components/TextInput.vue';
 import {Link, useForm, usePage} from '@inertiajs/vue3';
 import AdminAreaLayout from "@/Layouts/AdminAreaLayout.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
+import EmployerLogo from "@/Components/Employers/EmployerLogo.vue";
 
 const props = defineProps({
   employer: {
@@ -17,6 +18,7 @@ const user = usePage().props.auth.user;
 
 const form = useForm({
   name: props.employer.name,
+  logo: props.employer.logo,
 });
 
 </script>
@@ -59,20 +61,23 @@ const form = useForm({
             <InputError class="mt-2" :message="form.errors.name"/>
           </div>
 
-          <div>
-<!--            <InputLabel for="email" value="Email"/>-->
+          <div class="mt-4">
+            <InputLabel for="employer" value="Employer logo"/>
 
-<!--            <TextInput-->
-<!--              id="email"-->
-<!--              type="email"-->
-<!--              class="mt-1 block w-full"-->
-<!--              v-model="form.email"-->
-<!--              required-->
-<!--              autocomplete="username"-->
-<!--            />-->
-
-<!--            <InputError class="mt-2" :message="form.errors.email"/>-->
+            <input
+              id="logo"
+              class="mt-1 block w-full"
+              required
+              type="file"
+              @input="form.logo = $event.target.files[0]"
+            />
+            <InputError class="mt-2" :message="form.errors.logo"/>
+            <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+              {{ form.progress.percentage }}%
+            </progress>
           </div>
+
+          <EmployerLogo :employer="employer" />
 
           <div class="flex items-center gap-4">
             <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
