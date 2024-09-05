@@ -26,7 +26,7 @@ defineProps({
     </template>
 
     <template #default>
-      <div v-if="$page.props.employer.id" class="flex gap-2">
+      <div v-if="$page.props.employer?.id" class="flex gap-2">
         <LinkButton :href="route('employer.edit', {'employer': $page.props.employer.id })">Edit Employer information</LinkButton>
       </div>
 

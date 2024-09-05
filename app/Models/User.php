@@ -2,18 +2,21 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * The user model.
  */
 class User extends Authenticatable {
 
-  use HasFactory, Notifiable;
+  use HasFactory, Notifiable, HasRoles;
 
   /**
    * The attributes that are mass assignable.
@@ -74,8 +77,18 @@ class User extends Authenticatable {
    * @return \Illuminate\Database\Eloquent\Relations\HasOne
    *   Returns the Profile Model.
    */
-  public function profile() {
+  public function profile(): HasOne {
     return $this->hasOne(Profile::class);
+  }
+
+  /**
+   * Local scope to retrieve only active users.
+   *
+   * @param \Illuminate\Database\Eloquent\Builder $query
+   *   The query builder.
+   */
+  public function scopeActive(Builder $query) {
+    $query->where('status', '=', 1);
   }
 
 }

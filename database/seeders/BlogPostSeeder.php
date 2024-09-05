@@ -1,16 +1,16 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Database\Seeders;
 
 use App\Models\BlogPost;
 use App\Models\Comment;
-use App\Models\Job;
-use App\Models\Tag;
-use App\Models\User;
-use Database\Factories\CommentFactory;
-use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
+/**
+ * The blog post seeder.
+ */
 class BlogPostSeeder extends Seeder {
 
   /**

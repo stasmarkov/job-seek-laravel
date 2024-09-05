@@ -4,14 +4,17 @@ declare(strict_types = 1);
 
 namespace App\Policies;
 
+use App\Enums\UserRolesEnum;
 use App\Models\Job;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 /**
  * The Job Mode policy.
  */
 class JobPolicy {
+
+  use HandlesAuthorization;
 
   /**
    * Determine whether the user can view any models.
@@ -31,7 +34,7 @@ class JobPolicy {
    * Determine whether the user can create models.
    */
   public function create(User $user): bool {
-    return (int) $user->id === 1;
+    return $user->hasRole(UserRolesEnum::ADMIN) || $user->hasPermissionTo('create a new job');
   }
 
   /**

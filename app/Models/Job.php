@@ -7,7 +7,6 @@ namespace App\Models;
 use App\Events\JobCreatedEvent;
 use App\Events\JobDeletedEvent;
 use App\Traits\LikableModel;
-use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -67,19 +66,6 @@ class Job extends Model {
    */
   public function tags(): BelongsToMany {
     return $this->belongsToMany(Tag::class)->withTimestamps();
-  }
-
-  /**
-   * Example of using the scope.
-   *
-   * @param $query
-   *   The query.
-   *
-   * @return mixed
-   *   The query.
-   */
-  public function scopePopular($query) {
-    return $query;
   }
 
 }

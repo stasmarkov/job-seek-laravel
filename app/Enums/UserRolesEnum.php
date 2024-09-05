@@ -7,7 +7,7 @@ namespace App\Enums;
 /**
  * Provides different type of users.
  */
-enum UserRole: string {
+enum UserRolesEnum: string {
 
   /**
    * The administrator role.
@@ -28,5 +28,20 @@ enum UserRole: string {
    * The content admin role.
    */
   case CONTENT_ADMIN = 'content_admin';
+
+  /**
+   * Get names.
+   *
+   * @return string
+   *   The label of the
+   */
+  public function label(): string {
+    return match ($this) {
+      static::ADMIN => 'Administrator',
+      static::EMPLOYER => 'Employer',
+      static::EMPLOYEE => 'Employee',
+      static::CONTENT_ADMIN => 'Content Administrator',
+    };
+  }
 
 }

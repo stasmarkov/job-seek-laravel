@@ -1,45 +1,23 @@
 <?php
 
-namespace Database\Seeders;
+declare(strict_types = 1);
 
-use App\Models\BlogPost;
-use App\Models\Employer;
-use App\Models\User;
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
+/**
+ * The mai seeder.
+ */
 class DatabaseSeeder extends Seeder {
 
   /**
    * Seed the application's database.
    */
   public function run(): void {
-    User::factory()
-      ->has(Employer::factory()->count(1))
-      ->create([
-        'name' => 'admin',
-        'email' => 'admin@example.com',
-        'password' => '123123123',
-      ]);
-
-    User::factory()
-      ->has(Employer::factory()->count(1))
-      ->create([
-      'name' => 'admin-2',
-      'email' => 'admin-2@example.com',
-      'password' => '123123123',
-    ]);
-
-    $users = User::factory(10)->create();
-    $this->call(JobSeeder::class, FALSE, [
-      'users' => $users,
-    ]);
-    $this->call(BlogPostSeeder::class, FALSE, [
-      'users' => $users,
-    ]);
-    $this->call(ProfileSeeder::class, FALSE, [
-      'users' => $users,
-    ]);
+    $this->call(RoleSeeder::class);
+    $this->call(UserSeeder::class);
+    $this->call(JobSeeder::class);
   }
 
 }

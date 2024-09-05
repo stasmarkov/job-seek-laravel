@@ -6,14 +6,18 @@ import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
 import TextInput from '@/Components/FormElements/TextInput.vue';
 import {Head, Link, useForm} from '@inertiajs/vue3';
 import Divider from "@/Components/FormElements/Divider.vue";
+import SelectInput from "@/Components/FormElements/SelectInput.vue";
 
 const form = useForm({
   name: '',
   email: '',
   password: '',
   password_confirmation: '',
-  employer: '',
-  logo: '',
+  role: '',
+});
+
+const props = defineProps({
+  roles: [],
 });
 
 const submit = () => {
@@ -94,31 +98,16 @@ const submit = () => {
       <Divider/>
 
       <div class="mt-4">
-        <InputLabel for="employer" value="Employer name"/>
+        <InputLabel for="role" value="Account Type"/>
 
-        <TextInput
-          id="employer"
-          class="mt-1 block w-full"
-          v-model="form.employer"
+        <SelectInput
+          id="role"
+          v-model="form.role"
+          :options="props.roles"
           required
         />
-        <InputError class="mt-2" :message="form.errors.employer"/>
 
-      </div>
-      <div class="mt-4">
-        <InputLabel for="employer" value="Employer logo"/>
-
-        <input
-          id="logo"
-          class="mt-1 block w-full"
-          required
-          type="file"
-          @input="form.logo = $event.target.files[0]"
-        />
-        <InputError class="mt-2" :message="form.errors.logo"/>
-        <progress v-if="form.progress" :value="form.progress.percentage" max="100">
-          {{ form.progress.percentage }}%
-        </progress>
+        <InputError class="mt-2" :message="form.errors.role"/>
       </div>
 
       <div class="flex items-center justify-end mt-4">

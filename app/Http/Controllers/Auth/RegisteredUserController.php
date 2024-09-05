@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\UserRolesEnum;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -10,17 +11,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use Illuminate\Validation\Rules\File;
 use Inertia\Inertia;
 use Inertia\Response;
+use Spatie\Permission\Models\Role;
 
+/**
+ * The registration controller.
+ */
 class RegisteredUserController extends Controller {
 
   /**
    * Display the registration view.
    */
   public function create(): Response {
-    return Inertia::render('Auth/Register');
+    $roles = Role::whereIn('name', [
+      UserRolesEnum::EMPLOYER->value,
+      UserRolesEnum::EMPLOYEE->value,
+    ])->get()->pluck('name', 'id');
+
+    return Inertia::render('Auth/Register', [
+      'roles' => $roles,
+    ]);
   }
 
   /**
@@ -33,24 +44,17 @@ class RegisteredUserController extends Controller {
       'name' => 'required|string|max:255',
       'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
       'password' => ['required', 'confirmed', Rules\Password::defaults()],
+      'role' => 'in:2,3',
     ]);
+
+    $role = Role::findOrFail($request->role);
 
     $user = User::create([
       'name' => $request->name,
       'email' => $request->email,
       'password' => Hash::make($request->password),
     ]);
-
-    $employer_attributes = $request->validate([
-      'employer' => ['required', 'unique:employers,name'],
-      'logo' => ['required', File::types(['png', 'webp', 'jpg'])],
-    ]);
-    // Store logos.
-    $logo_path = $request->logo->store('public');
-    $user->employer()->create([
-      'name' => $employer_attributes['employer'],
-      'logo' => $logo_path,
-    ]);
+    $user->roles()->attach($role);
 
     event(new Registered($user));
 

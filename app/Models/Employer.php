@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -7,18 +9,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * The employer profile.
+ */
 class Employer extends Model {
-
-  protected $guarded = [
-    'user_id',
-  ];
 
   use HasFactory;
 
-  public function newInstance($attributes = [], $exists = FALSE) {
-    $instance = parent::newInstance($attributes, $exists);
-    return $instance;
-  }
+  /**
+   * {@inheritdoc}
+   */
+  protected $guarded = [
+    'user_id',
+  ];
 
   /**
    * Get the User data model.
