@@ -34,35 +34,51 @@ class JobPolicy {
    * Determine whether the user can create models.
    */
   public function create(User $user): bool {
-    return $user->hasRole(UserRolesEnum::ADMIN) || $user->hasPermissionTo('create a new job');
+    return $user->hasPermissionTo('create a new job');
   }
 
   /**
    * Determine whether the user can update the model.
    */
   public function update(User $user, Job $job): bool {
-    return $user->id === $job?->employer?->user_id || (int) $user->id === 1;
+    if ($user->hasPermissionTo('edit any job')) {
+      return TRUE;
+    }
+
+    if ($user->hasPermissionTo('edit own job')) {
+      return $user->id === $job?->employer?->user_id;
+    }
+
+    return FALSE;
   }
 
   /**
    * Determine whether the user can delete the model.
    */
   public function delete(User $user, Job $job): bool {
-    return $user->id === $job?->employer?->user_id || (int) $user->id === 1;
+    if ($user->hasPermissionTo('delete any job')) {
+      return TRUE;
+    }
+
+    if ($user->hasPermissionTo('delete own job')) {
+      return $user->id === $job?->employer?->user_id;
+    }
+
+    return FALSE;
   }
 
   /**
    * Determine whether the user can restore the model.
    */
   public function restore(User $user, Job $job): bool {
-    return $user->id === 1;
+    return $user->hasRole(UserRolesEnum::ADMIN);
   }
 
   /**
    * Determine whether the user can permanently delete the model.
    */
   public function forceDelete(User $user, Job $job): bool {
-    return $user->id === 1;
+    return $user->hasRole(UserRolesEnum::ADMIN);
   }
 
 }

@@ -93,7 +93,6 @@ class JobController extends Controller implements HasMiddleware {
       }
     }
 
-    // @todo Add if posted/draft functionality, but for testing it's ok.
     return redirect(route('job.show', ['job' => $job->id]));
   }
 
@@ -108,7 +107,6 @@ class JobController extends Controller implements HasMiddleware {
    */
   public function edit(Job $job) {
     return Inertia::render('Model/Job/EditForm', [
-      // @todo Retrieve from the context.
       'employer' => Context::get('current_user_employer'),
       'job' => JobResource::make($job),
       'tags' => TagResource::collection(Tag::all()),
@@ -119,7 +117,6 @@ class JobController extends Controller implements HasMiddleware {
    * Store a newly created resource in storage.
    */
   public function update(JobUpdateRequest $request, Job $job) {
-    // @todo Move to the separate shared storage.
     $attributes = $request->validated();
 
     $attributes['featured'] = $request->has('featured');

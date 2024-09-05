@@ -18,19 +18,27 @@ class RoleSeeder extends Seeder {
    */
   public function run(): void {
     $admin = Role::findOrCreate(UserRolesEnum::ADMIN->value);
-    $admin->givePermissionTo([
+    $admin->syncPermissions([
       'create a new job',
       'edit any job',
       'edit own job',
       'delete any job',
       'delete own job',
+      'create a new employer',
+      'edit own employer',
+      'edit any employer',
+      'delete own employer',
+      'delete any employer',
     ]);
 
     $employer = Role::findOrCreate(UserRolesEnum::EMPLOYER->value);
-    $employer->givePermissionTo([
+    $employer->syncPermissions([
       'create a new job',
       'edit own job',
       'delete own job',
+      'create a new employer',
+      'edit own employer',
+      'delete own employer',
     ]);
 
     Role::findOrCreate(UserRolesEnum::EMPLOYEE->value);
