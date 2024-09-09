@@ -7,7 +7,7 @@ const props = defineProps({
 
 <template>
   <Link :href="props.href"
-     class="text-white mt-1 group flex items-center px-2 py-2 text-sm leading-5 font-medium rounded-md focus:outline-none transition ease-in-out duration-150"
+     class="text-white group flex items-center px-2 py-2 text-sm leading-5 font-medium rounded-md focus:outline-none transition ease-in-out duration-150"
   >
     <slot/>
   </Link>

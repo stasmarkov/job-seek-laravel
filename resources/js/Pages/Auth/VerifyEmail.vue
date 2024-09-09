@@ -44,8 +44,7 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
           as="button"
           class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >Log Out
-        </Link
-        >
+        </Link>
       </div>
     </form>
   </GuestLayout>
