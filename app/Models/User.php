@@ -2,21 +2,23 @@
 
 namespace App\Models;
 
+use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableInterface;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
  * The user model.
  */
-class User extends Authenticatable {
+class User extends Authenticatable implements ReacterableInterface {
 
-  use HasFactory, Notifiable, HasRoles;
+  use HasFactory, Notifiable, HasRoles, HasApiTokens, Reacterable;
 
   /**
    * The attributes that are mass assignable.

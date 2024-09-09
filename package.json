@@ -22,6 +22,11 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.6.0",
+        "@fortawesome/free-brands-svg-icons": "^6.6.0",
+        "@fortawesome/free-regular-svg-icons": "^6.6.0",
+        "@fortawesome/free-solid-svg-icons": "^6.6.0",
+        "@fortawesome/vue-fontawesome": "^3.0.8",
         "@inertiajs/progress": "^0.2.7",
         "@tinymce/tinymce-vue": "^5.1.1",
         "laravel-vue-pagination": "^4.1.3",

@@ -6,8 +6,10 @@ use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules\Can;
 
+/**
+ * The job resource.
+ */
 class JobResource extends JsonResource {
 
   /**
@@ -24,8 +26,8 @@ class JobResource extends JsonResource {
       'url' => $this->url,
       'schedule' => $this->schedule,
       'salary' => $this->salary,
-      'tags' => TagResource::collection($this->tags),
       'location' => $this->location,
+      'tags' => TagResource::collection($this->tags),
       'employer' => EmployerResource::make($this->employer),
       'can' => [
         'edit' => Auth::user()?->can('update', $this) ?? FALSE,

@@ -14,10 +14,10 @@ return new class extends Migration {
     Schema::create('jobs', function(Blueprint $table) {
       $table->id();
       $table->foreignIdFor(Employer::class);
-      $table->string('title');
+      $table->string('title')->index();
       $table->string('salary');
       $table->string('location');
-      // Full-time/ part-time.
+      // Full-time/Part-time/Contract.
       $table->string('schedule')->default('Full Time');
       $table->string('url');
       $table->boolean('featured')->default(FALSE);

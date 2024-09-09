@@ -29,3 +29,9 @@ The working demo might be found here: https://job-seeker.markovrecords.com/
    2. `ddev artisan reverb:start --host="0.0.0.0" --port=8080  --debug`
    3. `npm i && npm run dev`
 5. Run the migration command: `ddev artisan migrate:fresh --seed` and you are ready to check or probably work on this site!
+
+
+
+Todo:
+1. php artisan love:register-reacters --model="App\Models\User"
+2. artisan love:register-reactants --model="App\Models\Job"

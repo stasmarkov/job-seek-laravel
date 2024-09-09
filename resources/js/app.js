@@ -8,6 +8,10 @@ import {ZiggyVue} from '../../vendor/tightenco/ziggy';
 import {createPinia} from "pinia";
 import {InertiaProgress} from "@inertiajs/progress";
 import Layout from "@/Layouts/Layout.vue";
+/* import the fontawesome core */
+import { library } from '@fortawesome/fontawesome-svg-core';
+/* import the fontawesome icon component */
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Job Seeker';
 
@@ -25,6 +29,7 @@ createInertiaApp({
       .use(ZiggyVue)
       .component('Link', Link)
       .component('Head', Head)
+      .component('font-awesome-icon', FontAwesomeIcon)
       .mount(el);
   },
   progress: {

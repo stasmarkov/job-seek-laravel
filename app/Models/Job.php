@@ -4,9 +4,11 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
+use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
 use App\Events\JobCreatedEvent;
 use App\Events\JobDeletedEvent;
 use App\Traits\LikableModel;
+use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,9 +18,9 @@ use Illuminate\Notifications\Notifiable;
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Job extends Model {
+class Job extends Model implements ReactableInterface {
 
-  use HasFactory, Notifiable, LikableModel;
+  use HasFactory, Notifiable, Reactable;
 
   /**
    * The list of guarded fields.

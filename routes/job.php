@@ -24,6 +24,9 @@ Route::controller(JobController::class)->group(function () {
 
     Route::patch('/job/{job}/edit', 'update')
       ->name('job.update');
+
+    Route::get('/job/{job}/like', 'like')
+      ->name('job.like');
   });
 
   Route::get('/job/{job}', 'show')

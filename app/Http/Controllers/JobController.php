@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Events\JobCreatedEvent;
-use App\Events\JobViewedEvent;
 use App\Http\Requests\JobCreateRequest;
 use App\Http\Requests\JobUpdateRequest;
 use App\Http\Resources\JobResource;
@@ -17,7 +15,6 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Context;
 use Inertia\Inertia;
 
@@ -48,11 +45,12 @@ class JobController extends Controller implements HasMiddleware {
    */
   public function show(Request $request, Job $job) {
     $user = Auth::user();
-
-    JobViewedEvent::dispatch($job);
+    $reactantFacade = $job->viaLoveReactant();
 
     return Inertia::render('Model/Job/View', [
       'job' => JobResource::make($job),
+      'likesCount' => $reactantFacade->getReactionCounterOfType('Like')->getCount(),
+      'isLiked' => $reactantFacade->isReactedBy($user, 'Like'),
       'can' => [
         'edit_job' => $user ? $user->can('update', $job) : FALSE,
         'create_job' => Auth::user()?->can('create', Job::class),
@@ -141,6 +139,23 @@ class JobController extends Controller implements HasMiddleware {
     return redirect(route('job.show', [
       'job' => $job,
     ]));
+  }
+
+  /**
+   * React on the like/dislike click.
+   */
+  public function like(Job $job) {
+    $user = Auth::user();
+    $reacterFacade = $user?->viaLoveReacter();
+
+    if ($reacterFacade->hasNotReactedTo($job, 'Like')) {
+      $reacterFacade->reactTo($job, 'Like');
+    }
+    else {
+      $reacterFacade->unreactTo($job, 'Like');
+    }
+
+    return back();
   }
 
 }

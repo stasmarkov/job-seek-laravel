@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -30,6 +32,8 @@ class AuthenticatedSessionController extends Controller {
     $request->authenticate();
 
     $request->session()->regenerate();
+
+    Event::dispatch(Login::class);
 
     return redirect()->intended(route('homepage', absolute: FALSE));
   }

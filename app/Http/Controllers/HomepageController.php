@@ -27,6 +27,7 @@ class HomepageController extends Controller {
   public function index() {
     $jobs_featured = Cache::remember('views:jobs:homepage:featured', 3600, static function () {
       return Job::latest()
+        ->select('id', 'title', 'short_description', 'featured', 'salary', 'schedule')
         ->with(['employer', 'tags'])
         ->where('featured', TRUE)
         ->limit(6)
