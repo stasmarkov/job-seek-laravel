@@ -48,3 +48,4 @@ Route::get('/search', [SearchJobsController::class, 'index'])->name('search.jobs
 require __DIR__ . '/job.php';
 require __DIR__ . '/employer.php';
 require __DIR__ . '/auth.php';
+require __DIR__ . '/admin.php';

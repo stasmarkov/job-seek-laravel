@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use App\Models\LoginLog;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -24,6 +25,7 @@ class DashboardController extends Controller {
     return Inertia::render('Admin/Dashboard', [
       'totalJobs' => $totalJobs,
       'loginsCount' => $loginsCount,
+      'usersCount' => User::all()->count(),
     ]);
   }
 

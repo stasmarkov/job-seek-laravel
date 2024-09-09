@@ -10,6 +10,10 @@ const props = defineProps({
   loginsCount: {
     type: Number,
     default: 0,
+  },
+  usersCount: {
+    type: Number,
+    default: 0,
   }
 })
 </script>
@@ -89,7 +93,7 @@ const props = defineProps({
             </div>
           </div>
         </div>
-        <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="bg-white overflow-hidden shadow rounded-lg" v-if="$page.props.isAdmin">
           <div class="px-4 py-5 sm:p-6">
             <div class="flex items-center">
               <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
@@ -105,7 +109,7 @@ const props = defineProps({
                   </dt>
                   <dd class="flex items-baseline">
                     <div class="text-2xl leading-8 font-semibold text-gray-900">
-                      $usersCount
+                      {{ props.usersCount }}
                     </div>
                   </dd>
                 </dl>
@@ -114,7 +118,7 @@ const props = defineProps({
           </div>
           <div class="bg-gray-50 px-4 py-4 sm:px-6">
             <div class="text-sm leading-5">
-              <a href="#"
+              <a :href="route('admin.users')"
                  class="font-medium text-indigo-600 hover:text-indigo-500 transition ease-in-out duration-150">
                 View all
               </a>
