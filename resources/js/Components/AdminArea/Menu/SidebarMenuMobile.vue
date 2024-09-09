@@ -16,7 +16,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
       </svg>
       Dashboard
     </MenuLink>
-    <MenuLink :href="route('job.index')" >
+    <MenuLink :href="route('job.index')" v-if="$page.props.isAdmin || $page.props.isEmployer">
       <svg
         class="mr-2 h-4 w-4 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
         fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -25,7 +25,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
       </svg>
       My jobs
     </MenuLink>
-    <MenuLink :href="route('job.create')" >
+    <MenuLink :href="route('job.create')" v-if="$page.props.isAdmin || $page.props.isEmployer">
       <font-awesome-icon :icon="faSuitcase" class="mr-2 h-4 w-4 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150" />
       Post a new job
     </MenuLink>

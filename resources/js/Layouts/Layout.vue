@@ -8,7 +8,7 @@ import BgBlur from "@/Components/BgBlur.vue";
 
 <template>
   <div class="bg-black text-white">
-    <div class="pt-[4.375rem] flex flex-col justify-between">
+    <div class="pt-[5.125rem] flex flex-col justify-between">
       <!-- Page Header -->
       <div>
         <slot name="header">
