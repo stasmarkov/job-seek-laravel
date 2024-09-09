@@ -7,6 +7,8 @@
   import AnchorButton from "@/Components/Buttons/AnchorButton.vue";
   import Like from "@/Components/Reactions/Like.vue";
   import {Inertia} from "@inertiajs/inertia";
+  import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+  import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
   const props = defineProps({
     job: Object,
@@ -30,35 +32,55 @@
       <LinkButton  class="bg-green-600" :href="route('job.edit', { job: props.job.data.id })">Edit</LinkButton>
     </div>
 
-    <Panel>
-      <div class="border-b pb-4 flex justify-between items-center gap-2">
-        <h1 class="text-3xl font-bold">{{ props.job.data.title }}</h1>
-        <EmployerLogo :employer="props.job.data.employer" width="50"/>
-      </div>
-      <div class="info mt-4 border-b pb-4 text-gray-100 font-light">
-        <h2 class="text-xl font-medium">General information:</h2>
-        <div class="mt-2" v-html="props.job.data.description"></div>
-        <div class="mt-4 space-y-2">
-          <p><strong>Salary:</strong> <i>{{ props.job.data.salary }}</i></p>
-          <p><strong>Schedule:</strong> <i>{{ props.job.data.schedule }}</i></p>
-          <p><strong>Location:</strong> <i>{{ props.job.data.location }}</i></p>
+    <Panel :hoverable="false">
+      <div class="text-white">
+        <div class="px-4 sm:px-0">
+          <div class="flex justify-between">
+            <h3 class="text-base font-semibold leading-7">
+              <span class="text-3xl font-bold">{{ props.job.data.title }}</span>
+            </h3>
+            <EmployerLogo :employer="props.job.data.employer" width="50"/>
+          </div>
+          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Employer: {{ props.job.data.employer.name }}</p>
+        </div>
+        <div class="mt-6 border-t border-gray-100">
+          <dl class="divide-y divide-gray-100">
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt class="text-sm font-medium leading-6">Salary</dt>
+              <dd class="mt-1 text-sm leading-6 text-gray-300 sm:col-span-2 sm:mt-0">{{ job.data.salary  }}</dd>
+            </div>
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt class="text-sm font-medium leading-6 text-gray-100">Schedule</dt>
+              <dd class="mt-1 text-sm leading-6 text-gray-300 sm:col-span-2 sm:mt-0">{{ props.job.data.schedule }}</dd>
+            </div>
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt class="text-sm font-medium leading-6 text-gray-100">Location</dt>
+              <dd class="mt-1 text-sm leading-6 text-gray-300 sm:col-span-2 sm:mt-0">{{ props.job.data.location }}</dd>
+            </div>
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt class="text-sm font-medium leading-6 text-gray-100">Description</dt>
+              <dd class="mt-1 text-sm leading-6 text-gray-300 sm:col-span-2 sm:mt-0">
+                {{ props.job.data.description }}
+              </dd>
+            </div>
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt class="text-sm font-medium leading-6 text-gray-100">Tags</dt>
+              <dd class="mt-2 text-sm text-gray-100 sm:col-span-2 sm:mt-0">
+                <div class="flex flex-wrap mt-auto gap-2">
+                  <Tag v-for="tag in props.job.data.tags" size="small" :tag/>
+                </div>
+              </dd>
+            </div>
+          </dl>
         </div>
       </div>
-      <div class="employer mt-4 border-b pb-4">
-        <div class="mt-4 space-y-2">
-          <p><strong>Company name:</strong> <i>{{ props.job.data.employer.name }}</i></p>
-        </div>
-      </div>
-      <div class="tags mt-4 border-b pb-4">
-        <div class="flex flex-wrap mt-auto gap-2">
-          <Tag v-for="tag in props.job.data.tags" size="small" :tag/>
-        </div>
-      </div>
+
       <div class="mt-4 flex justify-end">
         <Like :route="route('job.like', {'job': props.job.data.id })" :likesCount="props.likesCount" :isLiked="props.isLiked" />
         <AnchorButton :href="props.job.data.url" target="_blank">View more</AnchorButton>
       </div>
     </Panel>
+
   </Layout>
 </template>
 
