@@ -5,7 +5,7 @@
   import EmployerLogo from "@/Components/Employers/EmployerLogo.vue";
   import Tag from "@/Components/Tags/Tag.vue";
   import AnchorButton from "@/Components/Buttons/AnchorButton.vue";
-  import LikeDislike from "@/Components/Reactions/Like.vue";
+  import Like from "@/Components/Reactions/Like.vue";
   import {Inertia} from "@inertiajs/inertia";
 
   const props = defineProps({
@@ -55,7 +55,7 @@
         </div>
       </div>
       <div class="mt-4 flex justify-end">
-        <LikeDislike :route="route('job.like', {'job': props.job.data.id })" :likesCount="props.likesCount" :isLiked="props.isLiked" />
+        <Like :route="route('job.like', {'job': props.job.data.id })" :likesCount="props.likesCount" :isLiked="props.isLiked" />
         <AnchorButton :href="props.job.data.url" target="_blank">View more</AnchorButton>
       </div>
     </Panel>

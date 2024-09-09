@@ -20,6 +20,9 @@ export default {
         ],
         "hanken-grotesk": ['Hanken Grotesk', "sans-serif"]
       },
+      padding: {
+        '4.375rem': '4.375rem',
+      }
     },
   },
 

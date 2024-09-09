@@ -2,10 +2,11 @@
 import Footer from "@/Components/Footer.vue";
 import Header from "@/Components/Header.vue";
 import Notification from "@/Components/Notification.vue";
+import Alert from "@/Components/Banners/Alert.vue";
 </script>
 
 <template>
-  <div class="pt-16 flex flex-col h-screen justify-between">
+  <div class="pt-[4.375rem] flex flex-col h-screen justify-between">
     <!-- Page Header -->
     <div>
       <slot name="header">
@@ -19,6 +20,8 @@ import Notification from "@/Components/Notification.vue";
         <slot name="heading"/>
       </div>
     </header>
+
+    <Alert />
 
     <!-- Page Content -->
     <main class="mt-12  w-full max-w-5xl mx-auto flex-1 px-4 sm:px-6 lg:px-8">
