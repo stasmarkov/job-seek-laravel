@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Database\Seeders;
 
+use App\Enums\UserRolesEnum;
 use App\Models\Job;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\Sequence;
@@ -22,7 +23,7 @@ class JobSeeder extends Seeder {
     // Create tags.
     Tag::factory(20)->create();
 
-    $users = Role::firstOrNew(['name' => 'Employer'])->users();
+    $users = Role::firstOrNew(['name' => UserRolesEnum::EMPLOYER->value])->users()->get();
 
     Job::factory(20)
       ->recycle($users)

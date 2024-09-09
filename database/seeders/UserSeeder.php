@@ -37,7 +37,7 @@ class UserSeeder extends Seeder {
       ->count(10)
       ->create()
       ->each(function (User $user) use ($employer_role) {
-        $user->roles()->save($employer_role);
+        $user->roles()->attach($employer_role);
       });
   }
 
