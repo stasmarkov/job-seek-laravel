@@ -8,18 +8,24 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\LoginLogController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Search\SearchJobsController;
 use App\Http\Middleware\AddContext;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 
-Route::get('/dashboard', static function () {
-  return Inertia::render('Admin/Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+  Route::get('/dashboard', [DashboardController::class, 'view'])
+    ->name('dashboard');
+
+  Route::get('/login-logs', [LoginLogController::class, 'index'])
+    ->name('login_logs.index');
+});
 
 Route::middleware(['auth', AddContext::class])->group(function () {
   Route::get('/profile', [ProfileController::class, 'edit'])

@@ -3,6 +3,7 @@ import Footer from "@/Components/Footer.vue";
 import Header from "@/Components/Header.vue";
 import Notification from "@/Components/Notification.vue";
 import Alert from "@/Components/Banners/Alert.vue";
+import BgBlur from "@/Components/BgBlur.vue";
 </script>
 
 <template>
@@ -23,6 +24,7 @@ import Alert from "@/Components/Banners/Alert.vue";
       </header>
 
       <Alert/>
+      <BgBlur />
 
       <!-- Page Content -->
       <main class="z-10 mt-12  w-full max-w-5xl mx-auto flex-1 px-4 sm:px-6 lg:px-8">
@@ -32,6 +34,7 @@ import Alert from "@/Components/Banners/Alert.vue";
       <!-- Page Footer -->
       <div>
         <slot name="footer">
+          <BgBlur />
           <Footer/>
         </slot>
       </div>

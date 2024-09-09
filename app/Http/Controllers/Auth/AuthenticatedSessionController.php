@@ -33,8 +33,6 @@ class AuthenticatedSessionController extends Controller {
 
     $request->session()->regenerate();
 
-    Event::dispatch(Login::class);
-
     return redirect()->intended(route('homepage', absolute: FALSE));
   }
 

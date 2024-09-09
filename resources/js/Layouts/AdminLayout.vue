@@ -44,7 +44,7 @@ const isOpened = ref(false);
               <div class="flex items-center">
                 <div>
                   <img class="inline-block h-10 w-10 rounded-full"
-                       src="https://api.dicebear.com/9.x/pixel-art/svg"
+                       :src="$page.props.auth.user.avatar"
                        alt="">
                 </div>
                 <div class="ml-3">
@@ -82,7 +82,7 @@ const isOpened = ref(false);
             <div class="flex items-center">
               <div>
                 <img class="inline-block h-10 w-10 rounded-full"
-                     src="https://api.dicebear.com/9.x/pixel-art/svg"
+                     :src="$page.props.auth.user.avatar"
                      alt="">
               </div>
               <div class="ml-3">

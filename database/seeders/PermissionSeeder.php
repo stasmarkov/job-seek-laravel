@@ -16,6 +16,7 @@ class PermissionSeeder extends Seeder {
    * Run the database seeds.
    */
   public function run(): void {
+    Permission::create(['name' => 'view list of jobs']);
     Permission::create(['name' => 'create a new job']);
     Permission::create(['name' => 'edit any job']);
     Permission::create(['name' => 'edit own job']);

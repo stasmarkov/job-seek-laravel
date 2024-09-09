@@ -20,7 +20,7 @@ class JobPolicy {
    * Determine whether the user can view any models.
    */
   public function viewAny(User $user): bool {
-    return TRUE;
+    return $user->hasPermissionTo('view list of jobs');
   }
 
   /**

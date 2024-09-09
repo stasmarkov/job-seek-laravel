@@ -29,6 +29,7 @@ class RoleSeeder extends Seeder {
       'edit any employer',
       'delete own employer',
       'delete any employer',
+      'view list of jobs',
     ]);
 
     $employer = Role::findOrCreate(UserRolesEnum::EMPLOYER->value);
@@ -39,6 +40,7 @@ class RoleSeeder extends Seeder {
       'create a new employer',
       'edit own employer',
       'delete own employer',
+      'view list of jobs',
     ]);
 
     Role::findOrCreate(UserRolesEnum::EMPLOYEE->value);

@@ -43,13 +43,8 @@ class JobController extends Controller implements HasMiddleware {
    * @return \Inertia\Response
    */
   public function index() {
-    $user = Auth::user();
     $jobs = Job::query()
       ->with(['employer', 'tags']);
-
-    if (!$user?->hasRole(UserRolesEnum::ADMIN->value)) {
-      $jobs->whereRelation('employer', 'user_id', '=', $user?->id);
-    }
 
     $jobs = $jobs
       ->paginate(10)

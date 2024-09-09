@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Models;
 
 use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
@@ -29,6 +31,7 @@ class User extends Authenticatable implements ReacterableInterface {
     'name',
     'email',
     'password',
+    'avatar',
   ];
 
   /**
@@ -91,6 +94,24 @@ class User extends Authenticatable implements ReacterableInterface {
    */
   public function scopeActive(Builder $query) {
     $query->where('status', '=', 1);
+  }
+
+  /**
+   * Returns the collection of user Login Logs models.
+   */
+  public function loginLogs(): HasMany {
+    return $this->hasMany(LoginLog::class);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static function boot() {
+    parent::boot();
+
+    static::saving(function (User $user) {
+      $user->avatar = 'https://api.dicebear.com/9.x/pixel-art/svg?seed=' . $user->name;
+    });
   }
 
 }
