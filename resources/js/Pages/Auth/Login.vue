@@ -6,6 +6,7 @@ import InputLabel from '@/Components/FormElements/InputLabel.vue';
 import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
 import TextInput from '@/Components/FormElements/TextInput.vue';
 import {Head, Link, useForm} from '@inertiajs/vue3';
+import Heading from "@/Components/Heading.vue";
 
 defineProps({
   canResetPassword: {
@@ -55,7 +56,16 @@ const submit = () => {
       </div>
 
       <div class="mt-4">
-        <InputLabel for="password" value="Password"/>
+        <div class="flex justify-between">
+          <InputLabel for="password" value="Password"/>
+          <Link
+            v-if="canResetPassword"
+            :href="route('password.request')"
+            class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Forgot your password?
+          </Link>
+        </div>
 
         <TextInput
           id="password"
@@ -77,14 +87,6 @@ const submit = () => {
       </div>
 
       <div class="flex items-center justify-end mt-4 gap-2">
-        <Link
-          v-if="canResetPassword"
-          :href="route('password.request')"
-          class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          Forgot your password?
-        </Link>
-
         <Link
           :href="route('register')"
           class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

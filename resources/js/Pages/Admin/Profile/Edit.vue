@@ -6,6 +6,7 @@ import {Head, usePage} from '@inertiajs/vue3';
 import AdminAreaLayout from "@/Layouts/AdminAreaLayout.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
 import FormGroup from "@/Components/FormElements/FormGroup.vue";
+import AdminLayout from "@/Layouts/AdminLayout.vue";
 
 defineProps({
   mustVerifyEmail: {
@@ -20,7 +21,7 @@ defineProps({
 
 <template>
   <Head title="Profile"/>
-  <AdminAreaLayout>
+  <AdminLayout>
     <template #heading>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">Profile</h2>
     </template>
@@ -30,7 +31,7 @@ defineProps({
         <LinkButton :href="route('employer.edit', {'employer': $page.props.employer.id })">Edit Employer information</LinkButton>
       </div>
 
-      <FormGroup>
+      <FormGroup class="mt-4">
         <UpdateProfileInformationForm
           :must-verify-email="mustVerifyEmail"
           :status="status"
@@ -38,13 +39,13 @@ defineProps({
         />
       </FormGroup>
 
-      <FormGroup>
+      <FormGroup class="mt-4">
         <UpdatePasswordForm class="max-w-xl"/>
       </FormGroup>
 
-      <FormGroup>
+      <FormGroup class="mt-4">
         <DeleteUserForm class="max-w-xl"/>
       </FormGroup>
     </template>
-  </AdminAreaLayout>
+  </AdminLayout>
 </template>

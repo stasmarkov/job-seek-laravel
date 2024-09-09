@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(JobController::class)->group(function () {
   Route::middleware(['auth', AddContext::class])->group(function () {
+    Route::get('/jobs', 'index')
+      ->name('job.index');
+
     Route::get('/job/add', 'create')
       ->name('job.create');
 

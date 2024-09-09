@@ -8,6 +8,7 @@ import AdminAreaLayout from "@/Layouts/AdminAreaLayout.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
 import EmployerLogo from "@/Components/Employers/EmployerLogo.vue";
 import {useCurrentUser} from "@/Composables/useCurrentUser.js";
+import AdminLayout from "@/Layouts/AdminLayout.vue";
 
 const props = defineProps({
   employer: {
@@ -25,11 +26,10 @@ const form = useForm({
 </script>
 
 <template>
-  <AdminAreaLayout>
+  <AdminLayout>
     <template #heading>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">Edit employer</h2>
     </template>
-
 
     <template #default>
       <div v-if="user" class="flex gap-2">
@@ -97,5 +97,5 @@ const form = useForm({
 
     </template>
 
-  </AdminAreaLayout>
+  </AdminLayout>
 </template>

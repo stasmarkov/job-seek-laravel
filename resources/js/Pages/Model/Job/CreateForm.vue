@@ -15,6 +15,7 @@ import CheckboxButtons from "@/Components/FormElements/CheckboxButtons.vue";
 import {useCurrentUser} from "@/Composables/useCurrentUser.js";
 import FormGroup from "@/Components/FormElements/FormGroup.vue";
 import TextareaInput from "@/Components/FormElements/TextareaInput.vue";
+import AdminLayout from "@/Layouts/AdminLayout.vue";
 
 const props = defineProps({
   employer: Object,
@@ -87,99 +88,98 @@ const submit = () => {
 </script>
 
 <template>
-  <AdminAreaTwoColumnsLayout>
+  <AdminLayout>
     <Head title="Post a new job"/>
 
-    <template #heading><h1 class="text-xl font-bold">Add new job</h1></template>
+    <template #heading>Add new job</template>
 
-    <template #left_column :class="{
+    <div :class="{
       'sm:grid-cols-1': !enablePreview
     }">
-      <FormGroup>
-        <div class="flex gap-2 items-center">
-          <Checkbox :checked="enablePreview" id="preview" name="preview" @input="enablePreview = ! enablePreview"/>
-          <InputLabel for="preview" value="Enable preview"/>
-        </div>
-        <form @submit.prevent="submit" class="space-y-6 mt-4">
-          <div class="flex flex-wrap flex-col gap-4">
-            <TextInput label="Title" name="title" v-model="form.title" placeholder="Laravel Developer"/>
-            <InputError :message="form.errors.title" class="mt-2"/>
+      <div class="flex gap-2 items-center">
+        <Checkbox :checked="enablePreview" id="preview" name="preview" @input="enablePreview = ! enablePreview"/>
+        <InputLabel for="preview" value="Enable preview"/>
+      </div>
+      <form @submit.prevent="submit" class="space-y-6 mt-4">
+        <div class="flex flex-wrap flex-col gap-4">
+          <TextInput label="Title" name="title" v-model="form.title" placeholder="Laravel Developer"/>
+          <InputError :message="form.errors.title" class="mt-2"/>
 
-            <InputLabel value="Short description" for="short_description" />
-            <TextareaInput name="short_description" v-model="form.short_description"/>
+          <InputLabel value="Short description" for="short_description"/>
+          <TextareaInput name="short_description" v-model="form.short_description"/>
 
-            <span class="flex w-full justify-end" :class="{
+          <span class="flex w-full justify-end" :class="{
               'text-red-500': charsLeft <= 0,
             }">{{ charsLeft }} / 250</span>
 
-            <InputLabel value="Full description" for="description" />
-            <HtmlTextarea
-              name="description"
-              v-model="form.description"
-            />
-            <InputError :message="form.errors.description" class="mt-2"/>
-          </div>
-          <div>
-            <div class="bg-black/10 my-10 h-px w-full"></div>
-          </div>
-          <div class="info flex gap-4">
-            <TextInput label="Salary" name="salary" v-model="form.salary" placeholder="$60,000 USD"/>
-            <InputError :message="form.errors.salary" class="mt-2"/>
+          <InputLabel value="Full description" for="description"/>
+          <HtmlTextarea
+            name="description"
+            v-model="form.description"
+          />
+          <InputError :message="form.errors.description" class="mt-2"/>
+        </div>
+        <div>
+          <div class="bg-black/10 my-10 h-px w-full"></div>
+        </div>
+        <div class="info flex gap-4">
+          <TextInput label="Salary" name="salary" v-model="form.salary" placeholder="$60,000 USD"/>
+          <InputError :message="form.errors.salary" class="mt-2"/>
 
-            <TextInput label="Location" name="location" v-model="form.location" placeholder="Port City, Lutsk"/>
-            <InputError :message="form.errors.location" class="mt-2"/>
-          </div>
+          <TextInput label="Location" name="location" v-model="form.location" placeholder="Port City, Lutsk"/>
+          <InputError :message="form.errors.location" class="mt-2"/>
+        </div>
 
-          <select name="schedule" v-model="form.schedule">
-            <option value="Part-Time">Part Time</option>
-            <option value="Full-Time">Full Time</option>
-            <option value="Contract">Contract</option>
-          </select>
-          <InputError :message="form.errors.schedule" class="mt-2"/>
-
-
-          <div class="flex items-center align-middle gap-2">
-            <Checkbox label="Featured (Costs Extra)" id="featured" name="featured" v-model:checked="form.featured"/>
-            <InputLabel for="featured">Is this job should be featured?</InputLabel>
-            <InputError :message="form.errors.featured" class="mt-2"/>
-          </div>
-          <div>
-            <div class="bg-black/10 my-10 h-px w-full"></div>
-          </div>
+        <select name="schedule" v-model="form.schedule">
+          <option value="Part-Time">Part Time</option>
+          <option value="Full-Time">Full Time</option>
+          <option value="Contract">Contract</option>
+        </select>
+        <InputError :message="form.errors.schedule" class="mt-2"/>
 
 
-          <div class="flex flex-wrap flex-col gap-4">
-            <TextInput label="URL" name="url" type="url" v-model="form.url"
-                       placeholder="https://acme.com/jobs.ceo-wanted"/>
-            <InputError :message="form.errors.url" class="mt-2"/>
+        <div class="flex items-center align-middle gap-2">
+          <Checkbox label="Featured (Costs Extra)" id="featured" name="featured" v-model:checked="form.featured"/>
+          <InputLabel for="featured">Is this job should be featured?</InputLabel>
+          <InputError :message="form.errors.featured" class="mt-2"/>
+        </div>
+        <div>
+          <div class="bg-black/10 my-10 h-px w-full"></div>
+        </div>
 
-            <CheckboxButtons :items="props.tags.data" :selectedItems="form.tags" type="admin" @checkboxCheckedEvent="checkboxFormSubmit" />
 
-            <InputError :message="form.errors.tags" class="mt-2"/>
-          </div>
+        <div class="flex flex-wrap flex-col gap-4">
+          <TextInput label="URL" name="url" type="url" v-model="form.url"
+                     placeholder="https://acme.com/jobs.ceo-wanted"/>
+          <InputError :message="form.errors.url" class="mt-2"/>
 
-          <div class="flex items-center gap-4">
-            <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+          <CheckboxButtons :items="props.tags.data" :selectedItems="form.tags" type="admin"
+                           @checkboxCheckedEvent="checkboxFormSubmit"/>
 
-            <Transition
-              enter-active-class="transition ease-in-out"
-              enter-from-class="opacity-0"
-              leave-active-class="transition ease-in-out"
-              leave-to-class="opacity-0"
-            >
-              <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Saved.</p>
-            </Transition>
-          </div>
-        </form>
-      </FormGroup>
-    </template>
+          <InputError :message="form.errors.tags" class="mt-2"/>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+
+          <Transition
+            enter-active-class="transition ease-in-out"
+            enter-from-class="opacity-0"
+            leave-active-class="transition ease-in-out"
+            leave-to-class="opacity-0"
+          >
+            <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Saved.</p>
+          </Transition>
+        </div>
+      </form>
+    </div>
 
     <template #right_column v-if="enablePreview">
       <JobCardWide :job="job" v-if="!form.featured"></JobCardWide>
       <JobCard :job="job" v-else></JobCard>
     </template>
 
-  </AdminAreaTwoColumnsLayout>
+  </AdminLayout>
 
 </template>
 <style scoped>

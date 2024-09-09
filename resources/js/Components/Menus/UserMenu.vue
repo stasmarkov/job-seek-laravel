@@ -7,7 +7,6 @@ import {useCurrentUser} from "@/Composables/useCurrentUser.js";
 defineProps({
   can: Object,
 })
-
 </script>
 
 <template>
@@ -43,9 +42,7 @@ defineProps({
       </template>
 
       <template #content>
-        <DropdownLink :href="route('profile.edit')" v-if="useCurrentUser()"> Profile</DropdownLink>
-        <DropdownLink :href="route('job.create')" v-if="useCurrentUser() && $page.props.can.create_job">Post a job
-        </DropdownLink>
+        <DropdownLink :href="route('dashboard')" v-if="useCurrentUser().isLoggedIn()">Dashboard</DropdownLink>
         <DropdownLink :href="route('logout')" method="post" as="button" v-if="useCurrentUser().isLoggedIn()">
           Log Out
         </DropdownLink>

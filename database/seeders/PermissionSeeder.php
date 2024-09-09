@@ -27,7 +27,6 @@ class PermissionSeeder extends Seeder {
     Permission::create(['name' => 'edit own employer']);
     Permission::create(['name' => 'delete any employer']);
     Permission::create(['name' => 'delete own employer']);
-
   }
 
 }

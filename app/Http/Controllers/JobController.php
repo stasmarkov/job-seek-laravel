@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRolesEnum;
 use App\Http\Requests\JobCreateRequest;
 use App\Http\Requests\JobUpdateRequest;
 use App\Http\Resources\JobResource;
 use App\Http\Resources\TagResource;
+use App\Models\Employer;
 use App\Models\Job;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -28,10 +30,34 @@ class JobController extends Controller implements HasMiddleware {
    */
   public static function middleware() {
     return [
+      new Middleware('can:viewAny,\App\Model\Job', only: ['index']),
       new Middleware('can:create,\App\Model\Job', only: ['create', 'store']),
       new Middleware('can:update,job', only: ['edit', 'update']),
       new Middleware('can:delete,job', only: ['destroy']),
     ];
+  }
+
+  /**
+   * Get the list of all jobs.
+   *
+   * @return \Inertia\Response
+   */
+  public function index() {
+    $user = Auth::user();
+    $jobs = Job::query()
+      ->with(['employer', 'tags']);
+
+    if (!$user?->hasRole(UserRolesEnum::ADMIN->value)) {
+      $jobs->whereRelation('employer', 'user_id', '=', $user?->id);
+    }
+
+    $jobs = $jobs
+      ->paginate(10)
+      ->withQueryString();
+
+    return Inertia::render('Model/Job/List', [
+      'jobs' => $jobs,
+    ]);
   }
 
   /**

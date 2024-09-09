@@ -45,6 +45,7 @@ const submit = () => {
           required
           autofocus
           autocomplete="name"
+          placeholder="Name..."
         />
 
         <InputError class="mt-2" :message="form.errors.name"/>
@@ -60,6 +61,7 @@ const submit = () => {
           v-model="form.email"
           required
           autocomplete="username"
+          placeholder="example@mail.com"
         />
 
         <InputError class="mt-2" :message="form.errors.email"/>

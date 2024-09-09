@@ -29,6 +29,7 @@ class JobResource extends JsonResource {
       'location' => $this->location,
       'tags' => TagResource::collection($this->tags),
       'employer' => EmployerResource::make($this->employer),
+      'created_at' => $this->created_at,
       'can' => [
         'edit' => Auth::user()?->can('update', $this) ?? FALSE,
       ],
