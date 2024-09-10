@@ -24,19 +24,7 @@ class RegisteredUserController extends Controller {
    * Display the registration view.
    */
   public function create(): Response {
-    $roles = Role::whereIn('name', [
-      UserRolesEnum::EMPLOYER->value,
-      UserRolesEnum::EMPLOYEE->value,
-    ])
-      ->get()
-      ->pluck('name', 'id')
-      ->map(function ($role) {
-        return UserRolesEnum::from($role)->label();
-      });
-
-    return Inertia::render('Auth/Register', [
-      'roles' => $roles,
-    ]);
+    return Inertia::render('Auth/Register');
   }
 
   /**
@@ -49,17 +37,13 @@ class RegisteredUserController extends Controller {
       'name' => 'required|string|max:255',
       'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
       'password' => ['required', 'confirmed', Rules\Password::defaults()],
-      'role' => 'in:2,3',
     ]);
-
-    $role = Role::findOrFail($request->role);
 
     $user = User::create([
       'name' => $request->name,
       'email' => $request->email,
       'password' => Hash::make($request->password),
     ]);
-    $user->roles()->attach($role);
 
     event(new Registered($user));
 

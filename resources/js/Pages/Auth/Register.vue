@@ -13,11 +13,6 @@ const form = useForm({
   email: '',
   password: '',
   password_confirmation: '',
-  role: '',
-});
-
-const props = defineProps({
-  roles: [],
 });
 
 const submit = () => {
@@ -98,19 +93,6 @@ const submit = () => {
       </div>
 
       <Divider/>
-
-      <div class="mt-4">
-        <InputLabel for="role" value="Account Type"/>
-
-        <SelectInput
-          id="role"
-          v-model="form.role"
-          :options="props.roles"
-          required
-        />
-
-        <InputError class="mt-2" :message="form.errors.role"/>
-      </div>
 
       <div class="flex items-center justify-end mt-4">
         <Link
