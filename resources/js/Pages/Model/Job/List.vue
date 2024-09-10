@@ -26,7 +26,7 @@ const props = defineProps({
               {{ job.schedule }} | {{ job.salary }}
             </p>
             <p class="text-sm font-semibold leading-6 text-gray-900">
-              <Link :href="route('job.show', {job: job.id})" class="hover:text-blue-500 hover:underline">{{ job.title }}</Link>
+              <Link :href="route('job.show', { job: job.id })" v-if="job.id" class="hover:text-blue-500 hover:underline">{{ job.title }}</Link>
             </p>
             <p class="text-xs font-semibold leading-6 text-gray-500">
               {{ job.short_description }}

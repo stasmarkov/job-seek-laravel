@@ -1,10 +1,31 @@
 <script setup>
 
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 </script>
 
 <template>
-  <footer class="pt-12 bg-black border-t border-white/20 min-h-10 mt-10 py-10">
-    <div class="max-w-7xl mx-auto">
+  <footer class="pt-12  border-t border-white/20 min-h-10 mt-10 py-10 z-10">
+
+    <div class="max-w-5xl border-white/20 mx-auto border-b pb-4 mb-8 flex gap-6 flex-wrap flex-col md:flex-row px-6">
+      <div class="md:basis-56 basis-full">
+        <Link class="flex justify-center" :href="route('homepage')">
+          <ApplicationLogo />
+        </Link>
+
+        <div class="mt-4 text-center text-xs">
+          <p>The easiest way to hire or apply!</p>
+        </div>
+      </div>
+      <div class="flex gap-6 flex-wrap">
+       <ul class="space-y-2">
+         <li><Link :href="route('homepage')">Homepage</Link></li>
+         <li><Link :href="route('contact.index')">Contact us</Link></li>
+         <li><Link :href="route('homepage')">FAQ</Link></li>
+       </ul>
+      </div>
+    </div>
+
+    <div class="max-w-5xl mx-auto">
       <div class="text-center">
         <p>Copyright ©{{ new Date().getFullYear() }} - Developed by <a href="https://www.linkedin.com/in/stanislav-markov-179947103/" class="text-blue-400 hover:underline" target="_blank">Stas Markov</a></p>
       </div>

@@ -9,7 +9,6 @@ import InputError from "@/Components/FormElements/InputError.vue";
 import JobCardWide from "@/Components/Jobs/JobCardWide.vue";
 import JobCard from "@/Components/Jobs/JobCard.vue";
 import {computed, ref} from "vue";
-import AdminAreaTwoColumnsLayout from "@/Layouts/AdminAreaTwoColumnsLayout.vue";
 import HtmlTextarea from "@/Components/FormElements/HtmlTextarea.vue";
 import useCharsCounter from "@/stores/charsCounter.js";
 import CheckboxButtons from "@/Components/FormElements/CheckboxButtons.vue";

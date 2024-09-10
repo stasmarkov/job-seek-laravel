@@ -9,7 +9,7 @@ import {Link} from "@inertiajs/vue3";
 <template>
   <!--   Sidebar component, swap this element with another sidebar if you like -->
   <nav class="mt-5 flex-1 px-2 bg-gray-800">
-    <MenuLink :href="route('dashboard')">
+    <MenuLink :href="route('dashboard')" :active="route().current('dashboard')">
       <svg
         class="mr-2 h-4 w-4  group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
         fill="none" viewBox="0 0 24 24" stroke="currentColor">

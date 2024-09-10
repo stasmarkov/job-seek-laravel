@@ -59,7 +59,7 @@ const props = defineProps({
                         class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Inactive</span>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                  <div class="flex">
+                  <div class="flex" v-if="user.roles[0]">
                     {{ user.roles[0].name.charAt(0).toUpperCase() + user.roles[0].name.slice(1) }}
                   </div>
                 </td>
@@ -73,7 +73,6 @@ const props = defineProps({
           </div>
         </div>
       </div>
-
     </div>
   </AdminLayout>
 </template>

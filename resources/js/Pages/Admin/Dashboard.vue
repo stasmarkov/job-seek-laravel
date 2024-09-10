@@ -1,5 +1,4 @@
 <script setup>
-import AdminAreaLayout from "@/Layouts/AdminAreaLayout.vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 
 const props = defineProps({

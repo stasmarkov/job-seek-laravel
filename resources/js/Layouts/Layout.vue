@@ -7,7 +7,7 @@ import BgBlur from "@/Components/BgBlur.vue";
 </script>
 
 <template>
-  <div class="bg-black text-white">
+  <div class="bg-black text-white overflow-hidden">
     <div class="pt-[5.125rem] flex flex-col justify-between">
       <!-- Page Header -->
       <div>
@@ -33,13 +33,11 @@ import BgBlur from "@/Components/BgBlur.vue";
       </main>
 
       <!-- Page Footer -->
-      <div>
-        <slot name="footer">
-          <BgBlur />
-          <Footer/>
-        </slot>
-      </div>
+      <slot name="footer">
+        <Footer/>
+      </slot>
 
+      <BgBlur />
       <Notification/>
     </div>
   </div>

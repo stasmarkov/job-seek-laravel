@@ -3,7 +3,6 @@ import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 import {Head, usePage} from '@inertiajs/vue3';
-import AdminAreaLayout from "@/Layouts/AdminAreaLayout.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
 import FormGroup from "@/Components/FormElements/FormGroup.vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";

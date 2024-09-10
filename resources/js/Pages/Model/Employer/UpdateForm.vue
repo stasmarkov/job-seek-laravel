@@ -4,7 +4,6 @@ import InputLabel from '@/Components/FormElements/InputLabel.vue';
 import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
 import TextInput from '@/Components/FormElements/TextInput.vue';
 import {Link, useForm, usePage} from '@inertiajs/vue3';
-import AdminAreaLayout from "@/Layouts/AdminAreaLayout.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
 import EmployerLogo from "@/Components/Employers/EmployerLogo.vue";
 import {useCurrentUser} from "@/Composables/useCurrentUser.js";
