@@ -23,7 +23,7 @@ class SendContactUsMailJob implements ShouldQueue {
   /**
    * Create a new job instance.
    */
-  public function __construct(public string $contactMessage) {}
+  public function __construct(public array $data) {}
 
   /**
    * Execute the job.
@@ -31,7 +31,7 @@ class SendContactUsMailJob implements ShouldQueue {
   public function handle(): void {
     try {
       Context::push('queued_jobs', json_encode($this, JSON_THROW_ON_ERROR));
-      Mail::send(new ContactUsMail($this->contactMessage));
+      Mail::send(new ContactUsMail($this->data));
     }
     catch (\JsonException $e) {
       Log::error($e);

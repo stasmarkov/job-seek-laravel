@@ -8,8 +8,8 @@
   <title>Contact us</title>
 </head>
 <body>
-<h1>Contact us from the {{ $employer->name }}</h1>
+<h1>Contact us from the {{ $data['first_name'] }}  {{ $data['last_name'] }}</h1>
 
-<p>{{ $contactMessage }}</p>
+<p>{{ $data['contact_message'] }}</p>
 </body>
 </html>

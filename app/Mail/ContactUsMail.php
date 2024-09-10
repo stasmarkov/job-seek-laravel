@@ -22,20 +22,15 @@ class ContactUsMail extends Mailable {
   /**
    * Create a new message instance.
    */
-  public function __construct(public string $contactMessage) {}
+  public function __construct(public array $data) {}
 
   /**
    * Get the message envelope.
    */
   public function envelope(): Envelope {
-    /** @var \App\Models\Employer $current_employer */
-    $current_employer = Context::get('current_user_employer');
-    /** @var \App\Models\User $current_user */
-    $current_user = Context::get('current_user');
-
     return new Envelope(
       to: 'admin@example.com',
-      from: new Address($current_user->email, $current_employer->name),
+      from: new Address($this->data['email'], $this->data['first_name'] . ' ' . $this->data['last_name']),
       subject: 'Contact Us',
     );
   }
@@ -47,9 +42,7 @@ class ContactUsMail extends Mailable {
     return new Content(
       view: 'emails.contact',
       with: [
-        'user' => Context::get('current_user'),
-        'employer' => Context::get('current_user_employer'),
-        'contactMessage' => $this->contactMessage,
+        'data' => $this->data,
       ]
     );
   }

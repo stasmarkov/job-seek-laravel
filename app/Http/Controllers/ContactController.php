@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SendContactUsMailJob;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 /**
@@ -33,10 +34,16 @@ class ContactController extends Controller {
    *   The response.
    */
   public function store(Request $request) {
-    $message = $request->get('contact_message');
+    $data = $request->validate([
+      'first_name' => ['required'],
+      'last_name' => ['required'],
+      'email' => ['required', 'email'],
+      'contact_message' => ['required'],
+    ]);
+
     // Add the name to the queue and run it with prior.
     // php artisan queue:Work --queue=mail,default.
-    SendContactUsMailJob::dispatch($message)->onQueue('mail');
+    SendContactUsMailJob::dispatch($data)->onQueue('mail');
     return back();
   }
 

@@ -9,6 +9,7 @@ import ContactUsForm from "@/Components/Forms/ContactUsForm.vue";
 <template>
   <Layout>
     <Head title="Contact Us" />
+
     <ContactUsForm />
   </Layout>
 </template>

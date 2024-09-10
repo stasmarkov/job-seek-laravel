@@ -7,8 +7,8 @@ import BgBlur from "@/Components/BgBlur.vue";
 </script>
 
 <template>
-  <div class="bg-black text-white overflow-hidden">
-    <div class="pt-[5.125rem] flex flex-col justify-between">
+  <div class="bg-black text-white overflow-hidden min-h-screen">
+    <div class="pt-[5.125rem] flex flex-col justify-between min-h-screen">
       <!-- Page Header -->
       <div>
         <slot name="header">

@@ -28,6 +28,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     ->name('login_logs.index');
 });
 
+Route::get('/contact', [ContactController::class, 'index'])
+  ->name('contact.index');
+Route::post('/contact', [ContactController::class, 'store'])
+  ->name('contact.store');
+
 Route::middleware(['auth', AddContext::class])->group(function () {
   Route::get('/profile', [ProfileController::class, 'edit'])
     ->name('profile.edit');
@@ -43,11 +48,6 @@ Route::middleware(['auth', AddContext::class])->group(function () {
   Route::post('/profile/role-select', [RoleSelectController::class, 'update'])
     ->withoutMiddleware('user_has_role')
     ->name('profile.role_select.update');
-
-  Route::get('/contact', [ContactController::class, 'index'])
-    ->name('contact.index');
-  Route::post('/contact', [ContactController::class, 'store'])
-    ->name('contact.store');
 });
 
 
