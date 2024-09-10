@@ -18,14 +18,10 @@ class LoginSubscriber {
    * Handle the event.
    */
   public function handle(Login $event) {
-    $b=0;
-
     LoginLog::create([
       'user_id' => $event->user->id,
       'ip' => Request::ip(),
     ]);
-
-    // vfriesen@example.org
   }
 
   /**

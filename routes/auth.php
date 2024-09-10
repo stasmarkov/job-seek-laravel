@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -9,11 +11,34 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\EmployerController;
-use App\Http\Controllers\JobController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 Route::middleware('guest')->group(function () {
+  Route::get('/auth/redirect/github', function () {
+    return Socialite::driver('github')->redirect();
+  })->name('auth.github');
+
+  Route::get('/auth/callback', function () {
+    $githubUser = Socialite::driver('github')->user();
+
+    $user = User::updateOrCreate([
+      'github_id' => $githubUser->id,
+    ], [
+      'name' => $githubUser->name,
+      'email' => $githubUser->email,
+      'github_token' => $githubUser->token,
+      'github_refresh_token' => $githubUser->refreshToken,
+      'status' => 1,
+    ]);
+
+    Auth::login($user);
+
+    return redirect('/dashboard');
+  });
+
   Route::get('register', [RegisteredUserController::class, 'create'])
     ->name('register');
 

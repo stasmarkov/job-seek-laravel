@@ -30,12 +30,15 @@ class UserSeeder extends Seeder {
         'name' => 'admin',
         'email' => 'admin@example.com',
         'password' => '123123123',
+        'status' => 1,
       ]);
 
     // Create Employer users.
     User::factory()
       ->count(10)
-      ->create()
+      ->create([
+        'status' => 1,
+      ])
       ->each(function (User $user) use ($employer_role) {
         $user->roles()->attach($employer_role);
       });

@@ -24,4 +24,3 @@ Route::middleware('role:' . UserRolesEnum::ADMIN->value)->group(function () {
     ]);
   })->name('admin.users');
 });
-

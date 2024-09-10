@@ -32,6 +32,9 @@ class User extends Authenticatable implements ReacterableInterface {
     'email',
     'password',
     'avatar',
+    'github_id',
+    'github_token',
+    'github_refresh_token',
   ];
 
   /**

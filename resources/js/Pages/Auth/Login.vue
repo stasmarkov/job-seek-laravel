@@ -7,6 +7,9 @@ import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
 import TextInput from '@/Components/FormElements/TextInput.vue';
 import {Head, Link, useForm} from '@inertiajs/vue3';
 import Heading from "@/Components/Heading.vue";
+import LinkButton from "@/Components/Buttons/LinkButton.vue";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {faGithub} from "@fortawesome/free-brands-svg-icons";
 
 defineProps({
   canResetPassword: {
@@ -94,7 +97,13 @@ const submit = () => {
           Create a new account
         </Link>
 
-        <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+        <a
+          :href="route('auth.github')"
+          class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          GitHub
+          <font-awesome-icon :icon="faGithub" />
+        </a>
+        <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
           Log in
         </PrimaryButton>
       </div>

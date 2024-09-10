@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\LoginLogController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleSelectController;
 use App\Http\Controllers\Search\SearchJobsController;
 use App\Http\Middleware\AddContext;
 use Illuminate\Support\Facades\Route;
@@ -35,9 +36,16 @@ Route::middleware(['auth', AddContext::class])->group(function () {
   Route::delete('/profile', [ProfileController::class, 'destroy'])
     ->name('profile.destroy');
 
+  Route::get('/profile/role-select', [RoleSelectController::class, 'edit'])
+    ->withoutMiddleware('user_has_role')
+    ->name('profile.role_select');
+
+  Route::post('/profile/role-select', [RoleSelectController::class, 'update'])
+    ->withoutMiddleware('user_has_role')
+    ->name('profile.role_select.update');
+
   Route::get('/contact', [ContactController::class, 'index'])
     ->name('contact.index');
-
   Route::post('/contact', [ContactController::class, 'store'])
     ->name('contact.store');
 });
