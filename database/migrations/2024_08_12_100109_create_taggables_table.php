@@ -12,10 +12,13 @@ return new class extends Migration {
    * Run the migrations.
    */
   public function up(): void {
-    Schema::create('job_tag', function(Blueprint $table) {
+    Schema::create('taggables', function(Blueprint $table) {
       $table->id();
-      $table->foreignIdFor(Job::class)->constrained()->cascadeOnDelete();
+
       $table->foreignIdFor(Tag::class)->constrained()->cascadeOnDelete();
+      $table->unsignedBigInteger('taggable_id');
+      $table->string('taggable_type');
+
       $table->timestamps();
     });
   }
@@ -24,7 +27,7 @@ return new class extends Migration {
    * Reverse the migrations.
    */
   public function down(): void {
-    Schema::dropIfExists('job_tag');
+    Schema::dropIfExists('taggables');
   }
 
 };

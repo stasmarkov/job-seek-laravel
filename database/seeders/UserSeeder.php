@@ -23,14 +23,35 @@ class UserSeeder extends Seeder {
   public function run(Collection $users): void {
     $administrator_role = Role::firstOrNew(['name' => UserRolesEnum::ADMIN->value]);
     $employer_role = Role::firstOrNew(['name' => UserRolesEnum::EMPLOYER->value]);
+    $employee_role = Role::firstOrNew(['name' => UserRolesEnum::EMPLOYEE->value]);
 
     // Create admin user.
     User::factory()
       ->hasAttached($administrator_role)
       ->create([
         'name' => 'admin',
-        'email' => 'admin@example.com',
-        'password' => '123123123',
+        'email' => 'admin@mail.com',
+        'password' => env('ADMIN_PASSWORD') ?? '123456789',
+        'status' => 1,
+      ]);
+
+    // Create admin user.
+    User::factory()
+      ->hasAttached($employer_role)
+      ->create([
+        'name' => 'employer',
+        'email' => 'employer@mail.com',
+        'password' => env('EMPLOYER_PASSWORD') ?? '123456789',
+        'status' => 1,
+      ]);
+
+    // Create admin user.
+    User::factory()
+      ->hasAttached($employee_role)
+      ->create([
+        'name' => 'employee',
+        'email' => 'employee@mail.com',
+        'password' => env('EMPLOYEE_PASSWORD') ?? '123456789',
         'status' => 1,
       ]);
 
