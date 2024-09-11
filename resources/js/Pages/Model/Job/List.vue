@@ -2,8 +2,8 @@
 
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
-import Pager from "@/Components/Pager.vue";
-import Tag from "@/Components/Tags/Tag.vue";
+import Pager from "@/Components/Pagers/Pager.vue";
+import Tag from "@/Components/Models/Tags/Tag.vue";
 
 const props = defineProps({
   jobs: Object,

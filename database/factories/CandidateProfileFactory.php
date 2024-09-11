@@ -6,9 +6,9 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Profile>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CandidateProfile>
  */
-class ProfileFactory extends Factory {
+class CandidateProfileFactory extends Factory {
 
   /**
    * Define the model's default state.
@@ -19,7 +19,9 @@ class ProfileFactory extends Factory {
     return [
       'first_name' => $this->faker->firstName(),
       'last_name' => $this->faker->lastName(),
-      'phone_number' => $this->faker->phoneNumber(),
+      'description' => $this->faker->realText(1000),
+      'achievements' => $this->faker->realText(),
+      'experience_since' => $this->faker,
       'user_id' => User::factory(),
     ];
   }

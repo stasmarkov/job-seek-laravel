@@ -1,16 +1,13 @@
 <script setup>
 import {computed} from "vue";
-import {router} from "@inertiajs/vue3";
 
 const props = defineProps({
   href: {
     type: String,
+    required: true,
   },
   target: {
     type: String,
-  },
-  active: {
-    type: Boolean,
   },
 });
 
@@ -30,9 +27,4 @@ const isActive = computed(() => {
   >
     <slot/>
   </Link>
-
 </template>
-
-<style scoped>
-
-</style>

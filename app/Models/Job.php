@@ -44,13 +44,13 @@ class Job extends Model implements ReactableInterface {
   ];
 
   /**
-   * Get the Employer data model.
+   * Get the Employer Profile model.
    *
    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-   *   The Employer model.
+   *   The Employer Profile Model.
    */
-  public function employer(): BelongsTo {
-    return $this->belongsTo(Employer::class);
+  public function employerProfile(): BelongsTo {
+    return $this->belongsTo(EmployerProfile::class);
   }
 
   /**

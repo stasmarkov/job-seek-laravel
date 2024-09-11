@@ -1,7 +1,7 @@
 <script setup>
 import Panel from "@/Components/Panel.vue";
-import Tag from "@/Components/Tags/Tag.vue";
-import EmployerLogo from "@/Components/Employers/EmployerLogo.vue";
+import Tag from "@/Components/Models/Tags/Tag.vue";
+import EmployerProfileLogo from "@/Components/Models/Employers/EmployerProfileLogo.vue";
 
 defineProps({
   job: {
@@ -12,7 +12,7 @@ defineProps({
 
 <template>
   <Panel class="flex flex-col text-center bg-black">
-    <div v-if="job.employer" class="self-start text-sm">{{ job.employer.name }}</div>
+    <div v-if="job.employerProfile" class="self-start text-sm">{{ job.employerProfile.name }}</div>
 
     <div class="py-8 space-y-3">
       <h3 class="text-white group-hover:text-blue-600 text-xl text-bold transition-colors duration-300 ">
@@ -31,7 +31,7 @@ defineProps({
       <div class="flex flex-wrap mt-auto gap-2">
         <Tag v-for="tag in job.tags" size="small" :tag/>
       </div>
-      <EmployerLogo v-if="job.employer"  :employer="job.employer" width="42"/>
+      <EmployerProfileLogo v-if="job.employerProfile" :employerProfile="job.employerProfile" width="42"/>
     </div>
   </Panel>
 </template>

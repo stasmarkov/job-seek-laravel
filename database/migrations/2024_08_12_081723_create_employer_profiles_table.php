@@ -11,12 +11,11 @@ return new class extends Migration {
    * Run the migrations.
    */
   public function up(): void {
-    Schema::create('profiles', function (Blueprint $table) {
+    Schema::create('employer_profiles', function (Blueprint $table) {
       $table->id();
-      $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-      $table->string('first_name');
-      $table->string('last_name');
-      $table->string('phone_number')->nullable();
+      $table->foreignIdFor(User::class);
+      $table->string('name');
+      $table->string('logo');
       $table->timestamps();
     });
   }
@@ -25,7 +24,7 @@ return new class extends Migration {
    * Reverse the migrations.
    */
   public function down(): void {
-    Schema::dropIfExists('profiles');
+    Schema::dropIfExists('employer_profiles');
   }
 
 };

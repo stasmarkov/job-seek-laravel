@@ -13,10 +13,9 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::middleware('role:' . UserRolesEnum::ADMIN->value)->group(function () {
-
   Route::get('admin/users', function () {
     $users = User::query()
-      ->with(['employer', 'roles'])
+      ->with(['employerProfile', 'roles'])
       ->paginate(20);
 
     return Inertia::render('Model/User/List', [

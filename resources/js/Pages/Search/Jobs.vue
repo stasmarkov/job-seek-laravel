@@ -1,9 +1,9 @@
 <script setup>
 import Layout from "@/Layouts/Layout.vue";
 import Heading from "@/Components/Heading.vue";
-import JobCardWide from "@/Components/Jobs/JobCardWide.vue";
+import CardWide from "@/Components/Models/Jobs/CardWide.vue";
 import SearchJobForm from "@/Components/Forms/SearchJobForm.vue";
-import Pager from "@/Components/Pager.vue";
+import Pager from "@/Components/Pagers/Pager.vue";
 import {ref, watch} from "vue";
 import {router} from "@inertiajs/vue3";
 import {throttle, debounce} from "lodash";
@@ -70,7 +70,7 @@ watch([order, searchString, tags], throttle(function ([orderValue, searchValue, 
     <div class="mt-4">
       <div v-if="props.results.data.length > 0">
         <div class="space-y-4">
-          <JobCardWide v-for="job in props.results.data" :job :key="job.id"/>
+          <CardWide v-for="job in props.results.data" :job :key="job.id"/>
         </div>
 
         <div class="flex justify-center px-2 mt-6">

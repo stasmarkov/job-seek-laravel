@@ -1,7 +1,7 @@
 <script setup>
 
-import Dropdown from "@/Components/Dropdown.vue";
-import DropdownLink from "@/Components/DropdownLink.vue";
+import Dropdown from "@/Components/Dropdowns/Dropdown.vue";
+import DropdownLink from "@/Components/Dropdowns/DropdownLink.vue";
 import {useCurrentUser} from "@/Composables/useCurrentUser.js";
 
 defineProps({

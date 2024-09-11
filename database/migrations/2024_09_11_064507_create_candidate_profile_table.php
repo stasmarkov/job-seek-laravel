@@ -11,11 +11,14 @@ return new class extends Migration {
    * Run the migrations.
    */
   public function up(): void {
-    Schema::create('employers', function(Blueprint $table) {
+    Schema::create('candidate_profiles', function (Blueprint $table) {
       $table->id();
+      $table->string('first_name');
+      $table->string('last_name');
+      $table->longText('description');
+      $table->longText('achievements')->nullable();
+      $table->longText('experience_since');
       $table->foreignIdFor(User::class);
-      $table->string('name');
-      $table->string('logo');
       $table->timestamps();
     });
   }
@@ -24,7 +27,7 @@ return new class extends Migration {
    * Reverse the migrations.
    */
   public function down(): void {
-    Schema::dropIfExists('employers');
+    Schema::dropIfExists('candidate_profiles');
   }
 
 };

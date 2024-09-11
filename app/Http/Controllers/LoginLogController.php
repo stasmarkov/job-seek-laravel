@@ -17,7 +17,7 @@ class LoginLogController extends Controller {
    */
   public function index() {
     return Inertia::render('Model/LoginLog/List', [
-      'loginLogs' => Auth::user()->loginLogs,
+      'loginLogs' => Auth::user()->loginLogs()->paginate(50),
     ]);
   }
 

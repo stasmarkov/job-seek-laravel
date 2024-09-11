@@ -18,6 +18,13 @@ class TagFactory extends Factory {
     return [
       'name' => $this->faker->unique()->randomElement([
         'PHP',
+        'C',
+        'C++',
+        'C#',
+        'GO',
+        'Ruby',
+        'Ruby on Rails',
+        'Java',
         'Laravel',
         'MySQL',
         'PostgresSQL',

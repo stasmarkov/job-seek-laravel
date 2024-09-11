@@ -46,7 +46,7 @@ class JobPolicy {
     }
 
     if ($user->hasPermissionTo('edit own job')) {
-      return $user->id === $job?->employer?->user_id;
+      return $user->id === $job?->employerProfile?->user_id;
     }
 
     return FALSE;
@@ -61,7 +61,7 @@ class JobPolicy {
     }
 
     if ($user->hasPermissionTo('delete own job')) {
-      return $user->id === $job?->employer?->user_id;
+      return $user->id === $job?->employerProfile?->user_id;
     }
 
     return FALSE;

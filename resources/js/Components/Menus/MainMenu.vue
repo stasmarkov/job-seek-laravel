@@ -1,6 +1,6 @@
 <script setup>
 
-import NavLink from "@/Components/NavLink.vue";
+import NavLink from "@/Components/MenuItems/NavLink.vue";
 </script>
 
 <template>

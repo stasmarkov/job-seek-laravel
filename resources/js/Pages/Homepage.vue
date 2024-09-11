@@ -2,9 +2,9 @@
 
 import Layout from "@/Layouts/Layout.vue";
 import Heading from "@/Components/Heading.vue";
-import JobCard from "@/Components/Jobs/JobCard.vue";
-import Tag from "@/Components/Tags/Tag.vue";
-import JobCardWide from "@/Components/Jobs/JobCardWide.vue";
+import Card from "@/Components/Models/Jobs/Card.vue";
+import Tag from "@/Components/Models/Tags/Tag.vue";
+import CardWide from "@/Components/Models/Jobs/CardWide.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
 import SearchJobForm from "@/Components/Forms/SearchJobForm.vue";
 import {Head, useForm} from '@inertiajs/vue3';
@@ -41,7 +41,7 @@ function redirectOnSearchPage(value) {
         <Heading>Featured Jobs</Heading>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
-          <JobCard v-for="job in featuredJobs.data" :job />
+          <Card v-for="job in featuredJobs.data" :job />
         </div>
       </section>
 
@@ -54,7 +54,7 @@ function redirectOnSearchPage(value) {
 
       <section class="mt-6 space-y-6">
         <Heading>Recent Jobs</Heading>
-        <JobCardWide v-for="job in jobs.data" :job />
+        <CardWide v-for="job in jobs.data" :job />
 
         <div class="flex justify-center mt-2">
           <LinkButton :href="route('search.jobs')">{{ ('View more') }}</LinkButton>

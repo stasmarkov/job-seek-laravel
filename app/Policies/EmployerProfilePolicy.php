@@ -4,14 +4,13 @@ declare(strict_types = 1);
 
 namespace App\Policies;
 
-use App\Models\Employer;
+use App\Models\EmployerProfile;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 /**
  * Provides the employer policy.
  */
-class EmployerPolicy {
+class EmployerProfilePolicy {
 
   /**
    * Determine whether the user can view any models.
@@ -23,8 +22,8 @@ class EmployerPolicy {
   /**
    * Determine whether the user can view the model.
    */
-  public function view(User $user, Employer $employer): bool {
-    return $user->id === $employer->user_id || $user->id === 1;
+  public function view(User $user, EmployerProfile $employerProfile): bool {
+    return $user->id === $employerProfile->user_id || $user->id === 1;
   }
 
   /**
@@ -37,28 +36,28 @@ class EmployerPolicy {
   /**
    * Determine whether the user can update the model.
    */
-  public function update(User $user, Employer $employer): bool {
-    return $user->id === $employer->user_id || $user->id === 1;
+  public function update(User $user, EmployerProfile $employerProfile): bool {
+    return $user->id === $employerProfile->user_id || $user->id === 1;
   }
 
   /**
    * Determine whether the user can delete the model.
    */
-  public function delete(User $user, Employer $employer): bool {
-    return $user->id === $employer->user_id || $user->id === 1;
+  public function delete(User $user, EmployerProfile $employerProfile): bool {
+    return $user->id === $employerProfile->user_id || $user->id === 1;
   }
 
   /**
    * Determine whether the user can restore the model.
    */
-  public function restore(User $user, Employer $employer): bool {
+  public function restore(User $user, EmployerProfile $employerProfile): bool {
     return $user->id === 1;
   }
 
   /**
    * Determine whether the user can permanently delete the model.
    */
-  public function forceDelete(User $user, Employer $employer): bool {
+  public function forceDelete(User $user, EmployerProfile $employerProfile): bool {
     return $user->id === 1;
   }
 

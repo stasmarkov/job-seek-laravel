@@ -1,6 +1,4 @@
 <script setup>
-
-import BgBlur from "@/Components/BgBlur.vue";
 </script>
 
 <template>

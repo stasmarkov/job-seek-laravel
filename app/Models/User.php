@@ -60,13 +60,13 @@ class User extends Authenticatable implements ReacterableInterface {
   }
 
   /**
-   * Get the Employer data model.
+   * Get the Employer Profile Model.
    *
    * @return \Illuminate\Database\Eloquent\Relations\HasOne
-   *   The Employer Model.
+   *   The Employer Profile Model.
    */
-  public function employer(): HasOne {
-    return $this->hasOne(Employer::class);
+  public function employerProfile(): HasOne {
+    return $this->hasOne(EmployerProfile::class, 'user_id', 'id');
   }
 
   /**
@@ -77,16 +77,6 @@ class User extends Authenticatable implements ReacterableInterface {
    */
   public function blogPosts(): HasMany {
     return $this->hasMany(BlogPost::class);
-  }
-
-  /**
-   * Get the Profile Model.
-   *
-   * @return \Illuminate\Database\Eloquent\Relations\HasOne
-   *   Returns the Profile Model.
-   */
-  public function profile(): HasOne {
-    return $this->hasOne(Profile::class);
   }
 
   /**

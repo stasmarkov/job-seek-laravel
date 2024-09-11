@@ -26,8 +26,7 @@ class ProfileController extends Controller {
     return Inertia::render('Admin/Profile/Edit', [
       'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
       'status' => session('status'),
-      // @todo Retrieve from the context.
-      'employer' => Context::get('current_user_employer'),
+      'employerProfile' => Context::get('current_user_employerProfile'),
     ]);
   }
 

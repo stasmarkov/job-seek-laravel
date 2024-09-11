@@ -5,12 +5,12 @@ import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
 import TextInput from '@/Components/FormElements/TextInput.vue';
 import {Link, useForm, usePage} from '@inertiajs/vue3';
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
-import EmployerLogo from "@/Components/Employers/EmployerLogo.vue";
+import EmployerProfileLogo from "@/Components/Models/Employers/EmployerProfileLogo.vue";
 import {useCurrentUser} from "@/Composables/useCurrentUser.js";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 
 const props = defineProps({
-  employer: {
+  employerProfile: {
     type: Object,
   },
 });
@@ -18,8 +18,8 @@ const props = defineProps({
 const user = useCurrentUser();
 
 const form = useForm({
-  name: props.employer.name,
-  logo: props.employer.logo,
+  name: props.employerProfile.name,
+  logo: props.employerProfile.logo,
 });
 
 </script>
@@ -27,7 +27,7 @@ const form = useForm({
 <template>
   <AdminLayout>
     <template #heading>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">Edit employer</h2>
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">Edit employer profile</h2>
     </template>
 
     <template #default>
@@ -37,14 +37,14 @@ const form = useForm({
 
       <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
         <header>
-          <h2 class="text-lg font-medium text-gray-900">Employer Information</h2>
+          <h2 class="text-lg font-medium text-gray-900">Edit Employer Profile</h2>
 
           <p class="mt-1 text-sm text-gray-600">
             Update your employer's profile information.
           </p>
         </header>
 
-        <form @submit.prevent="form.patch(route('employer.update', { employer: employer.id }))" class="mt-6 space-y-6">
+        <form @submit.prevent="form.patch(route('employer_profile', { employerProfile: employerProfile.id }))" class="mt-6 space-y-6">
           <div>
             <InputLabel for="name" value="Name"/>
 
@@ -77,7 +77,7 @@ const form = useForm({
             </progress>
           </div>
 
-          <EmployerLogo :employer="employer" />
+          <EmployerProfileLogo :employerProfile="employerProfile" />
 
           <div class="flex items-center gap-4">
             <PrimaryButton :disabled="form.processing">Save</PrimaryButton>

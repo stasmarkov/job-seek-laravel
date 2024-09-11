@@ -4,10 +4,10 @@ import {useForm, usePage} from "@inertiajs/vue3";
 import InputLabel from "@/Components/FormElements/InputLabel.vue";
 import TextInput from "@/Components/FormElements/TextInput.vue";
 import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
-import Checkbox from "@/Components/Checkbox.vue";
+import Checkbox from "@/Components/FormElements/Checkbox.vue";
 import InputError from "@/Components/FormElements/InputError.vue";
-import JobCardWide from "@/Components/Jobs/JobCardWide.vue";
-import JobCard from "@/Components/Jobs/JobCard.vue";
+import CardWide from "@/Components/Models/Jobs/CardWide.vue";
+import Card from "@/Components/Models/Jobs/Card.vue";
 import {computed, ref} from "vue";
 import HtmlTextarea from "@/Components/FormElements/HtmlTextarea.vue";
 import useCharsCounter from "@/stores/charsCounter.js";
@@ -18,7 +18,7 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 
 const props = defineProps({
   job: Object,
-  employer: Object,
+  employerProfile: Object,
   tags: Array,
 });
 
@@ -59,7 +59,7 @@ const job = computed(() => {
     }),
     description: form.description,
     short_description: form.short_description,
-    employer: user.employer,
+    employerProfile: user.employerProfile,
   };
 });
 
@@ -165,8 +165,8 @@ const submit = () => {
     </div>
 
     <div v-if="enablePreview" class="mt-4">
-      <JobCardWide :job="job" v-if="!form.featured"></JobCardWide>
-      <JobCard :job="job" v-else></JobCard>
+      <CardWide :job="job" v-if="!form.featured"></CardWide>
+      <Card :job="job" v-else></Card>
     </div>
 
   </AdminLayout>

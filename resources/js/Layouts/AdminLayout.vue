@@ -2,8 +2,8 @@
 
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import {Link} from "@inertiajs/vue3";
-import SidebarMenuDesktop from "@/Components/AdminArea/Menu/SidebarMenuDesktop.vue";
-import SidebarMenuMobile from "@/Components/AdminArea/Menu/SidebarMenuMobile.vue";
+import AdminSidebarMenuDesktop from "@/Components/Menus/AdminSidebarMenuDesktop.vue";
+import AdminSidebarMenuMobile from "@/Components/Menus/AdminSidebarMenuMobile.vue";
 import {ref} from "vue";
 
 const isOpened = ref(false);
@@ -37,7 +37,7 @@ const isOpened = ref(false);
                 <ApplicationLogo/>
               </Link>
             </div>
-            <SidebarMenuMobile />
+            <AdminSidebarMenuMobile />
           </div>
           <div class="flex-shrink-0 flex bg-gray-700 p-4">
             <Link :href="route('profile.edit')" class="flex-shrink-0 group block">
@@ -75,7 +75,7 @@ const isOpened = ref(false);
               <ApplicationLogo/>
             </Link>
           </div>
-          <SidebarMenuDesktop />
+          <AdminSidebarMenuDesktop />
         </div>
         <div class="flex-shrink-0 flex bg-gray-700 p-4">
           <Link :href="route('profile.edit')" class="flex-shrink-0 group block">

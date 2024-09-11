@@ -19,12 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 
-
 Route::middleware(['auth', 'verified'])->group(function () {
   Route::get('/dashboard', [DashboardController::class, 'view'])
     ->name('dashboard');
 
-  Route::get('/login-logs', [LoginLogController::class, 'index'])
+  Route::get('/log/logins', [LoginLogController::class, 'index'])
     ->name('login_logs.index');
 });
 

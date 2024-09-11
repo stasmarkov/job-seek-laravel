@@ -22,6 +22,10 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
          <li><Link :href="route('contact.index')">Contact us</Link></li>
          <li><Link :href="route('homepage')">FAQ</Link></li>
        </ul>
+        <ul>
+          <li><Link :href="route('search.jobs')">Jobs</Link></li>
+          <li><Link :href="route('search.jobs')">Candidates</Link></li>
+        </ul>
       </div>
     </div>
 

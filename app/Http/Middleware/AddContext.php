@@ -18,7 +18,7 @@ class AddContext {
   public function handle(Request $request, Closure $next): Response {
     Context::add([
       'current_user' => Auth::user(),
-      'current_user_employer' => Auth::user()?->employer ?? NULL,
+      'current_user_employerProfile' => Auth::user()?->employerProfile ?? NULL,
     ]);
 
     return $next($request);

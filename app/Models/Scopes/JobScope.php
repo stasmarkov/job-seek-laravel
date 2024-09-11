@@ -21,8 +21,8 @@ class JobScope implements Scope {
   public function apply(Builder $builder, Model $model): void {
     $user = Auth::user();
 
-    if ($user && !$user->hasRole(UserRolesEnum::ADMIN->value)) {
-      $builder->whereRelation('employer', 'user_id', '=', $user->id);
+    if ($user && $user->hasRole(UserRolesEnum::EMPLOYER->value)) {
+//      $builder->whereRelation('employerProfile', 'user_id', '=', $user->id);
     }
   }
 

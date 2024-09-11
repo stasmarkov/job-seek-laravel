@@ -2,7 +2,7 @@
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
-import {Head, usePage} from '@inertiajs/vue3';
+import {Head} from '@inertiajs/vue3';
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
 import FormGroup from "@/Components/FormElements/FormGroup.vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
@@ -27,7 +27,7 @@ defineProps({
 
     <template #default>
       <div v-if="$page.props.employer?.id" class="flex gap-2">
-        <LinkButton :href="route('employer.edit', {'employer': $page.props.employer.id })">Edit Employer information</LinkButton>
+        <LinkButton :href="route('employer_profile.edit', {'employerProfile': $page.props.employerProfile.id })">Edit Employer information</LinkButton>
       </div>
 
       <FormGroup class="mt-4">

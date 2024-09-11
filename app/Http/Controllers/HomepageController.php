@@ -30,7 +30,7 @@ class HomepageController extends Controller {
       return Job::latest()
         ->withoutGlobalScope(JobScope::class)
         ->select('id', 'title', 'short_description', 'featured', 'salary', 'schedule')
-        ->with(['employer', 'tags'])
+        ->with(['employerProfile', 'tags'])
         ->where('featured', TRUE)
         ->limit(6)
         ->get();
@@ -39,7 +39,7 @@ class HomepageController extends Controller {
     $jobs = Cache::remember('views:jobs:homepage:non-featured', 3600, static function () {
       return Job::latest()
         ->withoutGlobalScope(JobScope::class)
-        ->with(['employer', 'tags'])
+        ->with(['employerProfile', 'tags'])
         ->where('featured', FALSE)
         ->limit(9)
         ->get();

@@ -4,7 +4,9 @@ declare(strict_types = 1);
 
 namespace Database\Seeders;
 
+use App\Enums\UserRolesEnum;
 use App\Models\Employer;
+use App\Models\EmployerProfile;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
@@ -19,12 +21,11 @@ class UserSeeder extends Seeder {
    * Run the database seeds.
    */
   public function run(Collection $users): void {
-    $administrator_role = Role::firstOrNew(['name' => 'Administrator']);
-    $employer_role = Role::firstOrNew(['name' => 'Employer']);
+    $administrator_role = Role::firstOrNew(['name' => UserRolesEnum::ADMIN->value]);
+    $employer_role = Role::firstOrNew(['name' => UserRolesEnum::EMPLOYER->value]);
 
     // Create admin user.
     User::factory()
-      ->has(Employer::factory()->count(1))
       ->hasAttached($administrator_role)
       ->create([
         'name' => 'admin',

@@ -23,14 +23,14 @@ class SearchJobsController extends Controller {
    */
   public function index(Request $request) {
     $query = Job::query()->with([
-      'employer',
+      'employerProfile',
       'tags',
     ])
       ->withoutGlobalScope(JobScope::class);
 
     $this->applyFilters($request, $query);
 
-    return Inertia::render('Search/SearchJobs', [
+    return Inertia::render('Search/Jobs', [
       'filters' => [
         'search' => $request->get('search'),
         'order' => $request->get('order'),

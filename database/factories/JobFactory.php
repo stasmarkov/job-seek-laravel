@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Employer;
+use App\Models\EmployerProfile;
 use App\Models\Job;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,7 +20,7 @@ class JobFactory extends Factory {
    */
   public function definition(): array {
     return [
-      'employer_id' => Employer::factory(),
+      'employer_profile_id' => EmployerProfile::factory(),
       'title' => $this->faker->jobTitle(),
       'salary' => $this->faker->randomElement([
         '$50,000 USD',

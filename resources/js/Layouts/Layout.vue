@@ -1,9 +1,9 @@
 <script setup>
-import Footer from "@/Components/Footer.vue";
-import Header from "@/Components/Header.vue";
+import Footer from "@/Components/Sections/Footer.vue";
+import Header from "@/Components/Sections/Header.vue";
 import Notification from "@/Components/Notification.vue";
 import Alert from "@/Components/Banners/Alert.vue";
-import BgBlur from "@/Components/BgBlur.vue";
+import BgBlur from "@/Components/VisualEffects/BgBlur.vue";
 </script>
 
 <template>

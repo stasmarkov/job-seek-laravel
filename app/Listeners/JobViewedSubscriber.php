@@ -20,7 +20,7 @@ class JobViewedSubscriber implements ShouldQueueAfterCommit {
    */
   public function handle(JobViewedEvent $event): void {
     // Send a notification to the Job owner.
-    Notification::send($event->job->employer->user, new JobViewedNotification($event->job));
+    Notification::send($event->job->employerProfile->user, new JobViewedNotification($event->job));
   }
 
   /**

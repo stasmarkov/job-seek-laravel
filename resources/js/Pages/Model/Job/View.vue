@@ -2,8 +2,8 @@
   import Layout from "@/Layouts/Layout.vue";
   import Panel from "@/Components/Panel.vue";
   import LinkButton from "@/Components/Buttons/LinkButton.vue";
-  import EmployerLogo from "@/Components/Employers/EmployerLogo.vue";
-  import Tag from "@/Components/Tags/Tag.vue";
+  import EmployerProfileLogo from "@/Components/Models/Employers/EmployerProfileLogo.vue";
+  import Tag from "@/Components/Models/Tags/Tag.vue";
   import AnchorButton from "@/Components/Buttons/AnchorButton.vue";
   import Like from "@/Components/Reactions/Like.vue";
   import {Inertia} from "@inertiajs/inertia";
@@ -39,9 +39,9 @@
             <h3 class="text-base font-semibold leading-7">
               <span class="text-3xl font-bold">{{ props.job.data.title }}</span>
             </h3>
-            <EmployerLogo :employer="props.job.data.employer" width="50"/>
+            <EmployerProfileLogo :employerProfile="props.job.data.employerProfile" width="50"/>
           </div>
-          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Employer: {{ props.job.data.employer.name }}</p>
+          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Employer: {{ props.job.data.employerProfile.name }}</p>
         </div>
         <div class="mt-6 border-t border-gray-100">
           <dl class="divide-y divide-gray-100">

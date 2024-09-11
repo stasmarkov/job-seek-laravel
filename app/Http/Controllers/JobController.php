@@ -9,7 +9,6 @@ use App\Http\Requests\JobCreateRequest;
 use App\Http\Requests\JobUpdateRequest;
 use App\Http\Resources\JobResource;
 use App\Http\Resources\TagResource;
-use App\Models\Employer;
 use App\Models\Job;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -44,7 +43,7 @@ class JobController extends Controller implements HasMiddleware {
    */
   public function index() {
     $jobs = Job::query()
-      ->with(['employer', 'tags']);
+      ->with(['employerProfile', 'tags']);
 
     $jobs = $jobs
       ->paginate(10)
@@ -84,7 +83,7 @@ class JobController extends Controller implements HasMiddleware {
    */
   public function create(Request $request) {
     return Inertia::render('Model/Job/CreateForm', [
-      'employer' => Context::get('current_user_employer'),
+      'employerProfile' => Context::get('current_user_employerProfile'),
       'tags' => TagResource::collection(Tag::all()),
     ]);
   }
@@ -97,7 +96,7 @@ class JobController extends Controller implements HasMiddleware {
     $attributes = $request->validated();
     $attributes['featured'] = $request->has('featured');
 
-    $job = Auth::user()->employer->jobs()
+    $job = Auth::user()->employerProfile->jobs()
       ->create(Arr::except($attributes, 'tags'));
 
     if ($attributes['tags'] ?? FALSE) {
@@ -127,7 +126,7 @@ class JobController extends Controller implements HasMiddleware {
    */
   public function edit(Job $job) {
     return Inertia::render('Model/Job/EditForm', [
-      'employer' => Context::get('current_user_employer'),
+      'employerProfile' => Context::get('current_user_employerProfile'),
       'job' => JobResource::make($job),
       'tags' => TagResource::collection(Tag::all()),
     ]);

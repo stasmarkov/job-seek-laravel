@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * The employer profile.
+ * The employer profile model.
  */
-class Employer extends Model {
+class EmployerProfile extends Model {
 
   use HasFactory;
 

@@ -1,4 +1,3 @@
-import {Inertia} from "@inertiajs/inertia";
 import User from "@/Models/User.js";
 import {usePage} from "@inertiajs/vue3";
 

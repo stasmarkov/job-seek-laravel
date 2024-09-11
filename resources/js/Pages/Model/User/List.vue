@@ -10,11 +10,7 @@ const props = defineProps({
 
 <template>
   <AdminLayout>
-
     <div>
-      <div class="grid grid-cols-6 mb-4">
-
-      </div>
       <div class="flex flex-col">
         <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
           <div

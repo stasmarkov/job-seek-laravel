@@ -1,13 +1,17 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Models;
 
-use App\Traits\LikableModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * The comment model.
+ */
 class Comment extends Model {
 
-  use HasFactory, LikableModel;
+  use HasFactory;
 
 }
