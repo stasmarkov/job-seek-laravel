@@ -29,7 +29,6 @@ class HomepageController extends Controller {
     $jobs_featured = Cache::remember('views:jobs:homepage:featured', 3600, static function () {
       return Job::latest()
         ->withoutGlobalScope(JobScope::class)
-        ->select('id', 'title', 'short_description', 'featured', 'salary', 'schedule')
         ->with(['employerProfile', 'tags'])
         ->where('featured', TRUE)
         ->limit(6)

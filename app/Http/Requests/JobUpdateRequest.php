@@ -28,7 +28,7 @@ class JobUpdateRequest extends FormRequest {
         'required',
         Rule::in(['Part-Time', 'Full-Time', 'Contract']),
       ],
-      'url' => ['required', 'active_url'],
+      'url' => ['required', 'url'],
       'tags' => ['nullable'],
     ];
   }

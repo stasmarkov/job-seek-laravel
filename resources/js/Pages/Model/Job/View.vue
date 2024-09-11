@@ -29,7 +29,7 @@
 
   <Layout>
     <div v-if="can.edit_job" class="flex gap-2 mb-2">
-      <LinkButton  class="bg-green-600" :href="route('job.edit', { job: props.job.data.id })">Edit</LinkButton>
+      <LinkButton class="bg-green-600" :href="route('job.edit', { job: props.job.data.id })">Edit</LinkButton>
     </div>
 
     <Panel :hoverable="false">
@@ -37,11 +37,13 @@
         <div class="px-4 sm:px-0">
           <div class="flex justify-between">
             <h3 class="text-base font-semibold leading-7">
+
               <span class="text-3xl font-bold">{{ props.job.data.title }}</span>
             </h3>
             <EmployerProfileLogo :employerProfile="props.job.data.employerProfile" width="50"/>
           </div>
-          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Employer: {{ props.job.data.employerProfile.name }}</p>
+
+          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Employer: <Link v-if="props.job.data.employerProfile" class="self-start text-sm text-gray-200 hover:underline hover:text-blue-500 ease-linear transition" :href="route('employer_profile.show', { employerProfile: props.job.data.employerProfile.id })">{{ props.job.data.employerProfile.name }}</Link></p>
         </div>
         <div class="mt-6 border-t border-gray-100">
           <dl class="divide-y divide-gray-100">

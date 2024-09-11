@@ -1,6 +1,7 @@
 <script setup>
 
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import RegularLink from "@/Components/Elements/RegularLink.vue";
 </script>
 
 <template>
@@ -18,13 +19,13 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
       </div>
       <div class="flex gap-6 flex-wrap">
        <ul class="space-y-2">
-         <li><Link :href="route('homepage')">Homepage</Link></li>
-         <li><Link :href="route('contact.index')">Contact us</Link></li>
-         <li><Link :href="route('homepage')">FAQ</Link></li>
+         <li><RegularLink :href="route('homepage')">Homepage</RegularLink></li>
+         <li><RegularLink :href="route('contact.index')">Contact us</RegularLink></li>
+         <li><RegularLink :href="route('homepage')">FAQ</RegularLink></li>
        </ul>
         <ul>
-          <li><Link :href="route('search.jobs')">Jobs</Link></li>
-          <li><Link :href="route('search.jobs')">Candidates</Link></li>
+          <li><RegularLink :href="route('search.jobs')">Jobs</RegularLink></li>
+          <li><RegularLink :href="route('search.jobs')">Candidates</RegularLink></li>
         </ul>
       </div>
     </div>

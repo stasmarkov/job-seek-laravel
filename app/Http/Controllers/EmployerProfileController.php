@@ -5,6 +5,8 @@ declare(strict_types = 1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EmployerProfileRequest;
+use App\Http\Resources\EmployerProfileResource;
+use App\Http\Resources\JobResource;
 use App\Models\EmployerProfile;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -58,7 +60,14 @@ class EmployerProfileController extends Controller {
   /**
    * Display the specified resource.
    */
-  public function show(EmployerProfile $employerProfile) {}
+  public function show(EmployerProfile $employerProfile) {
+    $jobs = $employerProfile->jobs()->get();
+
+    return Inertia::render('Model/Employer/View', [
+      'employerProfile' => EmployerProfileResource::make($employerProfile),
+      'jobs' => JobResource::collection($jobs),
+    ]);
+  }
 
   /**
    * Remove the specified resource from storage.

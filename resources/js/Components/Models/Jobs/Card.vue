@@ -2,6 +2,7 @@
 import Panel from "@/Components/Panel.vue";
 import Tag from "@/Components/Models/Tags/Tag.vue";
 import EmployerProfileLogo from "@/Components/Models/Employers/EmployerProfileLogo.vue";
+import RegularLink from "@/Components/Elements/RegularLink.vue";
 
 defineProps({
   job: {
@@ -12,7 +13,7 @@ defineProps({
 
 <template>
   <Panel class="flex flex-col text-center bg-black">
-    <div v-if="job.employerProfile" class="self-start text-sm">{{ job.employerProfile.name }}</div>
+    <RegularLink v-if="job.employerProfile" class="self-start text-sm" :href="route('employer_profile.show', { employerProfile: job.employerProfile.id })">{{ job.employerProfile.name }}</RegularLink>
 
     <div class="py-8 space-y-3">
       <h3 class="text-white group-hover:text-blue-600 text-xl text-bold transition-colors duration-300 ">
