@@ -40,7 +40,7 @@ const isOpened = ref(false);
             <AdminSidebarMenuMobile />
           </div>
           <div class="flex-shrink-0 flex bg-gray-700 p-4">
-            <Link :href="route('profile.edit')" class="flex-shrink-0 group block">
+            <Link :href="route('account.edit', { user: $page.props.auth.user.id })" class="flex-shrink-0 group block">
               <div class="flex items-center">
                 <div>
                   <img class="inline-block h-10 w-10 rounded-full"
@@ -78,7 +78,7 @@ const isOpened = ref(false);
           <AdminSidebarMenuDesktop />
         </div>
         <div class="flex-shrink-0 flex bg-gray-700 p-4">
-          <Link :href="route('profile.edit')" class="flex-shrink-0 group block">
+          <Link :href="route('account.edit', { user: $page.props.auth.user.id })" class="flex-shrink-0 group block">
             <div class="flex items-center">
               <div>
                 <img class="inline-block h-10 w-10 rounded-full"

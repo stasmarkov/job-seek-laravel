@@ -4,7 +4,9 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\AccountUpdateRequest;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,14 +19,15 @@ use Inertia\Response;
 /**
  * The profile controller.
  */
-class ProfileController extends Controller {
+class AccountController extends Controller {
 
   /**
    * Display the user's profile form.
    */
-  public function edit(Request $request): Response {
-    return Inertia::render('Admin/Profile/Edit', [
-      'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+  public function edit(Request $request, User $user): Response {
+    return Inertia::render('Admin/Account/Edit', [
+      'user' => UserResource::make($user),
+      'mustVerifyEmail' => $user instanceof MustVerifyEmail,
       'status' => session('status'),
       'employerProfile' => Context::get('employerProfile'),
       'candidateProfile' => Context::get('candidateProfile'),
@@ -34,18 +37,18 @@ class ProfileController extends Controller {
   /**
    * Update the user's profile information.
    */
-  public function update(ProfileUpdateRequest $request): RedirectResponse {
-    $request->user()->fill($request->validated());
+  public function update(User $user, AccountUpdateRequest $request): RedirectResponse {
+    $user->fill($request->validated());
 
     $request->validate([
       'name' => ['min:3'],
     ]);
 
-    if ($request->user()->isDirty('email')) {
-      $request->user()->email_verified_at = NULL;
+    if ($user->isDirty('email')) {
+      $user->email_verified_at = NULL;
     }
 
-    $request->user()->save();
+    $user->save();
 
     return redirect()->route('dashboard');
   }

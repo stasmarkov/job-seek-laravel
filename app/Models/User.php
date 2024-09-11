@@ -70,6 +70,16 @@ class User extends Authenticatable implements ReacterableInterface {
   }
 
   /**
+   * Get the Candidate Profile Model.
+   *
+   * @return \Illuminate\Database\Eloquent\Relations\HasOne
+   *   The Candidate Profile Model.
+   */
+  public function candidateProfile(): HasOne {
+    return $this->hasOne(CandidateProfile::class, 'user_id', 'id');
+  }
+
+  /**
    * Get User model BlogPost models.
    *
    * @return \Illuminate\Database\Eloquent\Relations\HasMany

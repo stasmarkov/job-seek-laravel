@@ -22,7 +22,7 @@ class JobScope implements Scope {
     $user = Auth::user();
 
     if ($user && $user->hasRole(UserRolesEnum::EMPLOYER->value)) {
-//      $builder->whereRelation('employerProfile', 'user_id', '=', $user->id);
+      $builder->whereRelation('employerProfile', 'user_id', '=', $user->id);
     }
   }
 

@@ -7,14 +7,14 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\EmployerProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::controller(EmployerController::class)->group(function () {
+Route::controller(EmployerProfileController::class)->group(function () {
   Route::middleware('auth')->group(function () {
-    Route::get('/user/{user}/profile', 'edit')
-      ->name('profile.edit');
-    Route::patch('/user/{user}/profile', 'update')
-      ->name('profile.update');
+    Route::get('/account/{user}/employer/create', 'edit')
+      ->name('profile.employer.edit');
+    Route::patch('/account/{user}/employer/profile', 'update')
+      ->name('profile.employer.update');
   });
 });

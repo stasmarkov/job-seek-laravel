@@ -4,7 +4,9 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmployerProfileRequest;
 use App\Models\EmployerProfile;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Validation\Rules\File;
@@ -16,15 +18,14 @@ use Inertia\Inertia;
 class EmployerProfileController extends Controller {
 
   /**
-   * Constructs EmployerController class.
+   * Constructs EmployerProfileController class.
    *
    * @param \Illuminate\Http\Request $request
    *   The request.
    */
   public function __construct(
     protected Request $request
-  ) {
-  }
+  ) {}
 
   /**
    * {@inheritdoc}
@@ -43,56 +44,45 @@ class EmployerProfileController extends Controller {
   /**
    * Display a listing of the resource.
    */
-  public function index() {
-    //
-  }
+  public function index() {}
 
   /**
    * Show the form for creating a new resource.
    */
-  public function create() {
-    //
-  }
+  public function create() {}
 
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request) {
-    //
-  }
+  public function store(Request $request) {}
 
   /**
    * Display the specified resource.
    */
-  public function show(EmployerProfile $employerProfile) {
-    //
-  }
+  public function show(EmployerProfile $employerProfile) {}
 
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(EmployerProfile $employerProfile) {
-    //
-  }
-
+  public function destroy(EmployerProfile $employerProfile) {}
 
   /**
    * Show the form for creating a new resource.
    */
-  public function edit(EmployerProfile $employerProfile) {
+  public function edit(User $user) {
     return Inertia::render('Model/Employer/UpdateForm', [
-      'employerProfile' => $employerProfile,
+      'user' => $user,
+      'employerProfile' => $user->employerProfile,
     ]);
   }
 
   /**
    * Store a newly created resource in storage.
    */
-  public function update(EmployerProfile $employerProfile) {
-    $attributes = $this->request->validate([
-      'name' => ['required'],
-      'logo' => ['required', File::types(['png', 'webp', 'jpg', 'jpeg'])],
-    ]);
+  public function update(EmployerProfileRequest $request, User $user) {
+    $employerProfile = $user->employerProfile;
+
+    $attributes = $request->validated();
 
     $employerProfile->update([
       'name' => $attributes['name'],

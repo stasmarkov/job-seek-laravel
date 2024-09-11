@@ -11,7 +11,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\LoginLogController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\RoleSelectController;
 use App\Http\Controllers\Search\SearchJobsController;
 use App\Http\Middleware\AddContext;
@@ -33,17 +33,18 @@ Route::post('/contact', [ContactController::class, 'store'])
   ->name('contact.store');
 
 Route::middleware(['auth', AddContext::class])->group(function () {
-  Route::get('/profile', [ProfileController::class, 'edit'])
-    ->name('profile.edit');
-  Route::patch('/profile', [ProfileController::class, 'update'])
-    ->name('profile.update');
-  Route::delete('/profile', [ProfileController::class, 'destroy'])
-    ->name('profile.destroy');
+  Route::get('/account/{user}/edit', [AccountController::class, 'edit'])
+    ->name('account.edit');
+
+  Route::patch('/account/{user}/edit', [AccountController::class, 'update'])
+    ->name('account.update');
+
+  Route::delete('/account/{user}/delete', [AccountController::class, 'destroy'])
+    ->name('account.destroy');
 
   Route::get('/profile/role-select', [RoleSelectController::class, 'edit'])
     ->withoutMiddleware('user_has_role')
     ->name('profile.role_select');
-
   Route::post('/profile/role-select', [RoleSelectController::class, 'update'])
     ->withoutMiddleware('user_has_role')
     ->name('profile.role_select.update');
@@ -53,6 +54,6 @@ Route::middleware(['auth', AddContext::class])->group(function () {
 Route::get('/search', [SearchJobsController::class, 'index'])->name('search.jobs');
 
 require __DIR__ . '/job.php';
-require __DIR__ . '/employer.php';
+require __DIR__ . '/profile.php';
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

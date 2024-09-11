@@ -4,12 +4,10 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
-use App\Models\Scopes\JobScope;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
 use App\Events\JobCreatedEvent;
 use App\Events\JobDeletedEvent;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
-use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,7 +17,6 @@ use Illuminate\Notifications\Notifiable;
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-#[ScopedBy(JobScope::class)]
 class Job extends Model implements ReactableInterface {
 
   use HasFactory, Notifiable, Reactable;

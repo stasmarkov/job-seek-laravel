@@ -61,7 +61,7 @@ const props = defineProps({
                 </td>
                 <td
                   class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                  <Link :href="route('profile.edit')" class="text-indigo-600 hover:text-indigo-900">Edit</Link>
+                  <Link :href="route('account.edit', { user: user.id })" class="text-indigo-600 hover:text-indigo-900">Edit</Link>
                 </td>
               </tr>
               </tbody>

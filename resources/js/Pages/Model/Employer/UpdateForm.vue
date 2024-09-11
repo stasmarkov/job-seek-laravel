@@ -10,16 +10,17 @@ import {useCurrentUser} from "@/Composables/useCurrentUser.js";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 
 const props = defineProps({
+  user: {
+    type: Object,
+  },
   employerProfile: {
     type: Object,
   },
 });
 
-const user = useCurrentUser();
-
 const form = useForm({
-  name: props.employerProfile.name,
-  logo: props.employerProfile.logo,
+  name: props.employerProfile?.name,
+  logo: props.employerProfile?.logo,
 });
 
 </script>
@@ -31,8 +32,8 @@ const form = useForm({
     </template>
 
     <template #default>
-      <div v-if="user" class="flex gap-2">
-        <LinkButton :href="route('profile.edit')">Edit profile</LinkButton>
+      <div v-if="user.id" class="flex gap-2 mb-4">
+        <LinkButton :href="route('account.edit', { user: props.user.id })">Edit account</LinkButton>
       </div>
 
       <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
@@ -44,7 +45,7 @@ const form = useForm({
           </p>
         </header>
 
-        <form @submit.prevent="form.patch(route('employer_profile', { employerProfile: employerProfile.id }))" class="mt-6 space-y-6">
+        <form @submit.prevent="form.patch(route('profile.update', { user: props.user.id }))" class="mt-6 space-y-6">
           <div>
             <InputLabel for="name" value="Name"/>
 
@@ -77,7 +78,7 @@ const form = useForm({
             </progress>
           </div>
 
-          <EmployerProfileLogo :employerProfile="employerProfile" />
+          <EmployerProfileLogo v-if="employerProfile" :employerProfile="employerProfile" />
 
           <div class="flex items-center gap-4">
             <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
@@ -95,6 +96,5 @@ const form = useForm({
       </div>
 
     </template>
-
   </AdminLayout>
 </template>

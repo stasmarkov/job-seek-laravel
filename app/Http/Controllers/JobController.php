@@ -49,7 +49,7 @@ class JobController extends Controller implements HasMiddleware {
       ->paginate(10)
       ->withQueryString();
 
-    return Inertia::render('Model/Job/List', [
+    return Inertia::render('Model/Job/DashboardList', [
       'jobs' => $jobs,
     ]);
   }
@@ -83,7 +83,7 @@ class JobController extends Controller implements HasMiddleware {
    */
   public function create(Request $request) {
     return Inertia::render('Model/Job/CreateForm', [
-      'employerProfile' => Context::get('current_user_employerProfile'),
+      'employerProfile' => Context::get('employerProfile'),
       'tags' => TagResource::collection(Tag::all()),
     ]);
   }
@@ -126,7 +126,7 @@ class JobController extends Controller implements HasMiddleware {
    */
   public function edit(Job $job) {
     return Inertia::render('Model/Job/EditForm', [
-      'employerProfile' => Context::get('current_user_employerProfile'),
+      'employerProfile' => Context::get('employerProfile'),
       'job' => JobResource::make($job),
       'tags' => TagResource::collection(Tag::all()),
     ]);

@@ -3,7 +3,7 @@ import Panel from "@/Components/Panel.vue";
 import EmployerProfileLogo from "@/Components/Models/Employers/EmployerProfileLogo.vue";
 import Tag from "@/Components/Models/Tags/Tag.vue";
 
-defineProps({
+const props = defineProps({
   job: Object,
 })
 
@@ -11,12 +11,12 @@ defineProps({
 
 <template>
   <Panel class="flex gap-x-6 flex-wrap bg-black text-white max-w-5xl mx-auto">
-    <div v-if="job.employerProfile">
-      <EmployerProfileLogo :employerProfile="job.employerProfile"/>
+    <div v-if="job.employer_profile">
+      <EmployerProfileLogo :employerProfile="job.employer_profile"/>
     </div>
 
     <div class="flex-1 flex flex-col md:flex-1 gap-0.5">
-      <a href="#" class="self-start text-sm text-gray-400" v-if="job.employerProfile">{{ job.employerProfile.name }}</a>
+      <a href="#" class="self-start text-sm text-gray-400" v-if="job.employer_profile">{{ job.employer_profile.name }}</a>
       <h3 class="text-white font-bold text-xl mt-2 group-hover:text-blue-600 transition-colors duration-300">
         <Link :href="route('job.show', { job: job.id })" v-if="job.id">
           {{ job.title }}

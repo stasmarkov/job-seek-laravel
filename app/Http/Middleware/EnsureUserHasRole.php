@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Http\Middleware;
 
+use App\Enums\UserRolesEnum;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,8 +21,11 @@ class EnsureUserHasRole {
    * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
    */
   public function handle(Request $request, Closure $next): Response {
-    if (($user = Auth::user()) && $user->roles()->count() === 0) {
+    $user = Auth::user();
+
+    if ($user && !$user?->hasAnyRole([UserRolesEnum::cases()])) {
       return redirect()->route('profile.role_select');
+
     }
 
     return $next($request);

@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * The blog post model.
+ * The Employer Profile Resource.
  */
-class BlogPostResource extends JsonResource {
+class CandidateProfileResource extends JsonResource {
 
   /**
    * Transform the resource into an array.
@@ -18,7 +18,10 @@ class BlogPostResource extends JsonResource {
    * @return array<string, mixed>
    */
   public function toArray(Request $request): array {
-    return parent::toArray($request);
+    return [
+      'first_name' => $this->first_name,
+      'last_name' => $this->last_name,
+    ];
   }
 
 }

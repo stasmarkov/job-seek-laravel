@@ -36,8 +36,8 @@ class EmployerController extends Controller implements HasMiddleware {
         'create',
         'store',
       ]),
-      new Middleware('can:update,employer_profile', only: ['edit', 'update']),
-      new Middleware('can:delete,employer_profile', only: ['destroy']),
+      new Middleware('can:update,employerProfile', only: ['edit', 'update']),
+      new Middleware('can:delete,employerProfile', only: ['destroy']),
     ];
   }
 

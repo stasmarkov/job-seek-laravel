@@ -9,9 +9,9 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 /**
- * THe Profile update request.
+ * The Account update request.
  */
-class ProfileUpdateRequest extends FormRequest {
+class AccountUpdateRequest extends FormRequest {
 
   /**
    * Get the validation rules that apply to the request.
@@ -27,7 +27,7 @@ class ProfileUpdateRequest extends FormRequest {
         'lowercase',
         'email',
         'max:255',
-        Rule::unique(User::class)->ignore($this->user()->id),
+        Rule::unique(User::class)->ignore($this->route('user')->id),
       ],
     ];
   }
