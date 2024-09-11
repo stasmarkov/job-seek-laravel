@@ -42,8 +42,9 @@ console.log(props.candidateProfile.data.tags);
 
 const updateCandidateProfile = () => {
   form.patch(route('profile.candidate.update', { user: props.user.id }), {
-    onSuccess: () => form.reset(),
-    onFinish: () => form.reset(),
+    onSuccess: () => {
+      form.reset()
+    },
   })
 }
 </script>

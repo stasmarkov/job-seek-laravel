@@ -127,7 +127,7 @@ class CandidateProfileController extends Controller implements HasMiddleware {
     unset($attributes['tags']);
     $candidate_profile->update(Arr::except($attributes, 'tags'));
 
-    back();
+    return back();
   }
 
 }
