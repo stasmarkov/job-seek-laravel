@@ -17,7 +17,9 @@ const props = defineProps({
   user: {
     type: Object,
     required: true,
-  }
+  },
+  candidateProfile: Object,
+  employerProfile: Object,
 });
 
 </script>
@@ -30,11 +32,14 @@ const props = defineProps({
     </template>
 
     <template #default>
-      <div v-if="props.user.data.employerProfile" class="flex gap-2">
+      <div v-if="props.employerProfile" class="flex gap-2">
         <LinkButton :href="route('profile.employer.edit', {'user': props.user.data.id })">Profile</LinkButton>
       </div>
 
-      <div v-if="props.user.data.candidateProfile" class="flex gap-2">
+      <div v-if="!props.candidateProfile" class="flex gap-2">
+        <LinkButton :href="route('profile.candidate.create', {'user': props.user.data.id })">Profile</LinkButton>
+      </div>
+      <div v-if="props.candidateProfile" class="flex gap-2">
         <LinkButton :href="route('profile.candidate.edit', {'user': props.user.data.id })">Profile</LinkButton>
       </div>
 

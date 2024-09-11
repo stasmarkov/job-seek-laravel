@@ -3,7 +3,7 @@ import Layout from "@/Layouts/Layout.vue";
 import Panel from "@/Components/Panel.vue";
 import EmployerProfileLogo from "@/Components/Models/Employers/EmployerProfileLogo.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
-import Heading from "@/Components/Heading.vue";
+import BlockHeading from "@/Components/Headings/BlockHeading.vue";
 import CardWide from "@/Components/Models/Jobs/CardWide.vue";
 
 const props = defineProps({

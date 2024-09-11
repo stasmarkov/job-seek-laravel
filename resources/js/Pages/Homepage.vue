@@ -1,7 +1,7 @@
 <script setup>
 
 import Layout from "@/Layouts/Layout.vue";
-import Heading from "@/Components/Heading.vue";
+import BlockHeading from "@/Components/Headings/BlockHeading.vue";
 import Card from "@/Components/Models/Jobs/Card.vue";
 import Tag from "@/Components/Models/Tags/Tag.vue";
 import CardWide from "@/Components/Models/Jobs/CardWide.vue";
@@ -38,7 +38,7 @@ function redirectOnSearchPage(value) {
           <SearchJobForm type="submit" @searchFormSubmitEvent="redirectOnSearchPage"/>
         </section>
 
-        <Heading>Featured Jobs</Heading>
+        <BlockHeading>Featured Jobs</BlockHeading>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
           <Card v-for="job in featuredJobs.data" :job />
@@ -46,14 +46,14 @@ function redirectOnSearchPage(value) {
       </section>
 
       <section>
-        <Heading>Tags</Heading>
+        <BlockHeading>Tags</BlockHeading>
         <div class="mt-6 gap-2 flex flex-wrap">
           <Tag v-for="tag in tags.data" :tag size="base" />
         </div>
       </section>
 
       <section class="mt-6 space-y-6">
-        <Heading>Recent Jobs</Heading>
+        <BlockHeading>Recent Jobs</BlockHeading>
         <CardWide v-for="job in jobs.data" :job />
 
         <div class="flex justify-center mt-2">

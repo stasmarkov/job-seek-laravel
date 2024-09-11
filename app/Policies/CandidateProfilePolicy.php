@@ -39,19 +39,21 @@ class CandidateProfilePolicy {
    * Determine whether the user can create models.
    */
   public function create(User $user): bool {
-    return $user->hasPermissionTo('create a new candidateProfile');
+    return $user->hasPermissionTo('create a new candidateProfile') && !$user->candidateProfile()->first();
   }
 
   /**
    * Determine whether the user can update the model.
    */
-  public function update(User $user, CandidateProfile $candidateProfile): bool {
+  public function update(User $user): bool {
+    return TRUE;
+
     if ($user->hasPermissionTo('edit any candidateProfile')) {
       return TRUE;
     }
 
     if ($user->hasPermissionTo('edit own candidateProfile')) {
-      return $user->id === $candidateProfile->user_id;
+      return TRUE;
     }
 
     return FALSE;

@@ -10,13 +10,14 @@ use App\Http\Resources\JobResource;
 use App\Models\EmployerProfile;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Inertia\Inertia;
 
 /**
  * The Employer Profile Model controller.
  */
-class EmployerProfileController extends Controller {
+class EmployerProfileController extends Controller implements HasMiddleware {
 
   /**
    * Constructs EmployerProfileController class.
@@ -63,7 +64,7 @@ class EmployerProfileController extends Controller {
   public function show(EmployerProfile $employerProfile) {
     $jobs = $employerProfile->jobs()->get();
 
-    return Inertia::render('Model/Employer/View', [
+    return Inertia::render('Model/EmployerProfile/View', [
       'employerProfile' => EmployerProfileResource::make($employerProfile),
       'jobs' => JobResource::collection($jobs),
     ]);
@@ -78,7 +79,7 @@ class EmployerProfileController extends Controller {
    * Show the form for creating a new resource.
    */
   public function edit(User $user) {
-    return Inertia::render('Model/Employer/UpdateForm', [
+    return Inertia::render('Model/EmployerProfile/UpdateForm', [
       'user' => $user,
       'employerProfile' => $user->employerProfile,
     ]);

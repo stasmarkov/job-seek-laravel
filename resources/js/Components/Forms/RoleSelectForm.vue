@@ -3,6 +3,7 @@
 import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 import Divider from "@/Components/FormElements/Divider.vue";
 import {useForm} from "@inertiajs/vue3";
+import FormHeading from "@/Components/Headings/FormHeading.vue";
 
 const roles = [
   {

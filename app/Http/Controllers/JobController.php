@@ -10,6 +10,7 @@ use App\Http\Requests\JobUpdateRequest;
 use App\Http\Resources\JobResource;
 use App\Http\Resources\TagResource;
 use App\Models\Job;
+use App\Models\Scopes\JobScope;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;

@@ -52,8 +52,8 @@ class RoleSeeder extends Seeder {
       'delete own employerProfile',
     ]);
 
-    $employer = Role::findOrCreate(UserRolesEnum::EMPLOYEE->value);
-    $employer->syncPermissions([
+    $employee = Role::findOrCreate(UserRolesEnum::EMPLOYEE->value);
+    $employee->syncPermissions([
       'create a new job',
       'edit own job',
       'delete own job',

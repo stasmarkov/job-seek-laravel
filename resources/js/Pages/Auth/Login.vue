@@ -6,7 +6,7 @@ import InputLabel from '@/Components/FormElements/InputLabel.vue';
 import PrimaryButton from '@/Components/Buttons/PrimaryButton.vue';
 import TextInput from '@/Components/FormElements/TextInput.vue';
 import {Head, Link, useForm} from '@inertiajs/vue3';
-import Heading from "@/Components/Heading.vue";
+import BlockHeading from "@/Components/Headings/BlockHeading.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {faGithub} from "@fortawesome/free-brands-svg-icons";

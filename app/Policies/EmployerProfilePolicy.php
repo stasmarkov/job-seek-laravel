@@ -46,6 +46,8 @@ class EmployerProfilePolicy {
    * Determine whether the user can update the model.
    */
   public function update(User $user, EmployerProfile $employerProfile): bool {
+    $b=0;
+
     if ($user->hasPermissionTo('edit any employerProfile')) {
       return TRUE;
     }

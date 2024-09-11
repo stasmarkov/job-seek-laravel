@@ -1,6 +1,6 @@
 <script setup>
 import Layout from "@/Layouts/Layout.vue";
-import Heading from "@/Components/Heading.vue";
+import BlockHeading from "@/Components/Headings/BlockHeading.vue";
 import CardWide from "@/Components/Models/Jobs/CardWide.vue";
 import SearchJobForm from "@/Components/Forms/SearchJobForm.vue";
 import Pager from "@/Components/Pagers/Pager.vue";

@@ -29,8 +29,8 @@ class AccountController extends Controller {
       'user' => UserResource::make($user),
       'mustVerifyEmail' => $user instanceof MustVerifyEmail,
       'status' => session('status'),
-      'employerProfile' => Context::get('employerProfile'),
-      'candidateProfile' => Context::get('candidateProfile'),
+      'employerProfile' => $user->employerProfile,
+      'candidateProfile' => $user->candidateProfile,
     ]);
   }
 

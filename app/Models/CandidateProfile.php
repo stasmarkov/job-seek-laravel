@@ -18,6 +18,17 @@ class CandidateProfile extends Model {
   use HasFactory, TaggableModel;
 
   /**
+   * {@inheritdoc}
+   */
+  protected $fillable = [
+    'first_name',
+    'last_name',
+    'description',
+    'achievements',
+    'experience_since',
+  ];
+
+  /**
    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
    */
   public function user(): BelongsTo {
