@@ -9,7 +9,6 @@ use App\Models\EmployerProfile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Validation\Rules\File;
 use Inertia\Inertia;
 
 /**

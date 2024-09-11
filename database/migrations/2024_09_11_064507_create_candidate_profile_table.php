@@ -17,7 +17,7 @@ return new class extends Migration {
       $table->string('last_name');
       $table->longText('description');
       $table->longText('achievements')->nullable();
-      $table->longText('experience_since');
+      $table->string('experience_since');
       $table->foreignIdFor(User::class);
       $table->timestamps();
     });

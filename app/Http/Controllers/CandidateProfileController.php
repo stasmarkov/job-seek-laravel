@@ -7,7 +7,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Validation\Rules\File;
 use Inertia\Inertia;
 
 /**
@@ -16,7 +15,7 @@ use Inertia\Inertia;
 class CandidateProfileController extends Controller {
 
   /**
-   * Constructs EmployerController class.
+   * Constructs CandidateProfileController class.
    *
    * @param \Illuminate\Http\Request $request
    *   The request.
