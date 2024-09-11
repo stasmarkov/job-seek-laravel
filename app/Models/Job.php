@@ -11,15 +11,15 @@ use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
+use App\Traits\TaggableModel;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Job extends Model implements ReactableInterface {
 
-  use HasFactory, Notifiable, Reactable;
+  use HasFactory, Notifiable, Reactable, TaggableModel;
 
   /**
    * The list of guarded fields.
@@ -48,25 +48,6 @@ class Job extends Model implements ReactableInterface {
    */
   public function employerProfile(): BelongsTo {
     return $this->belongsTo(EmployerProfile::class);
-  }
-
-  /**
-   * Set the Jobs' model Tag model.
-   *
-   * @param string $name
-   *   The Tag name.
-   */
-  public function tag(string $name): void {
-    // Find first tag with given name or create a new one.
-    $tag = Tag::firstOrCreate(['name' => trim($name)]);
-    $this->tags()->attach($tag);
-  }
-
-  /**
-   * Get the list of Tag models.
-   */
-  public function tags(): BelongsToMany {
-    return $this->belongsToMany(Tag::class)->withTimestamps();
   }
 
 }
