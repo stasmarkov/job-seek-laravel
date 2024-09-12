@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRolesEnum;
 use App\Http\Requests\AccountUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -31,6 +32,8 @@ class AccountController extends Controller {
       'status' => session('status'),
       'employerProfile' => $user->employerProfile,
       'candidateProfile' => $user->candidateProfile,
+      'canCreateCandidateProfile' => $user->hasPermissionTo('create a new candidateProfile') && !$user->hasRole(UserRolesEnum::ADMIN->value),
+      'canCreateEmployerProfile' => $user->hasPermissionTo('create a new employerProfile') && !$user->hasRole(UserRolesEnum::ADMIN->value),
     ]);
   }
 

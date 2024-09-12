@@ -134,7 +134,7 @@ const updateCandidateProfile = () => {
         </div>
 
 
-        <CheckboxButtons :items="props.tags."
+        <CheckboxButtons :items="props.tags"
                          :selectedItems="form.tags.map(el => el.id)" type="admin"
                          @checkboxCheckedEvent="checkboxFormSubmit"/>
 

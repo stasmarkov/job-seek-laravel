@@ -144,7 +144,7 @@ const submit = () => {
                      placeholder="https://acme.com/jobs.ceo-wanted"/>
           <InputError :message="form.errors.url" class="mt-2"/>
 
-          <CheckboxButtons :items="props.tags." :selectedItems="form.tags.map(el => el.id)" type="admin"
+          <CheckboxButtons :items="props.tags" :selectedItems="form.tags.map(el => el.id)" type="admin"
                            @checkboxCheckedEvent="checkboxFormSubmit"/>
           <InputError :message="form.errors.tags" class="mt-2"/>
         </div>

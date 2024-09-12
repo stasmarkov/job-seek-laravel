@@ -21,16 +21,14 @@ const props = defineProps({
       </tr>
       </thead>
       <tbody>
-      <tr v-for="log in props.loginLogs." class="border-t">
+      <tr v-for="log in props.loginLogs.data" class="border-t">
         <td class="p-2">{{ log.created_at }}</td>
         <td class="p-2">{{ log.ip }}</td>
       </tr>
       </tbody>
     </table>
 
-    <div class="flex pt-4 border-t justify-center px-2">
-      <Pager :links="props.loginLogs.links"></Pager>
-    </div>
+    <Pager :links="props.loginLogs.links"></Pager>
   </AdminLayout>
 </template>
 

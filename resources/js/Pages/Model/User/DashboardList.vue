@@ -2,6 +2,7 @@
 
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import Th from "@/Components/Table/Th.vue";
+import Pager from "@/Components/Pagers/Pager.vue";
 
 const props = defineProps({
   users: Object,
@@ -32,7 +33,7 @@ const props = defineProps({
               </tr>
               </thead>
               <tbody class="bg-white">
-              <tr v-for="user in props.users.">
+              <tr v-for="user in props.users.data">
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
@@ -49,7 +50,7 @@ const props = defineProps({
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                  <span v-if="user.status === 1"
+                  <span v-if="parseInt(user.status) === 1"
                         class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
                   <span v-else
                         class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Inactive</span>
@@ -67,6 +68,8 @@ const props = defineProps({
               </tbody>
             </table>
           </div>
+
+          <Pager :links="users.links" />
         </div>
       </div>
     </div>

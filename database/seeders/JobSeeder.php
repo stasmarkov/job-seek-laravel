@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Database\Seeders;
 
 use App\Enums\UserRolesEnum;
+use App\Models\EmployerProfile;
 use App\Models\Job;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\Sequence;
@@ -25,10 +26,12 @@ class JobSeeder extends Seeder {
 
     $users = Role::firstOrNew(['name' => UserRolesEnum::EMPLOYER->value])
       ->users()
-      ->with('employer_profile')
+      ->with('employerProfile')
       ->get();
+    $employer_profiles = EmployerProfile::all();
 
-    Job::factory(5000)
+    Job::factory(50000)
+      ->recycle($employer_profiles)
       ->recycle($users)
       ->create(new Sequence(
         ['featured' => FALSE],

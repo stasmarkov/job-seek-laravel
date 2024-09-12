@@ -94,7 +94,6 @@ const form = useForm({
           </div>
         </form>
       </div>
-
     </template>
   </AdminLayout>
 </template>

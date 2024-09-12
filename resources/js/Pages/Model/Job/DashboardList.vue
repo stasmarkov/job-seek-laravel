@@ -46,9 +46,7 @@ const props = defineProps({
       </li>
     </ul>
 
-    <div class="flex pt-4 border-t justify-center px-2">
-      <Pager :links="props.jobs.links"></Pager>
-    </div>
+    <Pager :links="props.jobs.links"></Pager>
   </AdminLayout>
 </template>
 

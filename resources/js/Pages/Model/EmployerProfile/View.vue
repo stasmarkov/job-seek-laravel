@@ -6,6 +6,7 @@ import LinkButton from "@/Components/Buttons/LinkButton.vue";
 import BlockHeading from "@/Components/Headings/BlockHeading.vue";
 import CardWide from "@/Components/Models/Jobs/CardWide.vue";
 import Article from "@/Components/Sections/Article.vue";
+import Pager from "@/Components/Pagers/Pager.vue";
 
 const props = defineProps({
   employerProfile: {
@@ -28,8 +29,10 @@ const props = defineProps({
       </article>
 
       <section class="mt-6 space-y-6">
-        <CardWide v-for="job in props.jobs" :job />
+        <CardWide v-for="job in props.jobs.data" :job />
       </section>
+
+      <Pager :links="props.jobs.meta.links" />
     </Article>
   </Layout>
 </template>

@@ -12,7 +12,7 @@ use App\Http\Middleware\AddContext;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(JobController::class)->group(function () {
-  Route::middleware(['auth', AddContext::class])->group(function () {
+  Route::middleware(['auth', 'user_active', AddContext::class])->group(function () {
     Route::get('/dashboard/jobs', 'index')
       ->name('job.index');
 

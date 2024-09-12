@@ -34,10 +34,7 @@ class EmployerProfileController extends Controller implements HasMiddleware {
    */
   public static function middleware() {
     return [
-      new Middleware('can:create,\App\Model\EmployerProfile', only: [
-        'create',
-        'store',
-      ]),
+      new Middleware('can:create,\App\Model\EmployerProfile', only: ['create', 'store']),
       new Middleware('can:update,employerProfile', only: ['edit', 'update']),
       new Middleware('can:delete,employerProfile', only: ['destroy']),
     ];
@@ -51,7 +48,9 @@ class EmployerProfileController extends Controller implements HasMiddleware {
   /**
    * Show the form for creating a new resource.
    */
-  public function create() {}
+  public function create() {
+    return 'TBD.';
+  }
 
   /**
    * Store a newly created resource in storage.
@@ -62,7 +61,7 @@ class EmployerProfileController extends Controller implements HasMiddleware {
    * Display the specified resource.
    */
   public function show(EmployerProfile $employerProfile) {
-    $jobs = $employerProfile->jobs()->get();
+    $jobs = $employerProfile->jobs()->paginate(10);
 
     return Inertia::render('Model/EmployerProfile/View', [
       'employerProfile' => EmployerProfileResource::make($employerProfile),
@@ -79,6 +78,7 @@ class EmployerProfileController extends Controller implements HasMiddleware {
    * Show the form for creating a new resource.
    */
   public function edit(User $user) {
+    return ';hello';
     return Inertia::render('Model/EmployerProfile/UpdateForm', [
       'user' => $user,
       'employerProfile' => $user->employerProfile,

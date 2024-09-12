@@ -75,9 +75,7 @@ watch([order, searchString, tags], throttle(function ([orderValue, searchValue, 
           <CardWide v-for="job in props.results.data" :job :key="job.id"/>
         </div>
 
-        <div class="flex justify-center px-2 mt-6">
-          <Pager :links="props.results.meta.links"></Pager>
-        </div>
+        <Pager :links="props.results.meta.links"></Pager>
       </div>
       <div class="text-xl text-center" v-else>
         {{ ('Oops! No results found :\'(') }}

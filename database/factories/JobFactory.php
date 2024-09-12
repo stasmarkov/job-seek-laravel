@@ -6,7 +6,9 @@ use App\Models\Employer;
 use App\Models\EmployerProfile;
 use App\Models\Job;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Job>

@@ -5,33 +5,35 @@ declare(strict_types = 1);
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Context;
 
 /**
- * The contact us mail.
+ * The new jobs mail notification.
  */
-class ContactUsMail extends Mailable {
-
+class WeeklyJobsDigestMail extends Mailable {
   use Queueable, SerializesModels;
 
   /**
    * Create a new message instance.
    */
-  public function __construct(public array $user) {}
+  public function __construct(
+    public $user,
+    public Collection $jobs,
+  ) {}
 
   /**
    * Get the message envelope.
    */
   public function envelope(): Envelope {
     return new Envelope(
-      to: 'admin@example.com',
-      from: new Address($this->user['email'], $this->user['first_name'] . ' ' . $this->user['last_name']),
-      subject: 'Contact Us',
+      to: $this->user->email,
+      from: new Address(config('mail.from.address')),
+      subject: 'Weekly Jobs Digest',
     );
   }
 
@@ -40,9 +42,10 @@ class ContactUsMail extends Mailable {
    */
   public function content(): Content {
     return new Content(
-      view: 'emails.contact',
+      view: 'emails.weekly_jobs_digest',
       with: [
-        'data' => $this->data,
+        'user' => $this->user,
+        'jobs' => $this->jobs,
       ]
     );
   }

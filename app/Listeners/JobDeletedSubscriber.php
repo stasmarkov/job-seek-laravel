@@ -4,15 +4,10 @@ declare(strict_types = 1);
 
 namespace App\Listeners;
 
-use App\Events\JobCreatedEvent;
 use App\Events\JobDeletedEvent;
-use App\Events\JobViewedEvent;
-use App\Models\User;
-use App\Notifications\JobPostedNotification;
 use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Notification;
 
 /**
  * The Job Deleted event subscriber.

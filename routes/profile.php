@@ -15,7 +15,7 @@ Route::controller(EmployerProfileController::class)->group(function () {
   Route::get('employer/{employerProfile}', 'show')
     ->name('profile.employer.show');
 
-  Route::middleware('auth')->group(function () {
+  Route::middleware(['auth', 'user_active'])->group(function () {
     Route::get('/account/{user}/employer/new', 'create')
       ->name('profile.employer.create');
 
@@ -34,7 +34,7 @@ Route::controller(CandidateProfileController::class)->group(function () {
   Route::get('candidate/{candidateProfile}', 'show')
     ->name('candidate.show');
 
-  Route::middleware('auth')->group(function () {
+  Route::middleware(['auth', 'user_active'])->group(function () {
     Route::get('/account/{user}/candidate/new', 'create')
       ->name('profile.candidate.create');
 

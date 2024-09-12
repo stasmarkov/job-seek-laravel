@@ -11,7 +11,7 @@ use Illuminate\Database\Seeder;
  * The mai seeder.
  */
 class DatabaseSeeder extends Seeder {
-  use WithoutModelEvents;
+//  use WithoutModelEvents;
 
   /**
    * Seed the application's database.
@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder {
     $this->call([
       PermissionSeeder::class,
       RoleSeeder::class,
-      RoleSeeder::class,
+      UserSeeder::class,
       JobSeeder::class,
     ]);
   }

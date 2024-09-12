@@ -20,6 +20,14 @@ const props = defineProps({
   },
   candidateProfile: Object,
   employerProfile: Object,
+  canCreateCandidateProfile: {
+    default: false,
+    type: Boolean,
+  },
+  canCreateEmployerProfile: {
+    default: false,
+    type: Boolean,
+  },
 });
 
 </script>
@@ -32,15 +40,15 @@ const props = defineProps({
     </template>
 
     <template #default>
-      <div v-if="!props.employerProfile" class="flex gap-2">
-        <LinkButton :href="route('profile.employer.create', {'user': props.user.id })">Edit Profile</LinkButton>
+      <div v-if="!props.employerProfile && props.canCraeteEmployerProfile" class="flex gap-2">
+        <LinkButton :href="route('profile.employer.create', {'user': props.user.id })">Create Profile</LinkButton>
       </div>
       <div v-if="props.employerProfile" class="flex gap-2">
         <LinkButton :href="route('profile.employer.edit', {'user': props.user.id })">Edit Profile</LinkButton>
       </div>
 
-      <div v-if="!props.candidateProfile" class="flex gap-2">
-        <LinkButton :href="route('profile.candidate.create', {'user': props.user.id })">Edit Profile</LinkButton>
+      <div v-if="!props.candidateProfile && props.canCraeteCandidateProfile" class="flex gap-2">
+        <LinkButton :href="route('profile.candidate.create', {'user': props.user.id })">Create Profile</LinkButton>
       </div>
       <div v-if="props.candidateProfile" class="flex gap-2">
         <LinkButton :href="route('profile.candidate.edit', {'user': props.user.id })">Edit Profile</LinkButton>

@@ -16,11 +16,13 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\RoleSelectController;
 use App\Http\Controllers\Search\SearchJobsController;
 use App\Http\Middleware\AddContext;
+use App\Jobs\SendWeeklyJobsDigestJob;
+use App\Models\Job;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use Spatie\Permission\Models\Role;
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 
@@ -59,16 +61,12 @@ Route::middleware(['auth', AddContext::class])->group(function () {
 Route::get('/search', [SearchJobsController::class, 'index'])->name('search.jobs');
 
 
-Route::get('playground', function () {
+Route::get('/playground', function () {
 
-  $jobs = DB::table('jobs')
-    ->selectRaw('count(id) as number_of_jobs, employer_profile_id')
-    ->groupBy('employer_profile_id')
-    ->having('number_of_jobs', '=', 1)
-    ->skip(100)
-    ->limit(5)
-    ->get()
-    ->dd();
+  SendWeeklyJobsDigestJob::dispatch();
+
+
+  $b=0;
 
   return 'Hello';
 })->name('playground');

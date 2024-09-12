@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
-Route::middleware('guest')->group(function () {
-  Route::get('/auth/redirect/github', function () {
+Route::middleware('guest')->group(function() {
+  Route::get('/auth/redirect/github', function() {
     return Socialite::driver('github')->redirect();
   })->name('auth.github');
 
-  Route::get('/auth/callback', function () {
+  Route::get('/auth/callback', function() {
     $githubUser = Socialite::driver('github')->user();
 
     $user = User::updateOrCreate([
@@ -62,7 +62,7 @@ Route::middleware('guest')->group(function () {
     ->name('password.store');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function() {
   Route::get('verify-email', EmailVerificationPromptController::class)
     ->name('verification.notice');
 

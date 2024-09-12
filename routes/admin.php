@@ -16,7 +16,7 @@ Route::middleware('role:' . UserRolesEnum::ADMIN->value)->group(function () {
   Route::get('admin/users', function () {
     $users = User::query()
       ->with(['employerProfile', 'roles'])
-      ->paginate(20);
+      ->paginate(25);
 
     return Inertia::render('Model/User/DashboardList', [
       'users' => $users,

@@ -22,7 +22,7 @@ class JobCreatedSubscriber implements ShouldQueueAfterCommit {
    */
   public function handleNotifications(JobCreatedEvent $event): void {
     // Send a notification to the all users for now.
-    Notification::send(User::all(), new JobPostedNotification($event->job));
+    Notification::send(User::query()->has('candidateProfile')->get(), new JobPostedNotification($event->job));
   }
 
   /**
