@@ -50,17 +50,20 @@ class RoleSeeder extends Seeder {
       'create a new employerProfile',
       'edit own employerProfile',
       'delete own employerProfile',
+      'view any candidateProfile',
+      'view own candidateProfile',
     ]);
 
     $employee = Role::findOrCreate(UserRolesEnum::EMPLOYEE->value);
     $employee->syncPermissions([
-      'create a new job',
-      'edit own job',
-      'delete own job',
+      'view any candidateProfile',
+      'view own candidateProfile',
       'view list of jobs',
       'create a new candidateProfile',
       'edit own candidateProfile',
       'delete own candidateProfile',
+      'view any employerProfile',
+      'view own employerProfile',
     ]);
 
     Role::findOrCreate(UserRolesEnum::CONTENT_ADMIN->value);

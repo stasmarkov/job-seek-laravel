@@ -47,7 +47,7 @@ const props = defineProps({
         <LinkButton :href="route('profile.employer.edit', {'user': props.user.id })">Edit Profile</LinkButton>
       </div>
 
-      <div v-if="!props.candidateProfile && props.canCraeteCandidateProfile" class="flex gap-2">
+      <div v-if="!props.candidateProfile && props.canCreateCandidateProfile" class="flex gap-2">
         <LinkButton :href="route('profile.candidate.create', {'user': props.user.id })">Create Profile</LinkButton>
       </div>
       <div v-if="props.candidateProfile" class="flex gap-2">

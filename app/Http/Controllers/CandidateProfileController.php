@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CandidateProfileResource;
 use App\Http\Resources\TagResource;
-use App\Models\CandidateProfile;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -39,8 +38,8 @@ class CandidateProfileController extends Controller implements HasMiddleware {
         'create',
         'store',
       ]),
-      //      new Middleware('can:update,candidateProfile', only: ['edit', 'update']),
-      //      new Middleware('can:delete,candidateProfile', only: ['destroy']),
+      new Middleware('can:update,\App\Model\CandidateProfile', only: ['update', 'edit']),
+      new Middleware('can:delete,\App\Model\CandidateProfile', only: ['destroy']),
     ];
   }
 

@@ -35,8 +35,8 @@ class EmployerProfileController extends Controller implements HasMiddleware {
   public static function middleware() {
     return [
       new Middleware('can:create,\App\Model\EmployerProfile', only: ['create', 'store']),
-      new Middleware('can:update,employerProfile', only: ['edit', 'update']),
-      new Middleware('can:delete,employerProfile', only: ['destroy']),
+      new Middleware('can:update,\App\Model\EmployerProfile', only: ['edit', 'update']),
+      new Middleware('can:delete,\App\Model\EmployerProfile', only: ['destroy']),
     ];
   }
 

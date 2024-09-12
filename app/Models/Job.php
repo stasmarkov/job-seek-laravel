@@ -24,6 +24,8 @@ class Job extends Model implements ReactableInterface {
 
   use HasFactory, Notifiable, Reactable, TaggableModel;
 
+
+
   /**
    * The list of guarded fields.
    *

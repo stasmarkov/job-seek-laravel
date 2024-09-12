@@ -30,7 +30,7 @@ class JobSeeder extends Seeder {
       ->get();
     $employer_profiles = EmployerProfile::all();
 
-    Job::factory(50000)
+    Job::factory(1000)
       ->recycle($employer_profiles)
       ->recycle($users)
       ->create(new Sequence(
