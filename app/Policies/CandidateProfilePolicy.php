@@ -25,13 +25,13 @@ class CandidateProfilePolicy {
   /**
    * Determine whether the user can view the model.
    */
-  public function view(User $user, CandidateProfile $candidateProfile): bool {
+  public function view(User $user): bool {
     if ($user->hasPermissionTo('view any candidateProfile')) {
       return TRUE;
     }
 
-    if ($user->hasPermissionTo('view own candidateProfile')) {
-      return $user->id === $candidateProfile->user_id;
+    if ($user->candidateProfile && $user->hasPermissionTo('view own candidateProfile')) {
+      return $user->id === $user->candidateProfile->user_id;
     }
 
     return FALSE;

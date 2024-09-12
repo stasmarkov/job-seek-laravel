@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CandidateProfileResource;
+use App\Http\Resources\EmployerProfileResource;
+use App\Http\Resources\JobResource;
 use App\Http\Resources\TagResource;
+use App\Models\CandidateProfile;
+use App\Models\EmployerProfile;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -41,6 +45,18 @@ class CandidateProfileController extends Controller implements HasMiddleware {
       new Middleware('can:update,\App\Model\CandidateProfile', only: ['update', 'edit']),
       new Middleware('can:delete,\App\Model\CandidateProfile', only: ['destroy']),
     ];
+  }
+
+  /**
+   * Display the specified resource.
+   */
+  public function show(User $user) {
+    if (!$user->candidateProfile()->first()) {
+      abort(403);
+    }
+    return Inertia::render('Model/CandidateProfile/View', [
+      'candidateProfile' => CandidateProfileResource::make($user->candidateProfile, $user->candidateProfile->tags),
+    ]);
   }
 
   /**

@@ -31,7 +31,7 @@ Route::controller(EmployerProfileController::class)->group(function () {
 });
 
 Route::controller(CandidateProfileController::class)->group(function () {
-  Route::get('candidate/{candidateProfile}', 'show')
+  Route::get('candidate/{user}', 'show')
     ->name('candidate.show');
 
   Route::middleware(['auth', 'user_active'])->group(function () {
