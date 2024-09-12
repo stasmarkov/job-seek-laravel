@@ -28,47 +28,47 @@ const props = defineProps({
   <Head title="Profile"/>
   <AdminLayout>
     <template #heading>
-      <h2 class="font-light text-xl text-gray-800 leading-tight"><span class="font-semibold">{{ props.user.data.name }}</span> account</h2>
+      <h2 class="font-light text-xl text-gray-800 leading-tight"><span class="font-semibold">{{ props.user.name }}</span> account</h2>
     </template>
 
     <template #default>
       <div v-if="!props.employerProfile" class="flex gap-2">
-        <LinkButton :href="route('profile.employer.create', {'user': props.user.data.id })">Edit Profile</LinkButton>
+        <LinkButton :href="route('profile.employer.create', {'user': props.user.id })">Edit Profile</LinkButton>
       </div>
       <div v-if="props.employerProfile" class="flex gap-2">
-        <LinkButton :href="route('profile.employer.edit', {'user': props.user.data.id })">Edit Profile</LinkButton>
+        <LinkButton :href="route('profile.employer.edit', {'user': props.user.id })">Edit Profile</LinkButton>
       </div>
 
       <div v-if="!props.candidateProfile" class="flex gap-2">
-        <LinkButton :href="route('profile.candidate.create', {'user': props.user.data.id })">Edit Profile</LinkButton>
+        <LinkButton :href="route('profile.candidate.create', {'user': props.user.id })">Edit Profile</LinkButton>
       </div>
       <div v-if="props.candidateProfile" class="flex gap-2">
-        <LinkButton :href="route('profile.candidate.edit', {'user': props.user.data.id })">Edit Profile</LinkButton>
+        <LinkButton :href="route('profile.candidate.edit', {'user': props.user.id })">Edit Profile</LinkButton>
       </div>
 
       <FormGroup class="mt-4">
         <UpdateProfileInformationForm
           :must-verify-email="mustVerifyEmail"
           :status="status"
-          :user="props.user.data"
+          :user="props.user"
           class="max-w-xl"
         />
       </FormGroup>
 
       <FormGroup
         class="mt-4"
-        v-if="props.user.data.id === $page.props.auth.user.id"
+        v-if="props.user.id === $page.props.auth.user.id"
       >
         <UpdatePasswordForm
           class="max-w-xl"
-          :user="props.user.data"
+          :user="props.user"
         />
       </FormGroup>
 
       <FormGroup class="mt-4">
         <DeleteUserForm
           class="max-w-xl"
-          :user="props.user.data"
+          :user="props.user"
         />
       </FormGroup>
     </template>

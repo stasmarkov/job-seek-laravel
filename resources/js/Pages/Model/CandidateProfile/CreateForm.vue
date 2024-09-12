@@ -121,7 +121,7 @@ const form = useForm({
         </div>
 
 
-        <CheckboxButtons :items="props.tags.data" :selectedItems="form.tags" type="admin"
+        <CheckboxButtons :items="props.tags." :selectedItems="form.tags" type="admin"
                          @checkboxCheckedEvent="checkboxFormSubmit"/>
 
         <div class="flex items-center gap-4">

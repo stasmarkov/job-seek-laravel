@@ -41,20 +41,20 @@ function redirectOnSearchPage(value) {
         <BlockHeading>Featured Jobs</BlockHeading>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
-          <Card v-for="job in featuredJobs.data" :job />
+          <Card v-for="job in featuredJobs" :job />
         </div>
       </section>
 
       <section>
         <BlockHeading>Tags</BlockHeading>
         <div class="mt-6 gap-2 flex flex-wrap">
-          <Tag v-for="tag in tags.data" :tag size="base" />
+          <Tag v-for="tag in tags" :tag size="base" />
         </div>
       </section>
 
       <section class="mt-6 space-y-6">
         <BlockHeading>Recent Jobs</BlockHeading>
-        <CardWide v-for="job in jobs.data" :job />
+        <CardWide v-for="job in jobs" :job />
 
         <div class="flex justify-center mt-2">
           <LinkButton :href="route('search.jobs')">{{ ('View more') }}</LinkButton>

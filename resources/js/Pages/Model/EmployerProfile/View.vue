@@ -19,16 +19,16 @@ const props = defineProps({
 
 <template>
   <Layout>
-    <Head :title="employerProfile.data.name" />
+    <Head :title="employerProfile.name" />
 
     <Article :hoverable="false">
       <article class="flex justify-between mb-4 pb-4 border-b">
-        <h1 class="text-2xl">{{ employerProfile.data.name }}</h1>
-        <EmployerProfileLogo :employerProfile="employerProfile.data" width="45" />
+        <h1 class="text-2xl">{{ employerProfile.name }}</h1>
+        <EmployerProfileLogo :employerProfile="employerProfile" width="45" />
       </article>
 
       <section class="mt-6 space-y-6">
-        <CardWide v-for="job in props.jobs.data" :job />
+        <CardWide v-for="job in props.jobs" :job />
       </section>
     </Article>
   </Layout>

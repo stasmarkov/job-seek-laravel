@@ -47,6 +47,8 @@ watch([order, searchString, tags], throttle(function ([orderValue, searchValue, 
   <Head title="Search"/>
 
   <Layout>
+
+    {{  }}
     <section class="text-center pt-6">
       <SearchJobForm type="keyup" :searchString @searchFormSubmitEvent="searchFormSubmit"/>
     </section>
@@ -63,7 +65,7 @@ watch([order, searchString, tags], throttle(function ([orderValue, searchValue, 
       </div>
       <div class="flex items-center gap-2">
         <span>Tags:</span>
-        <CheckboxButtons :items="props.tags.data" :selectedItems="tags" @checkboxCheckedEvent="checkboxFormSubmit" />
+        <CheckboxButtons :items="props.tags" :selectedItems="tags" @checkboxCheckedEvent="checkboxFormSubmit" />
       </div>
     </div>
 
@@ -74,7 +76,7 @@ watch([order, searchString, tags], throttle(function ([orderValue, searchValue, 
         </div>
 
         <div class="flex justify-center px-2 mt-6">
-          <Pager :links="props.results.links"></Pager>
+          <Pager :links="props.results.meta.links"></Pager>
         </div>
       </div>
       <div class="text-xl text-center" v-else>

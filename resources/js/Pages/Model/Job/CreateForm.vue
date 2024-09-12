@@ -54,7 +54,7 @@ const job = computed(() => {
       if (item instanceof Object) {
         return item;
       }
-      let tag = props.tags.data.find(el => el.id === item);
+      let tag = props.tags.find(el => el.id === item);
       return {
         'id': tag.id,
         'name': tag.name,
@@ -152,7 +152,7 @@ const submit = () => {
                      placeholder="https://acme.com/jobs.ceo-wanted"/>
           <InputError :message="form.errors.url" class="mt-2"/>
 
-          <CheckboxButtons :items="props.tags.data" :selectedItems="form.tags" type="admin"
+          <CheckboxButtons :items="props.tags." :selectedItems="form.tags" type="admin"
                            @checkboxCheckedEvent="checkboxFormSubmit"/>
 
           <InputError :message="form.errors.tags" class="mt-2"/>

@@ -37,9 +37,11 @@ class SearchJobsController extends Controller {
         'tags' => $request->get('tags'),
       ],
       'tags' => TagResource::collection(Tag::all()),
-      'results' => $query
-        ->paginate(10)
-        ->withQueryString(),
+      'results' => JobResource::collection(
+        $query
+          ->paginate(10)
+          ->withQueryString()
+      ),
     ]);
   }
 

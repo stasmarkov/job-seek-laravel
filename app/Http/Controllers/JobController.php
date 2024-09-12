@@ -70,8 +70,20 @@ class JobController extends Controller implements HasMiddleware {
     $user = Auth::user();
     $reactantFacade = $job->viaLoveReactant();
 
+    $similar_jobs = Job::query()
+      ->where('id', '!=', $job->id)
+      ->latest('created_at')
+      ->limit(4);
+
+    $similar_jobs->where(function (Builder $query) use ($job) {
+      foreach ($job->tags as $tag) {
+        $query->orWhereRelation('tags', 'tags.id', '=', $tag->id);
+      }
+    });
+
     return Inertia::render('Model/Job/View', [
       'job' => JobResource::make($job),
+      'similarJobs' => JobResource::collection($similar_jobs->get()),
       'likesCount' => $reactantFacade->getReactionCounterOfType('Like')->getCount(),
       'isLiked' => $reactantFacade->isReactedBy($user, 'Like'),
       'can' => [

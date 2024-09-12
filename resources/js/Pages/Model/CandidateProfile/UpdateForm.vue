@@ -31,14 +31,14 @@ function checkboxFormSubmit(value) {
 }
 
 const form = useForm({
-  first_name: props.candidateProfile.data?.first_name,
-  last_name: props.candidateProfile.data?.last_name,
-  description: props.candidateProfile.data?.description,
-  experience_since: props.candidateProfile.data?.experience_since,
-  tags: props.candidateProfile.data?.tags,
+  first_name: props.candidateProfile?.first_name,
+  last_name: props.candidateProfile?.last_name,
+  description: props.candidateProfile?.description,
+  experience_since: props.candidateProfile?.experience_since,
+  tags: props.candidateProfile?.tags,
 });
 
-console.log(props.candidateProfile.data.tags);
+console.log(props.candidateProfile.tags);
 
 const updateCandidateProfile = () => {
   form.patch(route('profile.candidate.update', { user: props.user.id }), {
@@ -134,7 +134,7 @@ const updateCandidateProfile = () => {
         </div>
 
 
-        <CheckboxButtons :items="props.tags.data"
+        <CheckboxButtons :items="props.tags."
                          :selectedItems="form.tags.map(el => el.id)" type="admin"
                          @checkboxCheckedEvent="checkboxFormSubmit"/>
 

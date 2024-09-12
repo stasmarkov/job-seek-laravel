@@ -21,7 +21,7 @@ const props = defineProps({
       </tr>
       </thead>
       <tbody>
-      <tr v-for="log in props.loginLogs.data" class="border-t">
+      <tr v-for="log in props.loginLogs." class="border-t">
         <td class="p-2">{{ log.created_at }}</td>
         <td class="p-2">{{ log.ip }}</td>
       </tr>

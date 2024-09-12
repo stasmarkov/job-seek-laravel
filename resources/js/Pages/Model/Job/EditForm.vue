@@ -25,15 +25,15 @@ const props = defineProps({
 let enablePreview = ref(false);
 
 const form = useForm({
-  title: props.job.data.title,
-  salary: props.job.data.salary,
-  location: props.job.data.location,
-  schedule: props.job.data.schedule,
-  url: props.job.data.url,
-  tags: props.job.data.tags,
-  description: props.job.data.description,
-  short_description: props.job.data.short_description,
-  featured: props.job.data.featured
+  title: props.job.title,
+  salary: props.job.salary,
+  location: props.job.location,
+  schedule: props.job.schedule,
+  url: props.job.url,
+  tags: props.job.tags,
+  description: props.job.description,
+  short_description: props.job.short_description,
+  featured: props.job.featured
 });
 
 const user = useCurrentUser();
@@ -51,7 +51,7 @@ const job = computed(() => {
       if (item instanceof Object) {
         return item;
       }
-      let tag = props.tags.data.find(el => el.id === item);
+      let tag = props.tags.find(el => el.id === item);
       return {
         'id': tag.id,
         'name': tag.name,
@@ -75,7 +75,7 @@ function checkboxFormSubmit(value) {
 
 // The form submission.
 const submit = () => {
-  form.patch(route('job.update', {job: props.job.data.id}));
+  form.patch(route('job.update', {job: props.job.id}));
 };
 </script>
 
@@ -83,7 +83,7 @@ const submit = () => {
   <AdminLayout>
     <Head title="Edit job"/>
 
-    <template #heading>Edit job: {{ props.job.data.title }}</template>
+    <template #heading>Edit job: {{ props.job.title }}</template>
 
     <div :class="{
       'sm:grid-cols-1': !enablePreview
@@ -144,7 +144,7 @@ const submit = () => {
                      placeholder="https://acme.com/jobs.ceo-wanted"/>
           <InputError :message="form.errors.url" class="mt-2"/>
 
-          <CheckboxButtons :items="props.tags.data" :selectedItems="form.tags.map(el => el.id)" type="admin"
+          <CheckboxButtons :items="props.tags." :selectedItems="form.tags.map(el => el.id)" type="admin"
                            @checkboxCheckedEvent="checkboxFormSubmit"/>
           <InputError :message="form.errors.tags" class="mt-2"/>
         </div>
