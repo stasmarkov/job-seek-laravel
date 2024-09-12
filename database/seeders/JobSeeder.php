@@ -21,11 +21,14 @@ class JobSeeder extends Seeder {
    */
   public function run(): void {
     // Create tags.
-    Tag::factory(20)->create();
+    Tag::factory(25)->create();
 
-    $users = Role::firstOrNew(['name' => UserRolesEnum::EMPLOYER->value])->users()->get();
+    $users = Role::firstOrNew(['name' => UserRolesEnum::EMPLOYER->value])
+      ->users()
+      ->with('employer_profile')
+      ->get();
 
-    Job::factory(20)
+    Job::factory(5000)
       ->recycle($users)
       ->create(new Sequence(
         ['featured' => FALSE],

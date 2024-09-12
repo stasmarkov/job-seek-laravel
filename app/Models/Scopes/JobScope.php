@@ -18,12 +18,6 @@ class JobScope implements Scope {
   /**
    * Apply the scope to a given Eloquent query builder.
    */
-  public function apply(Builder $builder, Model $model): void {
-    $user = Auth::user();
-
-    if ($user && $user->hasRole(UserRolesEnum::EMPLOYER->value)) {
-      $builder->whereRelation('employerProfile', 'user_id', '=', $user->id);
-    }
-  }
+  public function apply(Builder $builder, Model $model): void {}
 
 }

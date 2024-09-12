@@ -5,6 +5,7 @@ import EmployerProfileLogo from "@/Components/Models/Employers/EmployerProfileLo
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
 import BlockHeading from "@/Components/Headings/BlockHeading.vue";
 import CardWide from "@/Components/Models/Jobs/CardWide.vue";
+import Article from "@/Components/Sections/Article.vue";
 
 const props = defineProps({
   employerProfile: {
@@ -20,7 +21,7 @@ const props = defineProps({
   <Layout>
     <Head :title="employerProfile.data.name" />
 
-    <Panel :hoverable="false">
+    <Article :hoverable="false">
       <article class="flex justify-between mb-4 pb-4 border-b">
         <h1 class="text-2xl">{{ employerProfile.data.name }}</h1>
         <EmployerProfileLogo :employerProfile="employerProfile.data" width="45" />
@@ -29,6 +30,6 @@ const props = defineProps({
       <section class="mt-6 space-y-6">
         <CardWide v-for="job in props.jobs.data" :job />
       </section>
-    </Panel>
+    </Article>
   </Layout>
 </template>

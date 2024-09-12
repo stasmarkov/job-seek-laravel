@@ -13,19 +13,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(JobController::class)->group(function () {
   Route::middleware(['auth', AddContext::class])->group(function () {
-    Route::get('/jobs', 'index')
+    Route::get('/dashboard/jobs', 'index')
       ->name('job.index');
 
-    Route::get('/job/add', 'create')
+    Route::get('/dashboard/job/add', 'create')
       ->name('job.create');
 
-    Route::post('/job/add', 'store')
+    Route::post('/dashboard/job/add', 'store')
       ->name('job.store');
 
-    Route::get('/job/{job}/edit', 'edit')
+    Route::get('/dashboard/job/{job}/edit', 'edit')
       ->name('job.edit');
 
-    Route::patch('/job/{job}/edit', 'update')
+    Route::patch('/dashboard/job/{job}/edit', 'update')
       ->name('job.update');
 
     Route::get('/job/{job}/like', 'like')

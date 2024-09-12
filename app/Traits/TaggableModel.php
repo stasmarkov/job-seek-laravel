@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Traits;
 
 use App\Models\Tag;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
@@ -29,6 +30,24 @@ trait TaggableModel {
    */
   public function tags(): MorphToMany {
     return $this->morphToMany(Tag::class, 'taggable')->withTimestamps();
+  }
+
+  /**
+   * Helper method for attaching array of tags by ids.
+   *
+   * @param array $tags
+   *   The array of tag ids.
+   */
+  public function attachTags(array $tags = []): void {
+    if ($tags) {
+      $this->tags()->detach();
+
+      foreach ($tags as $tag) {
+        if ($loaded_tag = Tag::find($tag)) {
+          $this->tag($loaded_tag->name);
+        }
+      }
+    }
   }
 
 }

@@ -22,7 +22,7 @@ return new class extends Migration {
       $table->string('schedule')->default('Full Time');
       $table->string('url');
       $table->boolean('featured')->default(FALSE);
-      $table->longText('description');
+      $table->longText('description')->fulltext('description');
       $table->longText('short_description');
       $table->timestamps();
     });

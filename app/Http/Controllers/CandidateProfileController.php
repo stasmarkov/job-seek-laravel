@@ -69,18 +69,10 @@ class CandidateProfileController extends Controller implements HasMiddleware {
     $candidate_profile = $user->candidateProfile()
       ->create(Arr::except($attributes, 'tags'));
 
-    if ($attributes['tags'] ?? FALSE) {
-      $candidate_profile->tags()->detach();
-      if (\is_string($attributes['tags'])) {
-        $attributes['tags'] = explode(',', $attributes['tags']);
-      }
-
-      foreach ($attributes['tags'] as $tag) {
-        if ($loaded_tag = Tag::find($tag)) {
-          $candidate_profile->tag($loaded_tag->name);
-        }
-      }
+    if (\is_string($attributes['tags'])) {
+      $attributes['tags'] = explode(',', $attributes['tags']);
     }
+    $candidate_profile->attachTags($attributes['tags']);
 
     return redirect()->route('account.edit', ['user' => $user->id]);
   }
@@ -111,18 +103,10 @@ class CandidateProfileController extends Controller implements HasMiddleware {
 
     $candidate_profile = $user->candidateProfile;
 
-    if ($attributes['tags'] ?? FALSE) {
-      $candidate_profile->tags()->detach();
-      if (\is_string($attributes['tags'])) {
-        $attributes['tags'] = explode(',', $attributes['tags']);
-      }
-
-      foreach ($attributes['tags'] as $tag) {
-        if ($loaded_tag = Tag::find($tag)) {
-          $candidate_profile->tag($loaded_tag->name);
-        }
-      }
+    if (\is_string($attributes['tags'])) {
+      $attributes['tags'] = explode(',', $attributes['tags']);
     }
+    $candidate_profile->attachTags($attributes['tags']);
 
     unset($attributes['tags']);
     $candidate_profile->update(Arr::except($attributes, 'tags'));

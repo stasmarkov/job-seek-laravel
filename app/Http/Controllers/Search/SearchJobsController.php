@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Search;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\JobResource;
 use App\Http\Resources\TagResource;
 use App\Models\Job;
 use App\Models\Scopes\JobScope;
@@ -25,8 +26,7 @@ class SearchJobsController extends Controller {
     $query = Job::query()->with([
       'employerProfile',
       'tags',
-    ])
-      ->withoutGlobalScope(JobScope::class);
+    ]);
 
     $this->applyFilters($request, $query);
 
@@ -38,8 +38,7 @@ class SearchJobsController extends Controller {
       ],
       'tags' => TagResource::collection(Tag::all()),
       'results' => $query
-        ->paginate(6)
-        // Important to pre-save the query in pager links.
+        ->paginate(10)
         ->withQueryString(),
     ]);
   }

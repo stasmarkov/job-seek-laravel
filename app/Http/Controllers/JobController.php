@@ -12,6 +12,7 @@ use App\Http\Resources\TagResource;
 use App\Models\Job;
 use App\Models\Scopes\JobScope;
 use App\Models\Tag;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -44,7 +45,8 @@ class JobController extends Controller implements HasMiddleware {
    */
   public function index() {
     $jobs = Job::query()
-      ->with(['employerProfile', 'tags']);
+      ->currentEmployer()
+      ->with(['employerProfile:id,name', 'tags:name,id']);
 
     $jobs = $jobs
       ->paginate(10)
@@ -100,18 +102,10 @@ class JobController extends Controller implements HasMiddleware {
     $job = Auth::user()->employerProfile->jobs()
       ->create(Arr::except($attributes, 'tags'));
 
-    if ($attributes['tags'] ?? FALSE) {
-      $job->tags()->detach();
-      if (\is_string($attributes['tags'])) {
-        $attributes['tags'] = explode(',', $attributes['tags']);
-      }
-
-      foreach ($attributes['tags'] as $tag) {
-        if ($loaded_tag = Tag::find($tag)) {
-          $job->tag($loaded_tag->name);
-        }
-      }
+    if (\is_string($attributes['tags'])) {
+      $attributes['tags'] = explode(',', $attributes['tags']);
     }
+    $job->attachTags($attributes['tags']);
 
     return redirect(route('job.show', ['job' => $job->id]));
   }
@@ -141,18 +135,10 @@ class JobController extends Controller implements HasMiddleware {
 
     $attributes['featured'] = $request->has('featured');
 
-    if ($attributes['tags'] ?? FALSE) {
-      $job->tags()->detach();
-      if (\is_string($attributes['tags'])) {
-        $attributes['tags'] = explode(',', $attributes['tags']);
-      }
-
-      foreach ($attributes['tags'] as $tag) {
-        if ($loaded_tag = Tag::find($tag)) {
-          $job->tags()->attach($loaded_tag);
-        }
-      }
+    if (\is_string($attributes['tags'])) {
+      $attributes['tags'] = explode(',', $attributes['tags']);
     }
+    $job->attachTags($attributes['tags']);
 
     unset($attributes['tags']);
     $job->update($attributes);

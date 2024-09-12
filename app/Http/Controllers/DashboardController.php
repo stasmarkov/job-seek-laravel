@@ -18,11 +18,11 @@ class DashboardController extends Controller {
    * The dashboard view page.
    */
   public function view() {
-    $totalJobs = Job::all()->pluck('id')->count();
+    $jobsCount = Job::currentEmployer()->count();
     $loginsCount = Auth::user()->loginLogs->count();
 
     return Inertia::render('Admin/Dashboard', [
-      'totalJobs' => $totalJobs,
+      'jobsCount' => $jobsCount,
       'loginsCount' => $loginsCount,
       'usersCount' => User::all()->count(),
     ]);

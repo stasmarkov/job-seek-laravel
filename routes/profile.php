@@ -13,9 +13,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(EmployerProfileController::class)->group(function () {
   Route::get('employer/{employerProfile}', 'show')
-    ->name('employer_profile.show');
+    ->name('profile.employer.show');
 
   Route::middleware('auth')->group(function () {
+    Route::get('/account/{user}/employer/new', 'create')
+      ->name('profile.employer.create');
+
+    Route::post('/account/{user}/employer/new', 'store')
+      ->name('profile.employer.store');
+
     Route::get('/account/{user}/employer', 'edit')
       ->name('profile.employer.edit');
 
@@ -26,7 +32,7 @@ Route::controller(EmployerProfileController::class)->group(function () {
 
 Route::controller(CandidateProfileController::class)->group(function () {
   Route::get('candidate/{candidateProfile}', 'show')
-    ->name('employee.show');
+    ->name('candidate.show');
 
   Route::middleware('auth')->group(function () {
     Route::get('/account/{user}/candidate/new', 'create')

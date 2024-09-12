@@ -2,7 +2,7 @@
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 
 const props = defineProps({
-  totalJobs: {
+  jobsCount: {
     type: Number,
     default: 0,
   },
@@ -44,7 +44,7 @@ const props = defineProps({
                   </dt>
                   <dd class="flex items-baseline">
                     <div class="text-2xl leading-8 font-semibold text-gray-900">
-                      {{ props.totalJobs }}
+                      {{ props.jobsCount }}
                     </div>
                   </dd>
                 </dl>

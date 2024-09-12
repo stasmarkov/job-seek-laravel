@@ -16,9 +16,8 @@ return new class extends Migration {
       $table->id();
 
       $table->foreignIdFor(Tag::class)->constrained()->cascadeOnDelete();
-      $table->unsignedBigInteger('taggable_id');
-      $table->string('taggable_type');
-
+      // Create the taggable_type and taggable_id columns.
+      $table->morphs('taggable');
       $table->timestamps();
     });
   }

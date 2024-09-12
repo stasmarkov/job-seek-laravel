@@ -117,8 +117,8 @@ const isOpened = ref(false);
               <slot name="heading"/>
             </h1>
           </div>
-          <div class="mx-auto px-4 sm:px-6 md:px-8">
-            <div class="bg-white overflow-hidden p-4 sm:p-8 sm:rounded-lg">
+          <div class="mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden p-4 sm:p-8">
               <slot />
             </div>
           </div>

@@ -32,15 +32,18 @@ const props = defineProps({
     </template>
 
     <template #default>
+      <div v-if="!props.employerProfile" class="flex gap-2">
+        <LinkButton :href="route('profile.employer.create', {'user': props.user.data.id })">Edit Profile</LinkButton>
+      </div>
       <div v-if="props.employerProfile" class="flex gap-2">
-        <LinkButton :href="route('profile.employer.edit', {'user': props.user.data.id })">Profile</LinkButton>
+        <LinkButton :href="route('profile.employer.edit', {'user': props.user.data.id })">Edit Profile</LinkButton>
       </div>
 
       <div v-if="!props.candidateProfile" class="flex gap-2">
-        <LinkButton :href="route('profile.candidate.create', {'user': props.user.data.id })">Profile</LinkButton>
+        <LinkButton :href="route('profile.candidate.create', {'user': props.user.data.id })">Edit Profile</LinkButton>
       </div>
       <div v-if="props.candidateProfile" class="flex gap-2">
-        <LinkButton :href="route('profile.candidate.edit', {'user': props.user.data.id })">Profile</LinkButton>
+        <LinkButton :href="route('profile.candidate.edit', {'user': props.user.data.id })">Edit Profile</LinkButton>
       </div>
 
       <FormGroup class="mt-4">
