@@ -32,7 +32,7 @@ function checkboxFormSubmit(value) {
 
 // throttle - Makes request with some period.
 // debounce - Makes request after some period.
-watch([order, searchString, tags], throttle(function ([orderValue, searchValue, tagsValue]) {
+watch([tags], throttle(function ([orderValue, searchValue, tagsValue]) {
   router.get(route('search.vacancies'), {order: orderValue, search: searchValue, tags: tagsValue}, {
     preserveState: true,
     preserveScroll: true,
@@ -69,7 +69,12 @@ watch([order, searchString, tags], throttle(function ([orderValue, searchValue, 
     <div class="mt-4">
       <div v-if="props.results.data.length > 0">
         <div class="space-y-4">
-          <CardWide v-for="vacancy in props.results.data" :vacancy :key="vacancy.id"/>
+          <ul>
+            <li v-for="candidate in props.results.data" :key="candidate.id">
+              {{ candidate.first_name }}  {{ candidate.last_name }}
+            </li>
+
+          </ul>
         </div>
 
         <Pager :links="props.results.meta.links"></Pager>

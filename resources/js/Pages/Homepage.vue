@@ -6,7 +6,7 @@ import Card from "@/Components/Models/Vacancies/Card.vue";
 import CardWide from "@/Components/Models/Vacancies/CardWide.vue";
 import Tag from "@/Components/Models/Tags/Tag.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
-import SearchVacanciesForm from "@/Components/Forms/SearchVacanciesForm.vue";
+import SimpleSearchForm from "@/Components/Forms/SimpleSearchForm.vue";
 import {Head, useForm} from '@inertiajs/vue3';
 import { Inertia } from "@inertiajs/inertia";
 
@@ -35,7 +35,7 @@ function redirectOnSearchPage(value) {
     <div class="space-y-4">
       <section>
         <section class="text-center pt-6">
-          <SearchVacanciesForm type="submit" @searchFormSubmitEvent="redirectOnSearchPage"/>
+          <SimpleSearchForm type="submit" @searchFormSubmitEvent="redirectOnSearchPage"/>
         </section>
 
         <BlockHeading>Featured vacancies</BlockHeading>
