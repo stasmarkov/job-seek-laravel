@@ -20,9 +20,9 @@ enum UserRolesEnum: string {
   case EMPLOYER = 'employer';
 
   /**
-   * The employee role.
+   * The candidate role.
    */
-  case EMPLOYEE = 'employee';
+  case CANDIDATE = 'candidate';
 
   /**
    * The content admin role.
@@ -39,7 +39,7 @@ enum UserRolesEnum: string {
     return match ($this) {
       static::ADMIN => 'Administrator',
       static::EMPLOYER => 'Employer',
-      static::EMPLOYEE => 'Employee',
+      static::CANDIDATE => 'Candidate',
       static::CONTENT_ADMIN => 'Content Administrator',
     };
   }

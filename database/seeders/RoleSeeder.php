@@ -54,8 +54,8 @@ class RoleSeeder extends Seeder {
       'view own candidateProfile',
     ]);
 
-    $employee = Role::findOrCreate(UserRolesEnum::EMPLOYEE->value);
-    $employee->syncPermissions([
+    $candidate = Role::findOrCreate(UserRolesEnum::CANDIDATE->value);
+    $candidate->syncPermissions([
       'view any candidateProfile',
       'view own candidateProfile',
       'view list of vacancies',

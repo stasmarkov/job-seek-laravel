@@ -46,7 +46,7 @@ class HandleInertiaRequests extends Middleware {
       ],
       'isAdmin' => Auth::user() ? Auth::user()?->hasRole(UserRolesEnum::ADMIN->value) : FALSE,
       'isEmployer' => Auth::user() ? Auth::user()?->hasRole(UserRolesEnum::EMPLOYER->value) : FALSE,
-      'isEmployee' => Auth::user() ? Auth::user()?->hasRole(UserRolesEnum::EMPLOYEE->value) : FALSE,
+      'isCandidate' => Auth::user() ? Auth::user()?->hasRole(UserRolesEnum::CANDIDATE->value) : FALSE,
     ];
   }
 

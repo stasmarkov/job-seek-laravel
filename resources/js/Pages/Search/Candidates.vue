@@ -7,6 +7,8 @@ import {ref, watch} from "vue";
 import {router} from "@inertiajs/vue3";
 import {throttle, debounce} from "lodash";
 import CheckboxButtons from "@/Components/FormElements/CheckboxButtons.vue";
+import Tag from "@/Components/Models/Tags/Tag.vue";
+import Preview from "@/Components/Models/CandidateProfiles/Preview.vue";
 
 // Properties given from controller and parent components.
 const props = defineProps({
@@ -32,8 +34,8 @@ function checkboxFormSubmit(value) {
 
 // throttle - Makes request with some period.
 // debounce - Makes request after some period.
-watch([tags], throttle(function ([orderValue, searchValue, tagsValue]) {
-  router.get(route('search.vacancies'), {order: orderValue, search: searchValue, tags: tagsValue}, {
+watch([order, searchString, tags], throttle(function ([orderValue, searchValue, tagsValue]) {
+  router.get(route('search.candidates'), {order: orderValue, search: searchValue, tags: tagsValue}, {
     preserveState: true,
     preserveScroll: true,
     replace: true,
@@ -47,7 +49,12 @@ watch([tags], throttle(function ([orderValue, searchValue, tagsValue]) {
 
   <Layout>
     <section class="text-center pt-6">
-      <SimpleSearchForm type="keyup" :searchString @searchFormSubmitEvent="searchFormSubmit"/>
+      <SimpleSearchForm
+        type="keyup"
+        :searchString
+        @searchFormSubmitEvent="searchFormSubmit"
+        title="Let's find Candidate"
+      />
     </section>
 
     <heading>{{ ('Search results') }}</heading>
@@ -69,12 +76,7 @@ watch([tags], throttle(function ([orderValue, searchValue, tagsValue]) {
     <div class="mt-4">
       <div v-if="props.results.data.length > 0">
         <div class="space-y-4">
-          <ul>
-            <li v-for="candidate in props.results.data" :key="candidate.id">
-              {{ candidate.first_name }}  {{ candidate.last_name }}
-            </li>
-
-          </ul>
+          <Preview v-for="candidateProfile in props.results.data" :candidateProfile="candidateProfile" />
         </div>
 
         <Pager :links="props.results.meta.links"></Pager>

@@ -22,7 +22,7 @@ class UserSeeder extends Seeder {
   public function run(Collection $users): void {
     $administrator_role = Role::firstOrNew(['name' => UserRolesEnum::ADMIN->value]);
     $employer_role = Role::firstOrNew(['name' => UserRolesEnum::EMPLOYER->value]);
-    $employee_role = Role::firstOrNew(['name' => UserRolesEnum::EMPLOYEE->value]);
+    $candidate_role = Role::firstOrNew(['name' => UserRolesEnum::CANDIDATE->value]);
 
     // Create admin user.
     User::factory()
@@ -46,11 +46,11 @@ class UserSeeder extends Seeder {
 
     // Create admin user.
     User::factory()
-      ->hasAttached($employee_role)
+      ->hasAttached($candidate_role)
       ->create([
-        'name' => 'employee',
-        'email' => 'employee@mail.com',
-        'password' => env('EMPLOYEE_PASSWORD') ?? '123456789',
+        'name' => 'candidate',
+        'email' => 'candidate@mail.com',
+        'password' => env('CANDIDATE_PASSWORD') ?? '123456789',
         'status' => 1,
       ]);
 

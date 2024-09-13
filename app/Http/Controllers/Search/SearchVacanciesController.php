@@ -60,8 +60,8 @@ class SearchVacanciesController extends Controller {
         $sub_query->orderBy('created_at', strtoupper($order));
       }
     })
-      // Default sorting.
-      ->orderBy('created_at', 'DESC');
+    // Default sorting.
+    ->orderBy('created_at', 'DESC');
 
     // Search by title.
     $query->when($request->input('search'), function($sub_query, $search) {

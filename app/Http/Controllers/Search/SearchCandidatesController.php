@@ -22,12 +22,16 @@ class SearchCandidatesController extends Controller {
    * Handle the incoming request [GET].
    */
   public function index(Request $request) {
-    $query = CandidateProfile::query()->with(['tags']);
+    $query = CandidateProfile::query()->with([
+      'tags',
+      'user',
+    ]);
 
     $this->applyFilters($request, $query);
 
     return Inertia::render('Search/Candidates', [
       'filters' => [
+        'search' => $request->get('search'),
         'order' => $request->get('order'),
         'tags' => $request->get('tags'),
       ],

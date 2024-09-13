@@ -8,6 +8,10 @@ import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
 const props = defineProps({
   searchString: String,
   type: String,
+  title: {
+    type: String,
+    default: 'Let\'s Find Your Next vacancy'
+  }
 });
 
 // The form values.
@@ -20,7 +24,7 @@ defineEmits(['searchFormSubmitEvent']);
 </script>
 
 <template>
-  <h1 class="font-bold text-4xl">Let's Find Your Next vacancy</h1>
+  <h1 class="font-bold text-4xl">{{ props.title }}</h1>
   <form
     v-on="
       props.type === 'submit' ? { submit: () => $emit('searchFormSubmitEvent', form.search) } : {}
@@ -32,7 +36,7 @@ defineEmits(['searchFormSubmitEvent']);
         v-on="
           props.type === 'keyup' ? { keyup: () => $emit('searchFormSubmitEvent', form.search) } : {}
         "
-        type="search"
+        type="text"
         name="search"
         placeholder="Web Developer..."
         v-model="form.search"

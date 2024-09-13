@@ -12,8 +12,8 @@ const roles = [
     description: 'Lorem ipsum dolor sit amet consectetur adipiscing elit donec nascetur, natoque convallis luctus rhoncus nec libero id eros tellus placerat',
   },
   {
-    id: 'employee',
-    title: 'Employee',
+    id: 'candidate',
+    title: 'Candidate',
     description: 'Id inceptos imperdiet velit ac vestibulum nibh pulvinar viverra est accumsan etiam pellentesque, mattis semper dictum mi sagittis tortor ad orci malesuada litora <b>sed</b>.',
   },
 ];

@@ -32,7 +32,7 @@ Route::controller(EmployerProfileController::class)->group(function () {
 
 Route::controller(CandidateProfileController::class)->group(function () {
   Route::get('candidate/{user}', 'show')
-    ->name('candidate.show');
+    ->name('profile.candidate.show');
 
   Route::middleware(['auth', 'user_active'])->group(function () {
     Route::get('/account/{user}/candidate/new', 'create')
