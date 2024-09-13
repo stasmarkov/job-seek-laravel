@@ -55,8 +55,8 @@ class VacancyFactory extends Factory {
    * {@inheritdoc}
    */
   public function configure() {
-    return $this->afterCreating(function (Vacancy $job) {
-      $job->tags()->attach(Tag::all()->random(random_int(4, 10)));
+    return $this->afterCreating(function (Vacancy $vacancy) {
+      $vacancy->tags()->attach(Tag::all()->random(random_int(4, 10)));
     });
   }
 

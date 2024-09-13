@@ -26,7 +26,7 @@ class HomepageController extends Controller {
    *   The Inertia render page.
    */
   public function index() {
-    $vacancies_featured = Cache::remember('vacancies:vacancies:homepage:featured', 3600, static function () {
+    $vacancies_featured = Cache::remember('views:vacancies:homepage:featured', 3600, static function () {
       return Vacancy::latest()
         ->withoutGlobalScope(VacancyScope::class)
         ->with(['employerProfile', 'tags'])
