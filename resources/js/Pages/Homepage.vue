@@ -2,20 +2,20 @@
 
 import Layout from "@/Layouts/Layout.vue";
 import BlockHeading from "@/Components/Headings/BlockHeading.vue";
-import Card from "@/Components/Models/Jobs/Card.vue";
+import Card from "@/Components/Models/Vacancies/Card.vue";
+import CardWide from "@/Components/Models/Vacancies/CardWide.vue";
 import Tag from "@/Components/Models/Tags/Tag.vue";
-import CardWide from "@/Components/Models/Jobs/CardWide.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
-import SearchJobForm from "@/Components/Forms/SearchJobForm.vue";
+import SearchVacanciesForm from "@/Components/Forms/SearchVacanciesForm.vue";
 import {Head, useForm} from '@inertiajs/vue3';
 import { Inertia } from "@inertiajs/inertia";
 
 // Properties given by the route should be defined using defineProps.
 defineProps({
-  featuredJobs: {
+  featuredVacancies: {
     type: Object
   },
-  jobs: {
+  vacancies: {
     type: Object
   },
   tags: {
@@ -24,7 +24,7 @@ defineProps({
 });
 
 function redirectOnSearchPage(value) {
-  Inertia.get(route('search.jobs', {'search': value}));
+  Inertia.get(route('search.vacancies', {'search': value}));
 }
 
 </script>
@@ -35,13 +35,13 @@ function redirectOnSearchPage(value) {
     <div class="space-y-4">
       <section>
         <section class="text-center pt-6">
-          <SearchJobForm type="submit" @searchFormSubmitEvent="redirectOnSearchPage"/>
+          <SearchVacanciesForm type="submit" @searchFormSubmitEvent="redirectOnSearchPage"/>
         </section>
 
-        <BlockHeading>Featured Jobs</BlockHeading>
+        <BlockHeading>Featured vacancies</BlockHeading>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
-          <Card v-for="job in featuredJobs" :job />
+          <Card v-for="vacancy in featuredVacancies" :vacancy />
         </div>
       </section>
 
@@ -53,11 +53,11 @@ function redirectOnSearchPage(value) {
       </section>
 
       <section class="mt-6 space-y-6">
-        <BlockHeading>Recent Jobs</BlockHeading>
-        <CardWide v-for="job in jobs" :job />
+        <BlockHeading>Recent vacancies</BlockHeading>
+        <CardWide v-for="vacancy in vacancies" :vacancy />
 
         <div class="flex justify-center mt-2">
-          <LinkButton :href="route('search.jobs')">{{ ('View more') }}</LinkButton>
+          <LinkButton :href="route('search.vacancies')">{{ ('View more') }}</LinkButton>
         </div>
       </section>
     </div>

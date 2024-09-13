@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Enums\UserRolesEnum;
 use App\Http\Resources\UserResource;
-use App\Models\Job;
+use App\Models\Vacancy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
@@ -42,7 +42,7 @@ class HandleInertiaRequests extends Middleware {
         'location' => $request->url(),
       ],
       'can' => [
-        'create_job' => Auth::user()?->can('create', Job::class),
+        'create_vacancy' => Auth::user()?->can('create', Vacancy::class),
       ],
       'isAdmin' => Auth::user() ? Auth::user()?->hasRole(UserRolesEnum::ADMIN->value) : FALSE,
       'isEmployer' => Auth::user() ? Auth::user()?->hasRole(UserRolesEnum::EMPLOYER->value) : FALSE,

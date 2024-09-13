@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EmployerProfileRequest;
 use App\Http\Resources\EmployerProfileResource;
-use App\Http\Resources\JobResource;
+use App\Http\Resources\VacancyResource;
 use App\Models\EmployerProfile;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -61,11 +61,11 @@ class EmployerProfileController extends Controller implements HasMiddleware {
    * Display the specified resource.
    */
   public function show(EmployerProfile $employerProfile) {
-    $jobs = $employerProfile->jobs()->paginate(10);
+    $vacancies = $employerProfile->vacancies()->paginate(10);
 
     return Inertia::render('Model/EmployerProfile/View', [
       'employerProfile' => EmployerProfileResource::make($employerProfile),
-      'jobs' => JobResource::collection($jobs),
+      'vacancies' => VacancyResource::collection($vacancies),
     ]);
   }
 

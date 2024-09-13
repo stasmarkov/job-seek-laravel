@@ -4,7 +4,7 @@ import Panel from "@/Components/Panel.vue";
 import EmployerProfileLogo from "@/Components/Models/Employers/EmployerProfileLogo.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
 import BlockHeading from "@/Components/Headings/BlockHeading.vue";
-import CardWide from "@/Components/Models/Jobs/CardWide.vue";
+import CardWide from "@/Components/Models/Vacancies/CardWide.vue";
 import Article from "@/Components/Sections/Article.vue";
 import Pager from "@/Components/Pagers/Pager.vue";
 
@@ -12,7 +12,7 @@ const props = defineProps({
   employerProfile: {
     type: Object,
   },
-  jobs: {
+  vacancies: {
     type: Object,
   }
 })
@@ -29,10 +29,10 @@ const props = defineProps({
       </article>
 
       <section class="mt-6 space-y-6">
-        <CardWide v-for="job in props.jobs.data" :job />
+        <CardWide v-for="vacancy in props.vacancies.data" :vacancy />
       </section>
 
-      <Pager :links="props.jobs.meta.links" />
+      <Pager :links="props.vacancies.meta.links" />
     </Article>
   </Layout>
 </template>

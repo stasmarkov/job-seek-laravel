@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace Database\Seeders;
 
 use App\Enums\UserRolesEnum;
-use App\Models\Employer;
 use App\Models\EmployerProfile;
 use App\Models\User;
 use Illuminate\Database\Seeder;

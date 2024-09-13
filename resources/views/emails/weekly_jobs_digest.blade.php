@@ -10,9 +10,9 @@
 <body>
 <h1>Hey {{ $user->candidateProfile->first_name }} {{ $user->candidateProfile->last_name }}!</h1>
 <ul>
-  @foreach($jobs as $job)
+  @foreach($vacancies as $vacancy)
     <li>
-      <a href="{{ route('job.show', ['job' => $job->id]) }}" target="_blank">{{ $job->title }}</a>
+      <a href="{{ route('vacancy.show', ['vacancy' => $vacancy->id]) }}" target="_blank">{{ $vacancy->title }}</a>
     </li>
   @endforeach
 </ul>

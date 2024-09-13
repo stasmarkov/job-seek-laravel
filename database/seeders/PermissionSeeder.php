@@ -16,13 +16,13 @@ class PermissionSeeder extends Seeder {
    * Run the database seeds.
    */
   public function run(): void {
-    // Permissions related to Job Model.
-    Permission::create(['name' => 'view list of jobs']);
-    Permission::create(['name' => 'create a new job']);
-    Permission::create(['name' => 'edit any job']);
-    Permission::create(['name' => 'edit own job']);
-    Permission::create(['name' => 'delete any job']);
-    Permission::create(['name' => 'delete own job']);
+    // Permissions related to Vacancy Model.
+    Permission::create(['name' => 'view list of vacancies']);
+    Permission::create(['name' => 'create a new vacancy']);
+    Permission::create(['name' => 'edit any vacancy']);
+    Permission::create(['name' => 'edit own vacancy']);
+    Permission::create(['name' => 'delete any vacancy']);
+    Permission::create(['name' => 'delete own vacancy']);
 
     // Permissions related to EmployerProfile Model.
     Permission::create(['name' => 'view any employerProfile']);

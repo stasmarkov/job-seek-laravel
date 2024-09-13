@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 trait TaggableModel {
 
   /**
-   * Set the Jobs' model Tag model.
+   * Set the Vacancies' model Tag model.
    *
    * @param string $name
    *   The Tag name.
