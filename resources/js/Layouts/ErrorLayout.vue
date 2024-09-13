@@ -4,6 +4,9 @@ import Header from "@/Components/Sections/Header.vue";
 </script>
 
 <template>
+  <Head>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </Head>
   <div class="bg-black text-white overflow-hidden min-h-screen">
     <!-- Page Content -->
     <div class="pt-[5.125rem] flex flex-col justify-between min-h-screen">

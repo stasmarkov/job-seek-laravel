@@ -10,6 +10,9 @@ const isOpened = ref(false);
 </script>
 
 <template>
+  <Head>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </Head>
   <div class="h-screen flex overflow-hidden bg-gray-100">
     <!-- Off-canvas menu for mobile -->
     <div class="md:hidden">

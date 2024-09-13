@@ -7,6 +7,9 @@ import BgBlur from "@/Components/VisualEffects/BgBlur.vue";
 </script>
 
 <template>
+  <Head>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </Head>
   <div class="bg-black text-white overflow-hidden min-h-screen">
     <div class="pt-[5.125rem] flex flex-col justify-between min-h-screen">
       <!-- Page Header -->

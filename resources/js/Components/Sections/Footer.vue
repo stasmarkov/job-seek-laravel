@@ -10,7 +10,7 @@ import RegularLink from "@/Components/Elements/RegularLink.vue";
     <div class="max-w-5xl border-white/20 mx-auto border-b pb-4 mb-8 flex gap-6 flex-wrap flex-col md:flex-row px-6">
       <div class="md:basis-56 basis-full">
         <Link class="flex justify-center" :href="route('homepage')">
-          <ApplicationLogo />
+          <ApplicationLogo class="flex justify-center" />
         </Link>
 
         <div class="mt-4 text-center text-xs">
