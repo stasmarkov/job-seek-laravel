@@ -25,7 +25,7 @@ import RegularLink from "@/Components/Elements/RegularLink.vue";
        </ul>
         <ul>
           <li><RegularLink :href="route('search.vacancies')">Vacancies</RegularLink></li>
-          <li><RegularLink :href="route('search.vacancies')">Candidates</RegularLink></li>
+          <li><RegularLink :href="route('search.candidates')">Candidates</RegularLink></li>
         </ul>
       </div>
     </div>

@@ -3,6 +3,7 @@
 import TextInput from "@/Components/FormElements/TextInput.vue";
 import {useForm} from "@inertiajs/vue3";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
+import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
 
 // The default value or the search input.
 const props = defineProps({
@@ -10,7 +11,7 @@ const props = defineProps({
   type: String,
   title: {
     type: String,
-    default: 'Let\'s Find Your Next vacancy'
+    default: 'Let\'s find Your next Opportunity'
   }
 });
 
@@ -40,14 +41,14 @@ defineEmits(['searchFormSubmitEvent']);
         name="search"
         placeholder="Web Developer..."
         v-model="form.search"
-        class="mt-1 block w-full"
+        class="block w-full"
       />
-      <SecondaryButton
+      <PrimaryButton
         v-if="props.searchString && props.searchString.length && props.type === 'keyup'"
         @click="() => {form.search = null; $emit('searchFormSubmitEvent', {})}"
       >
         Reset
-      </SecondaryButton>
+      </PrimaryButton>
     </div>
   </form>
 </template>

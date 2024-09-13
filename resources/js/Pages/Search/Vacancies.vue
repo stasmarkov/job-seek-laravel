@@ -7,6 +7,7 @@ import {ref, watch} from "vue";
 import {router} from "@inertiajs/vue3";
 import {throttle, debounce} from "lodash";
 import CheckboxButtons from "@/Components/FormElements/CheckboxButtons.vue";
+import BlockHeading from "@/Components/Headings/BlockHeading.vue";
 
 // Properties given from controller and parent components.
 const props = defineProps({
@@ -50,22 +51,23 @@ watch([order, searchString, tags], throttle(function ([orderValue, searchValue, 
       <SimpleSearchForm type="keyup" :searchString @searchFormSubmitEvent="searchFormSubmit"/>
     </section>
 
-    <heading>{{ ('Search results') }}</heading>
+    <BlockHeading>{{ ('Filter') }}</BlockHeading>
 
     <div class="border-t border-b py-4 mt-4 space-y-4">
       <div class="flex items-center gap-2">
         <span>Sort by:</span>
-        <select name="" id="" v-model="order" class="text-black border-0">
+        <select name="order" id="" v-model="order" class="text-black border-0">
           <option value="DESC">Newest</option>
           <option value="ASC">Oldest</option>
         </select>
       </div>
-      <div class="flex items-center gap-2">
-        <span>Tags:</span>
-        <CheckboxButtons :items="props.tags" :selectedItems="tags" @checkboxCheckedEvent="checkboxFormSubmit" />
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="flex-1">Tagged by:</span>
+        <CheckboxButtons class="p-0" :items="props.tags" :selectedItems="tags" @checkboxCheckedEvent="checkboxFormSubmit" />
       </div>
     </div>
 
+    <BlockHeading>{{ ('Results') }}</BlockHeading>
     <div class="mt-4">
       <div v-if="props.results.data.length > 0">
         <div class="space-y-4">

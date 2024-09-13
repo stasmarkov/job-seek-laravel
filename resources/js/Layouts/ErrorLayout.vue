@@ -9,7 +9,7 @@ import Header from "@/Components/Sections/Header.vue";
   </Head>
   <div class="bg-black text-white overflow-hidden min-h-screen">
     <!-- Page Content -->
-    <div class="pt-[5.125rem] flex flex-col justify-between min-h-screen">
+    <div class="pt-[5.75rem] flex flex-col justify-between min-h-screen">
       <!-- Page Header -->
       <div>
         <slot name="header">

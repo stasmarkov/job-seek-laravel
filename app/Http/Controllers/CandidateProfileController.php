@@ -89,7 +89,7 @@ class CandidateProfileController extends Controller implements HasMiddleware {
     }
     $candidate_profile->attachTags($attributes['tags']);
 
-    return redirect()->route('account.edit', ['user' => $user->id]);
+    return redirect()->route('profile.candidate.show', ['user' => $user->id]);
   }
 
   /**

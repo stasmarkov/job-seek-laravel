@@ -8,6 +8,7 @@ import FormGroup from "@/Components/FormElements/FormGroup.vue";
 import {useForm} from "@inertiajs/vue3";
 import TextInput from "@/Components/FormElements/TextInput.vue";
 import {useCurrentUser} from "@/Composables/useCurrentUser.js";
+import InputDescription from "@/Components/FormElements/InputDescription.vue";
 
 const currentUser = useCurrentUser();
 
@@ -31,7 +32,7 @@ const submit = () => {
     <form @submit.prevent="submit">
         <div class="block border-b mb-4 pb-4">
           <h1 class="text-3xl">Contact Us!</h1>
-          <p class="mt-2 font-extralight text-gray-200">Write us about the problem or about your user experience.</p>
+          <p class="mt-2 font-light text-gray-300">Write us about the problem or about your user experience.</p>
         </div>
 
         <div class="flex gap-4 mt-4 flex-wrap md:flex-nowrap">
@@ -57,8 +58,10 @@ const submit = () => {
         <div class="mt-4">
           <InputLabel for="contact_message" class="text-white">Message</InputLabel>
           <TextareaInput required class="mt-2 w-full text-black" id="contact_message" rows="4" v-model="form.contact_message" />
+          <InputDescription class="!text-gray-300 font-extralight">
+            Please write your question or a description of the problem you’re trying to solve here.
+          </InputDescription>
           <InputError class="mt-2" :message="form.errors.contact_message" />
-
         </div>
 
 

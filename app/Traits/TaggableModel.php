@@ -43,7 +43,7 @@ trait TaggableModel {
       $this->tags()->detach();
 
       foreach ($tags as $tag) {
-        if ($loaded_tag = Tag::find($tag)?->first()) {
+        if ($loaded_tag = Tag::find($tag)) {
           $this->tag($loaded_tag->name);
         }
       }
