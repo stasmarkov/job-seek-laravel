@@ -16,18 +16,18 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
       </svg>
       Dashboard
     </AdminDashboardNavLink>
-    <AdminDashboardNavLink :href="route('job.index')" v-if="$page.props.isAdmin || $page.props.isEmployer">
+    <AdminDashboardNavLink :href="route('vacancy.index')" v-if="$page.props.isAdmin || $page.props.isEmployer">
       <svg
         class="mr-2 h-4 w-4 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
         fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
       </svg>
-      My jobs
+      My vacancies
     </AdminDashboardNavLink>
-    <AdminDashboardNavLink :href="route('job.create')" v-if="$page.props.isAdmin || $page.props.isEmployer">
+    <AdminDashboardNavLink :href="route('vacancy.create')" v-if="$page.props.isAdmin || $page.props.isEmployer">
       <font-awesome-icon :icon="faSuitcase" class="mr-2 h-4 w-4 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150" />
-      Post a new job
+      Post a new vacancy
     </AdminDashboardNavLink>
     <AdminDashboardNavLink
       :href="route('logout')"

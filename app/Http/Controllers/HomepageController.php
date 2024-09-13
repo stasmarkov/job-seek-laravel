@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\JobResource;
+use App\Http\Resources\VacancyResource;
 use App\Http\Resources\TagResource;
-use App\Models\Job;
-use App\Models\Scopes\JobScope;
+use App\Models\Vacancy;
+use App\Models\Scopes\VacancyScope;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
@@ -26,18 +26,18 @@ class HomepageController extends Controller {
    *   The Inertia render page.
    */
   public function index() {
-    $jobs_featured = Cache::remember('views:jobs:homepage:featured', 3600, static function () {
-      return Job::latest()
-        ->withoutGlobalScope(JobScope::class)
+    $vacancies_featured = Cache::remember('views:vacancies:homepage:featured', 3600, static function () {
+      return Vacancy::latest()
+        ->withoutGlobalScope(VacancyScope::class)
         ->with(['employerProfile', 'tags'])
         ->where('featured', TRUE)
         ->limit(6)
         ->get();
     });
 
-    $jobs = Cache::remember('views:jobs:homepage:non-featured', 3600, static function () {
-      return Job::latest()
-        ->withoutGlobalScope(JobScope::class)
+    $vacancies = Cache::remember('views:vacancies:homepage:non-featured', 3600, static function () {
+      return Vacancy::latest()
+        ->withoutGlobalScope(VacancyScope::class)
         ->with(['employerProfile', 'tags'])
         ->where('featured', FALSE)
         ->limit(9)
@@ -53,8 +53,8 @@ class HomepageController extends Controller {
       'canRegister' => Route::has('register'),
       'laravelVersion' => Application::VERSION,
       'phpVersion' => PHP_VERSION,
-      'featuredJobs' => JobResource::collection($jobs_featured),
-      'jobs' => JobResource::collection($jobs),
+      'featuredVacancies' => VacancyResource::collection($vacancies_featured),
+      'vacancies' => VacancyResource::collection($vacancies),
       'tags' => TagResource::collection($tags),
     ]);
   }

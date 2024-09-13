@@ -2,7 +2,7 @@
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 
 const props = defineProps({
-  jobsCount: {
+  vacanciesCount: {
     type: Number,
     default: 0,
   },
@@ -40,11 +40,11 @@ const props = defineProps({
               <div class="ml-5 w-0 flex-1">
                 <dl>
                   <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
-                    Total jobs posted
+                    Total vacancies posted
                   </dt>
                   <dd class="flex items-baseline">
                     <div class="text-2xl leading-8 font-semibold text-gray-900">
-                      {{ props.jobsCount }}
+                      {{ props.vacanciesCount }}
                     </div>
                   </dd>
                 </dl>
@@ -53,7 +53,7 @@ const props = defineProps({
           </div>
           <div class="bg-gray-50 px-4 py-4 sm:px-6">
             <div class="text-sm leading-5">
-              <Link :href="route('job.index')"
+              <Link :href="route('vacancy.index')"
                  class="font-medium text-indigo-600 hover:text-indigo-500 transition ease-in-out duration-150">
                 View all
               </Link>

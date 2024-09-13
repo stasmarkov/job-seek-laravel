@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
 
   public function up(): void {
-    Schema::table('jobs', function(Blueprint $table) {
+    Schema::table('vacancies', function(Blueprint $table) {
       $table->foreignId('love_reactant_id')->nullable();
 
       $table
@@ -29,7 +29,7 @@ return new class extends Migration {
   }
 
   public function down(): void {
-    Schema::table('jobs', function(Blueprint $table) {
+    Schema::table('vacancies', function(Blueprint $table) {
       $table->dropForeign(['love_reactant_id']);
       $table->dropColumn('love_reactant_id');
     });

@@ -14,19 +14,19 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 /**
- * The contact us job.
+ * The contact us vacancy.
  */
 class SendContactUsMailJob implements ShouldQueue {
 
   use Queueable, InteractsWithQueue, Dispatchable;
 
   /**
-   * Create a new job instance.
+   * Create a new vacancy instance.
    */
   public function __construct(public array $data) {}
 
   /**
-   * Execute the job.
+   * Execute the vacancy.
    */
   public function handle(): void {
     try {

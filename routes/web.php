@@ -14,14 +14,9 @@ use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\LoginLogController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\RoleSelectController;
-use App\Http\Controllers\Search\SearchJobsController;
+use App\Http\Controllers\Search\SearchVacanciesController;
 use App\Http\Middleware\AddContext;
-use App\Jobs\SendWeeklyJobsDigestJob;
-use App\Models\Job;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
+use App\Jobs\SendWeeklyVacanciesDigestJob;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
@@ -58,21 +53,16 @@ Route::middleware(['auth', AddContext::class])->group(function () {
 });
 
 
-Route::get('/search', [SearchJobsController::class, 'index'])->name('search.jobs');
+Route::get('/search', [SearchVacanciesController::class, 'index'])->name('search.vacancies');
 
 
 Route::get('/playground', function () {
-
-  SendWeeklyJobsDigestJob::dispatch();
-
-
-  $b=0;
-
+  SendWeeklyVacanciesDigestJob::dispatch();
   return 'Hello';
 })->name('playground');
 
 
-require __DIR__ . '/job.php';
+require __DIR__ . '/vacancy.php';
 require __DIR__ . '/profile.php';
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

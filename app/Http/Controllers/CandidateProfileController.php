@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CandidateProfileResource;
 use App\Http\Resources\EmployerProfileResource;
-use App\Http\Resources\JobResource;
+use App\Http\Resources\VacancyResource;
 use App\Http\Resources\TagResource;
 use App\Models\CandidateProfile;
 use App\Models\EmployerProfile;

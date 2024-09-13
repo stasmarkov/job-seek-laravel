@@ -34,13 +34,13 @@ class EmployerProfile extends Model {
   }
 
   /**
-   * Get the list of Job data models.
+   * Get the list of Vacancies data models.
    *
    * @return \Illuminate\Database\Eloquent\Relations\HasMany
-   *   The list of Job models.
+   *   The list of Vacancies models.
    */
-  public function jobs(): HasMany {
-    return $this->hasMany(Job::class);
+  public function vacancies(): HasMany {
+    return $this->hasMany(Vacancy::class);
   }
 
 }

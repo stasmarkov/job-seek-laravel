@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SendContactUsMailJob;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 /**

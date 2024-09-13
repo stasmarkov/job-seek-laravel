@@ -30,10 +30,10 @@ class Tag extends Model {
   ];
 
   /**
-   * Get the list of Job models.
+   * Get the list of Vacancy models.
    */
-  public function jobs(): BelongsToMany {
-    return $this->belongsToMany(Job::class)->withTimestamps();
+  public function vacancies(): BelongsToMany {
+    return $this->belongsToMany(Vacancy::class)->withTimestamps();
   }
 
 }

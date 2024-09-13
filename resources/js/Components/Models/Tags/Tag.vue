@@ -6,7 +6,7 @@
 </script>
 
 <template>
-  <Link :href="route('search.jobs', { tags: [tag.id] })"
+  <Link :href="route('search.vacancies', { tags: [tag.id] })"
      class="bg-white/10 px-3 py-1 rounded-2xl font-bold hover:bg-white/25 transition-colors duration-300 text-white"
      :class="{
       'px-5 py-1 text-sm' : size === 'base',
