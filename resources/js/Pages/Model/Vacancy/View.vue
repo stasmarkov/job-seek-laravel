@@ -12,6 +12,7 @@ import {faArrowUpRightFromSquare} from "@fortawesome/free-solid-svg-icons";
 import Article from "@/Components/Sections/Article.vue";
 import CardWide from "@/Components/Models/Vacancies/CardWide.vue";
 import BlockHeading from "@/Components/Headings/BlockHeading.vue";
+import RegularLink from "@/Components/Elements/RegularLink.vue";
 
 const props = defineProps({
   vacancy: Object,
@@ -48,11 +49,11 @@ const like = () => {
           </div>
 
           <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Employer:
-            <Link v-if="props.vacancy.employerProfile"
-                  class="self-start text-sm text-gray-200 hover:underline hover:text-blue-500 ease-linear transition"
+            <RegularLink v-if="props.vacancy.employerProfile"
+                  class="self-start text-sm hover:underline  ease-linear transition"
                   :href="route('profile.employer.show', { employerProfile: props.vacancy.employerProfile.id })">
               {{ props.vacancy.employerProfile.name }}
-            </Link>
+            </RegularLink>
           </p>
         </div>
         <div class="mt-6 border-t border-gray-100">

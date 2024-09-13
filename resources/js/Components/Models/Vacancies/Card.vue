@@ -17,9 +17,9 @@ defineProps({
 
     <div class="py-8 space-y-3">
       <h3 class="text-white group-hover:text-blue-600 text-xl text-bold transition-colors duration-300 ">
-        <Link :href="route('vacancy.show', { vacancy: vacancy.id })" v-if="vacancy.id">
+        <RegularLink :href="route('vacancy.show', { vacancy: vacancy.id })" v-if="vacancy.id">
           {{ vacancy.title }}
-        </Link>
+        </RegularLink>
         <span v-else>
           {{ vacancy.title }}
         </span>

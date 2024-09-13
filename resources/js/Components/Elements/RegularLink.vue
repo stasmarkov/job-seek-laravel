@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <Link class="text-gray-200 hover:underline hover:text-blue-500 ease-linear transition">
+  <Link class="text-blue-500 hover:text-pink-500 hover:underline ease-linear transition">
     <slot />
   </Link>
 </template>

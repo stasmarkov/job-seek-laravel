@@ -19,9 +19,9 @@ const props = defineProps({
     <div class="flex-1 flex flex-col md:flex-1 gap-0.5">
       <RegularLink v-if="vacancy.employerProfile" class="self-start text-sm" :href="route('profile.employer.show', { employerProfile: vacancy.employerProfile.id })">{{ vacancy.employerProfile.name }}</RegularLink>
       <h3 class="text-white font-bold text-xl mt-2 group-hover:text-blue-600 transition-colors duration-300">
-        <Link :href="route('vacancy.show', { vacancy: vacancy.id })" v-if="vacancy.id">
+        <RegularLink :href="route('vacancy.show', { vacancy: vacancy.id })" v-if="vacancy.id">
           {{ vacancy.title }}
-        </Link>
+        </RegularLink>
         <span v-else>
           {{ vacancy.title }}
         </span>
