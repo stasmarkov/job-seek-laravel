@@ -24,7 +24,7 @@ import MainMenuMobile from "@/Components/Menus/MainMenuMobile.vue";
           <UserMenu />
         </div>
       </div>
-      <div class="flex justify-between md:hidden py-4  w-full max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="flex justify-between md:hidden py-4 w-full max-w-5xl mx-auto px-2 sm:px-4">
         <Link :href="route('homepage')">
           <ApplicationLogo />
         </Link>

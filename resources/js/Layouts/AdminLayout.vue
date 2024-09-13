@@ -8,7 +8,6 @@ import {ref} from "vue";
 
 const isOpened = ref(false);
 </script>
-
 <template>
   <Head>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -35,7 +34,7 @@ const isOpened = ref(false);
             </button>
           </div>
           <div class="flex-1 h-0 pt-4 pb-4 overflow-y-auto">
-            <div class="flex-shrink-0 flex items-center px-4">
+            <div class="flex-shrink-0 flex items-center px-2">
               <Link :href="route('homepage')">
                 <ApplicationLogo/>
               </Link>
@@ -103,7 +102,10 @@ const isOpened = ref(false);
       </div>
     </div>
     <div class="flex flex-col w-0 flex-1 overflow-hidden">
-      <div class="py-4 px-4 md:hidden pl-1 sm:pt-1 sm:pl-3 flex justify-end border-b">
+      <div class="py-4 px-2 md:hidden sm:pt-1 sm:pl-3 flex justify-between border-b">
+        <Link :href="route('homepage')">
+          <ApplicationLogo mode="dark" />
+        </Link>
         <button
           @click="isOpened = !isOpened"
           class="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:bg-gray-200 transition ease-in-out duration-150"

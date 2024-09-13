@@ -30,7 +30,7 @@ const isOpened = ref(false);
       }">
 
       <div class="relative flex-1 flex flex-col w-full bg-gray-800">
-        <div class="absolute top-3 right-3 sm:right-5 p-1">
+        <div class="absolute top-3 right-1 sm:right-5 p-1">
           <button
             class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600"
             aria-label="Close sidebar" @click="isOpened = !isOpened">
@@ -41,7 +41,7 @@ const isOpened = ref(false);
           </button>
         </div>
         <div class="flex-1 h-0 pt-4 pb-4 overflow-y-auto">
-          <div class="flex-shrink-0 px-4 sm:px-6">
+          <div class="flex-shrink-0 px-2">
             <div>
               <Link :href="route('homepage')">
                 <ApplicationLogo/>
