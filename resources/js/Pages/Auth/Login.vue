@@ -10,6 +10,7 @@ import BlockHeading from "@/Components/Headings/BlockHeading.vue";
 import LinkButton from "@/Components/Buttons/LinkButton.vue";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {faGithub} from "@fortawesome/free-brands-svg-icons";
+import FormHeading from "@/Components/Headings/FormHeading.vue";
 
 defineProps({
   canResetPassword: {
@@ -41,7 +42,10 @@ const submit = () => {
       {{ status }}
     </div>
 
-    <form @submit.prevent="submit">
+    <FormHeading>
+      <h1 class="text-2xl">Login using your account</h1>
+    </FormHeading>
+    <form @submit.prevent="submit" class="mt-4">
       <div>
         <InputLabel for="email" value="Email"/>
 
@@ -90,22 +94,25 @@ const submit = () => {
       </div>
 
       <div class="flex items-center justify-end mt-4 gap-2">
-        <Link
-          :href="route('register')"
-          class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          Create a new account
-        </Link>
-
         <a
           :href="route('auth.github')"
           class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           GitHub
           <font-awesome-icon :icon="faGithub" />
         </a>
+
         <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
           Log in
         </PrimaryButton>
+      </div>
+
+      <div class="mt-4 pt-4 border-t border-gray-200">
+        <p class="text-sm text-gray-600">Don’t have an account? <Link
+          :href="route('register')"
+          class="underline hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Create a new account
+        </Link></p>
       </div>
     </form>
   </GuestLayout>
