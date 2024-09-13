@@ -14,6 +14,7 @@ use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\LoginLogController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\RoleSelectController;
+use App\Http\Controllers\Search\SearchCandidatesController;
 use App\Http\Controllers\Search\SearchVacanciesController;
 use App\Http\Middleware\AddContext;
 use App\Jobs\SendWeeklyVacanciesDigestJob;
@@ -52,9 +53,8 @@ Route::middleware(['auth', AddContext::class])->group(function () {
     ->name('profile.role_select.update');
 });
 
-
-Route::get('/search', [SearchVacanciesController::class, 'index'])->name('search.vacancies');
-
+Route::get('/search/vacancies', [SearchVacanciesController::class, 'index'])->name('search.vacancies');
+Route::get('/search/candidates', [SearchCandidatesController::class, 'index'])->name('search.candidates');
 
 Route::get('/playground', function () {
   SendWeeklyVacanciesDigestJob::dispatch();

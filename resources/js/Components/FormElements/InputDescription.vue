@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="text-sm text-gray-900 mt-2">
+  <div class="text-sm text-gray-600 mt-2">
     <slot />
   </div>
 </template>

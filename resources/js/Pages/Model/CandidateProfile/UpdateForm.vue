@@ -67,9 +67,7 @@ const updateCandidateProfile = () => {
 
       <form @submit.prevent="updateCandidateProfile" class="mt-6 space-y-6">
         <div class="flex justify-between gap-4">
-          <InputWrapper>
-            <InputLabel for="first_name" value="First Name"/>
-
+          <InputWrapper id="first_name" label="First Name" :message="form.errors.first_name">
             <TextInput
               type="text"
               class="mt-1 block w-full"
@@ -78,12 +76,8 @@ const updateCandidateProfile = () => {
               autofocus
               autocomplete="first_name"
             />
-
-            <InputError class="mt-2" :message="form.errors.first_name"/>
           </InputWrapper>
-          <InputWrapper>
-            <InputLabel for="last_name" value="Last Name"/>
-
+          <InputWrapper id="last_name" label="Last Name" :message="form.errors.last_name">
             <TextInput
               type="text"
               class="mt-1 block w-full"
@@ -92,15 +86,11 @@ const updateCandidateProfile = () => {
               autofocus
               autocomplete="last_name"
             />
-
-            <InputError class="mt-2" :message="form.errors.last_name"/>
           </InputWrapper>
         </div>
 
         <div>
-          <InputWrapper>
-            <InputLabel for="experience_since" value="Expirience since"/>
-
+          <InputWrapper id="experience_since" label="Experience Since" :message="form.errors.experience_since">
             <TextInput
               type="number"
               class="mt-1 block w-full"
@@ -108,28 +98,21 @@ const updateCandidateProfile = () => {
 
               autofocus
             />
-
-            <InputError class="mt-2" :message="form.errors.experience_since"/>
           </InputWrapper>
         </div>
 
         <div>
-          <InputWrapper>
-            <InputLabel for="description" value="Description"/>
-
+          <InputWrapper id="description" label="Description" :message="form.errors.description">
             <TextareaInput
               type="text"
               class="mt-1 block w-full"
               v-model="form.description"
-              required
               autofocus
               autocomplete="description"
             />
             <InputDescription>
               Tell us what projects and tasks you've completed, what technologies you've used, your current role in the team, and where you want to grow.
             </InputDescription>
-
-            <InputError class="mt-2" :message="form.errors.description"/>
           </InputWrapper>
         </div>
 

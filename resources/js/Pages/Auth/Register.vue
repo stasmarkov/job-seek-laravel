@@ -7,6 +7,10 @@ import TextInput from '@/Components/FormElements/TextInput.vue';
 import {Head, Link, useForm} from '@inertiajs/vue3';
 import Divider from "@/Components/FormElements/Divider.vue";
 import SelectInput from "@/Components/FormElements/SelectInput.vue";
+import InputWrapper from "@/Components/FormElements/InputWrapper.vue";
+import InputDescription from "@/Components/FormElements/InputDescription.vue";
+import {faGithub} from "@fortawesome/free-brands-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 const form = useForm({
   name: '',
@@ -29,9 +33,7 @@ const submit = () => {
     <Head title="Register"/>
 
     <form @submit.prevent="submit">
-      <div>
-        <InputLabel for="name" value="Name"/>
-
+      <InputWrapper id="name" label="Username" :message="form.errors.name">
         <TextInput
           id="name"
           type="text"
@@ -42,13 +44,10 @@ const submit = () => {
           autocomplete="name"
           placeholder="Name..."
         />
+      </InputWrapper>
 
-        <InputError class="mt-2" :message="form.errors.name"/>
-      </div>
 
-      <div class="mt-4">
-        <InputLabel for="email" value="Email"/>
-
+      <InputWrapper id="email" label="Email" :message="form.errors.email">
         <TextInput
           id="email"
           type="email"
@@ -58,13 +57,12 @@ const submit = () => {
           autocomplete="username"
           placeholder="example@mail.com"
         />
+        <InputDescription>
+          All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.
+        </InputDescription>
+      </InputWrapper>
 
-        <InputError class="mt-2" :message="form.errors.email"/>
-      </div>
-
-      <div class="mt-4">
-        <InputLabel for="password" value="Password"/>
-
+      <InputWrapper id="password" label="Password" :message="form.errors.password">
         <TextInput
           id="password"
           type="password"
@@ -73,13 +71,9 @@ const submit = () => {
           required
           autocomplete="new-password"
         />
+      </InputWrapper>
 
-        <InputError class="mt-2" :message="form.errors.password"/>
-      </div>
-
-      <div class="mt-4">
-        <InputLabel for="password_confirmation" value="Confirm Password"/>
-
+      <InputWrapper id="password_confirmation" label="Confirm Password" :message="form.errors.password_confirmation">
         <TextInput
           id="password_confirmation"
           type="password"
@@ -88,21 +82,24 @@ const submit = () => {
           required
           autocomplete="new-password"
         />
-
-        <InputError class="mt-2" :message="form.errors.password_confirmation"/>
-      </div>
+      </InputWrapper>
 
       <Divider/>
 
-      <div class="flex items-center justify-end mt-4">
+      <div class="flex items-center justify-end mt-4 gap-2">
         <Link
           :href="route('login')"
           class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Already registered?
         </Link>
-
-        <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+        <a
+          :href="route('auth.github')"
+          class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          GitHub
+          <font-awesome-icon :icon="faGithub" />
+        </a>
+        <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
           Register
         </PrimaryButton>
       </div>
