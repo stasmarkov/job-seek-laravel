@@ -24,7 +24,7 @@ const isOpened = ref(false);
           <div class="absolute inset-0 bg-gray-600 opacity-75"></div>
         </div>
         <div class="relative flex-1 flex flex-col max-w-xs w-full bg-gray-800">
-          <div class="absolute top-0 right-0 -mr-14 p-1">
+          <div class="absolute top-3 right-0 -mr-14 p-1">
             <button
               class="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600"
               aria-label="Close sidebar" @click="isOpened = !isOpened">
@@ -34,7 +34,7 @@ const isOpened = ref(false);
               </svg>
             </button>
           </div>
-          <div class="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
+          <div class="flex-1 h-0 pt-4 pb-4 overflow-y-auto">
             <div class="flex-shrink-0 flex items-center px-4">
               <Link :href="route('homepage')">
                 <ApplicationLogo/>
@@ -103,7 +103,7 @@ const isOpened = ref(false);
       </div>
     </div>
     <div class="flex flex-col w-0 flex-1 overflow-hidden">
-      <div class="md:hidden pl-1 sm:pt-1 sm:pl-3 flex justify-end border-b">
+      <div class="py-4 px-4 md:hidden pl-1 sm:pt-1 sm:pl-3 flex justify-end border-b">
         <button
           @click="isOpened = !isOpened"
           class="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:bg-gray-200 transition ease-in-out duration-150"
