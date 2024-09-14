@@ -45,15 +45,13 @@ let enablePreview = ref(false);
 // @todo Find better way to extract tags.
 const vacancy = computed(() => {
   return {
+    created_at: new Date().toDateString(),
     title: form.title,
     salary: form.salary,
     location: form.location,
     schedule: form.schedule,
     url: form.url,
     tags: form.tags.map(item => {
-      if (item instanceof Object) {
-        return item;
-      }
       let tag = props.tags.find(el => el.id === item);
       return {
         'id': tag.id,
@@ -62,7 +60,7 @@ const vacancy = computed(() => {
     }),
     description: form.description,
     short_description: form.short_description,
-    employerProfile: user.employerProfile,
+    employerProfile: props.employerProfile,
   };
 });
 
@@ -173,10 +171,10 @@ const submit = () => {
       </form>
     </div>
 
-    <template #right_column v-if="enablePreview">
+    <div v-if="enablePreview" class="mt-4">
       <CardWide :vacancy="vacancy" v-if="!form.featured"></CardWide>
       <Card :vacancy="vacancy" v-else></Card>
-    </template>
+    </div>
 
   </AdminLayout>
 

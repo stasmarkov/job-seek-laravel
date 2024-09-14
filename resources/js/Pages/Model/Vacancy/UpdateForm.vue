@@ -41,6 +41,7 @@ const user = useCurrentUser();
 // Vacancy passed to the preview.
 const vacancy = computed(() => {
   return {
+    created_at: props.vacancy.created_at,
     title: form.title,
     salary: form.salary,
     location: form.location,
@@ -55,7 +56,7 @@ const vacancy = computed(() => {
     }),
     description: form.description,
     short_description: form.short_description,
-    employerProfile: user.employerProfile,
+    employerProfile: props.employerProfile,
   };
 });
 
@@ -158,6 +159,7 @@ const submit = () => {
             leave-to-class="opacity-0"
           >
             <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Saved.</p>
+
           </Transition>
         </div>
       </form>
