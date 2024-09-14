@@ -29,7 +29,7 @@ const props = defineProps({
       </article>
 
       <section class="mt-6 space-y-6">
-        <CardWide v-for="vacancy in props.vacancies.data" :vacancy />
+        <CardWide :hoverable="false" v-for="vacancy in props.vacancies.data" :vacancy />
       </section>
 
       <Pager :links="props.vacancies.meta.links" />
