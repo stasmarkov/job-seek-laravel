@@ -4,38 +4,34 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Enums\UserRolesEnum;
 use App\Http\Requests\VacancyCreateRequest;
 use App\Http\Requests\VacancyUpdateRequest;
 use App\Http\Resources\VacancyResource;
 use App\Http\Resources\TagResource;
+use App\Jobs\CreateVacancy;
+use App\Jobs\UpdateVacancy;
 use App\Models\Vacancy;
-use App\Models\Scopes\VacancyScope;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Context;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 /**
  * The vacancy controller.
  */
-class VacancyController extends Controller implements HasMiddleware {
+class VacancyController extends Controller {
 
   /**
    * {@inheritdoc}
    */
-  public static function middleware() {
-    return [
-      new Middleware('can:viewAny,\App\Model\Vacancy', only: ['index']),
-      new Middleware('can:create,\App\Model\Vacancy', only: ['create', 'store']),
-      new Middleware('can:update,vacancy', only: ['edit', 'update']),
-      new Middleware('can:delete,vacancy', only: ['destroy']),
-    ];
+  public function __construct() {
+    $this->middleware('can:viewAny,\App\Model\Vacancy')->only('index');
+    $this->middleware('can:create,\App\Model\Vacancy')->only('create', 'store');
+    $this->middleware('can:update,vacancy')->only('edit', 'update');
+    $this->middleware('can:delete,vacancy')->only('destroy');
   }
 
   /**
@@ -75,9 +71,9 @@ class VacancyController extends Controller implements HasMiddleware {
       ->latest('created_at')
       ->limit(4);
 
-    $similar_vacancies->where(function (Builder $query) use ($vacancy) {
+    $similar_vacancies->whereHas('tags', function (Builder $query) use ($vacancy) {
       foreach ($vacancy->tags as $tag) {
-        $query->orWhereRelation('tags', 'tags.id', '=', $tag->id);
+        $query->orWhere('tags.id', '=', $tag->id);
       }
     });
 
@@ -107,19 +103,9 @@ class VacancyController extends Controller implements HasMiddleware {
    * Store a newly created resource in storage.
    */
   public function store(VacancyCreateRequest $request) {
-    // @todo Move to the separate shared storage.
-    $attributes = $request->validated();
-    $attributes['featured'] = $request->has('featured');
-
-    $vacancy = Auth::user()->employerProfile->vacancies()
-      ->create(Arr::except($attributes, 'tags'));
-
-    if (\is_string($attributes['tags'])) {
-      $attributes['tags'] = explode(',', $attributes['tags']);
-    }
-    $vacancy->attachTags($attributes['tags']);
-
-    return redirect(route('vacancy.show', ['vacancy' => $vacancy->id]));
+    $uuid = Str::uuid();
+    $this->dispatchSync(CreateVacancy::fromRequest($request, $uuid));
+    return redirect(route('vacancy.index'));
   }
 
   /**
@@ -132,7 +118,7 @@ class VacancyController extends Controller implements HasMiddleware {
    *   The page.
    */
   public function edit(Vacancy $vacancy) {
-    return Inertia::render('Model/Vacancy/EditForm', [
+    return Inertia::render('Model/Vacancy/UpdateForm', [
       'employerProfile' => Context::get('employerProfile'),
       'vacancy' => VacancyResource::make($vacancy),
       'tags' => TagResource::collection(Tag::all()),
@@ -143,18 +129,7 @@ class VacancyController extends Controller implements HasMiddleware {
    * Store a newly created resource in storage.
    */
   public function update(VacancyUpdateRequest $request, Vacancy $vacancy) {
-    $attributes = $request->validated();
-
-    $attributes['featured'] = $request->has('featured');
-
-    if (\is_string($attributes['tags'])) {
-      $attributes['tags'] = explode(',', $attributes['tags']);
-    }
-    $vacancy->attachTags($attributes['tags']);
-
-    unset($attributes['tags']);
-    $vacancy->update($attributes);
-
+    $this->dispatchSync(UpdateVacancy::fromRequest($vacancy, $request));
     return redirect(route('vacancy.show', [
       'vacancy' => $vacancy,
     ]));

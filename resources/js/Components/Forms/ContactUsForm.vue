@@ -9,6 +9,7 @@ import {useForm} from "@inertiajs/vue3";
 import TextInput from "@/Components/FormElements/TextInput.vue";
 import {useCurrentUser} from "@/Composables/useCurrentUser.js";
 import InputDescription from "@/Components/FormElements/InputDescription.vue";
+import InputWrapper from "@/Components/FormElements/InputWrapper.vue";
 
 const currentUser = useCurrentUser();
 
@@ -28,11 +29,11 @@ const submit = () => {
 </script>
 
 <template>
-  <FormGroup class="bg-white/20 border-white rounded-2xl">
+  <FormGroup class="bg-white/20 border-pink-500 rounded-2xl">
     <form @submit.prevent="submit">
         <div class="block border-b mb-4 pb-4">
           <h1 class="text-3xl">Contact Us!</h1>
-          <p class="mt-2 font-light text-gray-300">Write us about the problem or about your user experience.</p>
+          <p class="mt-2 font-light text-gray-200">Write us about the problem or about your user experience.</p>
         </div>
 
         <div class="flex gap-4 mt-4 flex-wrap md:flex-nowrap">

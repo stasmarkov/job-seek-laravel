@@ -17,7 +17,7 @@ use Inertia\Inertia;
 /**
  * The Employer Profile Model controller.
  */
-class EmployerProfileController extends Controller implements HasMiddleware {
+class EmployerProfileController extends Controller {
 
   /**
    * Constructs EmployerProfileController class.
@@ -27,17 +27,10 @@ class EmployerProfileController extends Controller implements HasMiddleware {
    */
   public function __construct(
     protected Request $request
-  ) {}
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function middleware() {
-    return [
-      new Middleware('can:create,\App\Model\EmployerProfile', only: ['create', 'store']),
-      new Middleware('can:update,\App\Model\EmployerProfile', only: ['edit', 'update']),
-      new Middleware('can:delete,\App\Model\EmployerProfile', only: ['destroy']),
-    ];
+  ) {
+    $this->middleware('can:create,\App\Model\EmployerProfile')->only('create', 'store');
+    $this->middleware('can:update,\App\Model\EmployerProfile')->only('edit', 'update');
+    $this->middleware('can:delete,\App\Model\EmployerProfile')->only('destroy');
   }
 
   /**

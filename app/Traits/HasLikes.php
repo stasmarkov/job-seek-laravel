@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 /**
  * Provides Model trait for likable Models.
  */
-trait LikableModel {
+trait HasLikes {
 
   /**
    * {@inheritdoc}

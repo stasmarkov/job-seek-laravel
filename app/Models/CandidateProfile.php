@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use App\Traits\TaggableModel;
+use App\Traits\HasTags;
 
 /**
  * The candidate profile model.
  */
 class CandidateProfile extends Model {
 
-  use HasFactory, TaggableModel;
+  use HasFactory, HasTags;
 
   /**
    * {@inheritdoc}

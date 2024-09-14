@@ -2,13 +2,14 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Vacancy;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 
 /**
  * The vacancy resource.
+ *
+ * @mixin \App\Models\Vacancy
  */
 class VacancyResource extends JsonResource {
 
@@ -19,8 +20,9 @@ class VacancyResource extends JsonResource {
    */
   public function toArray(Request $request): array {
     return [
-      'id' => $this->id,
+      'id' => $this->getKey(),
       'title' => $this->title,
+      'featured' => $this->featured,
       'description' => $this->description,
       'short_description' => $this->short_description,
       'url' => $this->url,

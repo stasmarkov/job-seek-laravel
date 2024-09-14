@@ -14,6 +14,7 @@ return new class extends Migration {
   public function up(): void {
     Schema::create('vacancies', function (Blueprint $table) {
       $table->id();
+      $table->uuid();
       $table->foreignIdFor(EmployerProfile::class);
       $table->string('title')->index();
       $table->string('salary');

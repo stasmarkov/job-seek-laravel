@@ -34,7 +34,7 @@ class VacancyPolicy {
    * Determine whether the user can create models.
    */
   public function create(User $user): bool {
-    return $user->hasPermissionTo('create a new vacancy');
+    return $user->hasPermissionTo('create a new vacancy') && $user->employerProfile()->first();
   }
 
   /**

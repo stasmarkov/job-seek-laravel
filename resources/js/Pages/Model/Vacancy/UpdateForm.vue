@@ -30,16 +30,15 @@ const form = useForm({
   location: props.vacancy.location,
   schedule: props.vacancy.schedule,
   url: props.vacancy.url,
-  tags: props.vacancy.tags,
+  tags: props.vacancy.tags.map(el => el.id),
   description: props.vacancy.description,
   short_description: props.vacancy.short_description,
-  featured: props.vacancy.featured
+  featured: Boolean(props.vacancy.featured)
 });
 
 const user = useCurrentUser();
 
-// vacancy passed to the preview.
-// @todo Find better way to extract tags.
+// Vacancy passed to the preview.
 const vacancy = computed(() => {
   return {
     title: form.title,
@@ -47,11 +46,8 @@ const vacancy = computed(() => {
     location: form.location,
     schedule: form.schedule,
     url: form.url,
-    tags: form.tags.map(item => {
-      if (item instanceof Object) {
-        return item;
-      }
-      let tag = props.tags.find(el => el.id === item);
+    tags: form.tags.map(tagId => {
+      let tag = props.tags.find(el => el.id === tagId);
       return {
         'id': tag.id,
         'name': tag.name,
@@ -81,7 +77,7 @@ const submit = () => {
 
 <template>
   <AdminLayout>
-    <Head title="Edit vacancy"/>
+    <Head title="Edit vacancy" />
 
     <template #heading>Edit vacancy: {{ props.vacancy.title }}</template>
 
@@ -144,8 +140,11 @@ const submit = () => {
                      placeholder="https://acme.com/jobs.ceo-wanted"/>
           <InputError :message="form.errors.url" class="mt-2"/>
 
-          <CheckboxButtons :items="props.tags" :selectedItems="form.tags.map(el => el.id)" type="admin"
-                           @checkboxCheckedEvent="checkboxFormSubmit"/>
+          <CheckboxButtons
+            :items="props.tags"
+            :selectedItems="form.tags"
+            type="admin"
+            @checkboxCheckedEvent="checkboxFormSubmit"/>
           <InputError :message="form.errors.tags" class="mt-2"/>
         </div>
 

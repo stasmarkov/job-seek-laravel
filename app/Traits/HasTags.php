@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 /**
  * The ability to tag models.
  */
-trait TaggableModel {
+trait HasTags {
 
   /**
    * Set the Vacancies' model Tag model.
@@ -38,16 +38,10 @@ trait TaggableModel {
    * @param array $tags
    *   The array of tag ids.
    */
-  public function attachTags(array $tags = []): void {
-    if ($tags) {
-      $this->tags()->detach();
-
-      foreach ($tags as $tag) {
-        if ($loaded_tag = Tag::find($tag)) {
-          $this->tag($loaded_tag->name);
-        }
-      }
-    }
+  public function syncTags(array $tags = []): void {
+    $this->save();
+    $this->tags()->sync($tags);
+    $this->unsetRelation('tags');
   }
 
 }

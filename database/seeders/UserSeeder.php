@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Database\Seeders;
 
 use App\Enums\UserRolesEnum;
+use App\Models\CandidateProfile;
 use App\Models\EmployerProfile;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -34,9 +35,10 @@ class UserSeeder extends Seeder {
         'status' => 1,
       ]);
 
-    // Create admin user.
+    // Create employer user.
     User::factory()
       ->hasAttached($employer_role)
+//      ->has(EmployerProfile::factory())
       ->create([
         'name' => 'employer',
         'email' => 'employer@mail.com',
@@ -44,9 +46,10 @@ class UserSeeder extends Seeder {
         'status' => 1,
       ]);
 
-    // Create admin user.
+    // Create candidate user.
     User::factory()
       ->hasAttached($candidate_role)
+//      ->has(CandidateProfile::factory())
       ->create([
         'name' => 'candidate',
         'email' => 'candidate@mail.com',

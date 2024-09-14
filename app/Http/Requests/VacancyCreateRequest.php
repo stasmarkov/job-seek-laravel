@@ -29,6 +29,7 @@ class VacancyCreateRequest extends FormRequest {
         Rule::in(['Part-Time', 'Full-Time', 'Contract']),
       ],
       'url' => ['required', 'url'],
+      'featured' => ['boolean'],
       'tags' => ['nullable'],
     ];
   }

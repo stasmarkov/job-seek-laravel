@@ -22,6 +22,7 @@ class VacancyFactory extends Factory {
    */
   public function definition(): array {
     return [
+      'uuid' => $this->faker->uuid(),
       'employer_profile_id' => EmployerProfile::factory(),
       'title' => $this->faker->jobTitle(),
       'salary' => $this->faker->randomElement([

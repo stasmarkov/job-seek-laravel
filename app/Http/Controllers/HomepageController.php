@@ -29,7 +29,6 @@ class HomepageController extends Controller {
     $vacancies_featured = Cache::remember('views:vacancies:homepage:featured', 3600, static function () {
       return Vacancy::latest()
         ->withoutGlobalScope(VacancyScope::class)
-        ->with(['employerProfile', 'tags'])
         ->where('featured', TRUE)
         ->limit(6)
         ->get();
@@ -38,7 +37,6 @@ class HomepageController extends Controller {
     $vacancies = Cache::remember('views:vacancies:homepage:non-featured', 3600, static function () {
       return Vacancy::latest()
         ->withoutGlobalScope(VacancyScope::class)
-        ->with(['employerProfile', 'tags'])
         ->where('featured', FALSE)
         ->limit(9)
         ->get();

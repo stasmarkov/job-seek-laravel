@@ -21,7 +21,7 @@ use Inertia\Inertia;
 /**
  * The Candidate Profile model controller.
  */
-class CandidateProfileController extends Controller implements HasMiddleware {
+class CandidateProfileController extends Controller {
 
   /**
    * Constructs CandidateProfileController class.
@@ -31,20 +31,10 @@ class CandidateProfileController extends Controller implements HasMiddleware {
    */
   public function __construct(
     protected Request $request
-  ) {}
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function middleware() {
-    return [
-      new Middleware('can:create,\App\Model\CandidateProfile', only: [
-        'create',
-        'store',
-      ]),
-      new Middleware('can:update,\App\Model\CandidateProfile', only: ['update', 'edit']),
-      new Middleware('can:delete,\App\Model\CandidateProfile', only: ['destroy']),
-    ];
+  ) {
+    $this->middleware('can:create,\App\Model\CandidateProfile')->only('create', 'store');
+    $this->middleware('can:update,\App\Model\CandidateProfile')->only('edit', 'update');
+    $this->middleware('can:delete,\App\Model\CandidateProfile')->only('destroy');
   }
 
   /**
@@ -87,7 +77,7 @@ class CandidateProfileController extends Controller implements HasMiddleware {
     if (\is_string($attributes['tags'])) {
       $attributes['tags'] = explode(',', $attributes['tags']);
     }
-    $candidate_profile->attachTags($attributes['tags']);
+    $candidate_profile->syncTags($attributes['tags']);
 
     return redirect()->route('profile.candidate.show', ['user' => $user->id]);
   }
@@ -121,7 +111,7 @@ class CandidateProfileController extends Controller implements HasMiddleware {
     if (\is_string($attributes['tags'])) {
       $attributes['tags'] = explode(',', $attributes['tags']);
     }
-    $candidate_profile->attachTags($attributes['tags']);
+    $candidate_profile->syncTags($attributes['tags']);
 
     unset($attributes['tags']);
     $candidate_profile->update(Arr::except($attributes, 'tags'));

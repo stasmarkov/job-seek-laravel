@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Models;
 
 use App\Enums\UserRolesEnum;
+use App\Traits\HasUuid;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
 use App\Events\VacancyCreatedEvent;
 use App\Events\VacancyDeletedEvent;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
-use App\Traits\TaggableModel;
+use App\Traits\HasTags;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -22,15 +23,21 @@ use Illuminate\Support\Facades\Auth;
  */
 class Vacancy extends Model implements ReactableInterface {
 
-  use HasFactory, Notifiable, Reactable, TaggableModel;
+  use HasFactory, Notifiable, Reactable, HasTags, HasUuid;
 
   /**
-   * The list of guarded fields.
-   *
-   * @var string[]
+   * {@inheritdoc}
    */
   protected $guarded = [
     'id',
+  ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $with = [
+    'tags',
+    'employerProfile',
   ];
 
   /**

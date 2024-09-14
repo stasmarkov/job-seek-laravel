@@ -30,6 +30,7 @@ class VacancyUpdateRequest extends FormRequest {
       ],
       'url' => ['required', 'url'],
       'tags' => ['nullable'],
+      'featured' => ['boolean'],
     ];
   }
 
