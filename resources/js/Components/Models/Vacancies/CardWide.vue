@@ -17,7 +17,7 @@ const props = defineProps({
     </div>
 
     <div class="flex-1 flex flex-col md:flex-1 gap-0.5">
-      <span class="text-sm">Employer: <RegularLink v-if="vacancy.employerProfile" class="self-start" :href="route('profile.employer.show', { employerProfile: vacancy.employerProfile.id })">{{ vacancy.employerProfile.name }}</RegularLink></span>
+      <span class="text-sm text-gray-300">Employer: <RegularLink v-if="vacancy.employerProfile" class="self-start" :href="route('profile.employer.show', { employerProfile: vacancy.employerProfile.id })">{{ vacancy.employerProfile.name }}</RegularLink></span>
       <span class="text-xs text-gray-300">{{ vacancy.created_at }}</span>
       <h3 class="text-white font-bold text-xl mt-2 group-hover:text-blue-600 transition-colors duration-300">
         <RegularLink :href="route('vacancy.show', { vacancy: vacancy.id })" v-if="vacancy.id">
@@ -28,7 +28,7 @@ const props = defineProps({
         </span>
       </h3>
       <p class="text-md font-light">{{ vacancy.short_description?.substring(0, 100) + '...' }}</p>
-      <p class="text-sm text-gray-500 mt-auto">{{ vacancy.schedule }} - {{ vacancy.salary }}</p>
+      <p class="mt-2 text-sm text-gray-500">{{ vacancy.schedule }} - {{ vacancy.salary }}</p>
     </div>
 
     <div v-if="vacancy.tags.length" class="flex flex-wrap gap-2 mt-4 basis-full md:mt-auto md:flex-1 md:justify-end">

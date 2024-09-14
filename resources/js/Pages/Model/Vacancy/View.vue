@@ -41,20 +41,21 @@ const like = () => {
       <div class="text-white">
         <div class="px-4 sm:px-0">
           <div class="flex justify-between">
-            <h3 class="text-base font-semibold leading-7">
-
+            <h1 class="text-base font-semibold leading-7">
               <span class="text-3xl font-bold">{{ props.vacancy.title }}</span>
-            </h3>
+            </h1>
             <EmployerProfileLogo :employerProfile="props.vacancy.employerProfile" width="50"/>
           </div>
 
-          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Employer:
+          <div class="mt-1 max-w-2xl text-sm leading-6 text-gray-300">Employer:
             <RegularLink v-if="props.vacancy.employerProfile"
                   class="self-start text-sm hover:underline  ease-linear transition"
                   :href="route('profile.employer.show', { employerProfile: props.vacancy.employerProfile.id })">
               {{ props.vacancy.employerProfile.name }}
             </RegularLink>
-          </p>
+
+            <p class="text-xs text-gray-300">{{ vacancy.created_at }}</p>
+          </div>
         </div>
         <div class="mt-6 border-t border-gray-100">
           <dl class="divide-y divide-gray-100">

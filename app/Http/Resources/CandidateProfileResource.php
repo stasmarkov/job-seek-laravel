@@ -26,6 +26,7 @@ class CandidateProfileResource extends JsonResource {
       'tags' => TagResource::collection($this->tags),
       'experience_since' => $this->experience_since,
       'user' => UserResource::make($this->user),
+      'created_at' => $this->created_at->format('j F, Y'),
     ];
   }
 

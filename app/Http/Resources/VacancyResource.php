@@ -31,7 +31,7 @@ class VacancyResource extends JsonResource {
       'location' => $this->location,
       'tags' => TagResource::collection($this->tags),
       'employerProfile' => EmployerProfileResource::make($this->employerProfile),
-      'created_at' => $this->created_at,
+      'created_at' => $this->created_at->format('j F, Y'),
       'can' => [
         'edit' => Auth::user()?->can('update', $this) ?? FALSE,
       ],

@@ -16,8 +16,15 @@ const props = defineProps({
 
     <Article :hoverable="false">
       <article class="mb-4 pb-4 border-b">
-        <h1 class="text-2xl">{{ `${candidateProfile.first_name} ${candidateProfile.last_name}` }}</h1>
-        <p class="text-sm"><span class="text-gray-300">Experience since:</span> {{ props.candidateProfile.experience_since }}</p>
+        <div class="flex justify-between items-center">
+          <h3 class="text-base font-semibold leading-7">
+            <span class="text-3xl font-bold">{{ `${candidateProfile.first_name} ${candidateProfile.last_name}` }}</span>
+          </h3>
+          <p class="text-xs text-gray-300">{{ candidateProfile.created_at }}</p>
+        </div>
+        <div class="mt-1">
+          <p class="text-sm"><span class="text-gray-300">Experience since:</span> {{ props.candidateProfile.experience_since }}</p>
+        </div>
         <p class="mt-4">{{ props.candidateProfile.description }}</p>
       </article>
 

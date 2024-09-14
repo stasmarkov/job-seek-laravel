@@ -49,7 +49,7 @@ class VacancyController extends Controller {
       ->withQueryString();
 
     return Inertia::render('Model/Vacancy/DashboardList', [
-      'vacancies' => $vacancies,
+      'vacancies' => VacancyResource::collection($vacancies),
     ]);
   }
 

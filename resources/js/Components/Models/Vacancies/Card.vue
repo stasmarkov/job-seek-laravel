@@ -13,9 +13,12 @@ defineProps({
 
 <template>
   <Panel class="flex flex-col text-center bg-black">
-    <RegularLink v-if="vacancy.employerProfile" class="self-start text-sm" :href="route('profile.employer.show', { employerProfile: vacancy.employerProfile.id })">{{ vacancy.employerProfile.name }}</RegularLink>
+    <div>
+      <RegularLink v-if="vacancy.employerProfile" class="self-start text-sm" :href="route('profile.employer.show', { employerProfile: vacancy.employerProfile.id })">{{ vacancy.employerProfile.name }}</RegularLink>
+      <div class="text-xs text-gray-300">{{ vacancy.created_at }}</div>
+    </div>
 
-    <div class="py-8 space-y-3">
+    <div class="py-4 space-y-3">
       <h3 class="text-white group-hover:text-blue-600 text-xl text-bold transition-colors duration-300 ">
         <RegularLink :href="route('vacancy.show', { vacancy: vacancy.id })" v-if="vacancy.id">
           {{ vacancy.title }}
