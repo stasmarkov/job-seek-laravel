@@ -39,7 +39,7 @@ const like = () => {
 
     <Article :hoverable="false">
       <div class="text-white">
-        <div class="px-4 sm:px-0">
+        <div class="">
           <div class="flex justify-between">
             <h1 class="text-base font-semibold leading-7">
               <span class="text-3xl font-bold">{{ props.vacancy.title }}</span>
@@ -59,25 +59,25 @@ const like = () => {
         </div>
         <div class="mt-6 border-t border-gray-100">
           <dl class="divide-y divide-gray-100">
-            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <div class=" py-6 sm:grid sm:grid-cols-3 sm:gap-4">
               <dt class="text-sm font-medium leading-6">Salary</dt>
               <dd class="mt-1 text-sm leading-6 text-gray-300 sm:col-span-2 sm:mt-0">{{ vacancy.salary }}</dd>
             </div>
-            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <div class=" py-6 sm:grid sm:grid-cols-3 sm:gap-4">
               <dt class="text-sm font-medium leading-6 text-gray-100">Schedule</dt>
               <dd class="mt-1 text-sm leading-6 text-gray-300 sm:col-span-2 sm:mt-0">{{ props.vacancy.schedule }}</dd>
             </div>
-            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <div class=" py-6 sm:grid sm:grid-cols-3 sm:gap-4">
               <dt class="text-sm font-medium leading-6 text-gray-100">Location</dt>
               <dd class="mt-1 text-sm leading-6 text-gray-300 sm:col-span-2 sm:mt-0">{{ props.vacancy.location }}</dd>
             </div>
-            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <div class=" py-6 sm:grid sm:grid-cols-3 sm:gap-4">
               <dt class="text-sm font-medium leading-6 text-gray-100">Description</dt>
               <dd class="mt-1 text-sm leading-6 text-gray-300 sm:col-span-2 sm:mt-0">
                 {{ props.vacancy.description }}
               </dd>
             </div>
-            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <div class=" py-6 sm:grid sm:grid-cols-3 sm:gap-4">
               <dt class="text-sm font-medium leading-6 text-gray-100">Tags</dt>
               <dd class="mt-2 text-sm text-gray-100 sm:col-span-2 sm:mt-0">
                 <div class="flex flex-wrap mt-auto gap-2">
@@ -89,7 +89,7 @@ const like = () => {
         </div>
       </div>
 
-      <div class="mt-4 flex justify-end">
+      <div class="mt-4 flex justify-end gap-2">
         <Like :route="route('vacancy.like', {'vacancy': props.vacancy.id })" :likesCount="props.likesCount"
               :isLiked="props.isLiked"/>
         <AnchorButton :href="props.vacancy.url" target="_blank">View more</AnchorButton>

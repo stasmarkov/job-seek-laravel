@@ -3,6 +3,7 @@
 import Tag from "@/Components/Models/Tags/Tag.vue";
 import RegularLink from "@/Components/Elements/RegularLink.vue";
 import Article from "@/Components/Sections/Article.vue";
+import Panel from "@/Components/Panel.vue";
 
 defineProps({
   candidateProfile: {
@@ -13,7 +14,7 @@ defineProps({
 </script>
 
 <template>
-  <Article>
+  <Panel>
     <RegularLink :href="route('profile.candidate.show', { user: candidateProfile.user.id})">
       <h3 class="text-lg">{{ `${candidateProfile.first_name} ${candidateProfile.last_name}` }}</h3>
     </RegularLink>
@@ -23,5 +24,5 @@ defineProps({
     <div class="flex flex-wrap gap-2 mt-2">
       <Tag v-for="tag in candidateProfile.tags" size="small" :tag/>
     </div>
-  </Article>
+  </Panel>
 </template>

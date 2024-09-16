@@ -64,7 +64,7 @@ const isOpened = ref(false);
                 class="hover:text-white/70"
               >Contact Us</NavLink>
             </div>
-            <div class="mt-4 flex flex-col">
+            <div class="mt-4 pt-4 border-t border-gray-700 flex flex-col">
               <NavLink
                 :href="route('dashboard')"
                 v-if="useCurrentUser().isLoggedIn()"

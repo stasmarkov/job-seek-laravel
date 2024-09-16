@@ -57,7 +57,7 @@ class VacancyFactory extends Factory {
    */
   public function configure() {
     return $this->afterCreating(function (Vacancy $vacancy) {
-      $vacancy->tags()->attach(Tag::all()->random(random_int(4, 10)));
+      $vacancy->tags()->attach(Tag::all()->random(random_int(4, 12)));
     });
   }
 
