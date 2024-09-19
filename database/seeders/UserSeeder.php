@@ -5,11 +5,10 @@ declare(strict_types = 1);
 namespace Database\Seeders;
 
 use App\Enums\UserRolesEnum;
-use App\Models\CandidateProfile;
-use App\Models\EmployerProfile;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
+use Modules\Employer\Models\EmployerProfile;
 use Spatie\Permission\Models\Role;
 
 /**

@@ -1,10 +1,10 @@
-# Job Seeker 
+# Job Seek 
 **This repository is only a sandbox aka playground with Laravel 11 and Inertia/Vue3.**
 So new changes/features/bugs will definitely appear in the future :D
 
 _Feel free to copy and modify anything what you want here._
 
-The working demo might be found here: https://job-seeker.markovrecords.com/
+The working demo might be found here: https://job-seek.markovrecords.com/
 
 ### Stack of technologies used here:
 - [Laravel 11](https://laravel.com/docs/11.x) as a core of the website;
@@ -27,11 +27,6 @@ The working demo might be found here: https://job-seeker.markovrecords.com/
 4. Run following tasks in different terminal tabs:
    1. `ddev artisan queue:work --queue=mail,default`
    2. `ddev artisan reverb:start --host="0.0.0.0" --port=8080  --debug`
+   3. `ddev artisan schedule:run`
    3. `npm i && npm run dev`
-5. Run the migration command: `ddev artisan migrate:fresh --seed` and you are ready to check or probably work on this site!
-
-
-
-Todo:
-1. php artisan love:register-reacters --model="App\Models\User"
-2. artisan love:register-reactants --model="App\Models\Job"
+5. Run the migration command: `ddev artisan migrate:fresh --seed && ddev artisan love:reaction-type-add --default` and you are ready to check or probably work on this site!

@@ -15,7 +15,7 @@ defineProps({
 
 <template>
   <Panel>
-    <RegularLink :href="route('profile.candidate.show', { user: candidateProfile.user.id})">
+    <RegularLink :href="route('candidate_profile.show', { user: candidateProfile.user.id})">
       <h3 class="text-lg">{{ `${candidateProfile.first_name} ${candidateProfile.last_name}` }}</h3>
     </RegularLink>
     <p class="text-sm"><span class="text-gray-300">Experience since:</span> {{ candidateProfile.experience_since }}</p>

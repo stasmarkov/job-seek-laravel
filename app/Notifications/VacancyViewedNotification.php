@@ -4,11 +4,11 @@ declare(strict_types = 1);
 
 namespace App\Notifications;
 
-use App\Models\Vacancy;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
+use Modules\Vacancy\Models\Vacancy;
 
 /**
  * The Vacancy Model viewed notification.

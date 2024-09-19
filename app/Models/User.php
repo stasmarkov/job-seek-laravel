@@ -4,15 +4,18 @@ declare(strict_types = 1);
 
 namespace App\Models;
 
+use App\Traits\HasSiteRoles;
+use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableInterface;
 use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableInterface;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Candidate\Models\CandidateProfile;
+use Modules\Employer\Models\EmployerProfile;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -20,7 +23,7 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable implements ReacterableInterface {
 
-  use HasFactory, Notifiable, HasRoles, HasApiTokens, Reacterable;
+  use HasFactory, Notifiable, HasRoles, HasApiTokens, Reacterable, HasSiteRoles;
 
   /**
    * The attributes that are mass assignable.

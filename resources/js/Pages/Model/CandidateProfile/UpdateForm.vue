@@ -41,7 +41,7 @@ const form = useForm({
 console.log(props.candidateProfile.tags);
 
 const updateCandidateProfile = () => {
-  form.patch(route('profile.candidate.update', { user: props.user.id }))
+  form.patch(route('candidate_profile.update', { user: props.user.id }))
 }
 </script>
 

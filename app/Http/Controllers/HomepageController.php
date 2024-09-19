@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\VacancyResource;
 use App\Http\Resources\TagResource;
-use App\Models\Vacancy;
-use App\Models\Scopes\VacancyScope;
 use App\Models\Tag;
-use Illuminate\Support\Facades\Cache;
-use Inertia\Inertia;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
+use Modules\Vacancy\Http\Resources\VacancyResource;
+use Modules\Vacancy\Models\Scopes\VacancyScope;
+use Modules\Vacancy\Models\Vacancy;
 
 /**
  * The homepage controller class.
