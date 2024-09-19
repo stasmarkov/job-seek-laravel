@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Modules\Vacancy\Models\Vacancy;
@@ -12,7 +13,7 @@ use Modules\Vacancy\Models\Vacancy;
 /**
  * The Vacancy Model posted notification.
  */
-class VacancyPostedNotification extends Notification {
+class VacancyPostedNotification extends Notification implements ShouldQueue {
 
   use Queueable;
 

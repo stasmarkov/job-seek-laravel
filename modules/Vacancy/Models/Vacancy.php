@@ -37,7 +37,7 @@ class Vacancy extends Model implements ReactableInterface {
    * {@inheritdoc}
    */
   protected static function newFactory(): VacancyFactory {
-    return new VacancyFactory();
+    return VacancyFactory::new();
   }
 
   /**

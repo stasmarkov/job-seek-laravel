@@ -23,7 +23,7 @@ class CandidateProfile extends Model {
    * {@inheritdoc}
    */
   protected static function newFactory(): CandidateProfileFactory {
-    return new CandidateProfileFactory();
+    return CandidateProfileFactory::new();
   }
 
   /**
