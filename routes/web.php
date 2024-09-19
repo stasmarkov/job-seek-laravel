@@ -7,7 +7,6 @@
 
 declare(strict_types=1);
 
-use App\Enums\UserRolesEnum;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomepageController;
@@ -17,7 +16,6 @@ use App\Http\Controllers\RoleSelectController;
 use App\Http\Controllers\Search\SearchCandidatesController;
 use App\Http\Controllers\Search\SearchVacanciesController;
 use App\Http\Middleware\AddContext;
-use App\Jobs\SendWeeklyVacanciesDigestJob;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
@@ -56,13 +54,5 @@ Route::middleware(['auth', AddContext::class])->group(function () {
 Route::get('/search/vacancies', [SearchVacanciesController::class, 'index'])->name('search.vacancies');
 Route::get('/search/candidates', [SearchCandidatesController::class, 'index'])->name('search.candidates');
 
-Route::get('/playground', function () {
-  SendWeeklyVacanciesDigestJob::dispatch();
-  return 'Hello';
-})->name('playground');
-
-
-require __DIR__ . '/vacancy.php';
-require __DIR__ . '/profile.php';
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

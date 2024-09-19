@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace App\Traits;
 
 use App\Models\Tag;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**

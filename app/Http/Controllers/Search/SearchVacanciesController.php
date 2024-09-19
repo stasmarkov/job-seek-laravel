@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Search;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\VacancyResource;
 use App\Http\Resources\TagResource;
-use App\Models\Vacancy;
-use App\Models\Scopes\VacancyScope;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Modules\Vacancy\Http\Resources\VacancyResource;
+use Modules\Vacancy\Models\Vacancy;
 
 /**
  * The search controller.
@@ -27,6 +26,8 @@ class SearchVacanciesController extends Controller {
       'employerProfile',
       'tags',
     ]);
+    $b=0;
+    $url = $query->first()->url();
 
     $this->applyFilters($request, $query);
 

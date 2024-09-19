@@ -13,7 +13,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 /* import the fontawesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Job Seeker';
+const appName = import.meta.env.VITE_APP_NAME || 'Job Seek';
 
 createInertiaApp({
   title: (title) => `${title} | ${appName}`,

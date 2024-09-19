@@ -52,7 +52,7 @@ const form = useForm({
         Edit Employer Profile
       </FormHeading>
 
-      <form @submit.prevent="form.post(route('profile.candidate.store', { user: user.id }))" class="mt-6 space-y-6">
+      <form @submit.prevent="form.post(route('candidate_profile.store', { user: user.id }))" class="mt-6 space-y-6">
         <div class="flex justify-between gap-4">
           <InputWrapper id="first_name" label="First Name" :message="form.errors.first_name">
             <TextInput

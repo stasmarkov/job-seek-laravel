@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Search;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CandidateProfileResource;
 use App\Http\Resources\TagResource;
-use App\Models\CandidateProfile;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Modules\Candidate\Http\Resources\CandidateProfileResource;
+use Modules\Candidate\Models\CandidateProfile;
 
 /**
  * The search controller.

@@ -48,10 +48,10 @@ const props = defineProps({
       </div>
 
       <div v-if="!props.candidateProfile && props.canCreateCandidateProfile" class="flex gap-2">
-        <LinkButton :href="route('profile.candidate.create', {'user': props.user.id })">Create Profile</LinkButton>
+        <LinkButton :href="route('candidate_profile.create', {'user': props.user.id })">Create Profile</LinkButton>
       </div>
       <div v-if="props.candidateProfile" class="flex gap-2">
-        <LinkButton :href="route('profile.candidate.edit', {'user': props.user.id })">Edit Profile</LinkButton>
+        <LinkButton :href="route('candidate_profile.edit', {'user': props.user.id })">Edit Profile</LinkButton>
       </div>
 
       <FormGroup class="mt-4">

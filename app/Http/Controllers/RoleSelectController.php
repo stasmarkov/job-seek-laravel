@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace App\Http\Controllers;
 
 use App\Enums\UserRolesEnum;
-use Cassandra\Type\UserType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;

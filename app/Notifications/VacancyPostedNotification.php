@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace App\Notifications;
 
-use App\Models\Vacancy;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Modules\Vacancy\Models\Vacancy;
 
 /**
  * The Vacancy Model posted notification.

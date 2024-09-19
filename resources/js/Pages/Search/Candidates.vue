@@ -1,13 +1,11 @@
 <script setup>
 import Layout from "@/Layouts/Layout.vue";
-import CardWide from "@/Components/Models/Vacancies/CardWide.vue";
 import SimpleSearchForm from "@/Components/Forms/SimpleSearchForm.vue";
 import Pager from "@/Components/Pagers/Pager.vue";
 import {ref, watch} from "vue";
 import {router} from "@inertiajs/vue3";
 import {throttle, debounce} from "lodash";
 import CheckboxButtons from "@/Components/FormElements/CheckboxButtons.vue";
-import Tag from "@/Components/Models/Tags/Tag.vue";
 import Preview from "@/Components/Models/CandidateProfiles/Preview.vue";
 import BlockHeading from "@/Components/Headings/BlockHeading.vue";
 

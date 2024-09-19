@@ -5,13 +5,9 @@ declare(strict_types = 1);
 namespace Database\Seeders;
 
 use App\Enums\UserRolesEnum;
-use App\Models\CandidateProfile;
-use App\Models\EmployerProfile;
 use App\Models\User;
-use App\Models\Vacancy;
-use App\Models\Tag;
-use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
+use Modules\Candidate\Models\CandidateProfile;
 use Spatie\Permission\Models\Role;
 
 /**

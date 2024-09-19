@@ -7,10 +7,10 @@
 
 declare(strict_types = 1);
 
-use App\Http\Resources\VacancyResource;
-use App\Models\Vacancy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Modules\Vacancy\Http\Resources\VacancyResource;
+use Modules\Vacancy\Models\Vacancy;
 
 Route::middleware('throttle:public_api')->group(function () {
   Route::get('/vacancies', function (Request $request) {

@@ -1,7 +1,15 @@
 <?php
 
+/**
+ * @file
+ * The app config file.
+ */
+
 declare(strict_types=1);
 
+use Spatie\Permission\Middleware\RoleOrPermissionMiddleware;
+use Spatie\Permission\Middleware\PermissionMiddleware;
+use Spatie\Permission\Middleware\RoleMiddleware;
 use App\Http\Middleware\EnsureUserActive;
 use App\Http\Middleware\EnsureUserHasRole;
 use App\Http\Middleware\HandleInertiaRequests;
@@ -10,6 +18,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\Response;
 use Tighten\Ziggy\Ziggy;
@@ -21,24 +30,34 @@ return Application::configure(basePath: dirname(__DIR__))
     commands: __DIR__ . '/../routes/console.php',
     channels: __DIR__ . '/../routes/channels.php',
     health: '/up',
+    then: function () {
+      Route::middleware('web')
+        ->group(base_path('modules/Vacancy/routes.php'));
+      Route::middleware('web')
+        ->group(base_path('modules/Candidate/routes.php'));
+      Route::middleware('web')
+        ->group(base_path('modules/Employer/routes.php'));
+    }
   )
-  ->withMiddleware(function(Middleware $middleware) {
+  ->withMiddleware(function (Middleware $middleware) {
     $middleware->web(append: [
       HandleInertiaRequests::class,
       AddLinkHeadersForPreloadedAssets::class,
       EnsureUserHasRole::class,
-    ])
-      ->alias([
-        'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
-        'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
-        'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
-        'user_has_role' => EnsureUserHasRole::class,
-        'user_active' => EnsureUserActive::class,
-      ]);
+    ])->alias([
+      'role' => RoleMiddleware::class,
+      'permission' => PermissionMiddleware::class,
+      'role_or_permission' => RoleOrPermissionMiddleware::class,
+      'user_has_role' => EnsureUserHasRole::class,
+      'user_active' => EnsureUserActive::class,
+    ]);
   })
-  ->withExceptions(function(Exceptions $exceptions) {
-    $exceptions->respond(function(Response $response, Throwable $exception, Request $request) {
-      if (!app()->environment(['local', 'testing']) && in_array($response->getStatusCode(), [500, 503, 404, 403])) {
+  ->withExceptions(function (Exceptions $exceptions) {
+    $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
+      if (!app()->environment([
+        'local',
+        'testing',
+      ]) && in_array($response->getStatusCode(), [500, 503, 404, 403])) {
         return Inertia::render('Error/Page', [
           'status' => $response->getStatusCode(),
           'auth' => [
@@ -61,5 +80,4 @@ return Application::configure(basePath: dirname(__DIR__))
 
       return $response;
     });
-  }
-  )->create();
+  })->create();
