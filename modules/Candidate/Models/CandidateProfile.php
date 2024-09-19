@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Candidate\Models;
 
-use App\Models\ContactInformation;
 use App\Models\User;
 use App\Traits\HasTags;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

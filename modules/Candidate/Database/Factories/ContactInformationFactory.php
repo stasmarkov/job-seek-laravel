@@ -2,12 +2,12 @@
 
 namespace Modules\Candidate\Database\Factories;
 
-use App\Models\ContactInformation;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Candidate\Models\ContactInformation;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ContactInformation>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\Candidate\Models\ContactInformation>
  */
 class ContactInformationFactory extends Factory {
 

@@ -77,18 +77,18 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Modules\Candidate\Models\CandidateProfile|null $candidateProfile
  * @method static \Modules\Candidate\Database\Factories\ContactInformationFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation query()
- * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation whereCandidateProfileId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation whereSkype($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation whereTelegram($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation whereWhatsapp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Candidate\Models\ContactInformation newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Candidate\Models\ContactInformation newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Candidate\Models\ContactInformation query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Candidate\Models\ContactInformation whereCandidateProfileId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Candidate\Models\ContactInformation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Candidate\Models\ContactInformation whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Candidate\Models\ContactInformation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Candidate\Models\ContactInformation wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Candidate\Models\ContactInformation whereSkype($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Candidate\Models\ContactInformation whereTelegram($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Candidate\Models\ContactInformation whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Candidate\Models\ContactInformation whereWhatsapp($value)
  */
 	class ContactInformation extends \Eloquent {}
 }
@@ -210,7 +210,7 @@ namespace Modules\Candidate\Models{
  * @property int $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\ContactInformation|null $contactInformation
+ * @property-read \Modules\Candidate\Models\ContactInformation|null $contactInformation
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tag> $tags
  * @property-read int|null $tags_count
  * @property-read \App\Models\User|null $user

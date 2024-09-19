@@ -27,9 +27,9 @@ class EmployerProfileController extends Controller {
   public function __construct(
     protected Request $request
   ) {
-    $this->middleware('can:create,\App\Model\EmployerProfile')->only('create', 'store');
-    $this->middleware('can:update,\App\Model\EmployerProfile')->only('edit', 'update');
-    $this->middleware('can:delete,\App\Model\EmployerProfile')->only('destroy');
+    $this->middleware('can:create,\Modules\Employer\Models\EmployerProfile')->only('create', 'store');
+    $this->middleware('can:update,\Modules\Employer\Models\EmployerProfile')->only('edit', 'update');
+    $this->middleware('can:delete,\Modules\Employer\Models\EmployerProfile')->only('destroy');
   }
 
   /**
@@ -70,7 +70,6 @@ class EmployerProfileController extends Controller {
    * Show the form for creating a new resource.
    */
   public function edit(User $user) {
-    return ';hello';
     return Inertia::render('Model/EmployerProfile/UpdateForm', [
       'user' => $user,
       'employerProfile' => $user->employerProfile,

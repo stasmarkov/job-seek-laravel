@@ -23,8 +23,8 @@ class EnsureUserActive {
     $user = Auth::user();
 
     if ($user && $user->status === 0) {
+      // Redirect to the route without current middleware.
       return redirect()->route('verification.notice');
-
     }
 
     return $next($request);

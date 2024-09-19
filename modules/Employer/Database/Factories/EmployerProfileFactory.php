@@ -11,6 +11,9 @@ use Modules\Employer\Models\EmployerProfile;
  */
 class EmployerProfileFactory extends Factory {
 
+  /**
+   * {@inheritdoc}
+   */
   protected $model = EmployerProfile::class;
 
   /**

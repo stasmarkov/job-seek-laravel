@@ -24,8 +24,8 @@ class EnsureUserHasRole {
     $user = Auth::user();
 
     if ($user && !$user?->hasAnyRole([UserRolesEnum::cases()])) {
+      // Redirect to the route without current middleware.
       return redirect()->route('profile.role_select');
-
     }
 
     return $next($request);
