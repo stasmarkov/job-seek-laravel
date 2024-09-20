@@ -23,7 +23,7 @@ import RegularLink from "@/Components/Elements/RegularLink.vue";
          <li><RegularLink :href="route('contact.index')">Contact us</RegularLink></li>
          <li><RegularLink :href="route('homepage')">FAQ</RegularLink></li>
        </ul>
-        <ul>
+        <ul class="space-y-2">
           <li><RegularLink :href="route('search.vacancies')">Vacancies</RegularLink></li>
           <li><RegularLink :href="route('search.candidates')">Candidates</RegularLink></li>
         </ul>
