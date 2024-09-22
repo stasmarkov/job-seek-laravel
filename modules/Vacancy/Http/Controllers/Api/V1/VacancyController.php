@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Modules\Vacancy\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
 use Modules\Vacancy\Http\Requests\Api\V1\StoreVacancyRequest;
 use Modules\Vacancy\Http\Requests\Api\V1\UpdateVacancyRequest;
-use Modules\Vacancy\Http\Resources\VacancyResource;
+use Modules\Vacancy\Http\Resources\V1\VacancyResource;
 use Modules\Vacancy\Models\Vacancy;
 
 /**
  * The Vacancy API controller.
  */
-class VacancyController extends Controller {
+class VacancyController extends ApiController {
 
   /**
    * {@inheritdoc}
@@ -27,6 +29,10 @@ class VacancyController extends Controller {
    * Display a listing of the resource.
    */
   public function index() {
+    if ($this->include('tags')) {
+      return VacancyResource::collection(Vacancy::with('tags')->paginate(50));
+    }
+
     return VacancyResource::collection(Vacancy::query()->paginate(50));
   }
 
@@ -41,6 +47,10 @@ class VacancyController extends Controller {
    * Display the specified resource.
    */
   public function show(Vacancy $vacancy) {
+    if ($this->include('tags')) {
+      return new VacancyResource($vacancy->load('tags'));
+    }
+
     return VacancyResource::make($vacancy);
   }
 

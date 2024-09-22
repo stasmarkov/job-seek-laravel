@@ -1,11 +1,18 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Modules\Auth\Http\Resources\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static $wrap = 'data';
 
   /**
    * Transform the resource into an array.
@@ -21,8 +28,11 @@ class UserResource extends JsonResource {
         'email' => $this->email,
         'status' => $this->status,
         'role' => $this->roles()?->first()?->name,
-        'createdAt' => $this->created_at,
-        'updatedAt' => $this->updated_at,
+        $this->mergeWhen($request->routeIs('api.v1.user.*'), [
+          'createdAt' => $this->created_at,
+          'updatedAt' => $this->updated_at,
+          'emailVerifiedAt' => $this->email_verified_at
+        ]),
       ],
     ];
   }

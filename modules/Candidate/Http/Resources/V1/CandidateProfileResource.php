@@ -15,6 +15,11 @@ use Modules\Auth\Http\Resources\V1\UserResource;
 class CandidateProfileResource extends JsonResource {
 
   /**
+   * {@inheritdoc}
+   */
+  public static $wrap = 'data';
+
+  /**
    * Transform the resource into an array.
    *
    * @return array<string, mixed>

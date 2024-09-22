@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Modules\Vacancy\Models;
 
 use App\Enums\UserRolesEnum;
+use App\Models\User;
 use App\Traits\HasTags;
 use App\Traits\HasUrl;
 use App\Traits\HasUuid;

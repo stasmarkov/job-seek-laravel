@@ -37,7 +37,6 @@ const props = defineProps({
           </div>
         </div>
         <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-          <p class="text-sm leading-6 text-gray-900">{{ vacancy.role }}</p>
           <p class="mt-1 text-xs leading-5 text-gray-500">
             Posted: <time :datetime="vacancy.created_at">{{ vacancy.created_at }}</time>
           </p>
@@ -46,7 +45,7 @@ const props = defineProps({
       </li>
     </ul>
 
-    <Pager :links="props.vacancies.links"></Pager>
+    <Pager :links="props.vacancies.meta.links"></Pager>
   </AdminLayout>
 </template>
 
