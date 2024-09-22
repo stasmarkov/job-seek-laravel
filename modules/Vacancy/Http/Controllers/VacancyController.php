@@ -106,6 +106,7 @@ class VacancyController extends Controller {
    * Store a newly created resource in storage.
    */
   public function store(VacancyCreateRequest $request) {
+    $request->validated($request->all());
     $uuid = Str::uuid();
     $this->dispatchSync(CreateVacancy::fromRequest($request, $uuid));
     return redirect(route('vacancy.index'));
@@ -132,6 +133,7 @@ class VacancyController extends Controller {
    * Store a newly created resource in storage.
    */
   public function update(VacancyUpdateRequest $request, Vacancy $vacancy) {
+    $request->validated($request->all());
     $this->dispatchSync(UpdateVacancy::fromRequest($vacancy, $request));
     return redirect(route('vacancy.show', [
       'vacancy' => $vacancy,

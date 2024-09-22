@@ -31,12 +31,6 @@ return Application::configure(basePath: dirname(__DIR__))
     channels: __DIR__ . '/../routes/channels.php',
     health: '/up',
     then: function () {
-      Route::middleware('web')
-        ->group(base_path('modules/Vacancy/routes.php'));
-      Route::middleware('web')
-        ->group(base_path('modules/Candidate/routes.php'));
-      Route::middleware('web')
-        ->group(base_path('modules/Employer/routes.php'));
     }
   )
   ->withMiddleware(function (Middleware $middleware) {

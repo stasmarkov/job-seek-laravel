@@ -23,7 +23,12 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable implements ReacterableInterface {
 
-  use HasFactory, Notifiable, HasRoles, HasApiTokens, Reacterable, HasSiteRoles;
+  use HasFactory;
+  use Notifiable;
+  use HasRoles;
+  use HasApiTokens;
+  use Reacterable;
+  use HasSiteRoles;
 
   /**
    * The attributes that are mass assignable.

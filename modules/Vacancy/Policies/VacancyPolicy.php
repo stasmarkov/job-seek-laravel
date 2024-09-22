@@ -20,7 +20,7 @@ class VacancyPolicy {
    * Determine whether the user can view any models.
    */
   public function viewAny(User $user): bool {
-    return $user->hasPermissionTo('view list of vacancies');
+    return TRUE;
   }
 
   /**

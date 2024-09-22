@@ -26,8 +26,6 @@ class SearchVacanciesController extends Controller {
       'employerProfile',
       'tags',
     ]);
-    $b=0;
-    $url = $query->first()->url();
 
     $this->applyFilters($request, $query);
 

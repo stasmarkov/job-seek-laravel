@@ -6,17 +6,14 @@ namespace App\Http\Controllers;
 
 use App\Enums\UserRolesEnum;
 use App\Http\Requests\AccountUpdateRequest;
-use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Context;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
+use Modules\Auth\Http\Resources\V1\UserResource;
 
 /**
  * The profile controller.
@@ -44,10 +41,6 @@ class AccountController extends Controller {
   public function update(User $user, AccountUpdateRequest $request): RedirectResponse {
     $user->fill($request->validated());
 
-    $request->validate([
-      'name' => ['min:3'],
-    ]);
-
     if ($user->isDirty('email')) {
       $user->email_verified_at = NULL;
     }
@@ -74,7 +67,7 @@ class AccountController extends Controller {
     $request->session()->invalidate();
     $request->session()->regenerateToken();
 
-    return Redirect::to('/');
+    return redirect()->route('homepage');
   }
 
 }

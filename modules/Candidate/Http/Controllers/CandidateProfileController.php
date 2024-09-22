@@ -63,6 +63,8 @@ class CandidateProfileController extends Controller {
    * Store a newly created resource in storage.
    */
   public function store(CandidateProfileRequest $request, User $user) {
+    $request->validated($request->all());
+
     $request->setOwner($user);
     $uuid = Str::uuid();
     $this->dispatchSync(CreateCandidate::fromRequest($request, $uuid));
@@ -85,6 +87,8 @@ class CandidateProfileController extends Controller {
    * Store a newly created resource in storage.
    */
   public function update(CandidateProfileRequest $request, User $user) {
+    $request->validated($request->all());
+
     $request->setOwner($user);
     $uuid = Str::uuid();
     $this->dispatchSync(UpdateCandidate::fromRequest($request, $uuid));

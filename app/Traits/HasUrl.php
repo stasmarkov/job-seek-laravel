@@ -20,10 +20,10 @@ trait HasUrl {
    * @return string|null
    *   The URL to the show model page or NULL.
    */
-  public function url(): ?string {
+  public function toUrl(string $prefix = ''): ?string {
     $model = strtolower(Str::snake(class_basename($this)));
-    if (Route::has("{$model}.show")) {
-      return route("{$model}.show", $this);
+    if (Route::has("{$prefix}{$model}.show")) {
+      return route("{$prefix}{$model}.show", $this);
     }
 
     return NULL;

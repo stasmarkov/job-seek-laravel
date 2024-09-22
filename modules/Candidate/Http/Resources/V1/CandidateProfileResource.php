@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Modules\Candidate\Http\Resources;
+namespace Modules\Candidate\Http\Resources\V1;
 
 use App\Http\Resources\TagResource;
 use Illuminate\Http\Request;
@@ -21,14 +21,17 @@ class CandidateProfileResource extends JsonResource {
    */
   public function toArray(Request $request): array {
     return [
+      'type' => 'candidate_profile',
       'id' => $this->id,
-      'first_name' => $this->first_name,
-      'last_name' => $this->last_name,
-      'description' => $this->description,
-      'tags' => TagResource::collection($this->tags),
-      'experience_since' => $this->experience_since,
-      'user' => UserResource::make($this->user),
-      'created_at' => $this->created_at->format('j F, Y'),
+      'attributes' => [
+        'firstName' => $this->first_name,
+        'lastName' => $this->last_name,
+        'description' => $this->description,
+        'tags' => TagResource::collection($this->tags),
+        'experienceSince' => $this->experience_since,
+        'user' => UserResource::make($this->user),
+        'createdAt' => $this->created_at->format('j F, Y'),
+      ],
     ];
   }
 
