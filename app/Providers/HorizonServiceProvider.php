@@ -3,10 +3,9 @@
 namespace App\Providers;
 
 use App\Enums\UserRolesEnum;
-use App\Models\User;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Horizon\Horizon;
 use Laravel\Horizon\HorizonApplicationServiceProvider;
+use Modules\Auth\Models\User;
 
 class HorizonServiceProvider extends HorizonApplicationServiceProvider {
 

@@ -5,8 +5,8 @@ declare(strict_types = 1);
 namespace Modules\Vacancy\Policies;
 
 use App\Enums\UserRolesEnum;
-use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Modules\Auth\Models\User;
 use Modules\Vacancy\Models\Vacancy;
 
 /**

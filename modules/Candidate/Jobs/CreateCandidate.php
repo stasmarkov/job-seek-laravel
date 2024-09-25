@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Candidate\Jobs;
 
-use App\Models\User;
+use Modules\Auth\Models\User;
 use Modules\Candidate\Http\Requests\CandidateProfileRequest;
 use Modules\Candidate\Models\CandidateProfile;
 use Ramsey\Uuid\UuidInterface;

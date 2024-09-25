@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Modules\Candidate\Policies;
 
 use App\Enums\UserRolesEnum;
-use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Modules\Auth\Models\User;
 use Modules\Candidate\Models\CandidateProfile;
 
 /**
@@ -25,13 +25,13 @@ class CandidateProfilePolicy {
   /**
    * Determine whether the user can view the model.
    */
-  public function view(User $user): bool {
+  public function view(User $user, CandidateProfile $candidate_profile): bool {
     if ($user->hasPermissionTo('view any candidateProfile')) {
       return TRUE;
     }
 
-    if ($user->candidateProfile && $user->hasPermissionTo('view own candidateProfile')) {
-      return $user->id === $user->candidateProfile->user_id;
+    if ($user->hasPermissionTo('view own candidateProfile')) {
+      return $user->id === $candidate_profile->user_id;
     }
 
     return FALSE;
@@ -40,22 +40,24 @@ class CandidateProfilePolicy {
   /**
    * Determine whether the user can create models.
    */
-  public function create(User $user): bool {
-    return $user->hasPermissionTo('create a new candidateProfile') && !$user->candidateProfile()
-        ->first();
+  public function create(User $user, CandidateProfile $candidate_profile = NULL): bool {
+    return $user->hasPermissionTo('create a new candidateProfile') && !$candidate_profile;
   }
 
   /**
    * Determine whether the user can update the model.
    */
-  public function update(User $user): bool {
+  public function update(User $user, CandidateProfile $candidate_profile): bool {
+    if (!$candidate_profile) {
+      return FALSE;
+    }
+
     if ($user->hasPermissionTo('edit any candidateProfile')) {
       return TRUE;
     }
 
-    if ($user->hasPermissionTo('edit own candidateProfile') && $user->candidateProfile()
-        ->first()) {
-      return TRUE;
+    if ($user->hasPermissionTo('edit own candidateProfile')) {
+      return $candidate_profile->user->id === $user->id;
     }
 
     return FALSE;
@@ -65,14 +67,12 @@ class CandidateProfilePolicy {
    * Determine whether the user can delete the model.
    */
   public function delete(User $user, CandidateProfile $candidateProfile): bool {
-    return TRUE;
-
     if ($user->hasPermissionTo('delete any candidateProfile')) {
       return TRUE;
     }
 
     if ($user->hasPermissionTo('delete own candidateProfile')) {
-      return $user->id === $candidateProfile?->user_id;
+      return $candidate_profile->user->id === $user->id;
     }
 
     return FALSE;

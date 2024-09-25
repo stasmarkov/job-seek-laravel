@@ -17,6 +17,9 @@ class AuthServiceProvider extends ServiceProvider {
    */
   public function boot(): void {
     $this->registerRoutes();
+
+    // Load migrations from module.
+    $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
   }
 
   /**
@@ -26,6 +29,9 @@ class AuthServiceProvider extends ServiceProvider {
     Route::middleware('api')
       ->prefix('api/v1')
       ->group(base_path('modules/Auth/api.v1.php'));
+
+    Route::middleware('web')
+      ->group(base_path('modules/Auth/routes.php'));
   }
 
 }

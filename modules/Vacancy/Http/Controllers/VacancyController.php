@@ -70,7 +70,7 @@ class VacancyController extends Controller {
     $reactantFacade = $vacancy->viaLoveReactant();
 
     $similar_vacancies = Vacancy::query()
-      ->where('id', '!=', $vacan->cy->id)
+      ->where('id', '!=', $vacancy->id)
       ->latest('created_at')
       ->limit(4);
 

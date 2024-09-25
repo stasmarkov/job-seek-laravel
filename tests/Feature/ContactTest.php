@@ -1,8 +1,8 @@
 <?php
 
 use App\Models\Employer;
-use App\Models\User;
 use Illuminate\Support\Facades\Context;
+use Modules\Auth\Models\User;
 
 it('contact us queued only 1 job item', function() {
   $user = User::factory()->create();

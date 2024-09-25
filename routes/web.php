@@ -54,5 +54,4 @@ Route::middleware(['auth', AddContext::class])->group(function () {
 Route::get('/search/vacancies', [SearchVacanciesController::class, 'index'])->name('search.vacancies');
 Route::get('/search/candidates', [SearchCandidatesController::class, 'index'])->name('search.candidates');
 
-require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

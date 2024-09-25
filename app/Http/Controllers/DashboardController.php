@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Modules\Auth\Models\User;
 use Modules\Vacancy\Models\Vacancy;
 
 /**

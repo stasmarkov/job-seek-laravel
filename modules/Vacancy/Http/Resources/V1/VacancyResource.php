@@ -38,7 +38,8 @@ class VacancyResource extends JsonResource {
         'salary' => $this->salary,
         'location' => $this->location,
         'employerProfile' => EmployerProfileResource::make($this->employerProfile),
-        'createdAt' => $this->created_at->format('j F, Y'),
+        'createdAt' => $this->created_at->format('j F, Y, h:i'),
+        'updatedAt' => $this->updated_at->format('j F, Y, h:i'),
         $this->mergeWhen($request->routeIs('api.v1.vacancy.show'), [
           'description' => $this->description,
           'url' => $this->url,
@@ -48,7 +49,7 @@ class VacancyResource extends JsonResource {
         ]),
       ],
       'links' => [
-        ['self' => $this->toUrl('api.v1.')],
+        'self' => $this->toUrl('api.v1.'),
       ],
       'includes' => TagResource::collection($this->whenLoaded('tags')),
       'relationships' => [
@@ -56,7 +57,7 @@ class VacancyResource extends JsonResource {
           'data' => UserResource::make($this->employerProfile->user),
         ],
         'links' => [
-          ['self' => 'tbd']
+          'self' => $this->employerProfile->user->url
         ],
       ],
     ];

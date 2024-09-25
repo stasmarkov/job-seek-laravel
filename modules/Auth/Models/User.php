@@ -2,9 +2,13 @@
 
 declare(strict_types = 1);
 
-namespace App\Models;
+namespace Modules\Auth\Models;
 
+use App\Http\Filters\V1\QueryFilter;
+use App\Models\BlogPost;
+use App\Models\LoginLog;
 use App\Traits\HasSiteRoles;
+use App\Traits\HasUrl;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableInterface;
 use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Auth\Database\Factories\UserFactory;
 use Modules\Candidate\Models\CandidateProfile;
 use Modules\Employer\Models\EmployerProfile;
 use Spatie\Permission\Traits\HasRoles;
@@ -29,6 +34,7 @@ class User extends Authenticatable implements ReacterableInterface {
   use HasApiTokens;
   use Reacterable;
   use HasSiteRoles;
+  use HasUrl;
 
   /**
    * The attributes that are mass assignable.
@@ -54,6 +60,13 @@ class User extends Authenticatable implements ReacterableInterface {
     'password',
     'remember_token',
   ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static function newFactory(): UserFactory {
+    return UserFactory::new();
+  }
 
   /**
    * Get the attributes that should be cast.
@@ -123,6 +136,13 @@ class User extends Authenticatable implements ReacterableInterface {
     static::saving(function (User $user) {
       $user->avatar = 'https://api.dicebear.com/9.x/pixel-art/svg?seed=' . $user->name;
     });
+  }
+
+  /**
+   * Add filters for JSON:API.
+   */
+  public function scopeFilter(Builder $builder, QueryFilter $filter) {
+    return $filter->apply($builder);
   }
 
 }

@@ -3,8 +3,8 @@
 namespace Modules\Candidate\Database\Factories;
 
 use App\Models\Tag;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Auth\Models\User;
 use Modules\Candidate\Models\CandidateProfile;
 
 /**

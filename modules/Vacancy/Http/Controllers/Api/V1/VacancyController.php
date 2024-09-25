@@ -5,6 +5,8 @@ declare(strict_types = 1);
 namespace Modules\Vacancy\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\ApiController;
+use Modules\Auth\Http\Filters\V1\UserFilter;
+use Modules\Vacancy\Http\Filters\V1\VacancyFilter;
 use Modules\Vacancy\Http\Requests\Api\V1\StoreVacancyRequest;
 use Modules\Vacancy\Http\Requests\Api\V1\UpdateVacancyRequest;
 use Modules\Vacancy\Http\Resources\V1\VacancyResource;
@@ -28,12 +30,8 @@ class VacancyController extends ApiController {
   /**
    * Display a listing of the resource.
    */
-  public function index() {
-    if ($this->include('tags')) {
-      return VacancyResource::collection(Vacancy::with('tags')->paginate(50));
-    }
-
-    return VacancyResource::collection(Vacancy::query()->paginate(50));
+  public function index(VacancyFilter $filters) {
+    return VacancyResource::collection(Vacancy::filter($filters)->paginate(10));
   }
 
   /**

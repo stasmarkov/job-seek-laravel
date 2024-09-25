@@ -2,8 +2,8 @@
 
 namespace Modules\Candidate\Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Auth\Models\User;
 use Modules\Candidate\Models\ContactInformation;
 
 /**

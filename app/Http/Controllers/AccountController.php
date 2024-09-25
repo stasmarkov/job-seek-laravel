@@ -6,14 +6,14 @@ namespace App\Http\Controllers;
 
 use App\Enums\UserRolesEnum;
 use App\Http\Requests\AccountUpdateRequest;
-use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
-use Modules\Auth\Http\Resources\V1\UserResource;
+use Modules\Auth\Http\Resources\UserResource;
+use Modules\Auth\Models\User;
 
 /**
  * The profile controller.

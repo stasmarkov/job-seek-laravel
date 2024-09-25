@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Modules\Vacancy\Models;
 
 use App\Enums\UserRolesEnum;
-use App\Models\User;
+use App\Http\Filters\V1\QueryFilter;
 use App\Traits\HasTags;
 use App\Traits\HasUrl;
 use App\Traits\HasUuid;
@@ -52,7 +52,6 @@ class Vacancy extends Model implements ReactableInterface {
    * {@inheritdoc}
    */
   protected $with = [
-    'tags',
     'employerProfile',
   ];
 
@@ -88,6 +87,13 @@ class Vacancy extends Model implements ReactableInterface {
     if ($user && $user->hasRole(UserRolesEnum::EMPLOYER->value)) {
       $builder->whereRelation('employerProfile', 'user_id', '=', $user->id);
     }
+  }
+
+  /**
+   * Add filters for JSON:API.
+   */
+  public function scopeFilter(Builder $builder, QueryFilter $filter) {
+    return $filter->apply($builder);
   }
 
 }

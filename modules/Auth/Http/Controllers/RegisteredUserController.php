@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Modules\Auth\Http\Controllers;
 
-use App\Enums\UserRolesEnum;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
-use Spatie\Permission\Models\Role;
+use Modules\Auth\Models\User;
 
 /**
  * The registration controller.

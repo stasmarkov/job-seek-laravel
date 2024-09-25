@@ -4,11 +4,11 @@ declare(strict_types = 1);
 
 namespace Modules\Employer\Models;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Auth\Models\User;
 use Modules\Employer\Database\Factories\EmployerProfileFactory;
 use Modules\Vacancy\Models\Vacancy;
 

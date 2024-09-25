@@ -10,6 +10,7 @@ declare(strict_types = 1);
 namespace Modules\Vacancy;
 
 use Illuminate\Support\Facades\Route;
+use Modules\Vacancy\Http\Controllers\Api\V1\UserVacancyController;
 use Modules\Vacancy\Http\Controllers\Api\V1\VacancyController;
 
 Route::middleware('auth:sanctum')
@@ -20,4 +21,10 @@ Route::middleware('auth:sanctum')
     'store' => 'api.v1.vacancy.store',
     'update' => 'api.v1.vacancy.update',
     'destroy' => 'api.v1.vacancy.destroy',
+  ]);
+
+Route::middleware('auth:sanctum')
+  ->apiResource('users.vacancies', UserVacancyController::class)
+  ->names([
+    'index' => 'api.v1.user.vacancy.index',
   ]);

@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Broadcast;
+use Modules\Auth\Models\User;
 use Modules\Vacancy\Models\Vacancy;
 
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {

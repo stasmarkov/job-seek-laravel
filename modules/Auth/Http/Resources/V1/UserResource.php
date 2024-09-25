@@ -34,6 +34,9 @@ class UserResource extends JsonResource {
           'emailVerifiedAt' => $this->email_verified_at
         ]),
       ],
+      'links' => [
+        'self' => $this->toUrl('api.v1.'),
+      ],
     ];
   }
 

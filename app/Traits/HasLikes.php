@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace App\Traits;
 
-use App\Models\User;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Facades\Auth;
+use Modules\Auth\Models\User;
 
 /**
  * Provides Model trait for likable Models.

@@ -45,7 +45,7 @@ const form = useForm({
           </p>
         </header>
 
-        <form @submit.prevent="form.patch(route('profile.update', { user: props.user.id }))" class="mt-6 space-y-6">
+        <form @submit.prevent="form.patch(route('profile.employer.update', { user: props.user.id }))" class="mt-6 space-y-6">
           <div>
             <InputLabel for="name" value="Name"/>
 
@@ -68,7 +68,6 @@ const form = useForm({
             <input
               id="logo"
               class="mt-1 block w-full"
-              required
               type="file"
               @input="form.logo = $event.target.files[0]"
             />

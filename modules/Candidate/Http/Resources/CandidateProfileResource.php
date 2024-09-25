@@ -7,7 +7,7 @@ namespace Modules\Candidate\Http\Resources;
 use App\Http\Resources\TagResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Modules\Auth\Http\Resources\V1\UserResource;
+use Modules\Auth\Http\Resources\UserResource;
 
 /**
  * The Employer Profile Resource.

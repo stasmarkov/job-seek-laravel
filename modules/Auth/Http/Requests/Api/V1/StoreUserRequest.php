@@ -12,7 +12,7 @@ class StoreUserRequest extends FormRequest {
    * Determine if the user is authorized to make this request.
    */
   public function authorize(): bool {
-    return false;
+    return TRUE;
   }
 
   /**
@@ -21,7 +21,10 @@ class StoreUserRequest extends FormRequest {
    * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
    */
   public function rules(): array {
-    return [];
+    return [
+      'email' => ['required', 'string', 'email'],
+      'password' => ['required', 'min:6'],
+    ];
   }
 
 }

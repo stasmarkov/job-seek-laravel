@@ -4,12 +4,12 @@ declare(strict_types = 1);
 
 namespace Modules\Vacancy\Listeners;
 
-use App\Models\User;
 use App\Notifications\VacancyPostedNotification;
 use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Notification;
+use Modules\Auth\Models\User;
 use Modules\Vacancy\Events\VacancyCreatedEvent;
 
 /**

@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Jobs;
 
 use App\Mail\WeeklyVacanciesDigestMail;
-use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
+use Modules\Auth\Models\User;
 use Modules\Vacancy\Models\Vacancy;
 
 /**

@@ -5,18 +5,19 @@ declare(strict_types = 1);
 namespace Modules\Auth\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\ApiController;
-use App\Models\User;
+use Modules\Auth\Http\Filters\V1\UserFilter;
 use Modules\Auth\Http\Requests\Api\V1\StoreUserRequest;
 use Modules\Auth\Http\Requests\Api\V1\UpdateUserRequest;
-use Modules\Auth\Http\Resources\V1\UserResource;
+use Modules\Auth\Http\Resources\UserResource;
+use Modules\Auth\Models\User;
 
 class UserController extends ApiController {
 
   /**
    * Display a listing of the resource.
    */
-  public function index() {
-    return UserResource::collection(User::paginate());
+  public function index(UserFilter $filters) {
+    return UserResource::collection(User::filter($filters)->paginate());
   }
 
   /**

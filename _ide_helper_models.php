@@ -21,9 +21,9 @@ namespace App\Models{
  * @property string $body
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $likes
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Auth\Models\User> $likes
  * @property-read int|null $likes_count
- * @property-read \App\Models\User|null $user
+ * @property-read \Modules\Auth\Models\User|null $user
  * @method static \Database\Factories\BlogPostFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|BlogPost newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BlogPost newQuery()
@@ -102,7 +102,7 @@ namespace App\Models{
  * @property string $ip
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\User|null $user
+ * @property-read \Modules\Auth\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|LoginLog newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|LoginLog newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|LoginLog query()
@@ -170,29 +170,29 @@ namespace App\Models{
  * @property-read int|null $roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
- * @method static \Illuminate\Database\Eloquent\Builder|User active()
- * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User permission($permissions, $without = false)
- * @method static \Illuminate\Database\Eloquent\Builder|User query()
- * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null, $without = false)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereAvatar($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereGithubId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereGithubRefreshToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereGithubToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereLoveReacterId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User withoutPermission($permissions)
- * @method static \Illuminate\Database\Eloquent\Builder|User withoutRole($roles, $guard = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User active()
+ * @method static \Modules\Auth\Database\Factories\UserFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User permission($permissions, $without = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User role($roles, $guard = null, $without = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User whereGithubId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User whereGithubRefreshToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User whereGithubToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User whereLoveReacterId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User withoutPermission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Auth\Models\User withoutRole($roles, $guard = null)
  */
 	class User extends \Eloquent implements \Cog\Contracts\Love\Reacterable\Models\Reacterable {}
 }
@@ -213,7 +213,7 @@ namespace Modules\Candidate\Models{
  * @property-read \Modules\Candidate\Models\ContactInformation|null $contactInformation
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tag> $tags
  * @property-read int|null $tags_count
- * @property-read \App\Models\User|null $user
+ * @property-read \Modules\Auth\Models\User|null $user
  * @method static \Modules\Candidate\Database\Factories\CandidateProfileFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|CandidateProfile newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CandidateProfile newQuery()
@@ -241,7 +241,7 @@ namespace Modules\Employer\Models{
  * @property string $logo
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\User|null $user
+ * @property-read \Modules\Auth\Models\User|null $user
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Vacancy\Models\Vacancy> $vacancies
  * @property-read int|null $vacancies_count
  * @method static \Modules\Employer\Database\Factories\EmployerProfileFactory factory($count = null, $state = [])
