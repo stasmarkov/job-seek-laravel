@@ -26,15 +26,21 @@ class VacancyPolicy {
   /**
    * Determine whether the user can view the model.
    */
-  public function view(User $user, Vacancy $vacancy): bool {
+  public function view(User $user): bool {
     return TRUE;
   }
 
   /**
    * Determine whether the user can create models.
    */
-  public function create(User $user): bool {
-    return $user->isAdmin() || ($user->hasPermissionTo('create a new vacancy') && $user->employerProfile()->first());
+  public function create(User $user, User $owner): bool {
+    if ($user->isAdmin()) {
+      return TRUE;
+    }
+
+    return
+      ($user->hasPermissionTo('create any new vacancy') && $owner->employerProfile()->first()) ||
+      ($user->hasPermissionTo('create a new vacancy') && $user->is($owner) && $user->employerProfile()->first());
   }
 
   /**

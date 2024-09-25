@@ -36,7 +36,7 @@ class CandidateProfileController extends Controller {
    * Display the specified resource.
    */
   public function show(CandidateProfile $candidate_profile) {
-    $this->authorize('view', $candidate_profile);
+    $this->authorize('view', [$candidate_profile]);
 
     return Inertia::render('Model/CandidateProfile/View', [
       'candidateProfile' => CandidateProfileResource::make($candidate_profile, $candidate_profile->tags),
@@ -51,7 +51,7 @@ class CandidateProfileController extends Controller {
       return redirect()->route('profile.candidate.edit', ['user' => $user->id]);
     }
 
-    $this->authorize('create', CandidateProfile::class);
+    $this->authorize('create', [CandidateProfile::class]);
 
     return Inertia::render('Model/CandidateProfile/CreateForm', [
       'user' => $user,
@@ -63,7 +63,7 @@ class CandidateProfileController extends Controller {
    * Store a newly created resource in storage.
    */
   public function store(CandidateProfileRequest $request, User $user) {
-    $this->authorize('create', CandidateProfile::class);
+    $this->authorize('create', [CandidateProfile::class]);
 
     $request->validated($request->all());
 
@@ -81,7 +81,7 @@ class CandidateProfileController extends Controller {
       return redirect()->route('profile.candidate.create', ['user' => $user->id]);
     }
 
-    $this->authorize('update', $user->candidateProfile);
+    $this->authorize('update', [$user->candidateProfile]);
 
     $user->candidateProfile->tags();
     return Inertia::render('Model/CandidateProfile/UpdateForm', [
@@ -95,7 +95,7 @@ class CandidateProfileController extends Controller {
    * Store a newly created resource in storage.
    */
   public function update(CandidateProfileRequest $request, User $user) {
-    $this->authorize('update', $user->candidateProfile);
+    $this->authorize('update', [$user->candidateProfile]);
 
     $request->validated($request->all());
 

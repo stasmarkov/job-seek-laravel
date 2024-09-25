@@ -23,6 +23,7 @@ trait HasApiResponses {
     return response()->json([
       'data' => $data,
       'message' => $message,
+      'success' => TRUE,
       'status' => $code,
     ], $code);
   }

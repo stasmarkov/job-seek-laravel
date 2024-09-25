@@ -9,12 +9,9 @@ const model = defineModel({
 </script>
 
 <template>
-  <textarea rows="5" v-model="model"></textarea>
+  <textarea class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm w-full" rows="5" v-model="model"></textarea>
 </template>
 
 <style scoped>
-  .tox.tox-tinymce {
-    border-radius: 0;
-    border-width: 1px;
-  }
+
 </style>

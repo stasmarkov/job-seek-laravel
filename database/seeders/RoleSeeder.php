@@ -20,6 +20,7 @@ class RoleSeeder extends Seeder {
     $admin = Role::findOrCreate(UserRolesEnum::ADMIN->value);
     $admin->syncPermissions([
       'create a new vacancy',
+      'create any new vacancy',
       'edit any vacancy',
       'edit own vacancy',
       'delete any vacancy',

@@ -19,6 +19,7 @@ class PermissionSeeder extends Seeder {
     // Permissions related to Vacancy Model.
     Permission::create(['name' => 'view list of vacancies']);
     Permission::create(['name' => 'create a new vacancy']);
+    Permission::create(['name' => 'create any new vacancy']);
     Permission::create(['name' => 'edit any vacancy']);
     Permission::create(['name' => 'edit own vacancy']);
     Permission::create(['name' => 'delete any vacancy']);

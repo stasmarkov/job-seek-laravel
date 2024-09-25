@@ -54,7 +54,7 @@ class EmployerProfileController extends Controller {
       return redirect()->route('profile.employer.edit', ['user' => $user->id]);
     }
 
-    $this->authorize('create', EmployerProfile::class);
+    $this->authorize('create', [EmployerProfile::class]);
 
     return 'TBD.';
   }
@@ -63,7 +63,7 @@ class EmployerProfileController extends Controller {
    * Store a newly created resource in storage.
    */
   public function store(Request $request, User $user) {
-    $this->authorize('create', EmployerProfile::class);
+    $this->authorize('create', [EmployerProfile::class]);
   }
 
   /**
@@ -74,7 +74,7 @@ class EmployerProfileController extends Controller {
       return redirect()->route('profile.employer.create', ['user' => $user->id]);
     }
 
-    $this->authorize('update', $user->employerProfile);
+    $this->authorize('update', [$user->employerProfile]);
 
     return Inertia::render('Model/EmployerProfile/UpdateForm', [
       'user' => $user,
@@ -86,7 +86,7 @@ class EmployerProfileController extends Controller {
    * Store a newly created resource in storage.
    */
   public function update(EmployerProfileRequest $request, User $user) {
-    $this->authorize('update', $user->employerProfile);
+    $this->authorize('update', [$user->employerProfile]);
 
     $employerProfile = $user->employerProfile;
 
@@ -112,7 +112,7 @@ class EmployerProfileController extends Controller {
    * Remove the specified resource from storage.
    */
   public function destroy(User $user) {
-    $this->authorize('delete', $user->employerProfile);
+    $this->authorize('delete', [$user->employerProfile]);
   }
 
 }
