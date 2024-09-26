@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Modules\Auth\Models;
 
-use App\Http\Filters\V1\QueryFilter;
 use App\Models\BlogPost;
 use App\Models\LoginLog;
 use App\Traits\HasSiteRoles;
@@ -20,6 +19,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Auth\Database\Factories\UserFactory;
 use Modules\Candidate\Models\CandidateProfile;
+use Modules\Core\Http\Filters\V1\QueryFilter;
 use Modules\Employer\Models\EmployerProfile;
 use Spatie\Permission\Traits\HasRoles;
 

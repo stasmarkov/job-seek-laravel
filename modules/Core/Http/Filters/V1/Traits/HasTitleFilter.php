@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Filters\V1\Traits;
+namespace Modules\Core\Http\Filters\V1\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 

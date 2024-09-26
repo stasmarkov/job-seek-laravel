@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace Modules\Vacancy\Models;
 
 use App\Enums\UserRolesEnum;
-use App\Http\Filters\V1\QueryFilter;
 use App\Traits\HasTags;
 use App\Traits\HasUrl;
 use App\Traits\HasUuid;
@@ -17,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Modules\Core\Http\Filters\V1\QueryFilter;
 use Modules\Employer\Models\EmployerProfile;
 use Modules\Vacancy\Database\Factories\VacancyFactory;
 use Modules\Vacancy\Events\VacancyCreatedEvent;

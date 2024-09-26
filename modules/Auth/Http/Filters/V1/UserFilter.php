@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Auth\Http\Filters\V1;
 
-use App\Http\Filters\V1\QueryFilter;
-use App\Http\Filters\V1\Traits\HasDateFilter;
-use App\Http\Filters\V1\Traits\HasTitleFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\Core\Http\Filters\V1\QueryFilter;
+use Modules\Core\Http\Filters\V1\Traits\HasDateFilter;
 
 /**
  * The endpoint filter.

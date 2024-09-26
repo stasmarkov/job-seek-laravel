@@ -21,6 +21,7 @@ use Modules\Vacancy\Jobs\CreateVacancy;
 use Modules\Vacancy\Jobs\UpdateCandidate;
 use Modules\Vacancy\Jobs\UpdateVacancy;
 use Modules\Vacancy\Models\Vacancy;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * The vacancy controller.

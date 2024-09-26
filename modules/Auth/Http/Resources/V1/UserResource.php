@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Modules\Auth\Http\Resources\V1;
 
@@ -31,7 +31,7 @@ class UserResource extends JsonResource {
         $this->mergeWhen($request->routeIs('api.v1.user.*'), [
           'createdAt' => $this->created_at,
           'updatedAt' => $this->updated_at,
-          'emailVerifiedAt' => $this->email_verified_at
+          'emailVerifiedAt' => $this->email_verified_at,
         ]),
       ],
       'links' => [
