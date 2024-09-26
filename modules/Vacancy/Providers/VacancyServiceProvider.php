@@ -13,6 +13,8 @@ use Modules\Candidate\Policies\CandidateProfilePolicy;
 use Modules\Vacancy\Listeners\VacancyCreatedSubscriber;
 use Modules\Vacancy\Listeners\VacancyDeletedSubscriber;
 use Modules\Vacancy\Listeners\VacancyViewedSubscriber;
+use Modules\Vacancy\Models\Vacancy;
+use Modules\Vacancy\Policies\VacancyPolicy;
 
 /**
  * The vacancy modules service provider.
@@ -37,7 +39,7 @@ class VacancyServiceProvider extends ServiceProvider {
    * {@inheritdoc}
    */
   public function registerPolicies() {
-    Gate::policy(CandidateProfile::class, CandidateProfilePolicy::class);
+    Gate::policy(Vacancy::class, VacancyPolicy::class);
   }
 
   /**

@@ -32,8 +32,10 @@ class VacancyController extends Controller {
    * {@inheritdoc}
    */
   public function __construct() {
-    $this->middleware('can:viewAny,\Modules\Vacancy\Models\Vacancy')->only('index');
-    $this->middleware('can:create,\Modules\Vacancy\Models\Vacancy')->only('create', 'store');
+    $this->middleware('can:viewAny,\Modules\Vacancy\Models\Vacancy')
+      ->only('index');
+    $this->middleware('can:create,\Modules\Vacancy\Models\Vacancy')
+      ->only('create', 'store');
     $this->middleware('can:update,vacancy')->only('edit', 'update');
     $this->middleware('can:delete,vacancy')->only('destroy');
   }
@@ -70,21 +72,21 @@ class VacancyController extends Controller {
     $user = Auth::user();
     $reactantFacade = $vacancy->viaLoveReactant();
 
-    $similar_vacancies = Vacancy::query()
+    $similar_vacancies_query = Vacancy::query()
       ->where('id', '!=', $vacancy->id)
-      ->latest('created_at')
-      ->limit(4);
-
-    $similar_vacancies->whereHas('tags', function (Builder $query) use ($vacancy) {
-      foreach ($vacancy->tags as $tag) {
-        $query->orWhere('tags.id', '=', $tag->id);
-      }
-    });
+      ->whereHas('employerProfile', function (Builder $query) use ($vacancy) {
+        $query->where('id', $vacancy->employerProfile()->pluck('id'));
+      })
+      ->whereHas('tags', function (Builder $query) use ($vacancy) {
+        $query->whereIn('tags.id', $vacancy->tags()->pluck('tags.id'));
+      }, '>=', 5)
+      ->limit(5);
 
     return Inertia::render('Model/Vacancy/View', [
       'vacancy' => VacancyResource::make($vacancy),
-      'similarVacancies' => VacancyResource::collection($similar_vacancies->get()),
-      'likesCount' => $reactantFacade->getReactionCounterOfType('Like')->getCount(),
+      'similarVacancies' => VacancyResource::collection($similar_vacancies_query->get()),
+      'likesCount' => $reactantFacade->getReactionCounterOfType('Like')
+        ->getCount(),
       'isLiked' => $reactantFacade->isReactedBy($user, 'Like'),
       'can' => [
         'edit_vacancy' => $user ? $user->can('update', $vacancy) : FALSE,
