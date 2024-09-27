@@ -4,11 +4,11 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
-use App\Enums\UserRolesEnum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Modules\Auth\Enums\UserRolesEnum;
 use Spatie\Permission\Exceptions\RoleDoesNotExist;
 use Spatie\Permission\Models\Role;
 

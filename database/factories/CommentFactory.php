@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\BlogPost;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Auth\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Comment>

@@ -20,7 +20,7 @@ class ContactInformation extends Model {
    * {@inheritdoc}
    */
   protected static function newFactory(): ContactInformationFactory {
-    return new ContactInformationFactory();
+    return ContactInformationFactory::new();
   }
 
   /**
@@ -32,6 +32,5 @@ class ContactInformation extends Model {
   public function candidateProfile(): BelongsTo {
     return $this->belongsTo(CandidateProfile::class);
   }
-
 
 }

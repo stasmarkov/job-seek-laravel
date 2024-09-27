@@ -38,13 +38,10 @@ const form = useForm({
   tags: props.candidateProfile?.tags,
 });
 
-console.log(props.candidateProfile.tags);
-
 const updateCandidateProfile = () => {
-  form.patch(route('candidate_profile.update', { user: props.user.id }))
+  form.patch(route('profile.candidate.update', { user: props.user.id }))
 }
 </script>
-
 
 <template>
   <AdminLayout>
@@ -113,9 +110,12 @@ const updateCandidateProfile = () => {
         </div>
 
 
-        <CheckboxButtons :items="props.tags"
-                         :selectedItems="form.tags.map(el => el.id)" type="admin"
-                         @checkboxCheckedEvent="checkboxFormSubmit"/>
+        <CheckboxButtons
+          :items="props.tags"
+          :selectedItems="form.tags.map(el => el.id)"
+          type="admin"
+          @checkboxCheckedEvent="checkboxFormSubmit"
+        />
 
         <div class="flex items-center gap-4">
           <PrimaryButton :disabled="form.processing">Save</PrimaryButton>

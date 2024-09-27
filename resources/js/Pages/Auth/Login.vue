@@ -57,22 +57,14 @@ const submit = () => {
           required
           autofocus
           autocomplete="username"
+          tabindex="0"
         />
 
         <InputError class="mt-2" :message="form.errors.email"/>
       </div>
 
       <div class="mt-4">
-        <div class="flex justify-between">
-          <InputLabel for="password" value="Password"/>
-          <Link
-            v-if="canResetPassword"
-            :href="route('password.request')"
-            class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Forgot your password?
-          </Link>
-        </div>
+        <InputLabel for="password" value="Password"/>
 
         <TextInput
           id="password"
@@ -81,16 +73,30 @@ const submit = () => {
           v-model="form.password"
           required
           autocomplete="current-password"
+          tabindex="0"
         />
 
         <InputError class="mt-2" :message="form.errors.password"/>
       </div>
 
-      <div class="block mt-4">
+      <div class="mt-4 flex justify-between flex-wrap gap-4">
         <label class="flex items-center">
-          <Checkbox name="remember" v-model:checked="form.remember"/>
+          <Checkbox
+            name="remember"
+            v-model:checked="form.remember"
+          />
           <span class="ms-2 text-sm text-gray-600">Remember me</span>
         </label>
+
+        <div class="flex justify-between">
+          <Link
+            v-if="canResetPassword"
+            :href="route('password.request')"
+            class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Forgot your password?
+          </Link>
+        </div>
       </div>
 
       <div class="flex items-center justify-end mt-4 gap-2">

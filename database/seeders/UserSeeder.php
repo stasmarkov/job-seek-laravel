@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace Database\Seeders;
 
-use App\Enums\UserRolesEnum;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
+use Modules\Auth\Enums\UserRolesEnum;
+use Modules\Auth\Models\User;
 use Modules\Employer\Models\EmployerProfile;
 use Spatie\Permission\Models\Role;
 
@@ -37,7 +37,7 @@ class UserSeeder extends Seeder {
     // Create employer user.
     User::factory()
       ->hasAttached($employer_role)
-//      ->has(EmployerProfile::factory())
+      ->has(EmployerProfile::factory())
       ->create([
         'name' => 'employer',
         'email' => 'employer@mail.com',

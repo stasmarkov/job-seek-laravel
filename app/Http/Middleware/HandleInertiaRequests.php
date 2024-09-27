@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Enums\UserRolesEnum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
+use Modules\Auth\Enums\UserRolesEnum;
 use Modules\Vacancy\Models\Vacancy;
 use Tighten\Ziggy\Ziggy;
 
@@ -41,7 +41,7 @@ class HandleInertiaRequests extends Middleware {
         'location' => $request->url(),
       ],
       'can' => [
-        'create_vacancy' => Auth::user()?->can('create', Vacancy::class),
+        'create_vacancy' => Auth::user()?->can('create', [Auth::user(), Vacancy::class]),
       ],
       'isAdmin' => Auth::user() ? Auth::user()?->hasRole(UserRolesEnum::ADMIN->value) : FALSE,
       'isEmployer' => Auth::user() ? Auth::user()?->hasRole(UserRolesEnum::EMPLOYER->value) : FALSE,

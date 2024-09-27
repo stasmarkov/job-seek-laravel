@@ -5,9 +5,9 @@ declare(strict_types = 1);
 namespace Modules\Candidate\Http\Resources;
 
 use App\Http\Resources\TagResource;
-use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Auth\Http\Resources\UserResource;
 
 /**
  * The Employer Profile Resource.

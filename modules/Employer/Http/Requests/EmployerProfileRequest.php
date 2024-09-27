@@ -20,7 +20,7 @@ class EmployerProfileRequest extends FormRequest {
   public function rules(): array {
     return [
       'name' => ['required'],
-      'logo' => ['required', File::types(['png', 'webp', 'jpg', 'jpeg'])],
+//      'logo' => ['nullable', File::types(['png', 'webp', 'jpg', 'jpeg'])],
     ];
   }
 

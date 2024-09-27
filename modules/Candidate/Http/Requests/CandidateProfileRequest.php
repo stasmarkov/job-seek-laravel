@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Modules\Candidate\Http\Requests;
 
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Modules\Auth\Models\User;
 
 /**
  * The Employer Profile model request.
@@ -15,7 +15,7 @@ class CandidateProfileRequest extends FormRequest {
   /**
    * The user to whom the candidate profile belongs.
    *
-   * @var \App\Models\User
+   * @var \Modules\Auth\Models\User
    */
   protected User $owner;
 

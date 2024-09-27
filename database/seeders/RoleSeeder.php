@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Database\Seeders;
 
-use App\Enums\UserRolesEnum;
 use Illuminate\Database\Seeder;
+use Modules\Auth\Enums\UserRolesEnum;
 use Spatie\Permission\Models\Role;
 
 /**
@@ -20,6 +20,7 @@ class RoleSeeder extends Seeder {
     $admin = Role::findOrCreate(UserRolesEnum::ADMIN->value);
     $admin->syncPermissions([
       'create a new vacancy',
+      'create any new vacancy',
       'edit any vacancy',
       'edit own vacancy',
       'delete any vacancy',

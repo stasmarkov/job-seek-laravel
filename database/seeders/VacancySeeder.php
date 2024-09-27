@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace Database\Seeders;
 
-use App\Enums\UserRolesEnum;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
+use Modules\Auth\Enums\UserRolesEnum;
 use Modules\Employer\Models\EmployerProfile;
 use Modules\Vacancy\Models\Vacancy;
 use Spatie\Permission\Models\Role;

@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace Modules\Vacancy\Policies;
 
-use App\Enums\UserRolesEnum;
-use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Modules\Auth\Enums\UserRolesEnum;
+use Modules\Auth\Models\User;
 use Modules\Vacancy\Models\Vacancy;
 
 /**
@@ -20,21 +20,27 @@ class VacancyPolicy {
    * Determine whether the user can view any models.
    */
   public function viewAny(User $user): bool {
-    return $user->hasPermissionTo('view list of vacancies');
+    return TRUE;
   }
 
   /**
    * Determine whether the user can view the model.
    */
-  public function view(User $user, Vacancy $vacancy): bool {
+  public function view(User $user): bool {
     return TRUE;
   }
 
   /**
    * Determine whether the user can create models.
    */
-  public function create(User $user): bool {
-    return $user->isAdmin() || ($user->hasPermissionTo('create a new vacancy') && $user->employerProfile()->first());
+  public function create(User $user, User $owner): bool {
+    if ($user->isAdmin()) {
+      return TRUE;
+    }
+
+    return
+      ($user->hasPermissionTo('create any new vacancy') && $owner->employerProfile()->first()) ||
+      ($user->hasPermissionTo('create a new vacancy') && $user->is($owner) && $user->employerProfile()->first());
   }
 
   /**

@@ -15,6 +15,7 @@ import {useCurrentUser} from "@/Composables/useCurrentUser.js";
 import FormGroup from "@/Components/FormElements/FormGroup.vue";
 import TextareaInput from "@/Components/FormElements/TextareaInput.vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
+import InputWrapper from "@/Components/FormElements/InputWrapper.vue";
 
 const props = defineProps({
   employerProfile: Object,
@@ -99,41 +100,56 @@ const submit = () => {
       </div>
       <form @submit.prevent="submit" class="space-y-6 mt-4">
         <div class="flex flex-wrap flex-col gap-4">
-          <TextInput label="Title" name="title" v-model="form.title" placeholder="Laravel Developer"/>
-          <InputError :message="form.errors.title" class="mt-2"/>
 
-          <InputLabel value="Short description" for="short_description"/>
-          <TextareaInput name="short_description" v-model="form.short_description"/>
+          <InputWrapper id="title" label="Vacancy title" :message="form.errors.title">
+            <TextInput
+              id="title"
+              type="text"
+              class="mt-1 block w-full"
+              v-model="form.title"
+              required
+              autofocus
+              placeholder="Sr. Laravel Developer..."
+            />
+          </InputWrapper>
 
-          <span class="flex w-full justify-end" :class="{
+          <InputWrapper id="short_description" label="Vacancy short description" :message="form.errors.short_description">
+            <HtmlTextarea
+              name="short_description"
+              v-model="form.short_description"
+            />
+            <span class="flex w-full justify-end" :class="{
               'text-red-500': charsLeft <= 0,
             }">{{ charsLeft }} / 250</span>
+          </InputWrapper>
 
-          <InputLabel value="Full description" for="description"/>
-          <HtmlTextarea
-            name="description"
-            v-model="form.description"
-          />
-          <InputError :message="form.errors.description" class="mt-2"/>
+          <InputWrapper id="description" label="Vacancy description" :message="form.errors.description">
+            <HtmlTextarea
+              name="description"
+              v-model="form.description"
+            />
+          </InputWrapper>
         </div>
         <div>
           <div class="bg-black/10 my-10 h-px w-full"></div>
         </div>
         <div class="info flex gap-4">
-          <TextInput label="Salary" name="salary" v-model="form.salary" placeholder="$60,000 USD"/>
-          <InputError :message="form.errors.salary" class="mt-2"/>
+          <InputWrapper class="flex-grow-0" id="salary" label="Salary" :message="form.errors.salary">
+            <TextInput label="Salary" name="salary" v-model="form.salary" placeholder="$60,000 USD"/>
+          </InputWrapper>
 
-          <TextInput label="Location" name="location" v-model="form.location" placeholder="Port City, Lutsk"/>
-          <InputError :message="form.errors.location" class="mt-2"/>
+          <InputWrapper class="flex-grow-0" id="salary" label="Location" :message="form.errors.location">
+            <TextInput name="location" v-model="form.location" placeholder="Port City, Lutsk"/>
+          </InputWrapper>
         </div>
 
-        <select name="schedule" v-model="form.schedule">
-          <option value="Part-Time">Part Time</option>
-          <option value="Full-Time">Full Time</option>
-          <option value="Contract">Contract</option>
-        </select>
-        <InputError :message="form.errors.schedule" class="mt-2"/>
-
+        <InputWrapper id="schedule" label="Schedule" :message="form.errors.schedule">
+          <select name="schedule" v-model="form.schedule">
+            <option value="Part-Time">Part Time</option>
+            <option value="Full-Time">Full Time</option>
+            <option value="Contract">Contract</option>
+          </select>
+        </InputWrapper>
 
         <div class="flex items-center align-middle gap-2">
           <Checkbox label="Featured (Costs Extra)" id="featured" name="featured" v-model:checked="form.featured"/>
@@ -143,7 +159,6 @@ const submit = () => {
         <div>
           <div class="bg-black/10 my-10 h-px w-full"></div>
         </div>
-
 
         <div class="flex flex-wrap flex-col gap-4">
           <TextInput label="URL" name="url" type="url" v-model="form.url"
