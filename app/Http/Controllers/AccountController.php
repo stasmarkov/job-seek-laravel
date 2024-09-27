@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace App\Http\Controllers;
 
-use App\Enums\UserRolesEnum;
 use App\Http\Requests\AccountUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
@@ -12,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
+use Modules\Auth\Enums\UserRolesEnum;
 use Modules\Auth\Http\Resources\UserResource;
 use Modules\Auth\Models\User;
 

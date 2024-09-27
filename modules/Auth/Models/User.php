@@ -6,8 +6,6 @@ namespace Modules\Auth\Models;
 
 use App\Models\BlogPost;
 use App\Models\LoginLog;
-use App\Traits\HasSiteRoles;
-use App\Traits\HasUrl;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableInterface;
 use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
 use Illuminate\Database\Eloquent\Builder;
@@ -20,6 +18,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Modules\Auth\Database\Factories\UserFactory;
 use Modules\Candidate\Models\CandidateProfile;
 use Modules\Core\Http\Filters\V1\QueryFilter;
+use Modules\Core\Traits\HasSiteRoles;
+use Modules\Core\Traits\HasUrl;
 use Modules\Employer\Models\EmployerProfile;
 use Spatie\Permission\Traits\HasRoles;
 

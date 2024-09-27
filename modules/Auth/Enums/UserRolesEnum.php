@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Enums;
+namespace Modules\Auth\Enums;
 
 /**
  * Provides different type of users.

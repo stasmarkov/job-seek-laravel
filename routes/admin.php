@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-use App\Enums\UserRolesEnum;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Modules\Auth\Enums\UserRolesEnum;
 use Modules\Auth\Models\User;
 
 Route::middleware('role:' . UserRolesEnum::ADMIN->value)->group(function () {

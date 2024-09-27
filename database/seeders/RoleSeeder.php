@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Database\Seeders;
 
-use App\Enums\UserRolesEnum;
 use Illuminate\Database\Seeder;
+use Modules\Auth\Enums\UserRolesEnum;
 use Spatie\Permission\Models\Role;
 
 /**

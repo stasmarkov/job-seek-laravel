@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\Candidate\Models;
 
-use App\Traits\HasTags;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Auth\Models\User;
 use Modules\Candidate\Database\Factories\CandidateProfileFactory;
+use Modules\Core\Traits\HasTags;
 
 /**
  * The candidate profile model.

@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace App\Traits;
+namespace Modules\Core\Traits;
 
-use App\Enums\UserRolesEnum;
+use Modules\Auth\Enums\UserRolesEnum;
 
 /**
  * Helper trait to check if models has specific roles.

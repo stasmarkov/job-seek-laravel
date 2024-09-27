@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Modules\Auth\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Traits\HasApiResponses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Auth\Http\Requests\Api\V1\LoginRequest;
 use Modules\Auth\Models\User;
+use Modules\Core\Traits\HasApiResponses;
 
 /**
  * {@inheritdoc}

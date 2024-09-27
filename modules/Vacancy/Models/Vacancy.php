@@ -4,10 +4,6 @@ declare(strict_types = 1);
 
 namespace Modules\Vacancy\Models;
 
-use App\Enums\UserRolesEnum;
-use App\Traits\HasTags;
-use App\Traits\HasUrl;
-use App\Traits\HasUuid;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Illuminate\Database\Eloquent\Builder;
@@ -16,7 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Modules\Auth\Enums\UserRolesEnum;
 use Modules\Core\Http\Filters\V1\QueryFilter;
+use Modules\Core\Traits\HasTags;
+use Modules\Core\Traits\HasUrl;
+use Modules\Core\Traits\HasUuid;
 use Modules\Employer\Models\EmployerProfile;
 use Modules\Vacancy\Database\Factories\VacancyFactory;
 use Modules\Vacancy\Events\VacancyCreatedEvent;

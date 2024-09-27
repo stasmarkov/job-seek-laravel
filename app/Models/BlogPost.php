@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use App\Traits\HasLikes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Auth\Models\User;
+use Modules\Core\Traits\HasLikes;
 
 /**
  * The BlogPost model.

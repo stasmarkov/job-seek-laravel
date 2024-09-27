@@ -4,19 +4,23 @@ declare(strict_types = 1);
 
 namespace Modules\Vacancy\Http\Controllers\Api\V1;
 
-use App\Enums\UserRolesEnum;
 use App\Http\Controllers\ApiController;
-use App\Traits\HasApiResponses;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Modules\Auth\Enums\UserRolesEnum;
 use Modules\Auth\Models\User;
+use Modules\Core\Traits\HasApiResponses;
 use Modules\Vacancy\Http\Filters\V1\VacancyFilter;
+use Modules\Vacancy\Http\Requests\Api\V1\ReplaceVacancyRequest;
 use Modules\Vacancy\Http\Requests\Api\V1\StoreVacancyRequest;
 use Modules\Vacancy\Http\Requests\Api\V1\UpdateVacancyRequest;
 use Modules\Vacancy\Http\Resources\V1\VacancyResource;
 use Modules\Vacancy\Models\Vacancy;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * The Vacancy API controller.
@@ -24,15 +28,6 @@ use Modules\Vacancy\Models\Vacancy;
 class VacancyController extends ApiController {
 
   use HasApiResponses;
-
-  /**
-   * {@inheritdoc}
-   */
-  public function __construct() {
-    $this->middleware('can:viewAny,\Modules\Vacancy\Models\Vacancy')->only('index');
-    $this->middleware('can:update,vacancy')->only('update');
-    $this->middleware('can:delete,vacancy')->only('destroy');
-  }
 
   /**
    * Display a listing of the resource.
@@ -46,13 +41,32 @@ class VacancyController extends ApiController {
   }
 
   /**
+   * Display the specified resource.
+   */
+  public function show(int $vacancy_id): JsonResource|JsonResponse {
+    try {
+      $vacancy = Vacancy::findOrFail($vacancy_id);
+      $this->authorize('view', [$vacancy]);
+
+      if ($this->include('tags')) {
+        return new VacancyResource($vacancy?->load('tags'));
+      }
+
+      return VacancyResource::make($vacancy);
+    }
+    catch (ModelNotFoundException) {
+      return $this->error('Vacancy cannot be found', 404);
+    }
+  }
+
+  /**
    * Store a newly created resource in storage.
    */
-  public function store(StoreVacancyRequest $request) {
+  public function store(StoreVacancyRequest $request): JsonResource|JsonResponse {
     try {
       $owner = User::findOrFail($request->input('data.relationships.author.data.id'));
     }
-    catch (ModelNotFoundException $exception) {
+    catch (ModelNotFoundException) {
       return $this->ok('User not found', [
         'error' => 'The provided user id does not exist.',
       ]);
@@ -60,25 +74,16 @@ class VacancyController extends ApiController {
 
     $this->authorize('create', [Vacancy::class, $owner]);
 
-    $model = [
-      'uuid' => Str::uuid(),
-      'title' => $request->validated('data.attributes.title'),
-      'featured' => $request->validated('data.attributes.featured'),
-      'schedule' => $request->validated('data.attributes.schedule'),
-      'salary' => $request->validated('data.attributes.salary'),
-      'location' => $request->validated('data.attributes.location'),
-      'description' => $request->validated('data.attributes.description'),
-      'short_description' => $request->validated('data.attributes.short_description'),
-      'url' => $request->validated('data.attributes.url'),
-      'employer_profile_id' => $owner->employerProfile->id,
-    ];
-
     try {
       DB::beginTransaction();
-      $vacancy = Vacancy::create($model);
+      $attributes = [
+        'uuid' => Str::uuid(),
+        'employer_profile_id' => $owner->employerProfile->id,
+      ];
+      $vacancy = Vacancy::create($request->getMappedAttributes($attributes));
       DB::commit();
     }
-    catch (\Exception) {
+    catch (\Exception $exception) {
       DB::rollBack();
 
       return $this->ok('Internal error', [
@@ -90,28 +95,77 @@ class VacancyController extends ApiController {
   }
 
   /**
-   * Display the specified resource.
+   * Update the specified resource in storage.
    */
-  public function show(Vacancy $vacancy) {
-    if ($this->include('tags')) {
-      return new VacancyResource($vacancy->load('tags'));
-    }
+  public function update(UpdateVacancyRequest $request, int $vacancy_id): JsonResource|JsonResponse {
+    try {
+      $vacancy = Vacancy::findOrFail($vacancy_id);
+      $this->authorize('update', [$vacancy]);
 
-    return VacancyResource::make($vacancy);
+      try {
+        DB::beginTransaction();
+        $vacancy?->update($request->getMappedAttributes());
+        DB::commit();
+      }
+      catch (\Exception) {
+        DB::rollBack();
+
+        return $this->ok('Internal error', [
+          'error' => 'Could not replace vacancy. Please try again later.',
+        ]);
+      }
+
+      return VacancyResource::make($vacancy);
+    }
+    catch (ModelNotFoundException) {
+      return $this->error('Vacancy cannot be found', 404);
+    }
+    catch (AuthorizationException $exception) {
+      return $this->error('You are not authorized to perform this action.', 401);
+    }
   }
 
   /**
-   * Update the specified resource in storage.
+   * Replace the specified resource in storage.
    */
-  public function update(UpdateVacancyRequest $request, Vacancy $vacancy) {
-    //
+  public function replace(ReplaceVacancyRequest $request, int $vacancy_id): JsonResource|JsonResponse {
+    try {
+      $vacancy = Vacancy::findOrFail($vacancy_id);
+      $this->authorize('update', [$vacancy]);
+
+      try {
+        DB::beginTransaction();
+        $vacancy?->update($request->getMappedAttributes());
+        DB::commit();
+      }
+      catch (\Exception) {
+        DB::rollBack();
+
+        return $this->ok('Internal error', [
+          'error' => 'Could not replace vacancy. Please try again later.',
+        ]);
+      }
+
+      return VacancyResource::make($vacancy);
+    }
+    catch (ModelNotFoundException) {
+      return $this->error('Vacancy cannot be found', 404);
+    }
   }
 
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(Vacancy $vacancy) {
-    //
+  public function destroy(int $vacancy_id): JsonResponse {
+    try {
+      $vacancy = Vacancy::findOrFail($vacancy_id);
+      $this->authorize('delete', [$vacancy]);
+      $vacancy?->delete();
+      return $this->ok('Vacancy successfully deleted');
+    }
+    catch (ModelNotFoundException) {
+      return $this->error('Vacancy cannot be found', 404);
+    }
   }
 
 }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Candidate\Policies;
 
-use App\Enums\UserRolesEnum;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Modules\Auth\Enums\UserRolesEnum;
 use Modules\Auth\Models\User;
 use Modules\Candidate\Models\CandidateProfile;
 

@@ -34,8 +34,6 @@ class VacancyController extends Controller {
   public function __construct() {
     $this->middleware('can:viewAny,\Modules\Vacancy\Models\Vacancy')
       ->only('index');
-    $this->middleware('can:create,\Modules\Vacancy\Models\Vacancy')
-      ->only('create', 'store');
     $this->middleware('can:update,vacancy')->only('edit', 'update');
     $this->middleware('can:delete,vacancy')->only('destroy');
   }
@@ -90,7 +88,7 @@ class VacancyController extends Controller {
       'isLiked' => $reactantFacade->isReactedBy($user, 'Like'),
       'can' => [
         'edit_vacancy' => $user ? $user->can('update', $vacancy) : FALSE,
-        'create_vacancy' => Auth::user()?->can('create', Vacancy::class),
+        'create_vacancy' => Auth::user()?->can('create', [Auth::user(), Vacancy::class]),
       ],
     ]);
   }
@@ -99,6 +97,8 @@ class VacancyController extends Controller {
    * Show the form for creating a new resource.
    */
   public function create(Request $request) {
+    $this->authorize('create', [Vacancy::class, Auth::user()]);
+
     return Inertia::render('Model/Vacancy/CreateForm', [
       'employerProfile' => Context::get('employerProfile'),
       'tags' => TagResource::collection(Tag::all()),
@@ -109,6 +109,8 @@ class VacancyController extends Controller {
    * Store a newly created resource in storage.
    */
   public function store(VacancyCreateRequest $request) {
+    $this->authorize('create', [Vacancy::class, Auth::user()]);
+
     $request->validated($request->all());
     $uuid = Str::uuid();
     $this->dispatchSync(CreateVacancy::fromRequest($request, $uuid));

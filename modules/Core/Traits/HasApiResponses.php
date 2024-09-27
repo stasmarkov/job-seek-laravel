@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Traits;
+namespace Modules\Core\Traits;
 
 /**
  * {@inheritdoc}
@@ -35,6 +35,7 @@ trait HasApiResponses {
     return response()->json([
       'message' => $message,
       'status' => $code,
+      'success' => FALSE,
     ], $code);
   }
 

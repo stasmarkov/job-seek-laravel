@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Employer\Policies;
 
-use App\Enums\UserRolesEnum;
-use Illuminate\Container\Attributes\Auth;
+use Modules\Auth\Enums\UserRolesEnum;
 use Modules\Auth\Models\User;
 use Modules\Employer\Models\EmployerProfile;
 

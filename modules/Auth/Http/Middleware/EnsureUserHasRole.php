@@ -2,12 +2,12 @@
 
 declare(strict_types = 1);
 
-namespace App\Http\Middleware;
+namespace Modules\Auth\Http\Middleware;
 
-use App\Enums\UserRolesEnum;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Modules\Auth\Enums\UserRolesEnum;
 use Symfony\Component\HttpFoundation\Response;
 
 /**

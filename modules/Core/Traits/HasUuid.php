@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Traits;
+namespace Modules\Core\Traits;
 
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
