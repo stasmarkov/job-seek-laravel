@@ -46,10 +46,10 @@ class VacancyController extends ApiController {
   public function show(int $vacancy_id): JsonResource|JsonResponse {
     try {
       $vacancy = Vacancy::findOrFail($vacancy_id);
-      $this->authorize('view', [$vacancy]);
+      $this->authorize('viewAny', [$vacancy]);
 
       if ($this->include('tags')) {
-        return new VacancyResource($vacancy?->load('tags'));
+        return new VacancyRaesource($vacancy?->load('tags'));
       }
 
       return VacancyResource::make($vacancy);
