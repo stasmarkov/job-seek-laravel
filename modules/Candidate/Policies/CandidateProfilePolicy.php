@@ -18,14 +18,15 @@ class CandidateProfilePolicy {
   /**
    * Determine whether the user can view any models.
    */
-  public function viewAny(User $user): bool {
+  public function viewAny(?User $user): bool {
+    return TRUE;
     return $user->hasPermissionTo('view any candidateProfile');
   }
 
   /**
    * Determine whether the user can view the model.
    */
-  public function view(User $user, CandidateProfile $candidate_profile): bool {
+  public function view(?User $user, CandidateProfile $candidate_profile): bool {
     if ($user->hasPermissionTo('view any candidateProfile')) {
       return TRUE;
     }

@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Modules\Employer\Providers;
 
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -13,7 +14,14 @@ use Modules\Employer\Policies\EmployerProfilePolicy;
 /**
  * The employer modules service provider.
  */
-class EmployerServiceProvider extends ServiceProvider {
+class EmployerServiceProvider extends AuthServiceProvider {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $policies = [
+    EmployerProfile::class => EmployerProfilePolicy::class,
+  ];
 
   /**
    * Bootstrap services.
@@ -26,12 +34,6 @@ class EmployerServiceProvider extends ServiceProvider {
     $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function registerPolicies() {
-    Gate::policy(EmployerProfile::class, EmployerProfilePolicy::class);
-  }
 
   /**
    * Register routes.

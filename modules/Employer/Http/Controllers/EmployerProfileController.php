@@ -38,6 +38,8 @@ class EmployerProfileController extends Controller {
    * Display the specified resource.
    */
   public function show(EmployerProfile $employerProfile) {
+    $this->authorize('viewAny', [$employerProfile]);
+
     $vacancies = $employerProfile->vacancies()->paginate(10);
 
     return Inertia::render('Model/EmployerProfile/View', [
@@ -74,7 +76,7 @@ class EmployerProfileController extends Controller {
       return redirect()->route('profile.employer.create', ['user' => $user->id]);
     }
 
-    $this->authorize('update', [$user->employerProfile]);
+    $this->authorize('update', $user->employerProfile);
 
     return Inertia::render('Model/EmployerProfile/UpdateForm', [
       'user' => $user,

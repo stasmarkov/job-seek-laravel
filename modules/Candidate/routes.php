@@ -30,3 +30,4 @@ Route::controller(CandidateProfileController::class)->group(function () {
       ->name('profile.candidate.update');
   });
 });
+

@@ -39,8 +39,8 @@ class VacancyPolicy {
     }
 
     return
-      ($user->hasPermissionTo('create any new vacancy') && $owner->employerProfile()->first()) ||
-      ($user->hasPermissionTo('create a new vacancy') && $user->is($owner) && $user->employerProfile()->first());
+      ($user->hasPermissionTo('create any new vacancy') && $owner->isEmployer()) ||
+      ($user->hasPermissionTo('create a new vacancy') && $user->is($owner) && $user->isEmployer());
   }
 
   /**
@@ -77,14 +77,14 @@ class VacancyPolicy {
    * Determine whether the user can restore the model.
    */
   public function restore(User $user, Vacancy $vacancy): bool {
-    return $user->hasRole(UserRolesEnum::ADMIN);
+    return $user->isAdmin();
   }
 
   /**
    * Determine whether the user can permanently delete the model.
    */
   public function forceDelete(User $user, Vacancy $vacancy): bool {
-    return $user->hasRole(UserRolesEnum::ADMIN);
+    return $user->isAdmin();
   }
 
 }

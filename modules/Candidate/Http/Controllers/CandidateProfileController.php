@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\TagResource;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Modules\Auth\Models\User;
@@ -36,7 +37,7 @@ class CandidateProfileController extends Controller {
    * Display the specified resource.
    */
   public function show(CandidateProfile $candidate_profile) {
-    $this->authorize('view', [$candidate_profile]);
+    $this->authorize('viewAny', [$candidate_profile]);
 
     return Inertia::render('Model/CandidateProfile/View', [
       'candidateProfile' => CandidateProfileResource::make($candidate_profile, $candidate_profile->tags),
